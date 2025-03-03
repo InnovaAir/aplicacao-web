@@ -1,0 +1,125 @@
+body {
+    display: flex;
+}
+
+.PageContent {
+    padding-top: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
+    width: 100%;
+}
+
+.Navbar {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 7vh;
+    margin-bottom: 3%;
+}
+
+.Navbar span {
+    color: #5271FF;
+    font-size: 50px;
+    text-decoration: none;
+    margin-left: 5%;
+    margin-right: 1%;
+}
+
+.IconeLogo {
+    height: 100%;
+    width: auto;
+}
+
+.IconeLogo img {
+    height: 100%;
+}
+
+.CommumText {
+    color: #5271FF;
+    font-size: 24px;
+}
+
+.Caixa {
+    width: 100%;
+    margin-left: 5px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px #9e9e9e;
+    padding: 10px;
+    margin-bottom: 3%;
+    display: flex;
+}
+
+.coluna {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1%;
+    margin-right: 1%;
+    width: 100%;
+}
+
+.imagem {
+    background-color: gray;
+    height: 121px;
+    width: 200px;
+}
+
+.Caixa h2 {
+    color: #8BA0FF;
+    margin-bottom: 0;
+}
+
+.TextBox {
+    margin-bottom: 3%;
+}
+
+.coluna .TextBox span {
+    color: #9e9e9e;
+    font-size: 14px;
+}
+
+.coluna span {
+    color: #5271FF;
+    font-size: 14px;
+    margin-bottom: 1%;
+}
+
+.InputsCadastro {
+    display: flex;
+}
+
+.InputsCadastro .coluna {
+    width: 100%;
+}
+
+.coluna input {
+    border: 1px solid #8BA0FF;
+    border-radius: 5px;
+    height: 26px;
+}
+
+.botoes {
+    display: flex;
+    margin: 1%;
+}
+
+.botoes a {
+    margin-right: 5%;
+    text-decoration: none;
+    color: #ffffff;
+    height: 100%;
+}
+
+.botao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #8BA0FF;
+    width: 150px;
+    height: 100%;
+    padding: 3%;
+}
+
+.colaborador {
+    display: none;
+}
