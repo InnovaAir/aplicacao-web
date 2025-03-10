@@ -4,3 +4,65 @@ body{
     margin: 0;
     padding: 0;
 }
+
+.homeInfo{
+    display: flex;
+    flex-direction: row;
+    margin: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.homeInfo img{
+    border-radius: 20px;
+}
+
+.homeInfo h2{
+    text-align: center;
+    color: #5271FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.homeInfo h4{
+    color: #8da2ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 80vw;
+    height: 30vh;
+}
+
+.divLine{
+    background-color: #5271FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.sobreNosInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    width: 80vw;
+}
+
+.sobreNosComputerInfo {
+    display: flex;
+    justify-content: space-between;
+    width: 70vw;
+    align-items: center;
+}
+
+.componentesInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
