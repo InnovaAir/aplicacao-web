@@ -1,6 +1,10 @@
+.navbar * {
+    max-width: 100%;
+}
 
 .navbar {
     height: 7vh;
+    max-width: 100vw;
     background-color: #5271FF;
     display: flex;
     align-items: center;
@@ -12,15 +16,15 @@
     margin-left: 10px;
 }
 
+.navbarMiddle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5rem;
+}
 .navbarMiddle a{
     color: white;
     text-decoration: none;
-}
-
-.navbarMiddle{
-    width: 300px;
-    display: flex;
-    justify-content: space-between;
 }
 
 .navbarRight{
@@ -50,4 +54,51 @@
     transform: scale(1.05);
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
     cursor: hand;
+}
+
+@media screen and (max-width: 768px) {
+    .homeInfo {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .homeInfo img {
+        width: 80%;
+        height: auto;
+    }
+
+    .homeInfo h1, .homeInfo h2 {
+        width: 100%;
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    .navbar {
+        position: relative;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+    }
+
+    .navbarMiddle, .navbarRight {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .sobreNosComputerInfo {
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+    }
+
+    .componentesInfo {
+        margin-bottom: 15px;
+    }
+
+    .divLine {
+        padding: 20px;
+    }
 }
