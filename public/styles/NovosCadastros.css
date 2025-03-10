@@ -103,11 +103,13 @@ body {
     margin: 1%;
 }
 
-.botoes a {
-    margin-right: 5%;
+.botoes button {
+    border: none;
     text-decoration: none;
     color: #ffffff;
     height: 100%;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 .botao {
@@ -118,7 +120,27 @@ body {
     background-color: #8BA0FF;
     width: 150px;
     height: 100%;
-    padding: 3%;
+    padding: 7%;
+}
+
+.adicionarDisp {
+    display: none;
+}
+
+.cadastrarDisp {
+    display: flex;
+}
+
+.adicionarColab {
+    display: flex;
+}
+
+.cadastrarColab {
+    display: none;
+}
+
+.dispositivo {
+    display: block;
 }
 
 .colaborador {

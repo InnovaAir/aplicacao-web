@@ -39,7 +39,7 @@
                     <span>Clique em "adicionar" para cadastrar um novo dispositivo para monitamento.</span>
                 </div>
 
-                <div class="dispositivo">
+                <div id="div_disp" class="dispositivo">
                     <div class="InputsCadastro">
                         <div class="coluna">
                             <span>Apelido:</span>
@@ -61,16 +61,12 @@
                 </div>
 
                 <div class="botoes">
-                    <a class="Adicionar" href="">
-                        <div class="botao">
-                            Adicionar
-                        </div>
-                    </a>
-                    <a class="Cadastrar" href="">
-                        <div class="botao">
-                            Cadastrar
-                        </div>
-                    </a>
+                    <div id="aD" class="adicionarDisp">
+                        <button class="botao" onclick="addDispositivo()">Adicionar</button>
+                    </div>
+                    <div id="cD" class="cadastrarDisp">
+                        <button class="botao" onclick="cadastrarDispositivo()">Cadastrar</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -86,7 +82,7 @@
                     <span>Clique em ”adicionar” para cadastrar um novo colaborador.</span>
                 </div>
 
-                <div class="colaborador">
+                <div id="div_colab" class="colaborador">
                     <div class="InputsCadastro">
                         <div class="coluna">
                             <span>Nome:</span>
@@ -102,20 +98,16 @@
                 </div>
 
                 <div class="botoes">
-                    <a class="Adicionar" href="">
-                        <div class="botao">
-                            Adicionar
-                        </div>
-                    </a>
-                    <a class="Cadastrar" href="">
-                        <div class="botao">
-                            Cadastrar
-                        </div>
-                    </a>
+                    <div id="aC" class="adicionarColab">
+                        <button class="botao" onclick="addColaborador()">Adicionar</button>
+                    </div>
+                    <div id="cC" class="cadastrarColab">
+                        <button class="botao" onclick="cadastrarColaborador()">Cadastrar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
-
+<script src="./js/NovosCadastros.js"></script>
 </html>
