@@ -6,6 +6,7 @@
     <title>Login</title>
     <link rel="stylesheet" href="styles/utils.css">
     <link rel="stylesheet" href="styles/login.css">
+    <script src="./js/validacaoLogin.js"></script>
 </head>
 <body>
     <div>
@@ -14,7 +15,7 @@
                 <img src="assets/2.png" alt="" style="width: 50px;">
             </div>
             <div class="navbarMiddle">
-                <a href=""><b><u>Home</u></b></a>
+                <a href="./index.html"><b><u>Home</u></b></a>
                 <a href="">Sobre nós</a>
                 <a href="">Nossa solução</a>
             </div>
@@ -32,12 +33,12 @@
                         <input id="ipt_email" type="text">
                         <label for="ipt_senha">Senha:</label>
                         <input id="ipt_senha" type="text">
-                        <label for="ipt_confirmar_senha">Confirmar Senha:</label>
-                        <input id="ipt_confirmar_senha" type="text">
-
+                    </div>
+                    <div id="mensagemErro" style="color: red;">
+                        <!-- msg de erro -->
                     </div>
                     <div class="buttons">
-                        <button>Acessar</button>
+                        <button onclick="validacao()">Acessar</button>
                         <div class="permanecer-conectado">
                             <input type="checkbox">
                             <p>Permanecer conectado</p>
