@@ -8,13 +8,30 @@ html, body {
     font-size: 16px;
 }
 
+
+
+
 .barraLateral {
-    width: 30vh;
+    width: 15%;
     height: 100vh;
     background: rgb(82, 113, 255);
     background: linear-gradient(45deg, rgba(82, 113, 255, 1) 25%, rgba(152, 170, 255, 1) 57%);
     display: flex;
     flex-direction: column;
+
+    .opcoes{
+        width: 100%;
+        height: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        margin-top: 5rem;
+    }
+
+    .opcao{
+        font-size: 26px;
+    }
 
 
     .fecharBarrinha {

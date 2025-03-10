@@ -1,0 +1,69 @@
+body {
+    display: flex;
+}
+
+
+.PageContent {
+    padding-top: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
+    width: 85%;
+    background-image: linear-gradient(180deg, #ffffff, #ccd5ff);
+
+}
+h1{
+    display: flex;  
+    justify-content: center;
+    width: 100%;
+    color:#5271FF;
+}
+
+.kpis{
+    width: 100%;
+    height: 18%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.kpi{
+    height: 100%;
+    width: 24%;
+    background-color: white;
+    border-radius: 15px;
+    border: 1px solid #5271FF;
+}
+
+
+.graficos{
+    margin-top: 2rem;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.grafico-linear{
+    background-color: white;
+    border: 1px solid #5271FF;
+    height: 100%;
+    width: 59%;
+    border-radius: 15px;
+}
+
+.ranking-incidentes{
+    background-color: white;
+    border: 1px solid #5271FF;
+    height: 100%;
+    width: 39%;
+    border-radius: 15px;
+}
+
+.ranking-incidentes .titulo , .grafico-linear .titulo{
+    margin-top: 1rem;
+    display: flex;  
+    justify-content: center;
+    width: 100%;
+    color: black;
+    font-size: 30px;
+    font-weight: 600;
+}
