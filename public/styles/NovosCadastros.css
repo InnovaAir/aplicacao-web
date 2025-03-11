@@ -123,6 +123,11 @@ body {
     padding: 7%;
 }
 
+.resposta{
+    color: #5271FF;
+    font-size: 14px;
+}
+
 .adicionarDisp {
     display: none;
 }
