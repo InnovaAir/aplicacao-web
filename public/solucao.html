@@ -1,59 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/MenuLateral.css" />
-    <link rel="stylesheet" href="styles/Solucao.css" />
-    <title>InnovaAir</title>
-    <link rel="icon" href="styles/Solucao.css" type="img/png" />
-    <link rel="stylesheet" href="styles/utils.css" />
-  </head>
 
-  <body>
-    <div class="tela">
-      <div class="barra_lateral">
-        <div class="fechar_barrinha">
-          <div class="container">
-            <img class="Icon" src="./assets/marca-cruzada.png" alt="fechar" />
-          </div>
-        </div>
-        <div class="logo_container">
-          <img src="assets/InnovaairWhite.png" alt="" />
-        </div>
-        <div class="opcoes">
-          <div class="container1">
-            <u>
-              <li><a href="">Home</a></li>
-              <li><a href="">Dispositivos</a></li>
-              <li><a href="">Sua Conta</a></li>
-            </u>
-          </div>
-          <div class="container2">
-            <u>
-              <li><a href="">Fale conosco!</a></li>
-            </u>
-          </div>
-        </div>
-      </div>
-      <div class="conteudo">
-        <h1>Hello Word!</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles/MenuLateral.css" />
+  <link rel="stylesheet" href="styles/Solucao.css" />
+  <title>InnovaAir</title>
+  <link rel="icon" href="styles/Solucao.css" type="img/png" />
+  <link rel="stylesheet" href="styles/utils.css" />
+</head>
+
+<body>
+  <button class="menu-btn" onclick="abrirMenu()">☰</button>
+  <div class="barra_lateral" id="conteudo">
+    <div class="fechar_barrinha">
+      <div class="container" id="menu" onclick="fecaharMenu()">
+        <img class="Icon" src="./assets/marca-cruzada.png" alt="fechar"/>
       </div>
     </div>
-    <!-- <div class="barrinha">
-      <div class="marca">
-        <span>InnovaAir</span>
-        <div class="logo">
-          <img src="assets/InnovaairWhite.png" alt="" />
-        </div>
-      </div>
-      <u>
-        <li><a href="">Login</a></li>
-        <li><a href="">Cadastrar-se</a></li>
-      </u>
+    <div class="logo_container">
+      <img src="assets/InnovaairWhite.png" alt="" />
     </div>
-    <div class="telaPrincipal">
-      <div class="listas"></div>
-    </div> -->
-  </body>
+    <div class="opcoes">
+      <div class="container1">
+        <u>
+          <li><a href="">Home</a></li>
+          <li><a href="">Dispositivos</a></li>
+          <li><a href="">Sua Conta</a></li>
+        </u>
+      </div>
+      <div class="container2">
+        <u>
+          <li><a href="">Fale conosco!</a></li>
+        </u>
+      </div>
+    </div>
+  </div>
+
+  <div class="painel">
+    <div class="logo_container">
+      <h2>InnovaAir</h2>
+      <img src="assets/innovaair.png" alt="" />
+    </div>
+    <div class="painel_container">
+      <div class="container">
+        <div class="descricao"></div>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
+<script>
+          function abrirMenu() {
+            document.getElementById("menu").classList.add("menu-aberto");
+            document.getElementById("conteudo").classList.add("conteudo-movido");
+        }
+          function fecharMenu() {
+            document.getElementById("menu").classList.remove("menu-aberto");
+            document.getElementById("conteudo").classList.remove("conteudo-movido");
+        }
+</script>
