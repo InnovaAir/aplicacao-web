@@ -13,12 +13,18 @@
                 <div class="navbarLogo">
                     <img src="assets/2.png" alt="" style="width: 50px;">
                 </div>
-                <div class="navbarMiddle">
-                    <a href=""><b><u>Home</u></b></a>
+                
+                <div class="navbarMiddle" id="navbarMiddle">
+                    <a href="">Home</a>
                     <a href="#tituloSobreNos">Sobre nós</a>
                     <a href="">Nossa solução</a>
                 </div>  
-                <div class="navbarRight">
+
+                <div class="navbarMiddle2" id="navbarMiddle2" style="display: none;">
+                    <button>x</button>
+                </div>  
+
+                <div class="navbarRight" id="navbarRight">
                     <a href="">Sou Empresa</a>
                     <a href="">Sou Colaborador</a>
                 </div>
@@ -33,7 +39,7 @@
         </div>
 
         <div class="homeInfo">
-            <h2>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio ratione earum, voluptatibus pariatur saepe sequi fugiat! Dolores quae, neque, quos rerum repellendus dolore, optio perspiciatis repellat vel numquam voluptate similique. Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem modi rem blanditiis, porro eaque culpa, voluptatum, non illo ipsum fugit unde enim tenetur nulla quas ipsam distinctio. Magni, id cum?</h2>
+            <h2>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio ratione earum, voluptatibus pariatur saepe sequi fugiat! Dolores quae, neque, quos rerum repellendus dolore, optio perspiciatis repellat vel numquam voluptate similique. Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem modi rem blanditiis, porro eaque culpa, voluptatum, non illo ipsum fugit unde enim tenetur nulla quas ipsam distinctio. Magni, id cum? vc sabe pq tatatatala;la; ??? etc e pq</h2>
         </div>
 
         <div class="divLine">
@@ -74,9 +80,36 @@
         <div>
             <h1>Nossa Solução</h1>
 
+            <div>
+                <p>
+                    O monitoramento oferecido captura informações de CPU, Disco, RAM e Atividade de uso de qualquer dispositivo de Check-in
+                </p>
+                <p>
+                    Todas essas informações estarão presentes em uma Dashboard dinâmica, capturando em tempo real todos os componentes citados enteriormente, facilitando o monitoramento da performance da máquina
+                </p>
+            </div>
+
         </div>
-
-
-    
 </body>
 </html>
+<script>
+function ajustarNavbar() {
+    let navbarMiddle = document.getElementById("navbarMiddle");
+    let navbarRight = document.getElementById("navbarRight");
+    let navbarMiddle2 = document.getElementById("navbarMiddle2");
+
+
+    if (window.innerWidth < 643) {
+        navbarMiddle.style.display = "none"; 
+        navbarRight.style.display = "flex";
+        navbarRight.style.flexDirection = "row";
+        navbarMiddle2.style.display = "block"
+    } else {
+        navbarMiddle.style.display = "block";
+        navbarMiddle2.style.display = "none"
+
+    }
+}
+window.onload = ajustarNavbar;
+window.onresize = ajustarNavbar;
+</script>

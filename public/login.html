@@ -9,7 +9,6 @@
     <script src="./js/validacaoLogin.js"></script>
 </head>
 <body>
-    <div>
         <div class="navbar">
             <div class="navbarLogo">
                 <img src="assets/2.png" alt="" style="width: 50px;">
@@ -23,6 +22,14 @@
                 <a href="">Sou Empresa</a>
                 <a href="">Sou Colaborador</a>
             </div>
+        </div>
+        <div class="navbar-mobile">
+            <img src="assets/2.png">
+            <div id="menu-bar" onclick="menuOnClick()">
+                <div id="bar1" class="bar"></div>
+                <div id="bar2" class="bar"></div>
+                <div id="bar3" class="bar"></div>
+              </div>
         </div>
         <div class="container">
             <div class="form-login">
@@ -43,16 +50,24 @@
                             <input type="checkbox">
                             <p>Permanecer conectado</p>
                         </div>
+                        <div class="registre-se">
+                            <p>Não é registrado? <span>Cadastre-se</span></p>
+                        </div>
                     </div>
                 </div>
                 <div class="signup">
                     <h1>Cadastre-se!</h1>
                     <p>Ainda não possui uma conta?</p>
                     <p>Não perca tempo e crie agora!</p>
-                    <button>Cadastrar</button>
+                    <button onclick="redirecionar()">Cadastrar</button>
                 </div>
             </div>
         </div>
-</div>
 </body>
 </html>
+<script>
+    function redirecionar(){
+        window.location.href = "cadastro.html";
+
+    }
+</script>
