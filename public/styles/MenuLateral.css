@@ -182,11 +182,24 @@ body {
       width: 900px;
       height: 450px;
       background-color: #ffffff;
-      border-radius: 50px;
+      border-radius: 10px;
       overflow-y: auto;
       overflow-y: scroll;
       padding: 50px;
 
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: none;
+
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background-color: #BDC9FF;
+        border-radius: 20px;
+      }
 
       .item_lista {
         list-style: none;
@@ -221,6 +234,7 @@ body {
             color: white;
             display: flex;
             align-items: center;
+            /* text-align: center; */
             /* justify-content: center; */
             
 
