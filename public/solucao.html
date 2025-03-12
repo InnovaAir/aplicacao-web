@@ -12,12 +12,11 @@
 </head>
 
 <body>
-  <button class="menu-btn" onclick="abrirMenu()">☰</button>
-  <div class="barra_lateral" id="conteudo">
+  <button class="botao_abrir" onclick="abrirMenu()">☰</button>
+
+  <div class="barra_lateral" id="menu">
     <div class="fechar_barrinha">
-      <div class="container" id="menu" onclick="fecaharMenu()">
-        <img class="Icon" src="./assets/marca-cruzada.png" alt="fechar"/>
-      </div>
+      <button class="botao_fechar" onclick="fecharMenu()">✖</button>
     </div>
     <div class="logo_container">
       <img src="assets/InnovaairWhite.png" alt="" />
@@ -38,7 +37,7 @@
     </div>
   </div>
 
-  <div class="painel">
+  <div class="tela" id="tela">
     <div class="logo_container">
       <h2>InnovaAir</h2>
       <img src="assets/innovaair.png" alt="" />
@@ -53,12 +52,12 @@
 
 </html>
 <script>
-          function abrirMenu() {
-            document.getElementById("menu").classList.add("menu-aberto");
-            document.getElementById("conteudo").classList.add("conteudo-movido");
-        }
-          function fecharMenu() {
-            document.getElementById("menu").classList.remove("menu-aberto");
-            document.getElementById("conteudo").classList.remove("conteudo-movido");
-        }
+  function abrirMenu() {
+    document.getElementById("menu").classList.add("menu-aberto");
+    document.getElementById("tela").classList.add("tela-movida");
+  }
+  function fecharMenu() {
+    document.getElementById("menu").classList.remove("menu-aberto");
+    document.getElementById("tela").classList.remove("tela-movidao");
+  }
 </script>
