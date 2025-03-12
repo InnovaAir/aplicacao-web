@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+body{
+    height: 100vh;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: "Rubik", sans-serif;
+}
+
+.formulario{
+    background-color: rgb(177, 177, 255);
+    height: 100%;
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box_forms{
+    border-radius: 15px;
+    height: 72%;
+    width: 50%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.estrutura_forms{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+h2{
+    font-size: 30px;
+}
+
+.estrutura_forms input , textarea{
+    height: 45px;
+    border-radius: 10px;
+    background-color: #efefef;
+    outline-color: rgb(82, 113, 255);
+    box-sizing: border-box;
+    padding: 5px;
+    font-family: "Rubik", sans-serif;
+    font-size: 20px;
+}
+
+.estrutura_forms label{
+    font-size: 25px;
+
+}
+
+.estrutura_forms button{
+    margin-top: 2rem;
+    font-family: "Rubik", sans-serif;
+    font-size: 20px;
+    height: 45px;
+    background-color: rgb(82, 113, 255);
+    border-radius: 10px;
+    border: none;
+    color: white;
+    transition: 0.3s all;
+}
+
+.estrutura_forms button:hover{
+    background-color: rgb(58, 94, 255);
+
+}
+
+textarea{
+    height: 20%;
+    font-size: 20px;
+    margin: 0.5rem 0 ;    
+    border-radius: 8px;
+    background-color: #efefef;
+    outline-color: rgb(82, 113, 255);
+    resize: none; /* Impede o redimensionamento */
+    box-sizing: border-box;
+    padding: 5px;
+    font-family: "Rubik", sans-serif;
+    
+}
