@@ -9,7 +9,6 @@ body{
 }
 
 .formulario{
-    background-color: rgb(177, 177, 255);
     height: 100%;
     width: 75%;
     display: flex;
@@ -17,25 +16,44 @@ body{
     align-items: center;
 }
 
+.centralizar_box{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+}
+
 .box_forms{
     border-radius: 15px;
-    height: 72%;
-    width: 50%;
+    height: 100%;
+    width: 35%;
     background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 }
 
 .estrutura_forms{
     width: 90%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 1.5rem;
+    padding: 2rem 0;
 }
 
-h2{
-    font-size: 30px;
+h1{
+    display: flex;  
+    justify-content: center;
+    width: 100%;
+    color:#5271FF;
+    margin: 0 0 1rem 0;
+}
+
+.boxes_inputs{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .estrutura_forms input , textarea{
@@ -47,11 +65,12 @@ h2{
     padding: 5px;
     font-family: "Rubik", sans-serif;
     font-size: 20px;
+    border: 1px black solid;
+
 }
 
 .estrutura_forms label{
-    font-size: 25px;
-
+    font-size: 18px;
 }
 
 .estrutura_forms button{
@@ -72,9 +91,9 @@ h2{
 }
 
 textarea{
-    height: 20%;
+    height: 100%;
     font-size: 20px;
-    margin: 0.5rem 0 ;    
+    margin:0 ;    
     border-radius: 8px;
     background-color: #efefef;
     outline-color: rgb(82, 113, 255);
@@ -82,5 +101,4 @@ textarea{
     box-sizing: border-box;
     padding: 5px;
     font-family: "Rubik", sans-serif;
-    
 }

@@ -7,6 +7,7 @@
     <title>Novos Cadastros</title>
     <link rel="stylesheet" href="styles/MenuLateral.css">
     <link rel="stylesheet" href="styles/NovosCadastros.css">
+    <link rel="icon" href="../public/assets/favicon.ico" type="favicon">
 </head>
 
 <body>
@@ -19,12 +20,15 @@
     <div class="logo_container">
       <img src="assets/InnovaairWhite.png" alt="" />
     </div>
+
+    <span id="user_logado">Olá, Usuário</span>
     <div class="opcoes">
       <div class="container1">
         <u>
-          <li><a href="">Home</a></li>
-          <li><a href="">Dispositivos</a></li>
-          <li><a href="">Sua Conta</a></li>
+          <li><a href="../public/Dashboard.html" >Dashboard</a></li>
+          <li><a href="../public/solucao.html">Solução</a></li>
+          <li><a href="../public/NovosCadastros.html" class="agora">Cadastros</a></li>
+          <li><a href="../public/suporte.html">Suporte</a></li>
         </u>
       </div>
       <div class="container2">
@@ -36,94 +40,97 @@
   </div>
 
 
-    <div class="PageContent">
-        <div class="Navbar">
-            <Span>InnovaAir</Span>
-            <div class="IconeLogo">
-                <img src="assets/Logo azul.png" alt="">
-            </div>
+    <div class="tela" id="tela">
+        <div class="logo_container">
+            <h2>InnovaAir</h2>
+            <img src="assets/innovaair.png" alt="" />
         </div>
 
-        <span class="CommumText" id="Mensagem_Usuario">Olá, Usuário!</span>
-        <div class="Caixa">
-            <div class="colunaImagem">
-                <div class="imagem"></div>
-            </div>
+        <!-- Henrique mudou, pelo motivo que "Ola,Usuario ja esta no menu hamburguer" -->
+        <!-- <span class="CommumText" id="Mensagem_Usuario">Olá, Usuário!</span> -->
 
-            <div class="coluna">
-                <div class="TextBox">
-                    <h2>Cadastrar Dispositivo Manualmente</h2>
-                    <span>Clique em "adicionar" para cadastrar um novo dispositivo para monitamento.</span>
+        <div class="box_cadastros">
+            <h1 class="CommumText">CADASTROS</h1>
+            <div class="Caixa">
+                <div class="colunaImagem">
+                    <div class="imagem"></div>
                 </div>
-
-                <div id="div_disp" class="dispositivo">
-                    <div class="InputsCadastro">
-                        <div class="coluna">
-                            <span>Apelido:</span>
-                            <input type="text" name="" id="ipt_apelido">
-                            <span>Endereço Mac:</span>
-                            <input type="text" name="" id="ipt_EnderecoMac">
-                            <span>Host Name:</span>
-                            <input type="text" name="" id="ipt_HostName">
+    
+                <div class="coluna">
+                    <div class="TextBox">
+                        <h2>Cadastrar Dispositivo Manualmente</h2>
+                        <span>Clique em "adicionar" para cadastrar um novo dispositivo para monitamento.</span>
+                    </div>
+    
+                    <div id="div_disp" class="dispositivo">
+                        <div class="InputsCadastro">
+                            <div class="coluna">
+                                <span>Apelido:</span>
+                                <input type="text" name="" id="ipt_apelido">
+                                <span>Endereço Mac:</span>
+                                <input type="text" name="" id="ipt_EnderecoMac">
+                                <span>Host Name:</span>
+                                <input type="text" name="" id="ipt_HostName">
+                            </div>
+                            <div class="coluna">
+                                <span>Fabricante:</span>
+                                <input type="text" name="" id="ipt_Fabricante">
+                                <span>Arquitetura:</span>
+                                <input type="text" name="" id="ipt_Arquitetura">
+                                <span>Sistema Operacional:</span>
+                                <input type="text" name="" id="ipt_SO">
+                            </div>
                         </div>
-                        <div class="coluna">
-                            <span>Fabricante:</span>
-                            <input type="text" name="" id="ipt_Fabricante">
-                            <span>Arquitetura:</span>
-                            <input type="text" name="" id="ipt_Arquitetura">
-                            <span>Sistema Operacional:</span>
-                            <input type="text" name="" id="ipt_SO">
+                    </div>
+    
+                    <div class="resposta" id="div_respDisp"></div>
+    
+                    <div class="botoes">
+                        <div id="aD" class="adicionarDisp">
+                            <button class="botao" onclick="addDispositivo()">Adicionar</button>
                         </div>
-                    </div>
-                </div>
-
-                <div class="resposta" id="div_respDisp"></div>
-
-                <div class="botoes">
-                    <div id="aD" class="adicionarDisp">
-                        <button class="botao" onclick="addDispositivo()">Adicionar</button>
-                    </div>
-                    <div id="cD" class="cadastrarDisp">
-                        <button class="botao" onclick="cadastrarDispositivo()">Cadastrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="Caixa">
-            <div class="colunaImagem">
-                <div class="imagem"></div>
-            </div>
-
-            <div class="coluna">
-                <div class="TextBox">
-                    <h2>Cadastrar Colaborador</h2>
-                    <span>Clique em ”adicionar” para cadastrar um novo colaborador.</span>
-                </div>
-
-                <div id="div_colab" class="colaborador">
-                    <div class="InputsCadastro">
-                        <div class="coluna">
-                            <span>Nome:</span>
-                            <input type="text" name="" id="ipt_nome">
-                            <span>Tipos de Usuário:</span>
-                            <input type="text" name="" id="ipt_usertype">
-                            <span>E-mail:</span>
-                            <input type="text" name="" id="ipt_email">
-                            <span>Senha:</span>
-                            <input type="text" name="" id="ipt_senha">
+                        <div id="cD" class="cadastrarDisp">
+                            <button class="botao" onclick="cadastrarDispositivo()">Cadastrar</button>
                         </div>
                     </div>
                 </div>
-
-                <div class="resposta" id="div_respColab"></div>
-
-                <div class="botoes">
-                    <div id="aC" class="adicionarColab">
-                        <button class="botao" onclick="addColaborador()">Adicionar</button>
+            </div>
+    
+            <div class="Caixa">
+                <div class="colunaImagem">
+                    <div class="imagem"></div>
+                </div>
+    
+                <div class="coluna">
+                    <div class="TextBox">
+                        <h2>Cadastrar Colaborador</h2>
+                        <span>Clique em ”adicionar” para cadastrar um novo colaborador.</span>
                     </div>
-                    <div id="cC" class="cadastrarColab">
-                        <button class="botao" onclick="cadastrarColaborador()">Cadastrar</button>
+    
+                    <div id="div_colab" class="colaborador">
+                        <div class="InputsCadastro">
+                            <div class="coluna">
+                                <span>Nome:</span>
+                                <input type="text" name="" id="ipt_nome">
+                                <span>Tipos de Usuário:</span>
+                                <input type="text" name="" id="ipt_usertype">
+                                <span>E-mail:</span>
+                                <input type="text" name="" id="ipt_email">
+                                <span>Senha:</span>
+                                <input type="text" name="" id="ipt_senha">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="resposta" id="div_respColab"></div>
+    
+                    <div class="botoes">
+                        <div id="aC" class="adicionarColab">
+                            <button class="botao" onclick="addColaborador()">Adicionar</button>
+                        </div>
+                        <div id="cC" class="cadastrarColab">
+                            <button class="botao" onclick="cadastrarColaborador()">Cadastrar</button>
+                        </div>
                     </div>
                 </div>
             </div>

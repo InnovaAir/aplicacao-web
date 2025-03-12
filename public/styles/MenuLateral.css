@@ -176,14 +176,72 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* background-color: black; */
 
     .container {
-      width: 500px;
-      height: 500px;
+      width: 900px;
+      height: 450px;
       background-color: #ffffff;
-      border-radius: 50px;
+      border-radius: 10px;
       overflow-y: auto;
       overflow-y: scroll;
+      padding: 50px;
+
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: none;
+
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background-color: #BDC9FF;
+        border-radius: 20px;
+      }
+
+      .item_lista {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        .item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 8px;
+          
+
+          .botao {
+            padding: 9px 60px;
+            background-color: #BDC9FF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+
+            &:hover {
+              background-color: #0056b3;
+            }
+          }
+
+          span {
+            background-color: #DDE3FF;
+            width: 80%;
+            height: 32px;
+            border-radius: 5px;
+            color: white;
+            display: flex;
+            align-items: center;
+            /* text-align: center; */
+            /* justify-content: center; */
+            
+
+          }
+
+        }
+      }
     }
   }
 }
@@ -193,5 +251,20 @@ body {
 
 .tela-movida {
   margin-left: 13vw;
+}
 
+.agora {
+  font-weight: 600;
+}
+
+#user_logado {
+  /* font-family: "Rubik", sans-serif; */
+  /* font-size: 22px; */
+  color: white;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* margin-left: 2rem; */
+  /* text-align: center; */
+  /* background-color: red; */
 }
