@@ -176,23 +176,57 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* background-color: black; */
 
     .container {
-      width: 1000px;
-      height: 550px;
+      width: 900px;
+      height: 450px;
       background-color: #ffffff;
       border-radius: 50px;
       overflow-y: auto;
       overflow-y: scroll;
-      display: flex;
-      flex-direction: column;
+      padding: 50px;
 
 
-      .descricao {
-        width: 80%;
-        height: 2vh;
-        background-color: cadetblue;
-        display: block;
+      .item_lista {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        .item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 8px;
+          
+
+          .botao {
+            padding: 9px 60px;
+            background-color: #BDC9FF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+
+            &:hover {
+              background-color: #0056b3;
+            }
+          }
+
+          span {
+            background-color: #DDE3FF;
+            width: 80%;
+            height: 32px;
+            border-radius: 5px;
+            color: white;
+            display: flex;
+            align-items: center;
+            /* justify-content: center; */
+            
+
+          }
+
+        }
       }
     }
   }
@@ -203,14 +237,13 @@ body {
 
 .tela-movida {
   margin-left: 13vw;
-
 }
 
-.agora{
+.agora {
   font-weight: 600;
 }
 
-#user_logado{
+#user_logado {
   /* font-family: "Rubik", sans-serif; */
   /* font-size: 22px; */
   color: white;
