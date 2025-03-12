@@ -155,10 +155,11 @@ body {
   flex-direction: column;
 
   .logo_container {
+    margin-top: 1.8rem;
     display: flex;
     align-items: center;
     width: 20vw;
-    height: 10vh;
+    height: 5vh;
     color: #5271ff;
 
     h2 {
@@ -194,4 +195,17 @@ body {
 .tela-movida {
   margin-left: 13vw;
 
+}
+
+.agora{
+  font-weight: 600;
+}
+
+#user_logado{
+  font-family: "Rubik", sans-serif;
+  font-size: 22px;
+  color: white;
+  width: 100%;
+  display: flex;
+  margin-left: 2rem;
 }

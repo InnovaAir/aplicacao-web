@@ -1,26 +1,28 @@
 body {
     display: flex;
+    height: 100vh;
+    width: 100%;
 }
 
-
-.PageContent {
-    padding-top: 1%;
-    padding-left: 2%;
-    padding-right: 2%;
-    width: 85%;
-    background-image: linear-gradient(180deg, #ffffff, #ccd5ff);
-
-}
 h1{
     display: flex;  
     justify-content: center;
     width: 100%;
     color:#5271FF;
+    margin: 0 0 1rem 0;
+
+}
+
+.box_graficos_kpis{
+    width: 100%;
+    height: 90%;
+    padding: 0 3rem;
+    box-sizing: border-box;
 }
 
 .kpis{
     width: 100%;
-    height: 18%;
+    height: 20%;
     display: flex;
     justify-content: space-between;
 }
@@ -37,7 +39,7 @@ h1{
 .graficos{
     margin-top: 2rem;
     width: 100%;
-    height: 50%;
+    height: 65%;
     display: flex;
     justify-content: space-between;
 }

@@ -7,9 +7,7 @@
     <link rel="stylesheet" href="styles/Suporte.css">
     <link rel="stylesheet" href="styles/MenuLateral.css">
     <script src="./js/animacaoMenu.js"></script>
-    <script src="./js/enviarForms.js"></script>
-
-
+    <link rel="icon" href="../public/assets/favicon.ico" type="favicon">
 </head>
 <body>
     <button class="botao_abrir" onclick="abrirMenu()">☰</button>
@@ -21,12 +19,15 @@
     <div class="logo_container">
       <img src="assets/InnovaairWhite.png" alt="" />
     </div>
+
+    <span id="user_logado">Olá, Usuário</span>
     <div class="opcoes">
       <div class="container1">
         <u>
-          <li><a href="">Home</a></li>
-          <li><a href="">Dispositivos</a></li>
-          <li><a href="">Sua Conta</a></li>
+          <li><a href="../public/Dashboard.html" >Dashboard</a></li>
+          <li><a href="../public/solucao.html">Solução</a></li>
+          <li><a href="../public/NovosCadastros.html">Cadastros</a></li>
+          <li><a href="../public/suporte.html" class="agora">Suporte</a></li>
         </u>
       </div>
       <div class="container2">
@@ -37,26 +38,42 @@
     </div>
   </div>
 
-    <div class="formulario">
-        <div class="box_forms">
-            <h2>Abertura de Chamado</h2>
-            <form action="#" method="post" class="estrutura_forms">
+  <div class="tela" id="tela">
+    <div class="logo_container">
+      <h2>InnovaAir</h2>
+      <img src="assets/innovaair.png" alt="" width="35px" />
+    </div>
+
+
+    <h1>ABERTURA DE CHAMADO</h1>
+    <div class="centralizar_box">
+      <div class="box_forms">
+          <form action="#" method="post" class="estrutura_forms">
+              <div class="boxes_inputs">
                 <label for="titulo">Título:</label>
                 <input type="text" id="titulo" name="titulo" required>
-        
+              </div>
+              
+              <div class="boxes_inputs">
                 <label for="descricao">Descrição:</label>
                 <textarea id="descricao" name="descricao" rows="4" required></textarea>
-        
+              </div>
+
+              <div class="boxes_inputs">
                 <label for="responsavel">Responsável:</label>
                 <input type="text" id="responsavel" name="responsavel">
-        
+              </div>
+
+              <div class="boxes_inputs">
                 <label for="anexo">Anexo:</label>
                 <input type="file" id="anexo" name="anexo">
-        
-                <button type="submit" onclick="createJiraIssue('Teste1231231', 'Teste descrição', 'CDA', '[System] Incident')">Abrir Chamado</button>
-            </form>
-        </div>
+              </div>
+      
+              <button>Enviar Chamado</button>
+          </form>
+      </div>
     </div>
+  </div>
 </body>
 </html>
 
