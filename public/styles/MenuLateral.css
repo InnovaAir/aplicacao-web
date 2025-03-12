@@ -155,11 +155,10 @@ body {
   flex-direction: column;
 
   .logo_container {
-    margin-top: 1.8rem;
     display: flex;
     align-items: center;
     width: 20vw;
-    height: 5vh;
+    height: 10vh;
     color: #5271ff;
 
     h2 {
@@ -179,12 +178,22 @@ body {
     justify-content: center;
 
     .container {
-      width: 500px;
-      height: 500px;
+      width: 1000px;
+      height: 550px;
       background-color: #ffffff;
       border-radius: 50px;
       overflow-y: auto;
       overflow-y: scroll;
+      display: flex;
+      flex-direction: column;
+
+
+      .descricao {
+        width: 80%;
+        height: 2vh;
+        background-color: cadetblue;
+        display: block;
+      }
     }
   }
 }
@@ -202,10 +211,13 @@ body {
 }
 
 #user_logado{
-  font-family: "Rubik", sans-serif;
-  font-size: 22px;
+  /* font-family: "Rubik", sans-serif; */
+  /* font-size: 22px; */
   color: white;
   width: 100%;
   display: flex;
-  margin-left: 2rem;
+  justify-content: center;
+  /* margin-left: 2rem; */
+  /* text-align: center; */
+  /* background-color: red; */
 }
