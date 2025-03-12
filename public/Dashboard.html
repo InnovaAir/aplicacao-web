@@ -7,24 +7,35 @@
     <title>Novos Cadastros</title>
     <link rel="stylesheet" href="styles/MenuLateral.css">
     <link rel="stylesheet" href="styles/Dashboard.css">
+  <script src="./js/animacaoMenu.js"></script>
+
 </head>
 
 <body>
-    <div class="barraLateral">
-        <div class="fecharBarrinha">
-            <div class="fechar"></div>
-        </div>
-        <div class="logo">
-            <img src="assets/InnovaairWhite.png" alt="">
-        </div>
+    <button class="botao_abrir" onclick="abrirMenu()">☰</button>
 
-        <div class="opcoes">
-            <span class="opcao">Dashboard</span>
-            <span class="opcao">Dispositivos</span>
-            <span class="opcao">Colaboradores</span>
-            <span class="opcao">Suporte</span>
-        </div>
+  <div class="barra_lateral" id="menu">
+    <div class="fechar_barrinha">
+      <button class="botao_fechar" onclick="fecharMenu()">✖</button>
     </div>
+    <div class="logo_container">
+      <img src="assets/InnovaairWhite.png" alt="" />
+    </div>
+    <div class="opcoes">
+      <div class="container1">
+        <u>
+          <li><a href="">Home</a></li>
+          <li><a href="">Dispositivos</a></li>
+          <li><a href="">Sua Conta</a></li>
+        </u>
+      </div>
+      <div class="container2">
+        <u>
+          <li><a href="">Fale conosco!</a></li>
+        </u>
+      </div>
+    </div>
+  </div>
 
     <div class="PageContent">
         <h1>DASHBOARD</h1>

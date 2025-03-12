@@ -5,11 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InnovaAir</title>
     <link rel="stylesheet" href="styles/Suporte.css">
+    <link rel="stylesheet" href="styles/MenuLateral.css">
+    <script src="./js/animacaoMenu.js"></script>
     <script src="./js/enviarForms.js"></script>
 
 
 </head>
 <body>
+    <button class="botao_abrir" onclick="abrirMenu()">☰</button>
+
+  <div class="barra_lateral" id="menu">
+    <div class="fechar_barrinha">
+      <button class="botao_fechar" onclick="fecharMenu()">✖</button>
+    </div>
+    <div class="logo_container">
+      <img src="assets/InnovaairWhite.png" alt="" />
+    </div>
+    <div class="opcoes">
+      <div class="container1">
+        <u>
+          <li><a href="">Home</a></li>
+          <li><a href="">Dispositivos</a></li>
+          <li><a href="">Sua Conta</a></li>
+        </u>
+      </div>
+      <div class="container2">
+        <u>
+          <li><a href="">Fale conosco!</a></li>
+        </u>
+      </div>
+    </div>
+  </div>
+
     <div class="formulario">
         <div class="box_forms">
             <h2>Abertura de Chamado</h2>
