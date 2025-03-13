@@ -131,3 +131,25 @@ body {
 .colaborador {
     display: none;
 }
+
+@media screen and (max-width: 768px) {
+    .Caixa {
+        flex-direction: column;
+    }
+
+    .coluna {
+        flex-direction: column;
+    }
+
+    .InputsCadastro {
+        flex-direction: column;
+    }
+
+    .botoes {
+        flex-direction: column;
+    }
+
+    .coluna input {
+        margin-right: 3%;
+    }
+}
