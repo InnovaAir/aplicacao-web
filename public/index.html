@@ -14,24 +14,28 @@
                     <img src="assets/2.png" alt="" style="width: 50px;">
                 </div>
                 
-                <div class="navbarMiddle" id="navbarMiddle">
+                <div class="navbarMiddle" id="navbarMidID">
                     <a href="">Home</a>
                     <a href="#tituloSobreNos">Sobre nós</a>
-                    <a href="">Nossa solução</a>
+                    <a href="#tituloNossaSolucao">Nossa solução</a>
                 </div>  
 
-                <div class="navbarMiddle2" id="navbarMiddle2" style="display: none;">
-                    <button>x</button>
-                </div>  
-
-                <div class="navbarRight" id="navbarRight">
+                <div class="navbarRight" id="navbarRightID" style="display: flex; flex-direction: row;">
                     <a href="">Sou Empresa</a>
                     <a href="">Sou Colaborador</a>
                 </div>
             </div>
         </div>
+        <div class="navBarPhone" id="id_navbarPhone" style="display: none;">
+            <a href="" id="homeNavBar"><b>Home</b></a>
+            |
+            <a href="#tituloSobreNos" id="sobreNosNavBar"><b>Sobre nós</b></a>
+            |
+            <a href="#tituloNossaSolucao" id="nossaSolucaoNavBar"><b>Nossa solução</b></a>
+        </div>
 
         <div class="homeInfo">
+            
             <img src="./assets/Monitoramento-proativo-jpg.webp" alt="" style="height: 10%; width: 40%;">
             <div>
                 <h1>Um check-in mais ágil e seguro, pronto para quaisquer ocorrência!</h1>
@@ -78,7 +82,7 @@
         </div>
 
         <div>
-            <h1>Nossa Solução</h1>
+            <h1 id="tituloNossaSolucao">Nossa Solução</h1>
 
             <div>
                 <p>
@@ -94,19 +98,36 @@
 </html>
 <script>
 function ajustarNavbar() {
-    let navbarMiddle = document.getElementById("navbarMiddle");
-    let navbarRight = document.getElementById("navbarRight");
-    let navbarMiddle2 = document.getElementById("navbarMiddle2");
-
+    var navbarMidID = document.getElementById("navbarMidID");
+    var navbarRightID = document.getElementById("navbarRightID")
+    var navbarPhoneID = document.getElementById("id_navbarPhone")
+    var homeID = document.getElementById("homeNavBar")
+    var sobreNosID = document.getElementById("sobreNosNavBar")
+    var nossaSolucaoID = document.getElementById("nossaSolucaoNavBar")
 
     if (window.innerWidth < 643) {
-        navbarMiddle.style.display = "none"; 
-        navbarRight.style.display = "flex";
-        navbarRight.style.flexDirection = "row";
-        navbarMiddle2.style.display = "block"
+        navbarMidID.style.display = "none"
+        navbarPhoneID.style.display = "flex"
+        navbarPhoneID.style.justifyContent = "space-between"
+        navbarPhoneID.style.margin = "10px"
+
+        homeID.style.color = "#5271FF"
+        homeID.style.textDecoration = "none"
+
+        sobreNosID.style.color = "#5271FF"
+        sobreNosID.style.textDecoration = "none"
+
+        nossaSolucaoID.style.color = "#5271FF"
+        nossaSolucaoID.style.textDecoration = "none"
+
     } else {
-        navbarMiddle.style.display = "block";
-        navbarMiddle2.style.display = "none"
+        navbarMidID.style.display = "flex"
+        navbarMidID.style.flexDirection = "row"
+
+        navbarRightID.style.display = "flex"
+        navbarRightID.style.flexDirection = "row"
+
+        navbarPhoneID.style.display = "none"
 
     }
 }
