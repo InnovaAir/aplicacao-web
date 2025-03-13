@@ -1,3 +1,103 @@
+:root {
+    --color-neutral-0: #3852c5;
+    --color-neutral-10: #5271FF;
+    --color-neutral-30: #ffffff;
+    --color-neutral-40: #2d42a0;
+    --color-neutral-50: #7a90f3;
+
+}
+
+* {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+}
+
+main {
+    height: 80vh;
+}
+
+footer {
+    width: 100%;
+    color: var(--color-neutral-40);
+}
+
+.link {
+    text-decoration: none;
+}
+
+#footerConteudo {
+    background-color: var(--color-neutral-10);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 2rem 3.5rem;
+}
+
+.lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    list-style: none;
+}
+
+.lista .link {
+    color: var(--color-neutral-30);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#footerContato {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#footerContato p {
+    color: var(--color-neutral-30);
+}
+
+#inputContato {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-neutral-30);
+    border-radius: 4px;
+}
+
+#inputContato input {
+    all: unset;
+    padding: 0.75rem;
+    width: 100%;
+    color: var(--color-neutral-40);
+}
+
+#inputContato button {
+    background-color: var(--color-neutral-50);
+    border: none;
+    color: var(--color-neutral-30);
+    padding: 0px 1.25rem;
+    font-size: 1.125rem;
+    height: 100%;
+    border-radius: 0px 4px 4px 0px;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+
+#inputContato button:hover {
+    opacity: 0.8;
+}
+
+#footerInnovaAir {
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-neutral-0);
+    font-size: 0.9rem;
+    padding: 1.5rem;
+    font-weight: 100;
+    color: var(--color-neutral-30);
+}
+
 body{
     font-family: Arial, Helvetica, sans-serif;
     border: 0;
@@ -66,4 +166,32 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.cardSolucao{
+    background-color: white;
+    border: 1px solid #dadada;
+    max-width: 80%;
+    border-radius: 2rem;
+    padding: 3rem;
+    margin: 5rem;
+    box-shadow: 15px 15px 20px #2d42a046;
+}
+
+.nossaSolucao{
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    #footerConteudo {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 2rem;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    #footerConteudo {
+        grid-template-columns: repeat(1, 1fr);
+        padding: 3rem 2rem;
+    }
 }
