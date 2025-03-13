@@ -1,5 +1,5 @@
 const e = require("express");
-var usuarioModel = require("../models/usuarioModel");
+var usuarioModel = require("../Models/usuarioModel");
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
