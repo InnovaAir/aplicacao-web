@@ -5,4 +5,4 @@ function abrirMenu() {
   function fecharMenu() {
     document.getElementById("menu").classList.remove("menu-aberto");
     document.getElementById("tela").classList.remove("tela-movida");
-x  }
+  }
