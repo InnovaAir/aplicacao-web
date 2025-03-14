@@ -10,10 +10,11 @@
   <link rel="icon" href="styles/Solucao.css" type="img/png" />
   <link rel="stylesheet" href="styles/utils.css" />
   <script src="./js/animacaoMenu.js"></script>
+  <script src="./js/geracaoDeConteudo.js"></script>
   <link rel="icon" href="../public/assets/favicon.ico" type="favicon">
 </head>
 
-<body>
+<body onload="gerarListaItens()">
   <button class="botao_abrir" onclick="abrirMenu()">☰</button>
 
   <div class="barra_lateral" id="menu">
@@ -49,55 +50,25 @@
     </div>
     <div class="painel_container">
       <div class="container">
-        <ul class="item_lista">
-          <li class="item">
-            <span>Item 1</span>
+        <div class="div_titulos">
+          <span class="titulos_lista">Identificação</span>
+          <span class="titulos_lista">CPU</span>
+          <span class="titulos_lista">Disco</span>
+          <span class="titulos_lista">RAM</span>
+          <span class="titulos_lista">Tempo de Uso</span>
+        </div>
+        <ul class="item_lista" id="item_lista">
+          <!-- <li class="item">
+            <div class="dados">
+              <span class="dados_lista">TAM-1932</span>
+              <span class="dados_lista">67%</span>
+              <span class="dados_lista">30%</span>
+              <span class="dados_lista">15%</span>
+              <span class="dados_lista">16d 20hs 13m</span>
+            </div>
             <button class="botao">Abrir</button>
-          </li>
-          <li class="item">
-            <span>Item 2</span>
-            <button class="botao">Abrir</button>
-          </li>
-          <li class="item">
-            <span>Item 3</span>
-            <button class="botao">Abrir</button>
-          </li>
-          <li class="item">
-            <span>Item 4</span>
-            <button class="botao">Abrir</button>
-          </li>
-          <li class="item">
-            <span>Item 5</span>
-            <button class="botao">Abrir</button>
-          </li>
-          <li class="item">
-            <span>Item 6</span>
-            <button class="botao">Abrir</button>
-          </li>
-          <li class="item">
-            <span>Item 7</span>
-            <button class="botao">Abrir</button>
-          </li>
-          <li class="item">
-            <span>Item 8</span>
-            <button class="botao">Abrir</button>
-          </li>
-          <li class="item">
-            <span>Item 9</span>
-            <button class="botao">Abrir</button>
-          </li>
-          <li class="item">
-            <span>Item 10</span>
-            <button class="botao">Abrir</button>
-          </li>
-          <li class="item">
-            <span>Item 11</span>
-            <button class="botao">Abrir</button>
-          </li>
-          <li class="item">
-            <span>Item 12</span>
-            <button class="botao">Abrir</button>
-          </li>
+          </li> -->
+          
         </ul>
       </div>
     </div>
