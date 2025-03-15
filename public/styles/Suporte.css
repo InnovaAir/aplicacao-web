@@ -102,3 +102,22 @@ textarea{
     padding: 5px;
     font-family: "Rubik", sans-serif;
 }
+
+@media screen and (max-width: 450px){
+    #tela {
+        margin-left: 0;
+    }
+
+    .centralizar_box {
+        width: 100vw;
+    }
+
+    .box_forms {
+        width: 90%;
+        height: 85vh;
+    }
+
+    .tela-movida > h1 {
+        text-align: center;
+    }
+}
