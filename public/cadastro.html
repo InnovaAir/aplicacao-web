@@ -1,105 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Cadastro</title>
     <link rel="stylesheet" href="styles/utils.css">
     <link rel="stylesheet" href="styles/cadastro.css">
     <script src="./js/validacaoCadastro.js"></script>
 </head>
+
 <body>
-    <div>
-        <div class="navbar">
-            <div class="navbarLogo">
-                <img src="assets/2.png" alt="" style="width: 50px;">
-            </div>
-            <div class="navbarMiddle">
-                <a href=""><b><u>Home</u></b></a>
-                <a href="">Sobre nós</a>
-                <a href="">Nossa solução</a>
-            </div>
-            <div class="navbarRight">
-                <a href="">Sou Empresa</a>
-                <a href="">Sou Colaborador</a>
+    <div class="container">
+        <div class="form-login">
+            <div class="signup">
+                <h1>Login!</h1>
+                <p>Já possui uma conta?</p>
+                <button onclick="redirecionar()">Clique aqui</button>
             </div>
         </div>
-        <div class="container">
-            <div class="form-login">
-                <div class="signup">
-                    <h1>Login!</h1>
-                    <p>Já possui uma conta?</p>
-                    <button onclick="redirecionar()">Clique aqui</button>
+        <div class="fields">
+            <h1 class="titulo">Cadastro</h1>
+            <div class="container_inputs">
+                <div class="input">
+                    <label for="ipt_razao_social">Razão Social:</label>
+                    <input id="ipt_razao_social" type="text">
                 </div>
-                <div class="fields">
-                    <h1 class="titulo">Cadastro</h1>
-                    <div class="inputs">
-                        <label for="ipt_razao_social">Razão Social:</label>
-                        <input id="ipt_razao_social" type="text">
 
-                        <label for="ipt_email">E-mail:</label>
-                        <input id="ipt_email" type="text">
-
-                        <label for="ipt_telefone">Telefone:</label>
-                        <input id="ipt_telefone" type="tel" maxlength="15" onkeyup="mascaraTel(event)">
-
-                        <label for="ipt_responsavel">Responsável:</label>
-                        <input id="ipt_responsavel" type="text">
-
-                        <label for="ipt_cnpj">CNPJ:</label>
-                        <input id="ipt_cnpj" type="tel" maxlength="18" onkeyup="mascaraCNPJ(event)">
-                        
-                        <label for="ipt_senha">Senha:</label>
-                        <input id="ipt_senha" type="password">
-
-                        <label for="ipt_confirmar_senha">Confirmar Senha:</label>
-                        <input id="ipt_confirmar_senha" type="password">
-
-                    </div>
-                    <div id="mensagemErro" style="color: red;">
-                        <!-- msg erro -->
-                    </div>
-                    <div class="buttons" onclick="">
-                        <button onclick="cadastrar()">Cadastrar</button>
-                    </div>
+                <div class="input">
+                    <label for="ipt_email">E-mail:</label>
+                    <input id="ipt_email" type="text">
                 </div>
+
+                <div class="input">
+                    <label for="ipt_telefone">Telefone:</label>
+                    <input id="ipt_telefone" type="tel" maxlength="15" onkeyup="mascaraTel(event)">
+                </div>
+
+                <div class="input">
+                    <label for="ipt_responsavel">Responsável:</label>
+                    <input id="ipt_responsavel" type="text">
+                </div>
+
+                <div class="input">
+                    <label for="ipt_cnpj">CNPJ:</label>
+                    <input id="ipt_cnpj" type="tel" maxlength="18" onkeyup="mascaraCNPJ(event)">
+                </div>
+
+                <div class="input">
+                    <label for="ipt_senha">Senha:</label>
+                    <input id="ipt_senha" type="password">
+                </div>
+
+                <div class="input">
+                    <label for="ipt_confirmar_senha">Confirmar Senha:</label>
+                    <input id="ipt_confirmar_senha" type="password">
+                </div>
+
+            </div>
+            <div id="mensagemErro" style="color: red;">
+                <!-- msg erro -->
+            </div>
+            <div class="buttons" onclick="">
+                <button onclick="cadastrar()">Cadastrar</button>
             </div>
         </div>
-</div>
+    </div>
 </body>
+
 </html>
 <script>
-    function redirecionar(){
+    function redirecionar() {
         window.location.href = "login.html";
     }
 
     const mascaraTel = (event) => {
-    let input = event.target
-    input.value = phoneMask(input.value)
+        let input = event.target
+        input.value = phoneMask(input.value)
     }
 
     const phoneMask = (value) => {
-    if (!value) return ""
-    value = value.replace(/\D/g,'')
-    value = value.replace(/(\d{2})(\d)/,"($1) $2")
-    value = value.replace(/(\d)(\d{4})$/,"$1-$2")
-  return value
-}
+        if (!value) return ""
+        value = value.replace(/\D/g, '')
+        value = value.replace(/(\d{2})(\d)/, "($1) $2")
+        value = value.replace(/(\d)(\d{4})$/, "$1-$2")
+        return value
+    }
 
-// XX. XXX. XXX/0001-XX
+    // XX. XXX. XXX/0001-XX
     const mascaraCNPJ = (event) => {
-    let input = event.target
-    input.value = cnpjMask(input.value)
+        let input = event.target
+        input.value = cnpjMask(input.value)
     }
 
     const cnpjMask = (value) => {
-    if (!value) return ""
-    value = value.replace(/\D/g,'')
-    value = value.replace(/(\d{2})(\d)/,"$1.$2")
-    value = value.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3")
-    value = value.replace(/\.(\d{3})(\d)/, ".$1/$2")
-    value = value.replace(/(\d{4})(\d)$/, "$1-$2")
-    return value
+        if (!value) return ""
+        value = value.replace(/\D/g, '')
+        value = value.replace(/(\d{2})(\d)/, "$1.$2")
+        value = value.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+        value = value.replace(/\.(\d{3})(\d)/, ".$1/$2")
+        value = value.replace(/(\d{4})(\d)$/, "$1-$2")
+        return value
     }
 
 

@@ -1,76 +1,48 @@
 * {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    height: 100vh;
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(238, 244, 255);
+    background: linear-gradient(144deg,
+            rgba(238, 244, 255, 1) 37%,
+            rgba(175, 190, 255, 1) 100%);
 }
 
 .container {
-    height: 93vh;
-    background-image: linear-gradient(#EEF4FF, #AFBEFF);
     display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: white;
+    border-radius: 50px;
+    height: 80%;
+    width: 65%;
 }
 
 .form-login {
-    background-color: white;
-    height: 70%;
-    width: 60vw;
-    border-radius: 50px;
-    display: flex;
-}
-
-.fields {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    align-self: center;
-    gap: 1rem;
-    padding: 2rem 0rem 2rem 2rem;
-}
+    align-items: center;
+    justify-content: center;
+    width: 50%;
 
-.fields h1, p {
-    color: #5271FF;
-}
-
-.titulo {
-    flex-grow: 1;
-    font-size: 2.5rem;
-}
-
-.fields .inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.inputs input {
-    box-sizing: border-box;
-    width: 85%;
-    height: 2.5rem;
-    border-radius: 50px;
-    border: 2px solid #5271FF;
-    padding: 0 0 0 5px;
-    
-}
-
-.inputs label {
-    color: #5271FF;
-    font-size: 1.2rem;
-    
-}
-
-.signup {
-    background-image: linear-gradient(#8BA0FF, #5271FF);
+    background-image: linear-gradient(26deg,#8BA0FF, #5271FF);
     flex: 1;
     gap: 10px;
     border-radius: 50px;
+}
 
+.signup {
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
 .signup h1 {
@@ -85,6 +57,67 @@
 .signup button {
     color: white;
     width: 40%;
+    height: 8%;
+    border-radius: 20px;
+    border: 1px solid #5271FF;
+    background-image: linear-gradient(#5473ff, #5271FF);
+    cursor: pointer;
+}
+
+.fields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+    height: 100%;
+}
+
+.fields h1 {
+    margin: 0;
+    margin-top: 0.9%;
+    margin-bottom: 2%;
+    color: #5271FF;
+}
+
+.titulo {
+    font-size: 2.5rem;
+}
+
+.container_inputs {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 90%;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 100%;
+    height: 100%;
+}
+
+input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 60%;
+    border-radius: 50px;
+    border: 2px solid #5271FF;
+    padding: 0 0 0 5px;   
+}
+
+label {
+    color: #5271FF;
+    font-size: 1rem;   
+}
+
+.signup button {
+    color: white;
+    width: 40%;
     height: 30px;
     border-radius: 20px;
     border: 1px solid #5271FF;
@@ -93,33 +126,22 @@
 }
 
 .buttons {
-    flex-grow: 1;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
+    margin-bottom: 5%;
     align-items: center;
     width: 85%;
+    height: 10%;
 }
 
 .buttons button {
     color: white;
+    height: 80%;
     width: 50%;
-    height: 2.5rem;
     border-radius: 20px;
     font-size: 20px;
     font-weight: 600;
     border: none;
     background-image: linear-gradient(#AFBEFF, #5271FF);
-    cursor: pointer;
-}
-
-.permanecer-conectado {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-  
-}
-
-.permaencer-conectado input {
     cursor: pointer;
 }
