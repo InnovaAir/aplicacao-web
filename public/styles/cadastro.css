@@ -21,6 +21,7 @@ body {
     border-radius: 50px;
     height: 80%;
     width: 65%;
+    box-shadow: 5px 5px 10px #9e9e9e;
 }
 
 .form-login {
@@ -144,4 +145,33 @@ label {
     border: none;
     background-image: linear-gradient(#AFBEFF, #5271FF);
     cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 90%;
+        border-radius: 20px;
+    }
+    
+    .form-login {
+        display: none;
+    }
+
+    .fields {
+        margin-left: 5%;
+        align-items: start;
+        width: 100%;
+    }
+
+    .container_inputs {
+        width: 95%;
+    }
+
+    .buttons {
+        width: 95% ;
+    }
+
+    .buttons button {
+        width: 100%;
+    }
 }
