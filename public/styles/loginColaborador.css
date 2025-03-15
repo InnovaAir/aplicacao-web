@@ -27,15 +27,59 @@
     width: 60vw;
     border-radius: 50px;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.box_voltar{
+    width: 100%;
+    padding: 0 0 0 3rem ;
+    display: flex;
+    align-items: center;
+}
+
+.box{
+    display: flex;
+    cursor: pointer;
+}
+
+.box_voltar img , span{
+    height: 100%;
+    display: flex;
+    cursor: pointer;
+}
+
+.box_voltar a{
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #5271FF;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    margin: 3px 0 0 3px;
+    text-decoration: none;
+}
+
+.box_voltar a:hover{
+    color: #4668ff;
+}
+
+.logo_container{
+    display: flex;
+    justify-content: center;
+    height: 15%;
+    width: 100%;
 }
 
 .fields {
-    flex: 1;
+    width: 50%;
+    height: 75%;
     display: flex;
     flex-direction: column;
-    align-self: center;
-    gap: 3rem;
-    padding: 2rem 0rem 2rem 2rem;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
 }
 
 .fields h1, p {
@@ -43,17 +87,19 @@
 }
 
 .titulo {
-    flex-grow: 1;
-    flex-grow: 1;
-    font-size: 2rem;
-    width: 85%;
+    height: 15%;
+    font-size: 28px;
+    width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .fields .inputs {
+    width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
 }
 
@@ -62,11 +108,15 @@
     height: 2.5rem;
     border-radius: 50px;
     border: 2px solid #5271FF;
+    box-sizing: border-box;
+    padding: 10px;
 }
 
 .inputs label {
     color: #5271FF;
     font-size: 1.2rem;
+    width: 85%;
+
 }
 
 .signup {
