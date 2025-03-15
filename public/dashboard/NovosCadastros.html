@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novos Cadastros</title>
-    <link rel="stylesheet" href="styles/MenuLateral.css">
-    <link rel="stylesheet" href="styles/NovosCadastros.css">
+    <link rel="stylesheet" href="../styles/MenuLateral.css">
+    <link rel="stylesheet" href="../styles/NovosCadastros.css">
     <link rel="icon" href="../public/assets/favicon.ico" type="favicon">
 </head>
 
@@ -18,22 +18,23 @@
       <button class="botao_fechar" onclick="fecharMenu()">✖</button>
     </div>
     <div class="logo_container">
-      <img src="assets/InnovaairWhite.png" alt="" />
+      <img src="../assets/InnovaairWhite.png" alt="" />
     </div>
 
     <span id="user_logado">Olá, Usuário</span>
     <div class="opcoes">
-      <div class="container1">
-        <u>
-          <li><a href="../public/Dashboard.html" >Dashboard</a></li>
-          <li><a href="../public/solucao.html">Solução</a></li>
-          <li><a href="../public/NovosCadastros.html" class="agora">Cadastros</a></li>
-          <li><a href="../public/suporte.html">Suporte</a></li>
-        </u>
-      </div>
+        <div class="container1">
+            <u>
+                <li><a href="visaoGeral.html">Visão geral</a></li>
+                <li><a href="tempoReal.html">Tempo real</a></li>
+                <li><a href="listaMaquinas.html">Lista de máquinas</a></li>
+                <li><a href="NovosCadastros.html" class="agora">Cadastros</a></li>
+                <li><a href="suporte.html">Suporte</a></li>
+            </u>
+        </div>
       <div class="container2">
         <u>
-          <li><a href="">Fale conosco!</a></li>
+          <li><a href="suporte.html">Fale conosco!</a></li>
         </u>
       </div>
     </div>
@@ -43,7 +44,7 @@
     <div class="tela" id="tela">
         <div class="logo_container">
             <h2>InnovaAir</h2>
-            <img src="assets/innovaair.png" alt="" />
+            <img src="../assets/innovaair.png" alt="" />
         </div>
 
         <!-- Henrique mudou, pelo motivo que "Ola,Usuario ja esta no menu hamburguer" -->
@@ -137,6 +138,18 @@
         </div>
     </div>
 </body>
-<script src="./js/NovosCadastros.js"></script>
-<script src="./js/animacaoMenu.js"></script>
+<script src="../js/NovosCadastros.js"></script>
+<script src="../js/animacaoMenu.js"></script>
 </html>
+<script>
+       function abrirMenu() {
+        document.getElementById("menu").classList.add("menu-aberto");
+        document.getElementById("tela").classList.add("tela-movida");
+    }
+    function fecharMenu() {
+        document.getElementById("menu").classList.remove("menu-aberto");
+        document.getElementById("tela").classList.remove("tela-movida");
+    }
+    abrirMenu();
+
+</script>

@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="styles/MenuLateral.css" />
-  <link rel="stylesheet" href="styles/Solucao.css" />
+  <link rel="stylesheet" href="../styles/MenuLateral.css" />
+  <link rel="stylesheet" href="../styles/Solucao.css" />
   <title>InnovaAir</title>
-  <link rel="icon" href="styles/Solucao.css" type="img/png" />
-  <link rel="stylesheet" href="styles/utils.css" />
-  <script src="./js/animacaoMenu.js"></script>
-  <script src="./js/geracaoDeConteudo.js"></script>
+  <link rel="icon" href="../styles/Solucao.css" type="img/png" />
+  <link rel="stylesheet" href="../styles/utils.css" />
+  <script src="../js/animacaoMenu.js"></script>
+  <script src="../js/geracaoDeConteudo.js"></script>
   <link rel="icon" href="../public/assets/favicon.ico" type="favicon">
 </head>
 
@@ -22,22 +22,23 @@
       <button class="botao_fechar" onclick="fecharMenu()">✖</button>
     </div>
     <div class="logo_container">
-      <img src="assets/InnovaairWhite.png" alt="" />
+      <img src="../assets/InnovaairWhite.png" alt="" />
     </div>
 
     <span id="user_logado">Olá, Usuário</span>
     <div class="opcoes">
       <div class="container1">
         <u>
-          <li><a href="../public/Dashboard.html" >Dashboard</a></li>
-          <li><a href="../public/solucao.html" class="agora">Solução</a></li>
-          <li><a href="../public/NovosCadastros.html">Cadastros</a></li>
-          <li><a href="../public/suporte.html">Suporte</a></li>
+            <li><a href="visaoGeral.html">Visão geral</a></li>
+            <li><a href="tempoReal.html">Tempo real</a></li>
+            <li><a href="listaMaquinas.html" class="agora">Lista de máquinas</a></li>
+            <li><a href="NovosCadastros.html">Cadastros</a></li>
+            <li><a href="suporte.html">Suporte</a></li>
         </u>
-      </div>
+    </div>
       <div class="container2">
         <u>
-          <li><a href="">Fale conosco!</a></li>
+          <li><a href="suporte.html">Fale conosco!</a></li>
         </u>
       </div>
     </div>
@@ -46,7 +47,7 @@
   <div class="tela" id="tela">
     <div class="logo_container">
       <h2>InnovaAir</h2>
-      <img src="assets/innovaair.png" alt="" />
+      <img src="../assets/innovaair.png" alt="" />
     </div>
     <div class="painel_container">
       <div class="container">
@@ -76,3 +77,15 @@
 </body>
 
 </html>
+<script>
+     function abrirMenu() {
+        document.getElementById("menu").classList.add("menu-aberto");
+        document.getElementById("tela").classList.add("tela-movida");
+    }
+    function fecharMenu() {
+        document.getElementById("menu").classList.remove("menu-aberto");
+        document.getElementById("tela").classList.remove("tela-movida");
+    }
+    abrirMenu();
+
+</script>
