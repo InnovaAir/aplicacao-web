@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Innovair - Login for Empresas</title>
+    <title>Innovair - Login for Colaboradores</title>
     <link rel="stylesheet" href="styles/utils.css">
-    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="styles/loginColaborador.css">
     <script src="./js/validacaoLogin.js"></script>
     <link rel="icon" href="../public/assets/favicon.ico" type="favicon">
 </head>
@@ -20,13 +20,22 @@
         </div>
         <div class="container">
             <div class="form-login">
+                <div class="box_voltar" >
+                    <div class="box" >
+                        <img src="../public/assets/back-icon.png" alt="voltar">
+                        <a class="voltar" href="../public/index.html">Voltar</a>
+                    </div>
+                </div>
+                <div class="logo_container">
+                    <img src="../public/assets/innovaair.png" alt=""  />
+                </div>
                 <div class="fields">
-                    <h1 class="titulo">Login para Empresas</h1>
+                    <h1 class="titulo">Login para Colaboradores</h1>
                     <div class="inputs">
                         <label for="ipt_email">E-mail:</label>
                         <input id="ipt_email" type="text">
                         <label for="ipt_senha">Senha:</label>
-                        <input id="ipt_senha" type="text">
+                        <input id="ipt_senha" type="password">
                     </div>
                     <div id="mensagemErro" style="color: red;">
                         <!-- msg de erro -->
@@ -41,12 +50,6 @@
                             <p>Não é registrado? <span>Cadastre-se</span></p>
                         </div>
                     </div>
-                </div>
-                <div class="signup">
-                    <h1>Cadastre-se!</h1>
-                    <p>Ainda não possui uma conta?</p>
-                    <p>Não perca tempo e crie agora!</p>
-                    <button onclick="redirecionar()">Cadastrar</button>
                 </div>
             </div>
         </div>

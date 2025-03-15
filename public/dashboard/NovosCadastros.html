@@ -7,38 +7,54 @@
     <title>Novos Cadastros</title>
     <link rel="stylesheet" href="../styles/MenuLateral.css">
     <link rel="stylesheet" href="../styles/NovosCadastros.css">
+    <link rel="stylesheet" href="../styles/menu_mobile.css">
     <link rel="icon" href="../public/assets/favicon.ico" type="favicon">
 </head>
 
 <body>
     <button class="botao_abrir" onclick="abrirMenu()">☰</button>
 
-  <div class="barra_lateral" id="menu">
-    <div class="fechar_barrinha">
-      <button class="botao_fechar" onclick="fecharMenu()">✖</button>
-    </div>
-    <div class="logo_container">
-      <img src="../assets/InnovaairWhite.png" alt="" />
-    </div>
-
-    <span id="user_logado">Olá, Usuário</span>
-    <div class="opcoes">
-        <div class="container1">
-            <u>
-                <li><a href="visaoGeral.html">Visão geral</a></li>
-                <li><a href="tempoReal.html">Tempo real</a></li>
-                <li><a href="listaMaquinas.html">Lista de máquinas</a></li>
-                <li><a href="NovosCadastros.html" class="agora">Cadastros</a></li>
-                <li><a href="suporte.html">Suporte</a></li>
-            </u>
+    <div class="barra_lateral" id="menu">
+        <div class="fechar_barrinha">
+            <button class="botao_fechar" onclick="fecharMenu()">✖</button>
         </div>
-      <div class="container2">
-        <u>
-          <li><a href="suporte.html">Fale conosco!</a></li>
-        </u>
-      </div>
+        <div class="logo_container">
+            <img src="../assets/InnovaairWhite.png" alt="" />
+        </div>
+
+        <span id="user_logado">Olá, Usuário</span>
+        <div class="opcoes">
+            <div class="container1">
+                <u>
+                    <li><a href="visaoGeral.html">Visão geral</a></li>
+                    <li><a href="tempoReal.html">Tempo real</a></li>
+                    <li><a href="listaMaquinas.html">Lista de máquinas</a></li>
+                    <li><a href="NovosCadastros.html" class="agora">Cadastros</a></li>
+                    <li><a href="suporte.html">Suporte</a></li>
+                </u>
+            </div>
+            <div class="container2">
+                <u>
+                    <li><a href="suporte.html">Fale conosco!</a></li>
+                </u>
+            </div>
+        </div>
     </div>
-  </div>
+    <div class="menu_mobile">
+        <button class="botao_menu_mobile" onclick="abrirMenuMobile()">☰</button>
+        <div class="logo_container">
+            <img src="../assets/InnovaairWhite.png" alt="" />
+        </div>
+
+    </div>
+    <div class="novo_menu">
+        <a href="visaoGeral.html" >Visão geral</a>
+        <a href="tempoReal.html">Tempo real</a>
+        <a href="listaMaquinas.html">Lista de máquinas</a>
+        <a href="NovosCadastros.html" class="agora">Cadastros</a>
+        <a href="suporte.html">Suporte</a>
+        <a href="suporte.html">Fale conosco!</a>
+    </div>
 
     <div class="tela" id="tela">
         <div class="logo_container">
@@ -55,13 +71,13 @@
                 <div class="colunaImagem">
                     <div class="imagem"></div>
                 </div>
-    
+
                 <div class="coluna">
                     <div class="TextBox">
                         <h2>Cadastrar Dispositivo Manualmente</h2>
                         <span>Clique em "adicionar" para cadastrar um novo dispositivo para monitamento.</span>
                     </div>
-    
+
                     <div id="div_disp" class="dispositivo">
                         <div class="InputsCadastro">
                             <div class="coluna">
@@ -82,9 +98,9 @@
                             </div>
                         </div>
                     </div>
-    
+
                     <div class="resposta" id="div_respDisp"></div>
-    
+
                     <div class="botoes">
                         <div id="aD" class="adicionarDisp">
                             <button class="botao" onclick="addDispositivo()">Adicionar</button>
@@ -95,18 +111,18 @@
                     </div>
                 </div>
             </div>
-    
+
             <div class="Caixa">
                 <div class="colunaImagem">
                     <div class="imagem"></div>
                 </div>
-    
+
                 <div class="coluna">
                     <div class="TextBox">
                         <h2>Cadastrar Colaborador</h2>
                         <span>Clique em ”adicionar” para cadastrar um novo colaborador.</span>
                     </div>
-    
+
                     <div id="div_colab" class="colaborador">
                         <div class="InputsCadastro">
                             <div class="coluna">
@@ -121,9 +137,9 @@
                             </div>
                         </div>
                     </div>
-    
+
                     <div class="resposta" id="div_respColab"></div>
-    
+
                     <div class="botoes">
                         <div id="aC" class="adicionarColab">
                             <button class="botao" onclick="addColaborador()">Adicionar</button>
@@ -139,9 +155,10 @@
 </body>
 <script src="../js/NovosCadastros.js"></script>
 <script src="../js/animacaoMenu.js"></script>
+
 </html>
 <script>
-       function abrirMenu() {
+    function abrirMenu() {
         document.getElementById("menu").classList.add("menu-aberto");
         document.getElementById("tela").classList.add("tela-movida");
     }

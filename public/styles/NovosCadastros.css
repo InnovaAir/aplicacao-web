@@ -152,4 +152,13 @@ body {
     .coluna input {
         margin-right: 3%;
     }
+
+    body {
+        display: block;
+    }
+
+    .tela-movida {
+        margin-left: 0;
+    }
+
 }
