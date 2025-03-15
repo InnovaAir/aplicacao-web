@@ -1,0 +1,44 @@
+.dispositivoContainer{
+    background-color: white;
+    display: flex;
+    margin: 12vb;
+    margin-left: 17vw;
+    height: 70vh;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+}
+
+.containerInfo1{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.containerInfo2{
+    display: flex;
+    flex-direction: column;
+    justify-items: space-between;
+}
+
+.containerInfo3{
+    display: flex;
+    flex-direction: column;
+    justify-items: space-between;
+    align-items: right;
+}
+
+.infoBoxMaquina{
+    display: flex;
+    flex-direction: column;
+}
+
+.tempoBox{
+    background-color: white;
+    border-color: black;
+    border-style: solid;
+    border-radius: 20px;
+    height: 20vh;
+    width: 30vw;
+    
+}

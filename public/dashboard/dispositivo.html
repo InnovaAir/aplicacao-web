@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/MenuLateral.css">
+    <link rel="stylesheet" href="../styles/dispositivo.css">
+    <title>Visão geral</title>
+</head>
+
+<body>
+    <button class="botao_abrir" onclick="abrirMenu()">☰</button>
+
+    <div class="barra_lateral" id="menu">
+        <div class="fechar_barrinha">
+            <button class="botao_fechar" onclick="fecharMenu()">✖</button>
+        </div>
+        <div class="logo_container">
+            <img src="../assets/InnovaairWhite.png" alt="" />
+        </div>
+
+        <span id="user_logado">Olá, Usuário</span>
+        <div class="opcoes">
+            <div class="container1">
+                <u>
+                    <li><a href="../Dashboard.html">Dashboard</a></li>
+                    <li><a href="../solucao.html" class="agora">Solução</a></li>
+                    <li><a href="../NovosCadastros.html">Cadastros</a></li>
+                    <li><a href="../suporte.html">Suporte</a></li>
+                </u>
+            </div>
+            <div class="container2">
+                <u>
+                    <li><a href="">Fale conosco!</a></li>
+                </u>
+            </div>
+        </div>
+    </div>
+
+    <div class="dispositivoContainer">
+        <div class="containerInfo1">
+            <div>
+                <h3>Nome:</h3>
+            </div>
+            <div>
+                <h3>Informações da Máquina:</h3>
+                <div class="infoBoxMaquina">
+                    <b>Hostname:</b>
+                    <b>Endereço MAC:</b>
+                    <b>Sistema Operacional:</b>
+                    <b>Fabricante:</b>
+                    <b>Arquitetura:</b>
+                </div>
+            </div>
+            <div>
+                <h3>CPU</h3>
+                <div>
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="containerInfo2">
+            <div>
+                <h3>Disco</h3>
+                <div>
+                    <canvas id="myChart2"></canvas>
+                </div>
+            </div>
+            <div>
+                <h3>RAM</h3>
+                <canvas id="myChart3"></canvas>
+            </div>
+        </div>
+
+        <div class="containerInfo3">
+            <div>
+                <h3>Tempo de Uso</h3>
+                <div class="tempoBox">
+
+                </div>
+            </div>
+            <div>
+                <h3>Histórico de Alertas</h3>
+                <div class="tempoBox">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    function abrirMenu() {
+        document.getElementById("menu").classList.add("menu-aberto");
+        document.getElementById("tela").classList.add("tela-movida");
+    }
+    function fecharMenu() {
+        document.getElementById("menu").classList.remove("menu-aberto");
+        document.getElementById("tela").classList.remove("tela-movida");
+    }
+    abrirMenu();
+</script>
+<script>
+const ctx = document.getElementById('myChart');
+
+new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['% Livre', '% Usado'],
+        datasets: [{
+            label: '# of Votes',
+            data: [87, 13],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+<script>
+    const ctx2 = document.getElementById('myChart2');
+    
+    new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['GB Livre', 'GB Usado', 'GB Total'],
+            datasets: [{
+                label: '# of Votes',
+                data: [30, 70, 100],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    </script>
+
+<script>
+    const ctx3 = document.getElementById('myChart3');
+    
+    new Chart(ctx3, {
+        type: 'doughnut',
+        data: {
+            labels: ['GB Livre', 'GB Usado'],
+            datasets: [{
+                label: '# of Votes',
+                data: [10, 6],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    </script>
