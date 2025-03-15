@@ -1,0 +1,50 @@
+
+.novo_menu {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    background-color: #8BA0FF;
+}
+
+.novo_menu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.menu_mobile {
+    display: none; 
+    top: 0;
+    left: 0;
+    height: 60px;
+    background-color: #8BA0FF;
+    z-index: 1000;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+@media (max-width: 768px) {
+    .menu_mobile {
+        display: flex; 
+    }
+
+    .barra_lateral {
+        display: none; 
+    }
+
+    .botao_abrir {
+        display: none; 
+    }
+
+    .logo_container {
+        width: 68px;
+    }
+
+    .logo_container img {
+        width: 100%;
+    }
+}

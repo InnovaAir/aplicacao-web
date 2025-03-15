@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/MenuLateral.css">
     <link rel="stylesheet" href="../styles/visao_geral.css">
+    <link rel="stylesheet" href="../styles/menu_mobile.css">
 
     <title>Visão geral</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -41,6 +42,21 @@
             </div>
         </div>
     </div>
+    <div class="menu_mobile">
+        <button class="botao_menu_mobile" onclick="abrirMenuMobile()">☰</button>
+        <div class="logo_container">
+            <img src="../assets/InnovaairWhite.png" alt="" />
+        </div>
+
+    </div>
+    <div class="novo_menu">
+        <a href="visaoGeral.html" class="agora">Visão geral</a>
+        <a href="tempoReal.html">Tempo real</a>
+        <a href="listaMaquinas.html">Lista de máquinas</a>
+        <a href="NovosCadastros.html">Cadastros</a>
+        <a href="suporte.html">Suporte</a>
+        <a href="suporte.html">Fale conosco!</a>
+    </div>
     <div class="container">
         <div class="child">
             <div class="section1">
@@ -73,17 +89,17 @@
                             <th class="titulo">Modelo</th>
                             <th class="titulo">Frequência</th>
                             <th class="titulo">Quantidade</th>
-                          </tr>
-                          <tr>
+                        </tr>
+                        <tr>
                             <td>Intel Core i5 2450M</td>
                             <td>2.5 GHz</td>
                             <td>20</td>
-                          </tr>
-                          <tr>
+                        </tr>
+                        <tr>
                             <td>Intel Core i7 10550F</td>
                             <td>3.4 GHz</td>
                             <td>3</td>
-                          </tr>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -155,7 +171,7 @@
                 'Pendente',
                 'Resolvido'
             ],
-            datasets:[{
+            datasets: [{
                 data: [300, 50, 100],
                 backgroundColor: [
                     '#34A853',
@@ -181,13 +197,16 @@
     }
 
     )
-
-
-
-
-
     abrirMenu();
 
+    function abrirMenuMobile() {
+        const menuMobile = document.querySelector('.menu_mobile');
+        const novoMenu = document.querySelector('.novo_menu');
 
-
+        if (novoMenu.style.display === 'flex') {
+            novoMenu.style.display = 'none';
+        } else {
+            novoMenu.style.display = 'flex';
+        }
+    }
 </script>
