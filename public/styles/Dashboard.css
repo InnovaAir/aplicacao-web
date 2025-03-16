@@ -21,7 +21,7 @@ h1{
 
 .kpis{
     width: 100%;
-    height: 20%;
+    height: 30%;
     display: flex;
     justify-content: space-between;
 }
@@ -32,6 +32,8 @@ h1{
     background-color: white;
     border-radius: 15px;
     border: 1px solid #5271FF;
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -41,6 +43,7 @@ h1{
     height: 65%;
     display: flex;
     justify-content: space-between;
+    
 }
 
 .grafico-linear{
@@ -49,6 +52,7 @@ h1{
     height: 100%;
     width: 59%;
     border-radius: 15px;
+    overflow-y: scroll;
 }
 
 .ranking-incidentes{
@@ -57,14 +61,74 @@ h1{
     height: 100%;
     width: 39%;
     border-radius: 15px;
+    overflow-y: scroll;
 }
 
-.ranking-incidentes .titulo , .grafico-linear .titulo{
+
+.ranking-incidentes .titulo , .grafico-linear .titulo {
     margin-top: 1rem;
     display: flex;  
     justify-content: center;
     width: 100%;
     color: black;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 600;
+}
+
+.tela {
+    width: 87vw;
+}
+
+.lista_maquinas {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.lista_incidentes {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.lista_incidentes li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0rem 1rem 0rem 1rem;
+    background-color: #DDE3FF;
+    border-radius: 10px;
+}
+
+.lista_incidentes p {
+    margin: 0;
+    padding: 0.5rem;
+}
+
+.lista_incidentes i {
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.lista_incidentes i:hover {
+    transform: translateY(-50%);
+}
+
+.lista_incidentes  .icons {
+    display: flex;
+    gap: 20px;
+}
+
+.dois {
+    flex-direction: column;
+    align-items: center;
+}
+
+.dois p {
+font-size: 2.5rem;
+}
+
+.dois h1 {
+    font-size: 1.5rem;
 }
