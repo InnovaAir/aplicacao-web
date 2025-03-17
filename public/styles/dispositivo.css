@@ -34,11 +34,29 @@
 }
 
 .tempoBox{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
     background-color: white;
     border-color: black;
     border-style: solid;
     border-radius: 20px;
     height: 20vh;
+    width: 33vw;
+}
+
+.tempoDivBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alertaBox{
+    background-color: lightgrey;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 2px;
     width: 30vw;
-    
 }
