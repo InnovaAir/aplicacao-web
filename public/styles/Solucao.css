@@ -5,11 +5,16 @@ body{
 
 .div_titulos{
     width: 100%;
+    height: 3rem;
     padding: 5px 20% 5px 0;
     border-bottom: 1px solid blue;
     display: flex;
+    align-items: flex-end;
     justify-content: space-between;
     box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    background-color: white;
 }
 
 .titulos_lista{
@@ -35,7 +40,7 @@ body{
       border-radius: 10px;
       overflow-y: auto;
       overflow-y: scroll;
-      padding: 50px;
+      padding:  0 20px ;
 
       .item_lista {
         list-style: none;
