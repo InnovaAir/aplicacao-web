@@ -1,11 +1,14 @@
-.navbar * {
-    max-width: 100%;
-}
+ /* .navbar * { 
+    max-width: 100vw;
+    display: flex;
+}  */
 
 .navbar {
+    z-index: 9999999;
     height: 7vh;
-    max-width: 100vw;
+    width: 100vw;
     background-color: #5271FF;
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -13,7 +16,7 @@
 }
 
 .navbarLogo{
-    margin-left: 10px;
+    display: flex;
 }
 
 .navbarMiddle {
@@ -24,13 +27,14 @@
 }
 .navbarMiddle a{
     color: white;
+    display: flex;
     text-decoration: none;
 }
 
 .navbarRight{
     display: flex;
     gap: 10px;
-    margin-right: 10px;
+
 }
 
 .navbarRight a{
@@ -41,7 +45,7 @@
     color: #5271FF;
     text-decoration: none;
     height: 35px;
-    width: 160px;
+    width: 150%;
     border-radius: 10px;
     border: none;
     background-color: white;
@@ -51,6 +55,7 @@
 }
 
 .navbarRight a:hover{
+    display: flex;
     transform: scale(1.05);
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
     cursor: hand;
@@ -63,7 +68,7 @@
     }
 
     .homeInfo img {
-        width: 80%;
+        /* width: 80%; */
         height: auto;
     }
 
@@ -74,10 +79,12 @@
     }
 
     .navbar {
-        position: relative;
+        position: fixed;
         flex-direction: row;
         align-items: center;
         text-align: center;
+
+        
     }
 
     .navbarMiddle, .navbarRight {
@@ -90,6 +97,7 @@
 
     .sobreNosComputerInfo {
         flex-direction: column;
+        display: flex;
         width: 100%;
         text-align: center;
     }
@@ -99,6 +107,6 @@
     }
 
     .divLine {
-        padding: 20px;
+        padding: 10px;
     }
 }

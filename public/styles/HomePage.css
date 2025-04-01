@@ -10,6 +10,7 @@
 }
 
 * {
+    overflow-x: hidden;
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
@@ -155,8 +156,8 @@ body{
     position: absolute;
     justify-self: center;
     z-index: -99999;
-    height: 140%;
-    width: 100%;
+    height:-50vh
+    width: 100vw;
     margin-top: 20rem;
 }
 
@@ -185,29 +186,37 @@ body{
     background-color: #5271FF;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     height: 100%;
-    padding: 6rem;
+    padding: 2rem;
 }
 
 .sobreNosInfo{
+    
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: white;
-    width: 90%;
+    width: 100vw;
+    min-height: 100vh;
+    padding: 40px;
+    
 }
 
 .sobreNosInfo p{
     max-width: 70%;
+    
 }
 
 .sobreNosComputerInfo {
+    overflow:visible;
     display: flex;
-    justify-content: space-evenly;
-    width: 70vw;
+    justify-content: center;
+    width: 94vw;
     align-items: center;
     margin: 20px;
 }
@@ -216,11 +225,15 @@ body{
     margin-top: 2rem;
     background-color: #5271FF;
     border: 1px solid #3c54bd;
-    max-width: 80%;
+    width: 20%;
     border-radius: 2rem;
-    padding: 5rem;
+    height: 255px;
     padding-right: 5rem;
     padding-left: 5rem;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2%;
+    align-items: center;
     box-shadow: 15px 15px 20px #2d42a046;
     transition: all 0.3s ease-in-out;
 }
@@ -237,11 +250,15 @@ body{
     margin-top: 2rem;
     background-color: #5271FF;
     border: 1px solid #3c54bd;
-    max-width: 80%;
+    width: 20%;
     border-radius: 2rem;
-    padding: 5rem;
+    height: 255px;
     padding-right: 5rem;
     padding-left: 5rem;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2%;
+    align-items: center;
     box-shadow: 15px 15px 20px #2d42a046;
     transition: all 0.3s ease-in-out;
 }
@@ -256,11 +273,15 @@ body{
     margin-top: 2rem;
     background-color: #5271FF;
     border: 1px solid #3c54bd;
-    max-width: 80%;
+    width: 20%;
     border-radius: 2rem;
-    padding: 5rem;
+    height: 255px;
     padding-right: 5rem;
     padding-left: 5rem;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2%;
+    align-items: center;
     box-shadow: 15px 15px 20px #2d42a046;
     transition: all 0.3s ease-in-out;
 }
@@ -275,11 +296,15 @@ body{
     margin-top: 2rem;
     background-color: #5271FF;
     border: 1px solid #3c54bd;
-    max-width: 80%;
+    width: 20%;
     border-radius: 2rem;
-    padding: 5rem;
-    padding-right: 3rem;
-    padding-left: 3rem;
+    height: 255px;
+    padding-right: 5rem;
+    padding-left: 5rem;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2%;
+    align-items: center;
     box-shadow: 15px 15px 20px #2d42a046;
     transition: all 0.3s ease-in-out;
 }
@@ -303,9 +328,11 @@ body{
 
 
 .componentesInfo{
+    overflow: visible;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .componentesInfo h4{
@@ -368,8 +395,7 @@ body{
         max-width: 100%;
         max-height: 100%;
         width: 50%;
-        height: 30%;
-        margin-top: 0rem;
+        height: 20%;
         position: absolute;
         text-shadow: 0px 0px 15px #5272ff91;
     }
@@ -378,7 +404,7 @@ body{
         max-width: 100vw !important; /* Força a largura total da tela */
         max-height: 100vh !important; /* Força a altura total da tela */
         width: 100vw !important;
-        height: 70vh !important;
+        height: 440vh !important;
         object-fit: cover !important; /* Garante que a imagem cubra o espaço sem distorcer */
         position: absolute !important; /* Mantém fixo na tela */
         top: 0;
