@@ -7,7 +7,15 @@
     <title>Cadastro</title>
     <link rel="stylesheet" href="styles/utils.css">
     <link rel="stylesheet" href="styles/cadastro.css">
-    <script src="./js/validacaoCadastro.js"></script>
+    <!-- <script src="./js/validacaoCadastro.js"></script> -->
+     <script src="js/validar.js"></script>
+    <style>
+            .erro {
+        color: red;
+        font-size: 12px;
+        margin-top: 5px;
+        }
+    </style>
 </head>
 
 <body>
@@ -70,7 +78,7 @@
                 <!-- msg erro -->
             </div>
             <div class="buttons" onclick="">
-                <button onclick="cadastrar()">Cadastrar</button>
+                <button type="button" onclick="validarFormulario()">Cadastrar</button>
             </div>
         </div>
     </div>
