@@ -1,60 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Innovair - Login for Empresas</title>
-    <link rel="stylesheet" href="styles/utils.css">
-    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="styles/utils.css" />
+    <link rel="stylesheet" href="styles/login.css" />
     <script src="./js/validacaoLogin.js"></script>
-    <link rel="icon" href="../public/assets/favicon.ico" type="favicon">
-</head>
-<body>
-        <div class="navbar-mobile">
-            <img src="assets/2.png">
-            <div id="menu-bar" onclick="menuOnClick()">
-                <div id="bar1" class="bar"></div>
-                <div id="bar2" class="bar"></div>
-                <div id="bar3" class="bar"></div>
-              </div>
+    <link rel="icon" href="../public/assets/favicon.ico" type="favicon" />
+  </head>
+  <body>
+    <div class="navbar-mobile">
+      <div id="menu-bar" onclick="menuOnClick()">
+        <div id="bar1" class="bar"></div>
+        <div id="bar2" class="bar"></div>
+        <div id="bar3" class="bar"></div>
+      </div>
+    </div>
+    <div class="box_voltar" >
+        <div class="box" >
+            <img src="../public/assets/back-icon.png" alt="voltar">
+            <a class="voltar" href="../public/index.html">Voltar</a>
         </div>
-        <div class="container">
-            <div class="form-login">
-                <div class="fields">
-                    <h1 class="titulo">Login para Empresas</h1>
-                    <div class="inputs">
-                        <label for="ipt_email">E-mail:</label>
-                        <input id="ipt_email" type="text">
-                        <label for="ipt_senha">Senha:</label>
-                        <input id="ipt_senha" type="text">
-                    </div>
-                    <div id="mensagemErro" style="color: red;">
-                        <!-- msg de erro -->
-                    </div>
-                    <div class="buttons">
-                        <button onclick="validacao()">Acessar</button>
-                        <div class="permanecer-conectado">
-                            <input type="checkbox">
-                            <p>Permanecer conectado</p>
-                        </div>
-                        <div class="registre-se">
-                            <p>Não é registrado? <span>Cadastre-se</span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="signup">
-                    <h1>Cadastre-se!</h1>
-                    <p>Ainda não possui uma conta?</p>
-                    <p>Não perca tempo e crie agora!</p>
-                    <button onclick="redirecionar()">Cadastrar</button>
-                </div>
+    </div>
+    <div class="container">
+      <div class="form-login">
+       
+        <div class="fields">
+          <h1 class="titulo">Login para Empresas</h1>
+          <div class="inputs">
+            <label for="ipt_email">E-mail:</label>
+            <input id="ipt_email" type="text" />
+            <label for="ipt_senha">Senha:</label>
+            <input id="ipt_senha" type="text" />
+          </div>
+          <div id="mensagemErro" style="color: red">
+            <!-- msg de erro -->
+          </div>
+          <div class="buttons">
+            <button onclick="validacao()">Acessar</button>
+            <div class="permanecer-conectado">
+              <input type="checkbox" />
+              <p>Permanecer conectado</p>
             </div>
+            <div class="registre-se">
+              <p>Não é registrado? <span>Cadastre-se</span></p>
+            </div>
+          </div>
         </div>
-</body>
+        <div class="signup">
+          <h1>Cadastre-se!</h1>
+          <p>Ainda não possui uma conta?</p>
+          <p>Não perca tempo e crie agora!</p>
+          <button onclick="redirecionar()">Cadastrar</button>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
 <script>
-    function redirecionar(){
-        window.location.href = "cadastro.html";
-
-    }
+  function redirecionar() {
+    window.location.href = "cadastro.html";
+  }
 </script>

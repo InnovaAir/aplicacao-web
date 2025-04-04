@@ -17,6 +17,7 @@
 
 .navbarLogo{
     display: flex;
+    margin: 10px;
 }
 
 .navbarMiddle {
