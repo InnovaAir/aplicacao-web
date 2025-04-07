@@ -1,30 +1,30 @@
 function validarFormulario() {
     // Recuperando os valores dos inputs
-    var razaoVar = ipt_razao_social.value;
-    var emailVar = ipt_email.value;
-    var telefoneVar = ipt_telefone.value;
-    var responsavelVar = ipt_responsavel.value;
-    var cnpjVar = ipt_cnpj.value;
-    var senhaVar = ipt_senha.value;
-    var confirmarSenhaVar = ipt_confirmar_senha.value;
+    var razao = ipt_razao_social.value;
+    var email = ipt_email.value;
+    var telefone = ipt_telefone.value;
+    var responsavel = ipt_responsavel.value;
+    var cnpj = ipt_cnpj.value;
+    var senha = ipt_senha.value;
+    var confirmarSenha = ipt_confirmar_senha.value;
 
-    var tamanho_senha = senhaVar.length;
+    var tamanho_senha = senha.length;
     var senhaValida = true;
     var senhaConfirmadaValida = false;
     var emailValido = false;
 
-    // Limpar mensagens de erro anteriores
+    // Limpando mensagens anteriores
     limparMensagensErro();
 
-    // Verificar se os campos obrigatórios estão preenchidos
-    if (razaoVar == "" || emailVar == "" || telefoneVar == "" || responsavelVar == "" || cnpjVar == "" || senhaVar == "" || confirmarSenhaVar == "") {
+    // Verificar se os capos estão vazios
+    if (razao == "" || email == "" || telefone == "" || responsavel == "" || cnpj == "" || senha == "" || confirmarSenha == "") {
         mostrarErro(ipt_razao_social, "Preencha todos os campos obrigatórios para prosseguir");
         return false;
     }
 
-    // Validação de E-mail
-    if (emailVar.includes('.') && emailVar.includes('@')) {
-        if (!(emailVar.indexOf('.') == (emailVar.indexOf('@') + 1))) {
+    // Validndo E-mail
+    if (email.includes('.') && email.includes('@')) {
+        if (!(email.indexOf('.') == (email.indexOf('@') + 1))) {
             mostrarErro(ipt_email, "E-mail válido.");
             emailValido = true;
         }
@@ -32,20 +32,20 @@ function validarFormulario() {
         mostrarErro(ipt_email, "E-mail inválido.");
     }
 
-    // Validação de Senha
-    if (senhaVar.toUpperCase() == senhaVar && senhaVar.toLowerCase() == senhaVar) {
+    // Validando Senha
+    if (senha.toUpperCase() == senha && senha.toLowerCase() == senha) {
         mostrarErro(ipt_senha, "Senha não possui letras.");
         senhaValida = false;
     }
 
-    if (senhaVar.toLowerCase() == senhaVar) {
+    if (senha.toLowerCase() == senha) {
         mostrarErro(ipt_senha, "Senha não possui caracteres maiúsculos.");
         senhaValida = false;
     } else {
         mostrarErro(ipt_senha, "Senha possui caracteres maiúsculos.");
     }
 
-    if (senhaVar.toUpperCase() == senhaVar) {
+    if (senha.toUpperCase() == senha) {
         mostrarErro(ipt_senha, "Senha não possui caracteres minúsculos.");
         senhaValida = false;
     } else {
@@ -60,7 +60,7 @@ function validarFormulario() {
     }
 
     var possuiNumero = /\d/;
-    if (!possuiNumero.test(senhaVar)) {
+    if (!possuiNumero.test(senha)) {
         mostrarErro(ipt_senha, "Senha não possui números.");
         senhaValida = false;
     } else {
@@ -68,7 +68,7 @@ function validarFormulario() {
     }
 
     var possuiCaracterEspecial = /[!@#$%^&*(),.?":{}|<>]/;
-    if (!possuiCaracterEspecial.test(senhaVar)) {
+    if (!possuiCaracterEspecial.test(senha)) {
         mostrarErro(ipt_senha, "Senha não contém caractere especial.");
         senhaValida = false;
     } else {
@@ -76,7 +76,7 @@ function validarFormulario() {
     }
 
     // Validando a confirmação da senha
-    if (senhaVar === confirmarSenhaVar) {
+    if (senha === confirmarSenha) {
         mostrarErro(ipt_confirmar_senha, "As senhas são iguais.");
         senhaConfirmadaValida = true;
     } else {
@@ -84,17 +84,17 @@ function validarFormulario() {
     }
 
     // Validação do CNPJ
-    if (!validarCNPJ(cnpjVar)) {
+    if (!validarCNPJ(cnpj)) {
         mostrarErro(ipt_cnpj, "CNPJ inválido.");
     }
 
-    // Se todos os campos forem válidos
+    // Todos os campos forem válidos
     if (emailValido && senhaValida && senhaConfirmadaValida) {
         alert("Cadastro realizado com sucesso!");
     }
 }
 
-// Função para mostrar as mensagens de erro
+// Função mensagem de erro
 function mostrarErro(input, mensagem) { 
     var divErro = document.createElement("div");
     divErro.classList.add("erro");
@@ -105,7 +105,7 @@ function mostrarErro(input, mensagem) {
     }
 }
 
-// Função para limpar as mensagens de erro
+// Função limpar as mensagens
 function limparMensagensErro() {
     var mensagensErro = document.querySelectorAll(".erro");
     mensagensErro.forEach(function (erro) {
@@ -113,7 +113,7 @@ function limparMensagensErro() {
     });
 }
 
-// Função para validar o CNPJ (simples exemplo de regex)
+// Função validar CNPJ
 function validarCNPJ(cnpj) {
     var regexCNPJ = /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/;
     return regexCNPJ.test(cnpj);
