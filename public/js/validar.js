@@ -6,18 +6,28 @@ function validarFormulario() {
     var responsavel = ipt_responsavel.value;
     var cnpj = ipt_cnpj.value;
     var senha = ipt_senha.value;
-    var confirmarSenha = ipt_confirmar_senha.value;
+    var confSenha = ipt_confirmar_senha.value;
 
     var tamanho_senha = senha.length;
     var senhaValida = true;
     var senhaConfirmadaValida = false;
     var emailValido = false;
 
+    console.log("Dados antes de enviar:", {
+        razao,
+        email,
+        telefone,
+        responsavel,
+        cnpj,
+        senha,
+        confSenha
+    });
+
     // Limpando mensagens anteriores
     limparMensagensErro();
 
     // Verificar se os capos estão vazios
-    if (razao == "" || email == "" || telefone == "" || responsavel == "" || cnpj == "" || senha == "" || confirmarSenha == "") {
+    if (razao == "" || email == "" || telefone == "" || responsavel == "" || cnpj == "" || senha == "" || confSenha == "") {
         mostrarErro(ipt_razao_social, "Preencha todos os campos obrigatórios para prosseguir");
         return false;
     }
@@ -76,7 +86,7 @@ function validarFormulario() {
     }
 
     // Validando a confirmação da senha
-    if (senha === confirmarSenha) {
+    if (senha === confSenha) {
         mostrarErro(ipt_confirmar_senha, "As senhas são iguais.");
         senhaConfirmadaValida = true;
     } else {
@@ -92,7 +102,7 @@ function validarFormulario() {
     if (emailValido && senhaValida && senhaConfirmadaValida) {
         alert("Cadastro realizado com sucesso!");
     }
-}
+
 
 // Função mensagem de erro
 function mostrarErro(input, mensagem) { 
@@ -117,4 +127,42 @@ function limparMensagensErro() {
 function validarCNPJ(cnpj) {
     var regexCNPJ = /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/;
     return regexCNPJ.test(cnpj);
+}
+
+fetch("/usuarios/cadastrar", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        razaoSocialServer: razao,
+        emailServer: email,
+        telefoneServer: telefone,
+        responsavelServer: responsavel,
+        cnpjServer: cnpj,
+        senhaServer: senha,
+        confServer: confSenha
+    }),
+})
+.then(function (resposta) {
+    console.log("resposta do servidor: ", resposta);
+    if (resposta.ok) {
+        alert('Cadastro realizado com sucesso!');
+        window.location = "login.html";
+        limparFormulario();
+    } else {
+        return resposta.text();
+    }
+})
+.then(function (erroTexto) {
+    if (erroTexto) {
+        console.log("Erro retornado do servidor:", erroTexto);
+        mensagemErro.innerHTML = erroTexto;
+    }
+})
+.catch(function (erro) {
+    console.log("Erro na requisição:", erro);
+    mensagemErro.innerHTML = "Erro ao tentar realizar o cadastro. Tente novamente.";
+});
+
 }

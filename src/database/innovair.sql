@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `innovair`.`Cliente` (
   `CNPJ` CHAR(14) NULL,
   `email` VARCHAR(255) NULL,
   `telefone` VARCHAR(11) NULL,
-  `resposanvel` VARCHAR(50) NULL,
+  `responsavel` VARCHAR(50) NULL,
   PRIMARY KEY (`idCliente`));
 
   CREATE TABLE IF NOT EXISTS `innovair`.`Usuario` (
