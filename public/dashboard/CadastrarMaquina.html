@@ -51,7 +51,7 @@
         <a href="visaoGeral.html" >Visão geral</a>
         <a href="tempoReal.html">Tempo real</a>
         <a href="listaMaquinas.html">Lista de máquinas</a>
-        <a href="NovosCadastros.html" class="agora">Cadastrar Máquina</a>
+        <a href="CadastrarMaquina.html" class="agora">Cadastrar Máquina</a>
         <a href="suporte.html">Suporte</a>
         <a href="suporte.html">Fale conosco!</a>
     </div>
@@ -77,24 +77,28 @@
                     <div id="div_disp" class="dispositivo">
                         <div class="InputsCadastro">
                             <div class="coluna">
-                                <span>Número Serial</span>
-                                <input type="text" name="" id="ipt_numeroSerial">
+                                <span>Endereço</span>
+                            <select name="select" id="slc_endereco">
+                                <option value="end1">Endereço 1</option>
+                                <option value="end2">Endereço 2</option>
+                                <option value="end3">Endereço 3</option>
+                            </select>
                                 <span>Setor</span>
                                 <input type="text" name="" id="ipt_Setor">
-                                <span>CPU</span>
-                                <input type="text" name="" id="ipt_CPU">
+                                <span>Número Serial</span>
+                                <input type="text" name="" id="ipt_NumeroSerial">
                                 <span>RAM</span>
                                 <input type="text" name="" id="ipt_RAM">
                             </div>
                             <div class="coluna">
-                                <span>Disco</span>
-                                <input type="text" name="" id="ipt_Disco">
+                                <span>CPU</span>
+                                <input type="text" name="" id="ipt_CPU">
                                 <span>Sistema Operacional</span>
                                 <input type="text" name="" id="ipt_SO">
-                                <span>Campo 7</span>
-                                <input type="text" name="" id="ipt_campo7">
-                                <span>Campo 8</span>
-                                <input type="text" name="" id="ipt_campo8">
+                                <span>Placa de Rede</span>
+                                <input type="text" name="" id="ipt_PlacaDeRede">
+                                <span>Disco</span>
+                                <input type="text" name="" id="ipt_Disco">
                             </div>
                         </div>
                     </div>
