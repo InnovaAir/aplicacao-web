@@ -59,7 +59,29 @@
     </div>
     <div class="container">
         <div class="child">
-            <div class="section1">
+
+            <div class="InformacaoTotens">
+
+                <canvas id="graficoPizzas"></canvas>
+
+                <div id="dados">
+                    <div class="TotensQTD">
+                        <div class="totem ">
+                            Total de Totens
+                        </div>
+
+                        <div class="totem ">
+                            Totens em Alerta
+
+                        </div>
+                    </div>
+
+                    <div class="totem ">Tempo desde o último alerta</div>
+
+                </div>
+
+            </div>
+            <!-- <div class="section1">
                 <select>
                     <option value="">Aeroporto de Guarulhos</option>
                     <option value="">Aeroporto de Congonhas</option>
@@ -77,11 +99,9 @@
                 <div class="grafico">
                     <canvas id="graficoAlertas"></canvas>
                 </div>
-            </div>
+            </div> -->
             <div class="section2">
-                <div class="grafico_pizza">
-                    <canvas id="graficoPizzas"></canvas>
-                </div>
+
                 <div class="tabela_cpus">
                     <p class="titulo">Relação de processadores das máquinas</p>
                     <table>
@@ -181,6 +201,7 @@
             }]
         },
         options: {
+            cutout: '70%', // serve para deixar o donut mais fino
             responsive: true,
             plugins: {
                 title: {
@@ -199,5 +220,13 @@
     )
     abrirMenu();
 
-  
+
+    <!-- elementos 'canvas' tem que ser "decorados" por javaScript -->
+
+    graficoPizzas =  document.getElementById('graficoPizzas')
+    graficoPizzas.setAttribute('width', 50);
+    graficoPizzas.setAttribute('height', 50);
+
+
+
 </script>
