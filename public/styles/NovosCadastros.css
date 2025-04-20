@@ -19,14 +19,16 @@ body {
 }
 
 .Caixa {
+    height: 80%;
     width: 100%;
     border-radius: 15px;
     box-shadow: 5px 5px 10px #9e9e9e;
-    padding: 10px;
-    margin-bottom: 3%;
+    padding: 15px;
+    margin-bottom: 10%;
     display: flex;
     box-sizing: border-box;
     background-color: white;
+    align-items: center;
 }
 
 .coluna {
@@ -50,6 +52,10 @@ body {
 
 .TextBox {
     margin-bottom: 3%;
+    display: flex;
+    align-self: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .coluna .TextBox span {
@@ -81,6 +87,8 @@ body {
 .botoes {
     display: flex;
     margin: 1%;
+    align-items: center;
+    align-self: center;
 }
 
 .botoes button {
