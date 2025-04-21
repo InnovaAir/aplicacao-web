@@ -55,7 +55,7 @@
         <a href="suporte.html">Suporte</a>
         <a href="suporte.html">Fale conosco!</a>
     </div>
-    <div class="container">
+    <div style="background-color: white;" class="container">
         <div class="child">
             <div class="tituloContainer">Análise em tempo real</div>
             <div style="margin-top: -30px;
@@ -63,7 +63,7 @@
                 *De acordo com a última captura obtida
             </div>
             <div class="section1">
-                
+
                 <div class="subSection1">
                     <div class="InformacaoTotens">
                         <canvas id="graficoPizzas"></canvas>
@@ -89,22 +89,22 @@
                         </div>
                     </div>
 
-                    <div class="listaMaquinas"> 
+                    <div class="listaMaquinas">
                         <div class="tituloContainer">Lista de máquinas</div>
-                        <div class="subtituloContainer">*Quer saber o significado das cores das metricas? Clique aqui!</div>
+                        <div class="subtituloContainer">*Quer saber o significado das cores das metricas? Clique aqui!
+                        </div>
                         <div class="scrollMaquinas">
                             <div class="legendasMaquinas">
-                            <div style="color: black; font-weight: 600;" class="maquinaLegenda">Nome do totem</div>
-                            <div style="color: black; font-weight: 600;" class="maquinaLegenda">Uso CPU</div>
-                            <div style="color: black; font-weight: 600;" class="maquinaLegenda">Uso RAM</div>
-                            <div style="color: black; font-weight: 600;" class="maquinaLegenda">Uso Disco</div>
-                            <div style="color: black; font-weight: 600;" class="maquinaLegenda">Ping</div>
-                            <div style="color: black; font-weight: 600;" class="maquinaLegenda">Processos</div>
-                            <div style="color: black; font-weight: 600;" class="maquinaLegenda">Tempo de Atividade</div>
+                                <div style="color: black; font-weight: 600;" class="maquinaLegenda">Nome do totem</div>
+                                <div style="color: black; font-weight: 600;" class="maquinaLegenda">Uso CPU</div>
+                                <div style="color: black; font-weight: 600;" class="maquinaLegenda">Uso RAM</div>
+                                <div style="color: black; font-weight: 600;" class="maquinaLegenda">Uso Disco</div>
+                                <div style="color: black; font-weight: 600;" class="maquinaLegenda">Ping</div>
+                                <div style="color: black; font-weight: 600;" class="maquinaLegenda">Processos</div>
+                                <div style="color: black; font-weight: 600;" class="maquinaLegenda">Tempo de Atividade
+                                </div>
 
-
-                            
-                        </div>
+                            </div>
                             <div class="secaoMaquinas">
                                 <div class="maquinaLegenda numeroTotem">totem aaaa</div>
                                 <div class="maquinaLegenda usoCPU">15%</div>
@@ -113,10 +113,10 @@
                                 <div class="maquinaLegenda ping">120ms</div>
                                 <div class="maquinaLegenda Processos">19283</div>
                                 <div class="maquinaLegenda tempoAtividade">24d 12h 32min 155</div>
-                                          
-                            
-                            <!-- varios log para testes de scroll abaixo (apenas des-comente para teste)-->
-                        </div>
+
+
+                                <!-- varios log para testes de scroll abaixo (apenas des-comente para teste)-->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -125,17 +125,25 @@
                         <p style="font-size: x-large; font-weight: bold; color: #5271FF;" class="titulo">
                             Log de alertas
                         </p>
-    
+
                         <div class="scrollLog">
-                        <div class="secaoLog">
-                            <div class="logMaquina">totem aaaa</div>
-                            <div class="logNivel">Grave</div>
-                            <div class="logComponente">CPU</div>
-                            <div class="logMomento">13:00</div>
-                        </div>
-                        
-                        <!-- varios log para testes de scroll abaixo (apenas des-comente para teste)-->
-                        <!-- <div class="secaoLog"> 
+                            <div class="legendasMaquinas">
+                                <div style="color: black; font-weight: 600; margin-left: 5px;width: 40%;" class="maquinaLegenda">Máquina</div>
+                                <div style="color: black;width: 30%; font-weight: 600;" class="maquinaLegenda">Nível</div>
+                                <div style="color: black; font-weight: 600; width: 40%;" class="maquinaLegenda">Componente</div>
+                                <div style="color: black; font-weight: 600;" class="maquinaLegenda">Momento</div>
+                               
+
+                            </div>
+                            <div class="secaoLog">
+                                <div style="margin-left: 3px;width: 40%;" class="maquinaLegenda logMaquina">totem aaaa</div>
+                                <div style="width: 30%;" class="maquinaLegenda logNivel">Grave</div>
+                                <div style="width: 40%;" class="maquinaLegenda logComponente">CPU</div>
+                                <div class="maquinaLegenda logMomento">13:00</div>
+                            </div>
+
+                            <!-- varios log para testes de scroll abaixo (apenas des-comente para teste)-->
+                            <!-- <div class="secaoLog"> 
                             <div class="logMaquina">totem aaaa</div>
                             <div class="logNivel">Grave</div>
                             <div class="logComponente">CPU</div>
@@ -225,13 +233,13 @@
                             <div class="logComponente">CPU</div>
                             <div class="logMomento">13:00</div>
                         </div> -->
-                        
-                    </div>
-                    </div>
-                </div>
-                </div>
 
-                <!-- <div class="section1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="section1">
                 <select>
                     <option value="">Aeroporto de Guarulhos</option>
                     <option value="">Aeroporto de Congonhas</option>
@@ -250,8 +258,8 @@
                     <canvas id="graficoAlertas"></canvas>
                 </div>
             </div> -->
-            </div>
         </div>
+    </div>
     </div>
 </body>
 
@@ -330,7 +338,7 @@
             ],
         },
         options: {
-            
+
             radius: "60%", // tamanho da rosca
             cutout: "70%", // serve para deixar o donut mais fino
             responsive: true,
@@ -368,5 +376,5 @@
     graficoPizzas = document.getElementById("graficoPizzas");
     graficoPizzas.setAttribute("width", 50);
     graficoPizzas.setAttribute("height", 50);
-   
+
 </script>
