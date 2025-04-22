@@ -63,25 +63,23 @@
 " class="subtituloContainer">
                 *De acordo com a última captura obtida
                 <div style="width: 40%; margin-top:10px">
-                <select class="selectBox selectFilial">
-                    <option value="" disabled selected>Escolher filial</option>
-                    <option value="volvo">opção</option>
-                    <option value="saab">opção</option>
-                    <option value="opel">opção</option>
-                    <option value="audi">opção</option>
-                  </select>
+                    <select class="selectBox selectFilial">
+                        <option value="" disabled selected>Escolher filial</option>
+                        <option value="volvo">opção</option>
+                        <option value="saab">opção</option>
+                        <option value="opel">opção</option>
+                        <option value="audi">opção</option>
+                    </select>
+                </div>
             </div>
-        </div>
             <div class="section1">
 
                 <div class="subSection1">
 
                     <div class="InformacaoTotens">
-                        <div class="graficoDiv" style="height: 70%;">
-                        <div id="graficoPizzas">
+                            <div id="graficoPizzas">
 
-                        </div>
-                    </div>
+                            </div>
 
                         <div id="dados">
                             <div class="TotensQTD">
@@ -134,27 +132,33 @@
                                     <option value="saab">opção</option>
                                     <option value="opel">opção</option>
                                     <option value="audi">opção</option>
-                                  </select>
-    
-                                  <select class="selectBox selectOrdem">
+                                </select>
+
+                                <select class="selectBox selectOrdem">
                                     <option value="" disabled selected>Ordem</option>
                                     <option value="volvo">opção</option>
                                     <option value="saab">opção</option>
                                     <option value="opel">opção</option>
                                     <option value="audi">opção</option>
-                                  </select>
-                                </div>
-                                
+                                </select>
+                            </div>
+
                         </div>
                         <div class="scrollMaquinas">
                             <div class="legendasMaquinas">
-                                <div style="color: black; font-weight: 600;width:100%" class="maquinaLegenda">Nome do totem</div>
-                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Uso CPU</div>
-                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Uso RAM</div>
-                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Uso Disco</div>
+                                <div style="color: black; font-weight: 600;width:100%" class="maquinaLegenda">Nome do
+                                    totem</div>
+                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Uso CPU
+                                </div>
+                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Uso RAM
+                                </div>
+                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Uso Disco
+                                </div>
                                 <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Ping</div>
-                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Processos</div>
-                                <div style="color: black; font-weight: 600;width:100%" class="maquinaLegenda">Tempo de Atividade
+                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Processos
+                                </div>
+                                <div style="color: black; font-weight: 600;width:100%" class="maquinaLegenda">Tempo de
+                                    Atividade
                                 </div>
 
                             </div>
@@ -170,10 +174,12 @@
                                 </div>
                                 <div style="width:50%" class="maquinaLegenda usoDisco">
                                     <div class="bola"></div>
-                                    45%</div>
+                                    45%
+                                </div>
                                 <div style="width:50%" class="maquinaLegenda ping">
                                     <div class="bola"></div>
-                                    120ms</div>
+                                    120ms
+                                </div>
                                 <div style="width:50%" class="maquinaLegenda Processos">19283</div>
                                 <div style="width:100%" class="maquinaLegenda tempoAtividade">24d 12h 32min 155</div>
 
@@ -181,10 +187,10 @@
                                 <!-- varios log para testes de scroll abaixo (apenas des-comente para teste)-->
                             </div>
 
-                            
+
 
                         </div>
-                </div>
+                    </div>
                     <div class="alertasLog">
                         <p style="font-size: x-large; font-weight: bold; color: #5271FF;" class="titulo">
                             Log de alertas
@@ -305,12 +311,12 @@
 
                         </div>
                     </div>
-                   
+
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- <div class="section1">
+        <!-- <div class="section1">
                 <select>
                     <option value="">Aeroporto de Guarulhos</option>
                     <option value="">Aeroporto de Congonhas</option>
@@ -339,65 +345,6 @@
 <script src="../js/animacaoMenu.js"></script>
 
 <script>
-    const graficoAlerta = document.getElementById("graficoAlertas");
-    new Chart(graficoAlerta, {
-        type: "line",
-        data: {
-            labels: [
-                "Outubro",
-                "Novembro",
-                "Dezembro",
-                "Janeiro",
-                "Fevereiro",
-                "Março",
-            ],
-            datasets: [
-                {
-                    label: "Quantidade de alertas",
-                    fill: true,
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        "rgba(255, 99, 132, 0.2)",
-                        "rgba(54, 162, 235, 0.2)",
-                        "rgba(255, 206, 86, 0.2)",
-                        "rgba(75, 192, 192, 0.2)",
-                        "rgba(153, 102, 255, 0.2)",
-                        "rgba(255, 159, 64, 0.2)",
-                    ],
-                    borderColor: [
-                        "rgba(255, 99, 132, 1)",
-                        "rgba(54, 162, 235, 1)",
-                        "rgba(255, 206, 86, 1)",
-                        "rgba(75, 192, 192, 1)",
-                        "rgba(153, 102, 255, 1)",
-                        "rgba(255, 159, 64, 1)",
-                    ],
-                    borderWidth: 1,
-                },
-            ],
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                },
-            },
-            responsive: [{
-                breakpoint: 1,
-                options: {}
-            }],
-            plugins: {
-                title: {
-                    display: true,
-                    text: "Volume de alertas por semana",
-                },
-                legend: {
-                    display: true,
-                    position: "top",
-                },
-            },
-        },
-    });
 
 
 
@@ -446,6 +393,66 @@
     //  }); 
 
 
+    //grafico linhas
+    var options = {
+        series: [{
+            name: "Desktops",
+            data: [10, 41, 35, 51, 49, 62, 69, 91, 148, 32]
+        }],
+        responsive: [{
+            options: {
+                chart: {
+
+                },
+                legend: {
+                    position: 'bottom'
+                },
+            }
+        }],
+
+        chart: {
+        
+            type: 'line',
+            height: '70%',
+            width:'100%',
+
+            zoom: {
+                enabled: false
+            }
+        },
+
+
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'straight'
+        },
+        title: {
+            text: 'Product Trends by Month',
+            align: 'left'
+        },
+        grid: {
+            row: {
+                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                opacity: 0.5
+            },
+        },
+        xaxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'bga'],
+        },
+        stroke:{
+
+            width:2
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector(".graficoAlertas"), options);
+    chart.render();
+
+
+
+    // grafico rosca
     var options = {
         series: [50, 15, 15, 7.5, 12.5],
         labels: ['Nenhum alerta', 'Um alerta', 'Dois alertas', 'Três alertas', 'Quatro alertas'],
@@ -456,10 +463,12 @@
         },
         chart: {
             type: 'donut',
+            height: '70%',
+            width:'100%',
+
         },
 
         responsive: [{
-            breakpoint: 480,
             options: {
                 chart: {
 

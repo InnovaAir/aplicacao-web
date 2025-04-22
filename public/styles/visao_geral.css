@@ -155,6 +155,7 @@
 
 .subSection2 {
     
+    
     display: flex;
     flex-direction: row;
     margin-left: 1%;
@@ -177,7 +178,7 @@
 }
 
 .section2 {
-
+    
     width: 50%;
     height: 90%;
     display: flex;
@@ -186,7 +187,7 @@
 }
 
 .InformacaoTotens {
-    border: solid 2px lightgray;
+
     display: flex;
     height: 100%;
     width: 40%;
@@ -195,18 +196,14 @@
 }
 
 .InformacaoAlertas{
-    border: solid 2px lightgray;
+
     height: 100%;
     width: 60%;
-    background-color: #5573ff;
 }
 
 .graficoAlertas{
-    background-color: red;
-    display: flex;
-    flex-direction: column;
-    height: 70%;
-    width: 100%;
+    border: 2px solid lightgray;
+    overflow: hidden;
 }
 
 .alertasLog{
@@ -226,22 +223,14 @@
 
 
 #graficoPizzas {
-    background-color: blanchedalmond;
-    border: solid, 2px, lightgray;
-    max-width:320px;
-    width: 80%;
-    height: 30%;
+    border: 2px solid lightgray;
+    width:100%;
+    height: 70%;
     overflow: hidden;
     
 
 }
 
-.graficoDiv{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
 
 .totemTitulo {
 
