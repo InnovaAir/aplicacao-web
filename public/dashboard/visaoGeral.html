@@ -77,8 +77,9 @@
                 <div class="subSection1">
 
                     <div class="InformacaoTotens">
+                        
                             <div id="graficoPizzas">
-
+                                <div style="height:20%; font-weight:600;font-size:100%; margin-left:5px; margin-top:5px;" class="titulo">Alertas no momento atual</div>
                             </div>
 
                         <div id="dados">
@@ -101,7 +102,11 @@
 
 
                     <div class="InformacaoAlertas">
-                        <div class="graficoAlertas"></div>
+                        <div class="graficoAlertas">
+                            <div style="font-weight:600;font-size:100%; margin-left:5px; margin-top:5px; margin-bottom:5px" class="">Tempo de atividade das máquinas</div>
+                            <div style="height:20%; font-weight:300;font-size:90%; margin-left:5px;" class="">De acordo com o período</div>
+                            <div style="height:10%; font-weight:300;font-size:90%; margin-left:5px;" class="">De acordo com o período</div>
+                        </div>
                         <div id="dados">
                             <div class="TotensQTD">
                                 <div class="totemTitulo">
@@ -413,7 +418,7 @@
         chart: {
         
             type: 'line',
-            height: '70%',
+            height: '50%',
             width:'100%',
 
             zoom: {
@@ -428,10 +433,7 @@
         stroke: {
             curve: 'straight'
         },
-        title: {
-            text: 'Product Trends by Month',
-            align: 'left'
-        },
+        
         grid: {
             row: {
                 colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
@@ -463,7 +465,7 @@
         },
         chart: {
             type: 'donut',
-            height: '70%',
+            height: '50%',
             width:'100%',
 
         },
