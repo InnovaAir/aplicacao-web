@@ -1,12 +1,16 @@
+
+
 .container {
+    
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: 7vw;
-    
+
 }
+
 .child {
     overflow-x: auto;
     width: 80%;
@@ -16,31 +20,34 @@
     flex-direction: column;
     display: flex;
     gap: 2rem;
-    
-    
+
+
 }
 
-.tituloContainer{
+.tituloContainer {
+    display: flex;
+    flex-direction: row;
     font-family: Arial, Helvetica, sans-serif;
     margin-top: 20px;
     margin-left: 20px;
     font-weight: 700;
-font-size: xx-large;
-color: #5573ff;
+    font-size: xx-large;
+    color: #5573ff;
 
 }
-.subtituloContainer{
+
+.subtituloContainer {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin-left: 20px;
-    font-weight:400;
-    font-size:medium;
+    font-weight: 400;
+    font-size: medium;
     font-style: italic;
     color: #8BA0FF;
 
 
 }
 
-.listaMaquinas{
+.listaMaquinas {
     gap: 2%;
     display: flex;
     height: 150%;
@@ -52,22 +59,22 @@ color: #5573ff;
 }
 
 
-.scrollMaquinas{
+.scrollMaquinas {
     width: 100%;
     height: 100%;
     display: flex;
     margin-top: 9px;
     flex-direction: column;
     align-items: center;
-    
+
 
 }
 
-.secaoMaquinas{
+.secaoMaquinas {
     width: 100%;
     margin-top: 5px;
     height: 10%;
-    border-radius: 10px;    
+    border-radius: 10px;
     background-color: #dde3ff;
     gap: 0.2%;
     flex-direction: row;
@@ -77,7 +84,7 @@ color: #5573ff;
     justify-content: center;
 }
 
-.bola{
+.bola {
     height: 10px;
     width: 10px;
     background-color: green;
@@ -85,7 +92,7 @@ color: #5573ff;
     border-radius: 50%;
 }
 
-.legendasMaquinas{
+.legendasMaquinas {
     width: 100%;
     border-bottom: solid 2px #5573ff;
     text-wrap: nowrap;
@@ -95,9 +102,9 @@ color: #5573ff;
     flex-direction: row;
 }
 
-.maquinaLegenda{
+.maquinaLegenda {
     align-items: center;
-   font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     width: 100%;
     font-size: 13px;
     margin-left: 4px;
@@ -109,31 +116,31 @@ color: #5573ff;
 
 
 .section1 {
-margin-top: 100px;
-position: absolute;
-justify-content: space-around;
-height: 80vh;
-width: 80%;
-flex-direction: row;
-display: flex;
+    margin-top: 100px;
+    position: absolute;
+    justify-content: space-around;
+    height: 80vh;
+    width: 80%;
+    flex-direction: row;
+    display: flex;
 }
 
 .section1 select {
     width: 30%;
 }
 
-.subSection1{
+.subSection1 {
    
     height: 40%;
     min-width: 1%;
     width: 70%;
-    
-    
-    
+
+
+
 }
 
-.subSection2{
-   margin-left: 1%;
+.subSection2 {
+    margin-left: 1%;
     width: 40%;
     height: 100%;
 }
@@ -141,11 +148,11 @@ display: flex;
 
 
 .grafico {
-    width: 100%; 
+    width: 100%;
     height: 300px;
-    min-height: 300px; 
-    flex-grow: 1; 
-    flex-shrink: 0; 
+    min-height: 300px;
+    flex-grow: 1;
+    flex-shrink: 0;
 }
 
 .titulo {
@@ -153,7 +160,7 @@ display: flex;
 }
 
 .section2 {
-    
+
     width: 50%;
     height: 90%;
     display: flex;
@@ -162,18 +169,18 @@ display: flex;
 }
 
 .InformacaoTotens {
-    
+
     display: flex;
     height: 90%;
     min-width: 10%;
     max-width: 100%;
     align-items: center;
-     justify-content:space-between; 
+    justify-content: space-between;
 }
 
-#dados{
-  
-    height:100% ; 
+#dados {
+
+    height: 100%;
     margin: 1%;
     width: 50%;
     overflow: hidden;
@@ -182,23 +189,27 @@ display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+
 }
- 
+
 
 #graficoPizzas {
+    background-color: #5573ff;
+    border: solid, 2px, lightgray;
     min-width: 30%;
     width: 50% !important;
     max-width: 60%;
+    height: 100%;
+    overflow: hidden;
     
-    
-  }
 
-.totemTitulo{
-    
+}
+
+.totemTitulo {
+
     padding-left: 1%;
     margin: 1%;
-    border:2px solid lightgray;
+    border: 2px solid lightgray;
     background-color: white;
     height: 80%;
     width: 97%;
@@ -208,12 +219,12 @@ display: flex;
     justify-content: center;
     display: flex;
     flex-direction: column;
-    
+
 
 
 }
 
-#totemDado{
+#totemDado {
     margin-left: 4%;
     font-weight: 600;
     overflow: hidden;
@@ -223,132 +234,145 @@ display: flex;
     color: black;
 }
 
-.TotensQTD{
-   
-    align-items:flex-start;
+.TotensQTD {
+
+    align-items: flex-start;
     justify-content: center;
     display: flex;
     flex-direction: row;
     height: 100%;
     width: 100%;
-  
-}
-
-.secaoLog{
-
-
-align-items: center;
-align-self: center;
-background-color: #dde3ff;
-display: flex;
-width: 100%;
-height: 35px;
-flex-shrink: 0;
-border-radius: 14px;
-overflow: hidden;
-text-overflow: ellipsis;
-}
-
-.secaoLog .logMaquina{
 
 }
 
-.secaoLog .logNivel{
+.secaoLog {
 
-}
 
-.secaoLog .logComponente{
-
-}
-
-.secaoLog .logMomento{
-
-}
-
-.scrollLog{
-   
-    overflow-y:scroll;
-    gap: 2%;
+    align-items: center;
+    align-self: center;
+    background-color: #dde3ff;
     display: flex;
-    height: 100%;
-    flex-direction: column;
- 
+    width: 100%;
+    height: 35px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.scrollLog::-webkit-scrollbar-thumb{
-    background-color: #8BA0FF;
-}
+.secaoLog .logMaquina {}
 
-.scrollLog::-webkit-scrollbar-button {
-    display: none;
-    height: 0;
-    width: 0;
-}
+.secaoLog .logNivel {}
 
-  
-.tabela {
-    position: sticky;
-    gap: 2%;
+.secaoLog .logComponente {}
+
+.secaoLog .logMomento {}
+
+.selects {
+    align-items: center;
+    top: 40%;
+    justify-content: space-evenly;
     display: flex;
-    height: 100%;
-    flex-direction: column;
+    width: 60%;
 }
 
-.tabela table {
-    text-align: center;
-    height: 50%;
-    border: 1px solid #8BA0FF;
-}
-
-.tabela td, th {
-    border: 1px solid #8BA0FF;
-}
+.selectBox {
+    color: gray;
+    height: 40px;
+    min-width: 40%;
+    max-width: 70%;
 
 
-@media (max-width: 768px) {
-    .container {
-        margin-left: 0;
-    }
-    .barra_lateral {
-        display: none;
+    .scrollLog {
 
-    }
-    .child {
-        display: flex;
-        flex-direction: column; 
-        gap: 1rem; 
-        padding: 0.5rem; 
-        height: 95vh;
         overflow-y: scroll;
-    }
-
-    .section1, .section2 {
-        width: 100%; 
-        gap: 3rem;
-        font-size: 1.2rem;
-    }
-
-    .section1 p, .section2 p {
-        margin:0;
-    }
-
-    .section1 select {
-        width: 100%; 
-    }
-
-   
-
-    .InformacaoTotens {
+        gap: 2%;
         display: flex;
-        justify-content: flex-start; 
+        height: 100%;
+        flex-direction: column;
+
+    }
+
+    .scrollLog::-webkit-scrollbar-thumb {
+        background-color: #8BA0FF;
+    }
+
+    .scrollLog::-webkit-scrollbar-button {
+        display: none;
+        height: 0;
+        width: 0;
+    }
+
+
+    .tabela {
+        position: sticky;
+        gap: 2%;
+        display: flex;
+        height: 100%;
+        flex-direction: column;
     }
 
     .tabela table {
-        width: 100%; 
-        
+        text-align: center;
+        height: 50%;
+        border: 1px solid #8BA0FF;
     }
 
-    .titulo {
-        margin: 0;
+    .tabela td,
+    th {
+        border: 1px solid #8BA0FF;
+    }
+
+
+    @media (max-width: 768px) {
+        .container {
+            margin-left: 0;
+        }
+
+        .barra_lateral {
+            display: none;
+
+        }
+
+        .child {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 0.5rem;
+            height: 95vh;
+            overflow-y: scroll;
+        }
+
+        .section1,
+        .section2 {
+            width: 100%;
+            gap: 3rem;
+            font-size: 1.2rem;
+        }
+
+        .section1 p,
+        .section2 p {
+            margin: 0;
+        }
+
+        .section1 select {
+            width: 100%;
+        }
+
+
+
+        .InformacaoTotens {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .tabela table {
+            width: 100%;
+
+        }
+
+        .titulo {
+            margin: 0;
+        }
     }
 }
