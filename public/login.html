@@ -6,7 +6,6 @@
     <title>Innovair - Login for Empresas</title>
     <link rel="stylesheet" href="styles/utils.css" />
     <link rel="stylesheet" href="styles/login.css" />
-    <script src="./js/validacaoLogin.js"></script>
     <link rel="icon" href="../public/assets/favicon.ico" type="favicon" />
   </head>
   <body>
@@ -40,24 +39,16 @@
           <div class="buttons">
             <button onclick="validacao()">Acessar</button>
             <div class="permanecer-conectado">
-              <input type="checkbox" />
-              <p>Permanecer conectado</p>
-            </div>
-            <div class="registre-se">
-              <p>Não é registrado? <span>Cadastre-se</span></p>
+              <!-- <input type="checkbox" /> -->
+              <!-- <p>Permanecer conectado</p> -->
             </div>
           </div>
-        </div>
-        <div class="signup">
-          <h1>Cadastre-se!</h1>
-          <p>Ainda não possui uma conta?</p>
-          <p>Não perca tempo e crie agora!</p>
-          <button onclick="redirecionar()">Cadastrar</button>
-        </div>
+        </div> 
       </div>
     </div>
   </body>
 </html>
+<script src="./js/validacaoLogin.js"></script>
 <script>
   function redirecionar() {
     window.location.href = "cadastro.html";
