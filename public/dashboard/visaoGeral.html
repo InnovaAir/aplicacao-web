@@ -10,6 +10,7 @@
 
     <title>Visão geral</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
 <body>
@@ -66,7 +67,9 @@
 
                 <div class="subSection1">
                     <div class="InformacaoTotens">
-                        <canvas id="graficoPizzas"></canvas>
+                        <div id="graficoPizzas">
+
+                        </div>
 
                         <div id="dados">
                             <div class="TotensQTD">
@@ -95,24 +98,27 @@
                         </div>
                         <div class="scrollMaquinas">
                             <div class="legendasMaquinas">
-                                <div style="color: black; font-weight: 600;" class="maquinaLegenda">Nome do totem</div>
-                                <div style="color: black; font-weight: 600;" class="maquinaLegenda">Uso CPU</div>
-                                <div style="color: black; font-weight: 600;" class="maquinaLegenda">Uso RAM</div>
-                                <div style="color: black; font-weight: 600;" class="maquinaLegenda">Uso Disco</div>
-                                <div style="color: black; font-weight: 600;" class="maquinaLegenda">Ping</div>
-                                <div style="color: black; font-weight: 600;" class="maquinaLegenda">Processos</div>
-                                <div style="color: black; font-weight: 600;" class="maquinaLegenda">Tempo de Atividade
+                                <div style="color: black; font-weight: 600;width:100%" class="maquinaLegenda">Nome do totem</div>
+                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Uso CPU</div>
+                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Uso RAM</div>
+                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Uso Disco</div>
+                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Ping</div>
+                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Processos</div>
+                                <div style="color: black; font-weight: 600;width:100%" class="maquinaLegenda">Tempo de Atividade
                                 </div>
 
                             </div>
                             <div class="secaoMaquinas">
-                                <div class="maquinaLegenda numeroTotem">totem aaaa</div>
-                                <div class="maquinaLegenda usoCPU">15%</div>
-                                <div class="maquinaLegenda usoRam">45%</div>
-                                <div class="maquinaLegenda usoDisco">45%</div>
-                                <div class="maquinaLegenda ping">120ms</div>
-                                <div class="maquinaLegenda Processos">19283</div>
-                                <div class="maquinaLegenda tempoAtividade">24d 12h 32min 155</div>
+                                <div style="width:100%" class="maquinaLegenda numeroTotem">totem aaaa</div>
+                                <div style="width:50%" class="maquinaLegenda usoCPU">15%</div>
+                                <div style="width:50%" class="maquinaLegenda usoRam">
+                                    <div class="bola"></div>
+                                    45%
+                                </div>
+                                <div style="width:50%" class="maquinaLegenda usoDisco">45%</div>
+                                <div style="width:50%" class="maquinaLegenda ping">120ms</div>
+                                <div style="width:50%" class="maquinaLegenda Processos">19283</div>
+                                <div style="width:100%" class="maquinaLegenda tempoAtividade">24d 12h 32min 155</div>
 
 
                                 <!-- varios log para testes de scroll abaixo (apenas des-comente para teste)-->
@@ -128,18 +134,22 @@
 
                         <div class="scrollLog">
                             <div class="legendasMaquinas">
-                                <div style="color: black; font-weight: 600; margin-left: 5px;width: 40%;" class="maquinaLegenda">Máquina</div>
-                                <div style="color: black;width: 30%; font-weight: 600;" class="maquinaLegenda">Nível</div>
-                                <div style="color: black; font-weight: 600; width: 40%;" class="maquinaLegenda">Componente</div>
-                                <div style="color: black; font-weight: 600;" class="maquinaLegenda">Momento</div>
-                               
+                                <div style="color: black; font-weight: 600; margin-left: 5px;width: 40%;"
+                                    class="maquinaLegenda">Máquina</div>
+                                <div style="color: black;width: 30%; font-weight: 600;" class="maquinaLegenda">Nível
+                                </div>
+                                <div style="color: black; font-weight: 600; width: 40%;" class="maquinaLegenda">
+                                    Componente</div>
+                                <div style="color: black; font-weight: 600;width: 60%;" class="maquinaLegenda">Momento</div>
+
 
                             </div>
                             <div class="secaoLog">
-                                <div style="margin-left: 3px;width: 40%;" class="maquinaLegenda logMaquina">totem aaaa</div>
+                                <div style="margin-left: 3px;width: 40%;" class="maquinaLegenda logMaquina">totem aaaa
+                                </div>
                                 <div style="width: 30%;" class="maquinaLegenda logNivel">Grave</div>
                                 <div style="width: 40%;" class="maquinaLegenda logComponente">CPU</div>
-                                <div class="maquinaLegenda logMomento">13:00</div>
+                                <div style="width: 60%;" class="maquinaLegenda logMomento">14/04/2025 13:50</div>
                             </div>
 
                             <!-- varios log para testes de scroll abaixo (apenas des-comente para teste)-->
@@ -325,56 +335,88 @@
         },
     });
 
-    const graficoPizzas = document.getElementById("graficoPizzas");
-    new Chart(graficoPizzas, {
-        type: "doughnut",
-        data: {
-            labels: ["Em aberto", "Pendente", "Resolvido"],
-            datasets: [
-                {
-                    data: [300, 50, 100],
-                    backgroundColor: ["#34A853", "#FBD604", "#F1060A"],
-                },
-            ],
+
+
+    // // new Chart(graficoPizzas, {   // chart js desatualizado
+    //      type: "doughnut",
+    //      data: {
+    //          labels: ["Em aberto", "Pendente", "Resolvido"],
+    //          datasets: [
+    //              {
+    //                  data: [300, 50, 100],
+    //                  backgroundColor: ["#34A853", "#FBD604", "#F1060A"],
+    //              },
+    //          ],
+    //      },
+    //      options: {
+    //
+    //          radius: "60%", // tamanho da rosca
+    //          cutout: "70%", // serve para deixar o donut mais fino
+    //          responsive: true,
+    //          maintainAspectRatio: false,
+    //          plugins: {
+    //              //
+    //              title: {
+    //                  align: "start",
+    //                  padding: {},
+    //                  font: {
+    //                      size: 24,
+    //                      left: 0,
+    //                  },
+    //
+    //                  display: true,
+    //                  text: "Relação de alertas e andamento",
+    //              }, 
+    //              //
+    //              legend: {
+    //                  display: true,
+    //                  position: "right",
+    //                  labels: {
+    //                      font: {
+    //                          size: 18,
+    //                      },
+    //                  },
+    //              },
+    //          },
+    //      },
+    //  }); 
+
+
+    var options = {
+        series: [50, 15, 15, 7.5, 12.5],
+        labels:['Nenhum alerta', 'Um alerta', 'Dois alertas', 'Três alertas', 'Quatro alertas'],
+        legend:{
+            position: 'right',
+            offsetY: 0,
+            height: 230,
         },
-        options: {
-
-            radius: "60%", // tamanho da rosca
-            cutout: "70%", // serve para deixar o donut mais fino
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                //
-                title: {
-                    align: "start",
-                    padding: {},
-                    font: {
-                        size: 24,
-                        left: 0,
-                    },
-
-                    display: true,
-                    text: "Relação de alertas e andamento",
+        chart: {
+            type: 'donut',
+        },
+        
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
                 },
-                //
                 legend: {
-                    display: true,
-                    position: "right",
-                    labels: {
-                        font: {
-                            size: 18,
-                        },
-                    },
+                    position: 'bottom'
                 },
-            },
-        },
-    });
-    abrirMenu();
+            }
+        }]
+    };
 
-    <!-- elementos 'canvas' tem que ser "decorados" por javaScript -->
+    var chart = new ApexCharts(document.querySelector("#graficoPizzas"), options);
+    chart.render();
+</script>
 
-    graficoPizzas = document.getElementById("graficoPizzas");
-    graficoPizzas.setAttribute("width", 50);
-    graficoPizzas.setAttribute("height", 50);
+abrirMenu();
+
+// elementos 'canvas' tem que ser "decorados" por javaScript
+
+graficoPizzas = document.querySelector("#chart"), options;
+graficoPizzas.setAttribute("width", 50);
+graficoPizzas.setAttribute("height", 50);
 
 </script>
