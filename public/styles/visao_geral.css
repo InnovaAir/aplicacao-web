@@ -196,6 +196,7 @@ display: flex;
 
 .totemTitulo{
     
+    padding-left: 1%;
     margin: 1%;
     border:2px solid lightgray;
     background-color: white;
@@ -213,7 +214,8 @@ display: flex;
 }
 
 #totemDado{
-    
+    margin-left: 4%;
+    font-weight: 600;
     overflow: hidden;
     width: 100%;
     text-overflow: ellipsis;
