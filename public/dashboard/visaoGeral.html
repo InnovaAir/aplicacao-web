@@ -62,10 +62,20 @@
             <div style="margin-top: -30px;
 " class="subtituloContainer">
                 *De acordo com a última captura obtida
+                <div style="width: 40%; margin-top:10px">
+                <select class="selectBox selectFilial">
+                    <option value="" disabled selected>Escolher filial</option>
+                    <option value="volvo">opção</option>
+                    <option value="saab">opção</option>
+                    <option value="opel">opção</option>
+                    <option value="audi">opção</option>
+                  </select>
             </div>
+        </div>
             <div class="section1">
 
                 <div class="subSection1">
+
                     <div class="InformacaoTotens">
                         <div id="graficoPizzas">
 
@@ -85,13 +95,34 @@
                                 </div>
                             </div>
 
-                            <div class="totemTitulo">
-                                Tempo desde o último alerta
-                                <div id="totemDado">1d 23hr 15min</div>
-                            </div>
+
                         </div>
                     </div>
 
+
+                    <div class="InformacaoAlertas">
+                        <div class="graficoAlertas"></div>
+                        <div id="dados">
+                            <div class="TotensQTD">
+                                <div class="totemTitulo">
+                                    Total de Alertas
+                                    <div id="totemDado">150</div>
+                                </div>
+
+                                <div class="totemTitulo">
+                                    Intervalo com maior pico
+
+                                    <div id="totemDado">Tarde</div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="subSection2">
                     <div class="listaMaquinas">
                         <div class="tituloContainer">Lista de máquinas
                             <div class="selects">
@@ -111,8 +142,7 @@
                                     <option value="audi">opção</option>
                                   </select>
                                 </div>
-                        </div>
-                        <div class="subtituloContainer">*Quer saber o significado das cores das metricas? Clique aqui!
+                                
                         </div>
                         <div class="scrollMaquinas">
                             <div class="legendasMaquinas">
@@ -152,10 +182,8 @@
                             
 
                         </div>
-                    </div>
                 </div>
-                <div class="subSection2">
-                    <div class="tabela">
+                    <div class="alertasLog">
                         <p style="font-size: x-large; font-weight: bold; color: #5271FF;" class="titulo">
                             Log de alertas
                         </p>
@@ -168,7 +196,8 @@
                                 </div>
                                 <div style="color: black; font-weight: 600; width: 40%;" class="maquinaLegenda">
                                     Componente</div>
-                                <div style="color: black; font-weight: 600;width: 60%;" class="maquinaLegenda">Momento</div>
+                                <div style="color: black; font-weight: 600;width: 60%;" class="maquinaLegenda">Momento
+                                </div>
 
 
                             </div>
@@ -274,10 +303,12 @@
 
                         </div>
                     </div>
-                </div>
+                   
             </div>
+        </div>
+    </div>
 
-            <!-- <div class="section1">
+    <!-- <div class="section1">
                 <select>
                     <option value="">Aeroporto de Guarulhos</option>
                     <option value="">Aeroporto de Congonhas</option>
@@ -296,7 +327,7 @@
                     <canvas id="graficoAlertas"></canvas>
                 </div>
             </div> -->
-        </div>
+    </div>
     </div>
     </div>
 </body>
@@ -349,7 +380,10 @@
                     beginAtZero: true,
                 },
             },
-            responsive: true,
+            responsive: [{
+                breakpoint: 1000,
+                options: {}
+            }],
             plugins: {
                 title: {
                     display: true,
@@ -412,21 +446,21 @@
 
     var options = {
         series: [50, 15, 15, 7.5, 12.5],
-        labels:['Nenhum alerta', 'Um alerta', 'Dois alertas', 'Três alertas', 'Quatro alertas'],
-        legend:{
+        labels: ['Nenhum alerta', 'Um alerta', 'Dois alertas', 'Três alertas', 'Quatro alertas'],
+        legend: {
             position: 'right',
             offsetY: 0,
-          
+
         },
         chart: {
             type: 'donut',
         },
-        
+
         responsive: [{
             breakpoint: 480,
             options: {
                 chart: {
-                  
+
                 },
                 legend: {
                     position: 'bottom'
