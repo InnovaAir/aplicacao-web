@@ -106,8 +106,8 @@ INSERT INTO cargo VALUES
 INSERT INTO usuario VALUES
 (default, 'InnovaAir', 'inovaair@technology.com', 'Admin123@', 1, 1),
 (default, 'Roberto', 'roberto@latam.com', 'Senha123@', 2, 2),
-(default, 'Estela', 'estelao@latam.com', 'Senha123@', 3, 3),
-(default, 'Kátia', 'katia@latam.com', 'Senha123@', 4, 4);
+(default, 'Estela', 'estelao@latam.com', 'Senha123@', 2, 3),
+(default, 'Kátia', 'katia@latam.com', 'Senha123@', 2, 4);
 
 SELECT * from maquina;
 SELECT * from componente;

@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href="styles/utils.css">
-    <link rel="stylesheet" href="styles/cadastro.css">
+    <link rel="stylesheet" href="../styles/utils.css">
+    <link rel="stylesheet" href="../styles/cadastro.css">
     <!-- <script src="./js/validacaoCadastro.js"></script> -->
      <script src="js/validar.js"></script>
     <style>
@@ -21,11 +21,6 @@
 <body>
     <div class="container">
         <div class="form-login">
-            <div class="signup">
-                <h1>Login!</h1>
-                <p>Já possui uma conta?</p>
-                <button onclick="redirecionar()">Clique aqui</button>
-            </div>
         </div>
         <div class="fields">
             <div class="linha">
@@ -82,13 +77,13 @@
             </div>
         </div>
     </div>
-    <script src="./js/validar.js"></script>
+    <script src="../js/validar.js"></script>
 </body>
 
 </html>
 <script>
     function redirecionar() {
-        window.location.href = "login.html";
+        window.location.href = "../../login.html";
     }
 
     const mascaraTel = (event) => {
