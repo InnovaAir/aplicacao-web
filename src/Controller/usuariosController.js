@@ -128,7 +128,6 @@ function entrar(req, res) {
 
 module.exports = {
     cadastrar,
-    autenticar,
     entrar
 }
 

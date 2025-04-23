@@ -163,7 +163,6 @@ function validarLogin() {
             formularioValido = false;
         }
     }
-
     // Validação da senha
     if (senha === "") {
         mostrarErro(ipt_senha, "Preencha a senha.");

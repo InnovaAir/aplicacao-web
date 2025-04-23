@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Innovair - Login for Empresas</title>
+    <title>Innovair - Login para Empresas</title>
     <link rel="stylesheet" href="styles/utils.css" />
     <link rel="stylesheet" href="styles/login.css" />
-    <link rel="icon" href="../public/assets/favicon.ico" type="favicon" />
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+
+    <style>
+      .erro {
+        color: red;
+        font-size: 0.9em;
+        margin-top: 5px;
+        display: block;
+      }
+    </style>
   </head>
   <body>
     <div class="navbar-mobile">
@@ -16,26 +25,28 @@
         <div id="bar3" class="bar"></div>
       </div>
     </div>
-    <div class="box_voltar" >
-        <div class="box" >
-            <img src="../public/assets/back-icon.png" alt="voltar">
-            <a class="voltar" href="../public/index.html">Voltar</a>
-        </div>
+
+    <div class="box_voltar">
+      <div class="box">
+        <img src="assets/back-icon.png" alt="voltar" />
+        <a class="voltar" href="index.html">Voltar</a>
+      </div>
     </div>
+
     <div class="container">
       <div class="form-login">
-       
         <div class="fields">
           <h1 class="titulo">Login para Empresas</h1>
           <div class="inputs">
             <label for="ipt_email">E-mail:</label>
             <input id="ipt_email" type="text" />
+            <div class="erro-container-email"></div> <!-- Contêiner de erro para o e-mail -->
+
             <label for="ipt_senha">Senha:</label>
-            <input id="ipt_senha" type="text" />
+            <input id="ipt_senha" type="password" />
+            <div class="erro-container-senha"></div> <!-- Contêiner de erro para a senha -->
           </div>
-          <div id="mensagemErro" style="color: red">
-            <!-- msg de erro -->
-          </div>
+
           <div class="buttons">
             <button onclick="validacao()">Acessar</button>
             <div class="permanecer-conectado">
@@ -43,7 +54,7 @@
               <!-- <p>Permanecer conectado</p> -->
             </div>
           </div>
-        </div> 
+        </div>
       </div>
     </div>
   </body>

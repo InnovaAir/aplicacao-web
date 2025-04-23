@@ -100,12 +100,15 @@ INSERT INTO cargo VALUES
 (1, 'Gerente', 7);
 
 INSERT INTO usuario VALUES
-(default, 'Roberto', 'roberto@latam.com', '123456', 1, 1);
+(default, 'Roberto', 'roberto@latam.com', 'Senha123@', 1, 1);
 
 SELECT * from maquina;
 SELECT * from componente;
 SELECT * from metrica;
 select * from cliente;
+select * from usuario;
+select * from filial;
+select * from endereco;
 SELECT idComponente, componente, metrica, limiteMinimo, limiteMaximo, idMetrica from componente join maquina on idMaquina = fkMaquina join metrica on idComponente = fkComponente where idMaquina = 1;
 desc captura_historico;
 select * from captura_historico;

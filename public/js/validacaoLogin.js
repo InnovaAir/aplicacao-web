@@ -1,36 +1,89 @@
 function validacao() {
-    var emailInput = document.getElementById("ipt_email");
-    var senhaInput = document.getElementById("ipt_senha");
-    var mensagemErro = document.getElementById("mensagemErro");
-    var email = emailInput.value.trim();
-    var senha = senhaInput.value;
-
-    // Limpa mensagens anteriores
-    mensagemErro.innerHTML = "";
-
-    let erros = [];
-
-    // Validação de campos vazios
-    if (!email || !senha) {
-        erros.push("Preencha todos os campos.");
+    limparMensagensErro();
+  
+    let formularioValido = true;
+    let emailValido = false;
+    let senhaValida = true;
+  
+    let ipt_email = document.getElementById("ipt_email");
+    let ipt_senha = document.getElementById("ipt_senha");
+  
+    let email = ipt_email.value.trim();
+    let senha = ipt_senha.value;
+  
+    // Verificações de campos obrigatórios
+    if (email === "") {
+      mostrarErro(ipt_email, "Preencha o e-mail.", "email");
+      formularioValido = false;
     }
-
+  
+    if (senha === "") {
+      mostrarErro(ipt_senha, "Preencha a senha.", "senha");
+      formularioValido = false;
+    }
+  
+    if (!formularioValido) return false;
+  
     // Validação de e-mail
-    var regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email && !regexEmail.test(email)) {
-        erros.push("E-mail inválido.");
+    let regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
+    if (regexEmail.test(email)) {
+      emailValido = true;
+    } else {
+      mostrarErro(ipt_email, "E-mail inválido.", "email");
+      formularioValido = false;
     }
-
-    if (erros.length > 0) {
-        mensagemErro.innerHTML = erros.join("<br>");
-        return false;
-    }else{
-        // Requisição para login
+  
+    // Validação da senha
+    if (senha.length < 8) {
+      mostrarErro(ipt_senha, "Senha deve ter pelo menos 8 caracteres.", "senha");
+      senhaValida = false;
+    }
+    if (senha === senha.toUpperCase()) {
+      mostrarErro(ipt_senha, "Senha deve conter letras minúsculas.", "senha");
+      senhaValida = false;
+    }
+    if (senha === senha.toLowerCase()) {
+      mostrarErro(ipt_senha, "Senha deve conter letras maiúsculas.", "senha");
+      senhaValida = false;
+    }
+    if (!/\d/.test(senha)) {
+      mostrarErro(ipt_senha, "Senha deve conter pelo menos um número.", "senha");
+      senhaValida = false;
+    }
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(senha)) {
+      mostrarErro(ipt_senha, "Senha deve conter um caractere especial.", "senha");
+      senhaValida = false;
+    }
+  
+    // Verificação final
+    if (formularioValido && emailValido && senhaValida) {
         entrar(email, senha);
+        return true;
     }
-
+  
     return false;
-}
+  }
+  
+  function mostrarErro(input, mensagem, tipoErro) {
+    // Escolher o contêiner de erro adequado com base no tipo de erro
+    let erroDiv;
+    if (tipoErro === "email") {
+      erroDiv = input.parentNode.querySelector(".erro-container-email");
+    } else if (tipoErro === "senha") {
+      erroDiv = input.parentNode.querySelector(".erro-container-senha");
+    }
+  
+    if (erroDiv) {
+      erroDiv.innerHTML = `<span class="erro">${mensagem}</span>`;
+    }
+  }
+  
+  function limparMensagensErro() {
+    // Limpar as mensagens de erro para todos os campos
+    for (const container of document.querySelectorAll(".erro-container-email, .erro-container-senha")) {
+      container.innerHTML = "";
+    }
+  }
 
 function entrar(email, senha){
     fetch("/usuarios/entrar", {
@@ -54,17 +107,17 @@ function entrar(email, senha){
                 sessionStorage.EMAIL_USUARIO = json.email;
                 sessionStorage.NOME_USUARIO = json.nome;
                 sessionStorage.ID_USUARIO = json.id;
-                alert("Login Realizado com sucesso!");
+                //alert("Login Realizado com sucesso!");
                 // alterando redirecionamento para pagina index
                 setTimeout(function () {
                     window.location = "./dashboard/temporeal.html";
                 }, 1000); // apenas para exibir o loading
-            });
+            })
         } else {
             console.log("Houve um erro ao tentar realizar o login!");
 
             //Adicionando uma mensagem, para aparecer quando o usuario digitar algo que não foi cadastrado
-            div_mensagem.innerHTML = `<span style='color:#ff0000; font-weight:bold;'>Nome de usuário ou senha invalidos</span><br>`;
+            mostrarErro(document.getElementById("ipt_senha") , "Nome de usuário ou senha não cadastrados!", "senha");
             resposta.text().then(texto => {
                 console.error(texto);
             });
