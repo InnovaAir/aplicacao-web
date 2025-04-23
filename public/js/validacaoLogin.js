@@ -109,9 +109,15 @@ function entrar(email, senha){
                 sessionStorage.ID_USUARIO = json.id;
                 //alert("Login Realizado com sucesso!");
                 // alterando redirecionamento para pagina index
-                setTimeout(function () {
-                    window.location = "./dashboard/temporeal.html";
-                }, 1000); // apenas para exibir o loading
+                if(json.fkCargo == 1){
+                    setTimeout(function () {
+                        window.location = "./dashboard/visaoGeral.html";
+                    }, 800); // apenas para exibir o loading
+                }else if (json.fkCargo == 2){
+                    setTimeout(function () {
+                        window.location = "./dashboard/temporeal.html";
+                    }, 800); // apenas para exibir o loading
+                }
             })
         } else {
             console.log("Houve um erro ao tentar realizar o login!");

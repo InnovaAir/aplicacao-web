@@ -94,13 +94,16 @@ CREATE TABLE IF NOT EXISTS captura_historico (
 );
 
 INSERT INTO cliente (razaoSocial, cnpj, email, telefone)
-VALUES ('TAM LINHAS AÉREAS S.A. A LATAM', '12345678000188', 'contato@latam.com.br', '1133224455');
+VALUES ('InnovaAir', '12345678000188', 'inovaair@technology.com', '1133224455'),
+('TAM LINHAS AÉREAS S.A. A LATAM', '12345678000188', 'contato@latam.com.br', '1133224455');
 
 INSERT INTO cargo VALUES
-(1, 'Gerente', 7);
+(1, 'Administrador', 7),
+(2, 'Gerente', 6);
 
 INSERT INTO usuario VALUES
-(default, 'Roberto', 'roberto@latam.com', 'Senha123@', 1, 1);
+(default, 'InnovaAir', 'inovaair@technology.com', 'Admin123@', 1, 1),
+(default, 'Roberto', 'roberto@latam.com', 'Senha123@', 2, 2);
 
 SELECT * from maquina;
 SELECT * from componente;
