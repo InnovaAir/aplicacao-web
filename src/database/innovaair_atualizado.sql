@@ -93,17 +93,21 @@ CREATE TABLE IF NOT EXISTS captura_historico (
   CONSTRAINT fk_historico_metrica FOREIGN KEY (fkMetrica) REFERENCES metrica (idMetrica)
 );
 
-INSERT INTO cliente (razaoSocial, cnpj, email, telefone)
-VALUES ('InnovaAir', '12345678000188', 'inovaair@technology.com', '1133224455'),
+INSERT INTO cliente (razaoSocial, cnpj, email, telefone) VALUES
+('InnovaAir', '12345678000188', 'inovaair@technology.com', '1133224455'),
 ('TAM LINHAS AÉREAS S.A. A LATAM', '12345678000188', 'contato@latam.com.br', '1133224455');
 
 INSERT INTO cargo VALUES
 (1, 'Administrador', 7),
-(2, 'Gerente', 6);
+(2, 'Gerente', 6),
+(3, 'Analista', 5),
+(4, 'Tecnico', 4);
 
 INSERT INTO usuario VALUES
 (default, 'InnovaAir', 'inovaair@technology.com', 'Admin123@', 1, 1),
-(default, 'Roberto', 'roberto@latam.com', 'Senha123@', 2, 2);
+(default, 'Roberto', 'roberto@latam.com', 'Senha123@', 2, 2),
+(default, 'Estela', 'estelao@latam.com', 'Senha123@', 3, 3),
+(default, 'Kátia', 'katia@latam.com', 'Senha123@', 4, 4);
 
 SELECT * from maquina;
 SELECT * from componente;

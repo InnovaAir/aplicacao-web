@@ -110,11 +110,6 @@ function entrar(email, senha){
                 sessionStorage.CARGO_USUARIO = json.cargo;
                 //alert("Login Realizado com sucesso!");
                 // alterando redirecionamento para pagina index
-
-                console.log("testando3");
-                console.log(json);
-                console.log("testando4");
-
                 if(json.cargo == 1){
                     setTimeout(function () {
                         window.location = "./dashboard/visaoGeral.html";
