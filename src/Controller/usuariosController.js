@@ -99,11 +99,15 @@ function entrar(req, res) {
                             if (resultadoAutenticar[0].email == email && resultadoAutenticar[0].senha == senha) {
                                 console.log(resultadoAutenticar);
                                 res.json({
-                                    id: resultadoAutenticar[0].idcadastro,
-                                    email: resultadoAutenticar[0].email,
+                                    id: resultadoAutenticar[0].idUsuario,
                                     nome: resultadoAutenticar[0].nome,
-                                    senha: resultadoAutenticar[0].senha
+                                    email: resultadoAutenticar[0].email,
+                                    senha: resultadoAutenticar[0].senha,
+                                    cargo: resultadoAutenticar[0].fkCargo
                                 });
+                                console.log("testando");
+                                console.log(resultadoAutenticar[0]);
+                                console.log("testando2");
                             }else{
                                 div_mensagem.innerHTML = `<span style='color:#ff0000; font-weight:bold;'>Nome de usuário ou senha invalidos</span><br>`;
                             };

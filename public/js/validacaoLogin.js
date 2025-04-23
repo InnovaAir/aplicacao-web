@@ -104,16 +104,22 @@ function entrar(email, senha){
             resposta.json().then(json => {
                 console.log(json);
                 console.log(JSON.stringify(json));
-                sessionStorage.EMAIL_USUARIO = json.email;
+                // sessionStorage.ID_USUARIO = json.id;
                 sessionStorage.NOME_USUARIO = json.nome;
-                sessionStorage.ID_USUARIO = json.id;
+                sessionStorage.EMAIL_USUARIO = json.email;
+                sessionStorage.CARGO_USUARIO = json.cargo;
                 //alert("Login Realizado com sucesso!");
                 // alterando redirecionamento para pagina index
-                if(json.fkCargo == 1){
+
+                console.log("testando3");
+                console.log(json);
+                console.log("testando4");
+
+                if(json.cargo == 1){
                     setTimeout(function () {
                         window.location = "./dashboard/visaoGeral.html";
                     }, 800); // apenas para exibir o loading
-                }else if (json.fkCargo == 2){
+                }else if (json.cargo == 2){
                     setTimeout(function () {
                         window.location = "./dashboard/temporeal.html";
                     }, 800); // apenas para exibir o loading
