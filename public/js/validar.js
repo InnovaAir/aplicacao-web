@@ -64,6 +64,7 @@ function validarFormulario() {
         emailValido = true;
     } else {
         mostrarErro(ipt_email, "E-mail inválido.");
+        formularioValido = false;
     }
 
     // Validação de telefone (mínimo 10 dígitos para BR - ex: 11912345678)
@@ -103,6 +104,7 @@ function validarFormulario() {
     // Confirmação da senha
     if (senha !== confSenha) {
         mostrarErro(ipt_confirmar_senha, "As senhas não coincidem.");
+        formularioValido = false;
     } else {
         senhaConfirmadaValida = true;
     }
@@ -117,21 +119,67 @@ function validarFormulario() {
     return false;
 }
 
-// Função para exibir mensagem de erro
-function mostrarErro(input, mensagem) { 
-    var divErro = document.createElement("div");
-    divErro.classList.add("erro");
-    divErro.innerHTML = mensagem;
-    var parentDiv = input.parentNode;
-    if (parentDiv.querySelector(".erro") === null) {
-        parentDiv.appendChild(divErro);
+function mostrarErro(inputElement, mensagem) {
+    inputElement.classList.add("input-erro");
+
+    let proximoElemento = inputElement.nextElementSibling;
+    if (proximoElemento && proximoElemento.classList.contains("mensagem-erro")) {
+        proximoElemento.innerText = mensagem;
+    } else {
+        let mensagemErro = document.createElement("span");
+        mensagemErro.classList.add("mensagem-erro");
+        mensagemErro.innerText = mensagem;
+        inputElement.insertAdjacentElement("afterend", mensagemErro);
     }
 }
 
-// Função para limpar mensagens de erro
 function limparMensagensErro() {
-    for (const erro of document.querySelectorAll(".erro")) {
-        erro.remove();
+    document.querySelectorAll(".mensagem-erro").forEach(el => el.remove());
+    document.querySelectorAll(".input-erro").forEach(el => el.classList.remove("input-erro"));
+}
+
+// Validação em tempo real (sem apagar erros dos outros campos)
+document.addEventListener("DOMContentLoaded", () => {
+    const campos = [
+        { id: "ipt_razao_social", msg: "Preencha a razão social." },
+        { id: "ipt_email", msg: "Preencha o e-mail.", extra: validarEmail },
+        { id: "ipt_telefone", msg: "Preencha o telefone." },
+        { id: "ipt_responsavel", msg: "Preencha o responsável." },
+        { id: "ipt_cnpj", msg: "Preencha o CNPJ." },
+        { id: "ipt_senha", msg: "Preencha a senha." },
+        { id: "ipt_confirmar_senha", msg: "Confirme a senha." }
+    ];
+
+    campos.forEach(({ id, msg, extra }) => {
+        const input = document.getElementById(id);
+        input.addEventListener("blur", () => {
+            if (input.value.trim() === "") {
+                mostrarErro(input, msg);
+            } else if (extra) {
+                extra(input);
+            } else {
+                limparErroIndividual(input);
+            }
+        });
+    });
+});
+
+// Validação individual de e-mail (extra)
+function validarEmail(input) {
+    const email = input.value.trim();
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
+    if (!regex.test(email)) {
+        mostrarErro(input, "E-mail inválido.");
+    } else {
+        limparErroIndividual(input);
+    }
+}
+
+function limparErroIndividual(input) {
+    input.classList.remove("input-erro");
+    const proximo = input.nextElementSibling;
+    if (proximo && proximo.classList.contains("mensagem-erro")) {
+        proximo.remove();
     }
 }
 

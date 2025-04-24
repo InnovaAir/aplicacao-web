@@ -5,10 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novos Cadastros</title>
-    <link rel="stylesheet" href="../styles/MenuLateral.css">
-    <link rel="stylesheet" href="../styles/NovosCadastros.css">
-    <link rel="stylesheet" href="../styles/menu_mobile.css">
-    <link rel="icon" href="../public/assets/favicon.ico" type="favicon">
+    <link rel="stylesheet" href="./styles/MenuLateral.css">
+    <link rel="stylesheet" href="./styles/NovosCadastros.css">
+    <link rel="stylesheet" href="./styles/menu_mobile.css">
+    <link rel="icon" href="./public/assets/favicon.ico" type="favicon">
+    <style>
+        .input-erro {
+            border: 1px solid red !important;
+        }
+
+        .mensagem-erro {
+            color: red;
+            font-size: 0.8rem;
+            margin-top: 4px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .input-erro {
+            border: 1px solid red !important;
+        }
+
+        .mensagem-erro {
+            color: red !important;
+            font-size: 0.75rem;
+            margin-top: 4px;
+            margin-bottom: 8px;
+            display: block;
+            font-weight: 500;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,7 +44,7 @@
             <button class="botao_fechar" onclick="fecharMenu()">✖</button>
         </div>
         <div class="logo_container">
-            <img src="../assets/InnovaairWhite.png" alt="" />
+            <img src="./assets/InnovaairWhite.png" alt="" />
         </div>
 
         <span id="user_logado">Olá, Administrador</span>
@@ -39,7 +64,7 @@
     <div class="menu_mobile">
         <button class="botao_menu_mobile" onclick="abrirMenuMobile()">☰</button>
         <div class="logo_container">
-            <img src="../assets/InnovaairWhite.png" alt="" />
+            <img src="./assets/InnovaairWhite.png" alt="" />
         </div>
 
     </div>
@@ -48,8 +73,7 @@
         <a href="tempoReal.html">Tempo real</a>
         <a href="listaMaquinas.html">Lista de máquinas</a>
         <a href="CadastrarMaquina.html" class="agora">Cadastrar Máquina</a>
-        <a href="suporte.html">Suporte</a>
-        <a href="suporte.html">Fale conosco!</a>
+        <!-- <a href="suporte.html">Fale conosco!</a> -->
     </div>
 
     <div class="tela" id="tela">
@@ -58,34 +82,28 @@
         </div>
 
         <div class="box_cadastros">
-            <h1 class="CommumText">Cadastrar Máquina</h1>
+            <h1 class="CommumText">Cadastrar Empresa</h1>
             <div class="Caixa">
                 <div class="coluna">
                     <div id="div_disp" class="dispositivo">
                         <div class="InputsCadastro">
                             <div class="coluna">
-                                <span>Endereço</span>
-                            <select name="select" id="slc_endereco">
-                                <option value="end1">Endereço 1</option>
-                                <option value="end2">Endereço 2</option>
-                                <option value="end3">Endereço 3</option>
-                            </select>
-                                <span>Setor</span>
-                                <input type="text" name="" id="ipt_Setor">
-                                <span>Número Serial</span>
-                                <input type="text" name="" id="ipt_NumeroSerial">
-                                <span>RAM</span>
-                                <input type="text" name="" id="ipt_RAM">
+                                <span>razaoSocial</span>
+                                <input id="ipt_razao_social" type="text">
+                                <span>cnpj</span>
+                                <input id="ipt_cnpj" type="tel" maxlength="18" onkeyup="mascaraCNPJ(event)">
+                                <span>email</span>
+                                <input id="ipt_email" type="text">
+                                <span>telefone</span>
+                                <input id="ipt_telefone" type="tel" maxlength="15" onkeyup="mascaraTel(event)">
                             </div>
                             <div class="coluna">
-                                <span>CPU</span>
-                                <input type="text" name="" id="ipt_CPU">
-                                <span>Sistema Operacional</span>
-                                <input type="text" name="" id="ipt_SO">
-                                <span>Placa de Rede</span>
-                                <input type="text" name="" id="ipt_PlacaDeRede">
-                                <span>Disco</span>
-                                <input type="text" name="" id="ipt_Disco">
+                                <span>Responsavel</span>
+                                <input id="ipt_responsavel" type="text">
+                                <span>Senha</span>
+                                <input id="ipt_senha" type="password">
+                                <span>Confirmar senha</span>
+                                <input id="ipt_confirmar_senha" type="password">
                             </div>
                         </div>
                     </div>
@@ -94,7 +112,7 @@
 
                     <div class="botoes">
                         <div id="cD" class="cadastrarDisp">
-                            <button class="botao" onclick="cadastrarDispositivo()">Cadastrar</button>
+                            <button class="botao" onclick="validarFormulario()">Cadastrar</button>
                         </div>
                     </div>
                 </div>
@@ -102,12 +120,9 @@
         </div>
     </div>
 </body>
-<script src="../js/NovosCadastros.js"></script>
-<script src="../js/animacaoMenu.js"></script>
+<script src="./js/validar.js"></script>
 
 </html>
-<script src="../js/NovosCadastros.js"></script>
-<script src="../js/animacaoMenu.js"></script>
 <script>
     function abrirMenu() {
         document.getElementById("menu").classList.add("menu-aberto");
