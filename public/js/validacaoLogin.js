@@ -110,22 +110,114 @@ function entrar(email, senha){
                 sessionStorage.CARGO_USUARIO = json.cargo;
                 //alert("Login Realizado com sucesso!");
                 // alterando redirecionamento para pagina index
-                if(json.cargo == 1){
+                if (json.cargo == 1){
+                    let timerInterval;
+                    Swal.fire({
+                      icon: "success",
+                      title: "Login efetuado com sucesso!",
+                      html: "Redirecionando... <b></b>",
+                      timer: 1350,
+                      timerProgressBar: true,
+                      didOpen: () => {
+                        Swal.showLoading();
+                        const timer = Swal.getPopup().querySelector("b");
+                        timerInterval = setInterval(() => {
+                          timer.textContent = `${Swal.getTimerLeft()}`;
+                        }, 100);
+                      },
+                      willClose: () => {
+                        clearInterval(timerInterval);
+                      }
+                    }).then((result) => {
+                      /* Read more about handling dismissals below */
+                      if (result.dismiss === Swal.DismissReason.timer) {
+                        console.log("I was closed by the timer");
+                      }
+                    });
                     setTimeout(function () {
                         window.location = "./cadastroEmpresa.html";
-                    }, 50); // apenas para exibir o loading
+                    }, 1350); // apenas para exibir o loading
                 }else if (json.cargo == 2){
+                    let timerInterval;
+                    Swal.fire({
+                      icon: "success",
+                      title: "Login efetuado com sucesso!",
+                      html: "Redirecionando... <b></b>",
+                      timer: 1350,
+                      timerProgressBar: true,
+                      didOpen: () => {
+                        Swal.showLoading();
+                        const timer = Swal.getPopup().querySelector("b");
+                        timerInterval = setInterval(() => {
+                          timer.textContent = `${Swal.getTimerLeft()}`;
+                        }, 100);
+                      },
+                      willClose: () => {
+                        clearInterval(timerInterval);
+                      }
+                    }).then((result) => {
+                      /* Read more about handling dismissals below */
+                      if (result.dismiss === Swal.DismissReason.timer) {
+                        console.log("I was closed by the timer");
+                      }
+                    });
                     setTimeout(function () {
                         window.location = "./dashboard/visaoGeralGerente.html";
-                    }, 50); // apenas para exibir o loading
+                    }, 1350); // apenas para exibir o loading
                 }else if (json.cargo == 3){
+                    let timerInterval;
+                    Swal.fire({
+                      icon: "success",
+                      title: "Login efetuado com sucesso!",
+                      html: "Redirecionando... <b></b>",
+                      timer: 1350,
+                      timerProgressBar: true,
+                      didOpen: () => {
+                        Swal.showLoading();
+                        const timer = Swal.getPopup().querySelector("b");
+                        timerInterval = setInterval(() => {
+                          timer.textContent = `${Swal.getTimerLeft()}`;
+                        }, 100);
+                      },
+                      willClose: () => {
+                        clearInterval(timerInterval);
+                      }
+                    }).then((result) => {
+                      /* Read more about handling dismissals below */
+                      if (result.dismiss === Swal.DismissReason.timer) {
+                        console.log("I was closed by the timer");
+                      }
+                    });
                     setTimeout(function () {
                         window.location = "./dashboard/dashboard_analista.html";
-                    }, 50); // apenas para exibir o loading
+                    }, 1350); // apenas para exibir o loading
                 }else if (json.cargo == 4){
+                    let timerInterval;
+                    Swal.fire({
+                      icon: "success",
+                      title: "Login efetuado com sucesso!",
+                      html: "Redirecionando... <b></b>",
+                      timer: 1350,
+                      timerProgressBar: true,
+                      didOpen: () => {
+                        Swal.showLoading();
+                        const timer = Swal.getPopup().querySelector("b");
+                        timerInterval = setInterval(() => {
+                          timer.textContent = `${Swal.getTimerLeft()}`;
+                        }, 100);
+                      },
+                      willClose: () => {
+                        clearInterval(timerInterval);
+                      }
+                    }).then((result) => {
+                      /* Read more about handling dismissals below */
+                      if (result.dismiss === Swal.DismissReason.timer) {
+                        console.log("I was closed by the timer");
+                      }
+                    });
                     setTimeout(function () {
                         window.location = "./dashboard/tempoReal.html";
-                    }, 50); // apenas para exibir o loading
+                    }, 1350); // apenas para exibir o loading
                 }
             })
         } else {
