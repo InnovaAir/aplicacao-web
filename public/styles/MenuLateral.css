@@ -10,7 +10,8 @@ body {
   transition: margin-left 0.3s ease-in-out;
   /* background-color: rgb(101, 40, 187); */
   background: rgb(238, 244, 255);
-  background: -moz-linear-gradient(
+  background-color: #ffffff;
+/*   background: -moz-linear-gradient(
     144deg,
     rgba(238, 244, 255, 1) 37%,
     rgba(175, 190, 255, 1) 100%
@@ -24,7 +25,7 @@ body {
     144deg,
     rgba(238, 244, 255, 1) 37%,
     rgba(175, 190, 255, 1) 100%
-  );
+  );   */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eef4ff",endColorstr="#afbeff",GradientType=1);
 }
 .botao_abrir {
@@ -37,7 +38,7 @@ body {
   color: white;
   cursor: pointer;
   padding: 10px;
-  background-color: blue;
+  background-color: #5573ff;
   border-radius: 0 10px 10px 0;
 }
 
