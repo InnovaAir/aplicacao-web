@@ -39,14 +39,14 @@
           <div class="inputs">
             <label for="ipt_email">Digite seu E-mail</label>
             <input id="ipt_email" type="text" />
-            <div class="erro-container-email"></div> <!-- Contêiner de erro para o e-mail -->
+            <div class="erro-container-email"></div>
 
             <label for="ipt_senha">Digite o nome da empresa</label>
-            <input id="ipt_senha" type="text" />
-            <div class="erro-container-senha"></div> <!-- Contêiner de erro para a senha -->
+            <input id="ipt_empresa" type="text" />
+            <div class="erro-container-senha"></div>
           </div>
           <div class="buttons">
-            <button onclick="">Solicitar</button>
+            <button onclick="" id="btnSolicitar">Solicitar</button>
             <div class="permanecer-conectado">
             </div>
           </div>
@@ -55,8 +55,19 @@
     </div>
   </body>
 </html>
-<script src="./js/validacaoLogin.js"></script>
+<script src="./js/jira.js"></script>
 <script>
+    document.getElementById("btnSolicitar").addEventListener("click", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("ipt_email").value.trim();
+        const empresa = document.getElementById("ipt_empresa").value.trim();
+
+        if (email && empresa) {
+            criarChamadoJira(email, empresa);
+        } else {
+            alert("Preencha todos os campos!");
+        }
+    });
   function redirecionar() {
     window.location.href = "cadastro.html";
   }
