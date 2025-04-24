@@ -112,7 +112,7 @@ function entrar(email, senha){
                 // alterando redirecionamento para pagina index
                 if(json.cargo == 1){
                     setTimeout(function () {
-                        window.location = "./dashboard/cadastroEmpresa.html";
+                        window.location = "./cadastroEmpresa.html";
                     }, 800); // apenas para exibir o loading
                 }else if (json.cargo == 2){
                     setTimeout(function () {

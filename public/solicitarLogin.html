@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Innovair - Solicitar Login</title>
+    <link rel="stylesheet" href="styles/utils.css" />
+    <link rel="stylesheet" href="styles/login.css" />
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+
+    <style>
+      .erro {
+        color: red;
+        font-size: 0.9em;
+        margin-top: 5px;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar-mobile">
+      <div id="menu-bar" onclick="menuOnClick()">
+        <div id="bar1" class="bar"></div>
+        <div id="bar2" class="bar"></div>
+        <div id="bar3" class="bar"></div>
+      </div>
+    </div>
+
+    <div class="box_voltar">
+      <div class="box">
+        <img src="assets/back-icon.png" alt="voltar" />
+        <a class="voltar" href="index.html">Voltar</a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="form-login">
+        <div class="fields">
+          <h1 class="titulo">Solicite o cadastro para a sua empresa</h1>
+          <div class="inputs">
+            <label for="ipt_email">Digite seu E-mail</label>
+            <input id="ipt_email" type="text" />
+            <div class="erro-container-email"></div> <!-- Contêiner de erro para o e-mail -->
+
+            <label for="ipt_senha">Digite o nome da empresa</label>
+            <input id="ipt_senha" type="text" />
+            <div class="erro-container-senha"></div> <!-- Contêiner de erro para a senha -->
+          </div>
+          <div class="buttons">
+            <button onclick="">Solicitar</button>
+            <div class="permanecer-conectado">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script src="./js/validacaoLogin.js"></script>
+<script>
+  function redirecionar() {
+    window.location.href = "cadastro.html";
+  }
+</script>
