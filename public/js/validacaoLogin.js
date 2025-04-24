@@ -113,19 +113,19 @@ function entrar(email, senha){
                 if(json.cargo == 1){
                     setTimeout(function () {
                         window.location = "./cadastroEmpresa.html";
-                    }, 800); // apenas para exibir o loading
+                    }, 50); // apenas para exibir o loading
                 }else if (json.cargo == 2){
                     setTimeout(function () {
                         window.location = "./dashboard/visaoGeralGerente.html";
-                    }, 800); // apenas para exibir o loading
+                    }, 50); // apenas para exibir o loading
                 }else if (json.cargo == 3){
                     setTimeout(function () {
                         window.location = "./dashboard/dashboard_analista.html";
-                    }, 800); // apenas para exibir o loading
+                    }, 50); // apenas para exibir o loading
                 }else if (json.cargo == 4){
                     setTimeout(function () {
                         window.location = "./dashboard/tempoReal.html";
-                    }, 800); // apenas para exibir o loading
+                    }, 50); // apenas para exibir o loading
                 }
             })
         } else {
