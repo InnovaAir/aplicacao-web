@@ -111,8 +111,18 @@ function validarFormulario() {
 
     // Verificação final
     if (formularioValido && emailValido && senhaValida && senhaConfirmadaValida) {
-        alert("Cadastro realizado com sucesso!");
+        // alert("Cadastro realizado com sucesso!");
         cadastrar(razao, email, telefone, responsavel, cnpj, senha);
+        setTimeout(function () {
+            Swal.fire({
+                title: "cadastro realizado com sucesso!",
+                text: "Clique em OK para sair!",
+                icon: "success"
+              })
+        }, 500);
+        setTimeout(function (){
+            limparFormulario();
+        }, 1500);
         return true;
     }
 
@@ -249,9 +259,8 @@ function cadastrar(razao, email, telefone, responsavel, cnpj, senha){
     .then(function (resposta) {
         console.log("resposta do servidor: ", resposta);
         if (resposta.ok) {
-            alert('Cadastro realizado com sucesso!');
-            window.location = "login.html";
-            limparFormulario();
+            // alert('Cadastro realizado com sucesso!');
+            // window.location = "login.html";
         } else {
             return resposta.text();
         }
@@ -266,4 +275,14 @@ function cadastrar(razao, email, telefone, responsavel, cnpj, senha){
         console.log("Erro na requisição:", erro);
         mensagemErro.innerHTML = "Erro ao tentar realizar o cadastro. Tente novamente.";
     });
+}
+
+function limparFormulario(){
+    document.getElementById("ipt_razao_social").value = "";
+    document.getElementById("ipt_email").value = "";
+    document.getElementById("ipt_telefone").value = "";
+    document.getElementById("ipt_responsavel").value = "";
+    document.getElementById("ipt_cnpj").value = "";
+    document.getElementById("ipt_senha").value = "";
+    document.getElementById("ipt_confirmar_senha").value = "";
 }
