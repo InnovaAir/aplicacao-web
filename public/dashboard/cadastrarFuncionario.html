@@ -48,11 +48,11 @@
             <img src="../assets/InnovaairWhite.png" alt="" />
         </div>
 
-        <span id="user_logado">Olá, Administrador</span>
+        <span id="user_logado">Olá, Gerente</span>
         <div class="opcoes">
             <div class="container1">
                 <u>
-                    <li><a href="cadastroEmpresa.html">Cadastrar Empresa</a></li>
+                    <li><a href="cadastroEmpresa.html">Cadastrar Funcionario</a></li>
                 </u>
             </div>
         </div>
@@ -66,32 +66,27 @@
     </div>
     <div class="novo_menu">
         <a href="visaoGeral.html" >Visão geral</a>
-        <a href="tempoReal.html">Tempo real</a>
-        <a href="listaMaquinas.html">Lista de máquinas</a>
-        <a href="CadastrarMaquina.html" class="agora">Cadastrar Máquina</a>
     </div>
 
     <div class="tela" id="tela">
         <div class="logo_container">
-          <span class="CommumText" id="Mensagem_Usuario">Olá, Usuário!</span>
+          <!-- <span class="CommumText" id="Mensagem_Usuario">Olá, Gerente!</span> -->
         </div>
 
         <div class="box_cadastros">
-            <h1 class="CommumText">Cadastrar Empresa</h1>
+            <h1 class="CommumText">Cadastrar Novo Funcionario</h1>
             <div class="Caixa">
                 <div class="coluna">
                     <div id="div_disp" class="dispositivo">
                         <div class="InputsCadastro">
                             <div class="coluna">
                                 <span>Nome do usuario</span>
-                                <input id="ipt_razao_social" type="text">
+                                <input id="ipt_nome" type="text">
                                 <span>Senha</span>
                                 <input id="ipt_senha" type="password">
                                 <span>Cargo</span>
-                                <select name="select" id="slc_endereco">
-                                    <option value="end1">Cargo 1</option>
-                                    <option value="end2">Cargo 2</option>
-                                    <option value="end3">Cargo 3</option>
+                                <select name="select" id="slc_cargo">
+                                    <option value="" disabled selected>Selecione o Cargo do funcionario</option>    
                                 </select>
                             </div>
                             <div class="coluna">
@@ -106,7 +101,7 @@
 
                     <div class="botoes">
                         <div id="cD" class="cadastrarDisp">
-                            <button class="botao" onclick="validarFormulario()">Cadastrar</button>
+                            <button class="botao" onclick="validacaoFuncionario()">Cadastrar</button>
                         </div>
                     </div>
                 </div>
@@ -115,6 +110,7 @@
     </div>
 </body>
 </html>
+<script src="../js/validar.js"></script>
 <script src="../js/validacaoFuncionario.js"></script>
 <script>
     function abrirMenu() {
@@ -126,4 +122,43 @@
         document.getElementById("tela").classList.remove("tela-movida");
     }
     abrirMenu();
+    
+
+    fetch("/usuarios/listarCargo", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    })
+    // Após a solicitação ser concluída, o then é executado. A função recebe o objeto da resposta.
+    .then(function (resposta) {
+        // Verifica se a resposta foi bem-sucedida
+        if (resposta.ok) {
+        if (resposta.status === 204) {
+            throw "Nenhum resultado encontrado!";
+        }
+            return resposta.json();
+        } else {
+            throw "Houve um erro na API!";
+        }
+    })
+        .then(function (resposta){
+            cargos = "";
+            console.log("cargos recebidas:", JSON.stringify(resposta));
+
+            for(var i = 1; i< resposta.length; i++){
+
+            var cargo = resposta[i];
+            var id = cargo.idcargo;
+            var nome = cargo.nome;
+            cargos += `<option value="${id}">${nome}</option>`;
+            console.log(`id: ${i}; cargo: ${JSON.stringify(cargo)}`);
+            }
+
+            slc_cargo.innerHTML += cargos;
+        })
+        .catch(function (erro) {
+        console.log("A consulta foi mal sucedida devido a um erro com o Banco de dados!");
+        console.log(`#ERRO: ${erro}`);
+    });
 </script>
