@@ -134,3 +134,36 @@ function limparFormulario(){
     document.getElementById("ipt_confirmar_senha").value = "";
     document.getElementById("slc_cargo").value = "0";
 }
+
+function cadastrarFuncionario(){
+    fetch("/usuarios/cadastrarUsuario", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            nomeServer: nome,
+            emailServer: email,
+            senhaServer: senha,
+            confirmar_senhaServer: confirmar_senha,
+            cargoServer: cargo
+        }),
+    })
+    .then(function (resposta) {
+        console.log("resposta do servidor: ", resposta);
+        if (resposta.ok) {
+        } else {
+            return resposta.text();
+        }
+    })
+    .then(function (erroTexto) {
+        if (erroTexto) {
+            console.log("Erro retornado do servidor:", erroTexto);
+            mensagemErro.innerHTML = erroTexto;
+        }
+    })
+    .catch(function (erro) {
+        console.log("Erro na requisição:", erro);
+        mensagemErro.innerHTML = "Erro ao tentar realizar o cadastro. Tente novamente.";
+    });
+}
