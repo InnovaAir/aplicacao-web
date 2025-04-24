@@ -10,6 +10,7 @@
 
     <title>Visão geral</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
@@ -56,185 +57,292 @@
         <a href="suporte.html">Suporte</a>
         <a href="suporte.html">Fale conosco!</a>
     </div>
-    <div style="background-color: white;" class="container">
-        <div class="child">
-            <div class="content">
-                <div style="margin-top: 20px;" class="tituloContainer">Análise em tempo real</div>
-                <div class="subtituloContainer">
-                    *De acordo com a última captura obtida
-                    <div style="width: 40%; margin-top:10px">
-                        <select class="selectBox selectFilial">
-                            <option value="" disabled selected>Escolher filial</option>
-                            <option value="volvo">opção</option>
-                            <option value="saab">opção</option>
-                            <option value="opel">opção</option>
-                            <option value="audi">opção</option>
-                        </select>
+    <div class="child">
+        <div id="tela" class="content">
+            <div style="margin-top: 20px;" class="tituloContainer">Análise em tempo real</div>
+            <div class="subtituloContainer">
+                *De acordo com a última captura obtida
+                <div style="width: 40%; margin-top:10px">
+                    <select class="selectBox selectFilial">
+                        <option value="" disabled selected>Escolher filial</option>
+                        <option value="volvo">opção</option>
+                        <option value="saab">opção</option>
+                        <option value="opel">opção</option>
+                        <option value="audi">opção</option>
+                    </select>
+                </div>
+            </div>
+            <div class="section1">
+
+                <div class="subSection1">
+
+                    <div class="InformacaoAlertas">
+
+                        <div class="legendaSecao">
+                            <div class="subtituloContainer"
+                                style="align-self: flex-start; font-size:25px; font-weight:500">Porcentagem de
+                                alertas
+                            </div>
+                            <div class="subtituloContainer" style="align-self: flex-start; font-size:15px">*No dia
+                                de
+                                hoje</div>
+                        </div>
+
+                        <div id="graficoPizzas">
+                        </div>
+
+                        <div id="dados">
+                            <div class="TotensQTD">
+                                <div class="totemTitulo">
+                                    Total de Totens
+                                    <div id="totemDado">48</div>
+                                </div>
+
+                                <div class="totemTitulo">
+                                    Totens em Alerta
+
+                                    <div id="totemDado">24</div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="InformacaoAlertas">
+                        <div class="legendaSecao">
+                            <div class="subtituloContainer"
+                                style="align-self: flex-start; font-size:25px; font-weight:500">Porcentagem de
+                                alertas
+                            </div>
+                            <div class="subtituloContainer" style="align-self: flex-start; font-size:15px">*No dia
+                                de
+                                hoje</div>
+                        </div>
+                        <div class="graficoAlertas">
+
+                        </div>
+
+                    </div>
+
+                    <div class="alertaStats">
+
+                        <div style="height: 30%;" class="totemTitulo">
+                            Intervalo com maior pico
+                            <div id="totemDado" style="display: flex; align-items:flex-end;">Tarde <div
+                                    style="font-size: 50%; margin-left:2%; margin-bottom:4px">(13:00 - 18:00)</div>
+                            </div>
+                        </div>
+                        <div style="height: 30%;" class="totemTitulo">
+                            Total de Alertas
+                            <div id="totemDado">150</div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="subSection2">
+                    <div class="listaMaquinas">
+                        <div class="tituloContainer">Lista de máquinas
+                            <div class="selects">
+                                <select class="selectBox selectFiltro">
+                                    <option value="" disabled selected>Filtro</option>
+                                    <option value="filtNome">Filtrar por Nome do Totem</option>
+                                    <option value="filtCPU">Filtrar por Uso de CPU</option>
+                                    <option value="filtRAM">Filtrar por Uso de RAM</option>
+                                    <option value="filtDisco">Filtrar por DISCO</option>
+                                    <option value="filtLatRed">Filtrar por Latência de Rede</option>
+                                    <option value="filtTempUso">Filtrar por Tempo de Uso</option>
+
+
+                                </select>
+
+                                <select class="selectBox selectOrdem">
+                                    <option value="" disabled selected>Ordem</option>
+                                    <option value="ordemCrescente">Ordem Crescente</option>
+                                    <option value="ordemDecrescente">Ordem Decrescente</option>
+
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="scrollMaquinas">
+                            <div class="legendasMaquinas">
+                                <div style="color: black; font-weight: 600;width:100%" class="maquinaLegenda">Nome
+                                    do
+                                    totem</div>
+                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Uso CPU
+                                </div>
+                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Uso RAM
+                                </div>
+                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Uso
+                                    Disco
+                                </div>
+                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Ping
+                                </div>
+                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">
+                                    Processos
+                                </div>
+                                <div style="color: black; font-weight: 600;width:100%" class="maquinaLegenda">Tempo
+                                    de
+                                    Atividade
+                                </div>
+                                <div style="color: black; font-weight: 600;width:60%; margin-right:3%"
+                                    class="maquinaLegenda"></div>
+
+                            </div>
+                            <div class="secaoMaquinas">
+                                <div style="width:100%" class="maquinaLegenda numeroTotem">Totem-f001-a</div>
+                                <div style="width:50%" class="maquinaLegenda usoCPU">
+                                    <div class="bola"></div>
+                                    15%
+                                </div>
+                                <div style="width:50%" class="maquinaLegenda usoRam">
+                                    <div class="bola"></div>
+                                    45%
+                                </div>
+                                <div style="width:50%" class="maquinaLegenda usoDisco">
+                                    <div class="bola"></div>
+                                    45%
+                                </div>
+                                <div style="width:50%" class="maquinaLegenda ping">
+                                    <div class="bola"></div>
+                                    120ms
+                                </div>
+                                <div style="width:50%" class="maquinaLegenda Processos">19283</div>
+                                <div style="width:100%" class="maquinaLegenda tempoAtividade">24d 12h 32min 155
+                                </div>
+                                <button style="color: white; font-weight: 600;width:60%;; margin-right:3%"
+                                    id="buttonExpandir" onclick="logPopup()">Expandir</button>
+
+
+                                <!-- varios log para testes de scroll abaixo (apenas des-comente para teste)-->
+                            </div>
+
+
+
+                        </div>
                     </div>
                 </div>
-                <div class="section1">
-
-                    <div class="subSection1">
-
-                        <div class="InformacaoTotens">
-
-                            <div class="legendaSecao">
-                                <div class="subtituloContainer"
-                                    style="align-self: flex-start; font-size:25px; font-weight:500">Porcentagem de
-                                    alertas
-                                </div>
-                                <div class="subtituloContainer" style="align-self: flex-start; font-size:15px">*No dia
-                                    de
-                                    hoje</div>
-                            </div>
-
-                            <div id="graficoPizzas">
-                            </div>
-
-                            <div id="dados">
-                                <div class="TotensQTD">
-                                    <div class="totemTitulo">
-                                        Total de Totens
-                                        <div id="totemDado">48</div>
-                                    </div>
-
-                                    <div class="totemTitulo">
-                                        Totens em Alerta
-
-                                        <div id="totemDado">24</div>
-                                    </div>
-                                </div>
+            </div>
+        </div>
+    </div>
+        
 
 
-                            </div>
-                        </div>
+</body>
+
+</html>
+
+<script src="../js/animacaoMenu.js"></script>
+
+<script>
 
 
-                        <div class="InformacaoAlertas">
-                            <div class="legendaSecao">
-                                <div class="subtituloContainer"
-                                    style="align-self: flex-start; font-size:25px; font-weight:500">Porcentagem de
-                                    alertas
-                                </div>
-                                <div class="subtituloContainer" style="align-self: flex-start; font-size:15px">*No dia
-                                    de
-                                    hoje</div>
-                            </div>
-                            <div class="graficoAlertas">
+    //grafico barras
+    var options = {
+        series: [{
+            name: 'Alerta Baixo',
+            data: [4, 6, 5, 5]
+        }, {
+            name: 'Médio',
+            data: [6, 9, 10, 6]
+        }, {
+            name: 'Alto',
+            data: [5, 2, 6, 6]
+        }],
+        chart: {
+            type: 'bar',
+            height: '300',
+            width: '100%',
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                borderRadius: 5,
+                borderRadiusApplication: 'end'
+            },
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        xaxis: {
+            categories: ['CPU', 'Disco', 'RAM', 'REDE'],
+        },
+        yaxis: {
+            title: {
+            }
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " alertas"
+                }
+            }
+        }
+    };
 
-                            </div>
-
-                        </div>
-
-                        <div class="alertaStats">
-
-                            <div class="totemTitulo">
-                                Intervalo com maior pico
-                                <div id="totemDado" style="display: flex; align-items:flex-end;">Tarde <div
-                                        style="font-size: 50%; margin-left:2%; margin-bottom:4px">(13:00 - 18:00)</div>
-                                </div>
-                            </div>
-                            <div class="totemTitulo">
-                                Total de Alertas
-                                <div id="totemDado">150</div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <div class="subSection2">
-                        <div class="listaMaquinas">
-                            <div class="tituloContainer">Lista de máquinas
-                                <div class="selects">
-                                    <select class="selectBox selectFiltro">
-                                        <option value="" disabled selected>Filtro</option>
-                                        <option value="filtNome">Filtrar por Nome do Totem</option>
-                                        <option value="filtCPU">Filtrar por Uso de CPU</option>
-                                        <option value="filtRAM">Filtrar por Uso de RAM</option>
-                                        <option value="filtDisco">Filtrar por DISCO</option>
-                                        <option value="filtLatRed">Filtrar por Latência de Rede</option>
-                                        <option value="filtTempUso">Filtrar por Tempo de Uso</option>
-
-
-                                    </select>
-
-                                    <select class="selectBox selectOrdem">
-                                        <option value="" disabled selected>Ordem</option>
-                                        <option value="ordemCrescente">Ordem Crescente</option>
-                                        <option value="ordemDecrescente">Ordem Decrescente</option>
-
-                                    </select>
-                                </div>
-
-                            </div>
-                            <div class="scrollMaquinas">
-                                <div class="legendasMaquinas">
-                                    <div style="color: black; font-weight: 600;width:100%" class="maquinaLegenda">Nome
-                                        do
-                                        totem</div>
-                                    <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Uso CPU
-                                    </div>
-                                    <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Uso RAM
-                                    </div>
-                                    <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Uso
-                                        Disco
-                                    </div>
-                                    <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Ping
-                                    </div>
-                                    <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">
-                                        Processos
-                                    </div>
-                                    <div style="color: black; font-weight: 600;width:100%" class="maquinaLegenda">Tempo
-                                        de
-                                        Atividade
-                                    </div>
-                                    <div style="color: black; font-weight: 600;width:60%; margin-right:3%"
-                                        class="maquinaLegenda"></div>
-
-                                </div>
-                                <div class="secaoMaquinas">
-                                    <div style="width:100%" class="maquinaLegenda numeroTotem">Totem-f001-a</div>
-                                    <div style="width:50%" class="maquinaLegenda usoCPU">
-                                        <div class="bola"></div>
-                                        15%
-                                    </div>
-                                    <div style="width:50%" class="maquinaLegenda usoRam">
-                                        <div class="bola"></div>
-                                        45%
-                                    </div>
-                                    <div style="width:50%" class="maquinaLegenda usoDisco">
-                                        <div class="bola"></div>
-                                        45%
-                                    </div>
-                                    <div style="width:50%" class="maquinaLegenda ping">
-                                        <div class="bola"></div>
-                                        120ms
-                                    </div>
-                                    <div style="width:50%" class="maquinaLegenda Processos">19283</div>
-                                    <div style="width:100%" class="maquinaLegenda tempoAtividade">24d 12h 32min 155
-                                    </div>
-                                    <div style="color: white; font-weight: 600;width:60%;; margin-right:3%"
-                                        id="buttonExpandir">Expandir</div>
-
-
-                                    <!-- varios log para testes de scroll abaixo (apenas des-comente para teste)-->
-                                </div>
+    var chart = new ApexCharts(document.querySelector(".graficoAlertas"), options);
+    chart.render();
 
 
 
-                            </div>
-                        </div>
-                        <dialog>
-                        <div class="alertasLog">
-                            <p style="font-size: x-large; font-weight: bold; color: #5271FF;" class="titulo">
-                                Log de alertas
+    // grafico rosca
+    var options = {
+        series: [50, 15, 15, 7.5, 12.5],
+        labels: ['Nenhum alerta', 'Um alerta', 'Dois alertas', 'Três alertas', 'Quatro alertas'],
+        legend: {
+            position: 'right',
+            offsetY: 0,
+
+        },
+        chart: {
+            type: 'donut',
+            height: '200',
+            width: '100%',
+
+        },
+
+        responsive: [{
+            options: {
+                chart: {
+
+                },
+                legend: {
+                    position: 'bottom'
+                },
+            }
+        }]
+    };
+
+    var chart = new ApexCharts(document.querySelector("#graficoPizzas"), options);
+    chart.render();
+
+
+    function logPopup() {
+        Swal.fire({
+            html: `
+              <p style="font-size: xx-large; font-weight: bold; color: #5271FF;" class="titulo">
+                                Log de alertas <p style="font-size: large; font-weight: light; color: #5271FF; margin-top:-20px" class="titulo">
+                                *Ordenado pelo momento
                             </p>
-
-                            <div class="scrollLog">
+                            </p>
+              <div class="scrollLog">
                                 <div class="legendasMaquinas">
                                     <div style="color: black; font-weight: 600; margin-left: 5px;width: 40%;"
                                         class="maquinaLegenda">Máquina</div>
-                                    <div style="color: black;width: 30%; font-weight: 600;" class="maquinaLegenda">Nível
+                                    <div style="color: black;width: 30%; font-weight: 600;" class="maquinaLegenda">
+                                        Nível
                                     </div>
                                     <div style="color: black; font-weight: 600; width: 40%;" class="maquinaLegenda">
                                         Componente</div>
@@ -250,7 +358,8 @@
                                     </div>
                                     <div style="width: 30%;" class="maquinaLegenda logNivel">Grave</div>
                                     <div style="width: 40%;" class="maquinaLegenda logComponente">CPU</div>
-                                    <div style="width: 60%;" class="maquinaLegenda logMomento">14/04/2025 13:50</div>
+                                    <div style="width: 60%;" class="maquinaLegenda logMomento">14/04/2025 13:50
+                                    </div>
                                 </div>
 
                                 <!-- varios log para testes de scroll abaixo (apenas des-comente para teste)-->
@@ -351,7 +460,7 @@
             </div>
         </div>
     </div>
-    </div>
+    </div> 
 
     <!-- <div class="section1">
                 <select>
@@ -371,154 +480,23 @@
                 <div class="grafico">
                     <canvas id="graficoAlertas"></canvas>
                 </div>
-            </div> -->
+            <!-- </div> -->
+
+
                             </div>
-                        </div>
-                    </dialog>
-                    </div>
-</body>
+        `,
+            showCloseButton: false,
+            showCancelButton: false,
+            focusConfirm: false,
 
-</html>
+            confirmButtonAriaLabel: "Thumbs up, great!",
+            cancelButtonText: `
+          <i class="fa fa-thumbs-down"></i>
+        `,
+            cancelButtonAriaLabel: "Thumbs down"
+        });
+    }
 
-<script src="../js/animacaoMenu.js"></script>
-
-<script>
-
-
-
-    // // new Chart(graficoPizzas, {   // chart js desatualizado
-    //      type: "doughnut",
-    //      data: {
-    //          labels: ["Em aberto", "Pendente", "Resolvido"],
-    //          datasets: [
-    //              {
-    //                  data: [300, 50, 100],
-    //                  backgroundColor: ["#34A853", "#FBD604", "#F1060A"],
-    //              },
-    //          ],
-    //      },
-    //      options: {
-    //
-    //          radius: "60%", // tamanho da rosca
-    //          cutout: "70%", // serve para deixar o donut mais fino
-    //          responsive: true,
-    //          maintainAspectRatio: false,
-    //          plugins: {
-    //              //
-    //              title: {
-    //                  align: "start",
-    //                  padding: {},
-    //                  font: {
-    //                      size: 24,
-    //                      left: 0,
-    //                  },
-    //
-    //                  display: true,
-    //                  text: "Relação de alertas e andamento",
-    //              }, 
-    //              //
-    //              legend: {
-    //                  display: true,
-    //                  position: "right",
-    //                  labels: {
-    //                      font: {
-    //                          size: 18,
-    //                      },
-    //                  },
-    //              },
-    //          },
-    //      },
-    //  }); 
-
-
-    //grafico barras
-    var options = {
-        series: [{
-            name: 'Alerta Baixo',
-            data: [44, 55, 57]
-        }, {
-            name: 'Médio',
-            data: [76, 85, 101]
-        }, {
-            name: 'Alto',
-            data: [35, 41, 36]
-        }],
-        chart: {
-            type: 'bar',
-            height: '90%',
-            width: '100%',
-        },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                borderRadius: 5,
-                borderRadiusApplication: 'end'
-            },
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
-        },
-        xaxis: {
-            categories: ['CPU', 'Disco', 'RAM'],
-        },
-        yaxis: {
-            title: {
-            }
-        },
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " alertas"
-                }
-            }
-        }
-    };
-
-    var chart = new ApexCharts(document.querySelector(".graficoAlertas"), options);
-    chart.render();
-
-
-
-    // grafico rosca
-    var options = {
-        series: [50, 15, 15, 7.5, 12.5],
-        labels: ['Nenhum alerta', 'Um alerta', 'Dois alertas', 'Três alertas', 'Quatro alertas'],
-        legend: {
-            position: 'right',
-            offsetY: 0,
-
-        },
-        chart: {
-            type: 'donut',
-            height: '50%',
-            width: '100%',
-
-        },
-
-        responsive: [{
-            options: {
-                chart: {
-
-                },
-                legend: {
-                    position: 'bottom'
-                },
-            }
-        }]
-    };
-
-    var chart = new ApexCharts(document.querySelector("#graficoPizzas"), options);
-    chart.render();
-</script>
 
 
 
