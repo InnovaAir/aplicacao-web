@@ -7,9 +7,9 @@ USE innovaair;
 CREATE TABLE IF NOT EXISTS cliente (
   idCliente INT PRIMARY KEY AUTO_INCREMENT,
   razaoSocial VARCHAR(105) NOT NULL,
-  cnpj CHAR(14) NOT NULL,
+  cnpj CHAR(18) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  telefone VARCHAR(11) NOT NULL
+  telefone VARCHAR(13) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS cargo (

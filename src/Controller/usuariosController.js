@@ -8,7 +8,6 @@ function cadastrar(req, res) {
     var responsavel = req.body.responsavelServer;
     var cnpj = req.body.cnpjServer;
     var senha = req.body.senhaServer;
-    var confSenha = req.body.confimarServer;
 
     // Faça as validações dos valores
     if (!razaoSocial) {
@@ -29,9 +28,8 @@ function cadastrar(req, res) {
     if (!senha) {
         return res.status(400).json({ error: "Sua senha está faltando!" });
     } else {
-
     
-        usuarioModel.cadastrar(razaoSocial, email, telefone, responsavel, cnpj, senha)
+        usuarioModel.cadastrar(razaoSocial, cnpj, email, telefone, responsavel, senha)
     .then((resultado) => {
         res.json(resultado); 
     })

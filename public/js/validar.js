@@ -231,7 +231,7 @@ function validarLogin() {
     return false;
 }
 
-function cadastrar(razao, email, telefone, responsavel, cnpj, senha, confSenha){
+function cadastrar(razao, email, telefone, responsavel, cnpj, senha){
     fetch("/usuarios/cadastrar", {
         method: "POST",
         headers: {
@@ -239,12 +239,11 @@ function cadastrar(razao, email, telefone, responsavel, cnpj, senha, confSenha){
         },
         body: JSON.stringify({
             razaoSocialServer: razao,
+            cnpjServer: cnpj,
             emailServer: email,
             telefoneServer: telefone,
             responsavelServer: responsavel,
-            cnpjServer: cnpj,
-            senhaServer: senha,
-            confServer: confSenha
+            senhaServer: senha
         }),
     })
     .then(function (resposta) {
