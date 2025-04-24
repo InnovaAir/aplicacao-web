@@ -62,7 +62,7 @@ function validacao() {
     }
   
     return false;
-  }
+}
   
   function mostrarErro(input, mensagem, tipoErro) {
     // Escolher o contêiner de erro adequado com base no tipo de erro
