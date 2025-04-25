@@ -93,23 +93,18 @@ function entrar(req, res) {
                 function (resultadoAutenticar) {
                     if (resultadoAutenticar.length == 1) {
                         if (resultadoAutenticar[0].email){
+                            console.log(resultadoAutenticar);
                             // Adicionando validacao para saber se o usuario e a senha esta exatamente igual ao que esta no banco de dados
                             // e retornando mensagem de erro caso não esteja.
-                            if (resultadoAutenticar[0].email == email && resultadoAutenticar[0].senha == senha) {
-                                console.log(resultadoAutenticar);
-                                res.json({
-                                    id: resultadoAutenticar[0].idUsuario,
-                                    nome: resultadoAutenticar[0].nome,
-                                    email: resultadoAutenticar[0].email,
-                                    senha: resultadoAutenticar[0].senha,
-                                    cliente: resultadoAutenticar[0].fkCliente,
-                                    cargo: resultadoAutenticar[0].fkCargo
-                                });
-                            }else{
-                                console.log(`Nome de usuário ou senha invalidos`);
-                                
-                                div_mensagem.innerHTML = `<span style='color:#ff0000; font-weight:bold;'>Nome de usuário ou senha invalidos</span><br>`;
-                            };
+                            console.log(resultadoAutenticar);
+                            res.json({
+                                id: resultadoAutenticar[0].idUsuario,
+                                nome: resultadoAutenticar[0].nome,
+                                email: resultadoAutenticar[0].email,
+                                senha: resultadoAutenticar[0].senha,
+                                cliente: resultadoAutenticar[0].fkCliente,
+                                cargo: resultadoAutenticar[0].fkCargo
+                            });
                         }
 
                     } else if (resultadoAutenticar.length == 0) {
