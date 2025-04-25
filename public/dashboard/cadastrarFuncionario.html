@@ -82,16 +82,20 @@
                             <div class="coluna">
                                 <span>Nome do usuario</span>
                                 <input id="ipt_nome" type="text">
-                                <span>Senha</span>
-                                <input id="ipt_senha" type="password">
                                 <span>Cargo</span>
                                 <select name="select" id="slc_cargo">
                                     <option value="" disabled selected>Selecione o Cargo do funcionario</option>    
                                 </select>
+                                <span>Senha</span>
+                                <input id="ipt_senha" type="password">
                             </div>
                             <div class="coluna">
-                                <span>email</span>
+                                <span>Email</span>
                                 <input id="ipt_email" type="text">
+                                <span>Filiais</span>
+                                <select name="select" id="slc_filial">
+                                    <option value="" disabled selected>Selecione a filial que o usuario será associado</option>  
+                                </select>
                                 <span>Confirmar senha</span>
                                 <input id="ipt_confirmar_senha" type="password">
                             </div>
@@ -123,7 +127,7 @@
     }
     abrirMenu();
     
-
+    //mostrar cargos
     fetch("/usuarios/listarCargo", {
     method: "POST",
     headers: {
@@ -156,6 +160,46 @@
             }
 
             slc_cargo.innerHTML += cargos;
+        })
+        .catch(function (erro) {
+        console.log("A consulta foi mal sucedida devido a um erro com o Banco de dados!");
+        console.log(`#ERRO: ${erro}`);
+    });
+
+    // mostrar filiais
+    fetch("/usuarios/listarFiliais", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    })
+    // Após a solicitação ser concluída, o then é executado. A função recebe o objeto da resposta.
+    .then(function (resposta) {
+        // Verifica se a resposta foi bem-sucedida
+        if (resposta.ok) {
+        if (resposta.status === 204) {
+            throw "Nenhum resultado encontrado!";
+        }
+            return resposta.json();
+        } else {
+            throw "Houve um erro na API!";
+        }
+    })
+        .then(function (resposta){
+            filiais = "";
+            console.log("filiais recebidas:", JSON.stringify(resposta));
+
+            for(var i = 0; i< resposta.length; i++){
+
+            var filial = resposta[i];
+            var id = filial.idFilial;
+            var terminal = filial.terminal;
+            // var setor = filial.setor;
+            filiais += `<option value="${id}">${terminal}</option>`;
+            console.log(`id: ${i}; filial: ${JSON.stringify(filial)}`);
+            }
+
+            slc_filial.innerHTML += filiais;
         })
         .catch(function (erro) {
         console.log("A consulta foi mal sucedida devido a um erro com o Banco de dados!");

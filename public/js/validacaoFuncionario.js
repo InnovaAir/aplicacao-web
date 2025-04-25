@@ -17,6 +17,7 @@ function validacaoFuncionario() {
     let senha = ipt_senha.value;
     let confSenha = ipt_confirmar_senha.value;
     let cliente = sessionStorage.CLIENTE_USUARIO;
+    let filial = slc_filial.value;
     let cargo = slc_cargo.value;
 
     let senhaValida = true;
@@ -42,6 +43,10 @@ function validacaoFuncionario() {
     }
     if (cargo === "" || cargo === "0") {
         mostrarErro(slc_cargo, "Selecione um cargo.");
+        formularioValido = false;
+    }
+    if (filial === "" || filial === "0") {
+        mostrarErro(slc_filial, "Selecione uma filial.");
         formularioValido = false;
     }
     if (cliente === "" || cliente === "0" || cliente == undefined) {
@@ -91,17 +96,7 @@ function validacaoFuncionario() {
 
     // Verificação final
     if (formularioValido && emailValido && senhaValida && senhaConfirmadaValida) {
-        cadastrarFuncionario(nome, email, senha, cliente, cargo);
-        // setTimeout(function () {
-        //     Swal.fire({
-        //         title: "Cadastro realizado com sucesso!",
-        //         text: "Clique em OK para sair!",
-        //         icon: "success"
-        //     });
-        // }, 500);
-        // setTimeout(function (){
-        //     limparFormulario();
-        // }, 1500);
+        cadastrarFuncionario(nome, email, senha, cliente, cargo, filial);
         return true;
     }
 
@@ -115,7 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
         { id: "ipt_email", msg: "Preencha o e-mail.", extra: validarEmail },
         { id: "ipt_senha", msg: "Preencha a senha." },
         { id: "ipt_confirmar_senha", msg: "Confirme a senha." },
-        { id: "slc_cargo", msg: "Selecione um cargo." }
+        { id: "slc_cargo", msg: "Selecione um cargo." },
+        { id: "slc_filial", msg: "Selecione uma filial." }
     ];
 
     campos.forEach(({ id, msg, extra }) => {

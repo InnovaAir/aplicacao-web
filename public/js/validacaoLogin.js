@@ -163,7 +163,7 @@ function entrar(email, senha){
                       }
                     });
                     setTimeout(function () {
-                        window.location = "./dashboard/visaoGeralGerente.html";
+                        window.location = "./dashboard/cadastrarFuncionario.html";
                     }, 1350); // apenas para exibir o loading
                 }else if (json.cargo == 3){
                     let timerInterval;

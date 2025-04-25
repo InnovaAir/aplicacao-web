@@ -11,16 +11,16 @@ router.post("/cadastrarUsuario", function (req, res) {
     usuarioController.cadastrarUsuario(req, res);
 })
 
-router.post("/autenticar", function (req, res) {
-    usuarioController.autenticar(req, res);
-});
-
 router.post("/entrar", function (req, res){
     usuarioController.entrar(req,res);
 })
 
 router.post("/listarCargo", function (req, res){
     usuarioController.listarCargo(req,res);
+})
+
+router.post("/listarFiliais", function (req, res){
+    usuarioController.listarFiliais(req,res);
 })
 
 module.exports = router;
