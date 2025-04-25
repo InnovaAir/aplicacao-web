@@ -113,16 +113,6 @@ function validarFormulario() {
     if (formularioValido && emailValido && senhaValida && senhaConfirmadaValida) {
         // alert("Cadastro realizado com sucesso!");
         cadastrar(razao, email, telefone, responsavel, cnpj, senha);
-        setTimeout(function () {
-            Swal.fire({
-                title: "cadastro realizado com sucesso!",
-                text: "Clique em OK para sair!",
-                icon: "success"
-              })
-        }, 500);
-        setTimeout(function (){
-            limparFormulario();
-        }, 1500);
         return true;
     }
 
@@ -241,7 +231,7 @@ function validarLogin() {
     return false;
 }
 
-function cadastrar(razao, email, telefone, responsavel, cnpj, senha){
+function cadastrar(razao, email, telefone, responsavel, cnpj, senha) {
     fetch("/usuarios/cadastrar", {
         method: "POST",
         headers: {
@@ -259,21 +249,29 @@ function cadastrar(razao, email, telefone, responsavel, cnpj, senha){
     .then(function (resposta) {
         console.log("resposta do servidor: ", resposta);
         if (resposta.ok) {
-            // alert('Cadastro realizado com sucesso!');
-            // window.location = "login.html";
+            // Mostra mensagem de sucesso apenas se o cadastro foi bem-sucedido
+            Swal.fire({
+                title: "Cadastro realizado com sucesso!",
+                text: "Clique em OK para sair!",
+                icon: "success"
+            }).then(() => {
+                limparFormulario();
+            });
+            return resposta.json();
         } else {
-            return resposta.text();
-        }
-    })
-    .then(function (erroTexto) {
-        if (erroTexto) {
-            console.log("Erro retornado do servidor:", erroTexto);
-            mensagemErro.innerHTML = erroTexto;
+            // Se não foi ok, mostra mensagem de erro
+            return resposta.text().then(erroTexto => {
+                throw new Error(erroTexto || "Erro ao cadastrar");
+            });
         }
     })
     .catch(function (erro) {
         console.log("Erro na requisição:", erro);
-        mensagemErro.innerHTML = "Erro ao tentar realizar o cadastro. Tente novamente.";
+        Swal.fire({
+            title: "Erro!",
+            text: erro.message || "Erro ao tentar realizar o cadastro. Tente novamente.",
+            icon: "error"
+        });
     });
 }
 

@@ -108,6 +108,7 @@ function entrar(email, senha){
                 sessionStorage.NOME_USUARIO = json.nome;
                 sessionStorage.EMAIL_USUARIO = json.email;
                 sessionStorage.CARGO_USUARIO = json.cargo;
+                sessionStorage.CLIENTE_USUARIO = json.cliente;
                 //alert("Login Realizado com sucesso!");
                 // alterando redirecionamento para pagina index
                 if (json.cargo == 1){

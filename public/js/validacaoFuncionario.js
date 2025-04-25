@@ -16,6 +16,7 @@ function validacaoFuncionario() {
     let email = ipt_email.value.trim();
     let senha = ipt_senha.value;
     let confSenha = ipt_confirmar_senha.value;
+    let cliente = sessionStorage.CLIENTE_USUARIO;
     let cargo = slc_cargo.value;
 
     let senhaValida = true;
@@ -41,6 +42,9 @@ function validacaoFuncionario() {
     }
     if (cargo === "" || cargo === "0") {
         mostrarErro(slc_cargo, "Selecione um cargo.");
+        formularioValido = false;
+    }
+    if (cliente === "" || cliente === "0" || cliente == undefined) {
         formularioValido = false;
     }
 
@@ -87,16 +91,17 @@ function validacaoFuncionario() {
 
     // Verificação final
     if (formularioValido && emailValido && senhaValida && senhaConfirmadaValida) {
-        setTimeout(function () {
-            Swal.fire({
-                title: "Cadastro realizado com sucesso!",
-                text: "Clique em OK para sair!",
-                icon: "success"
-            });
-        }, 500);
-        setTimeout(function (){
-            limparFormulario();
-        }, 1500);
+        cadastrarFuncionario(nome, email, senha, cliente, cargo);
+        // setTimeout(function () {
+        //     Swal.fire({
+        //         title: "Cadastro realizado com sucesso!",
+        //         text: "Clique em OK para sair!",
+        //         icon: "success"
+        //     });
+        // }, 500);
+        // setTimeout(function (){
+        //     limparFormulario();
+        // }, 1500);
         return true;
     }
 
@@ -135,7 +140,7 @@ function limparFormulario(){
     document.getElementById("slc_cargo").value = "0";
 }
 
-function cadastrarFuncionario(){
+function cadastrarFuncionario(nome, email, senha, cliente, cargo){
     fetch("/usuarios/cadastrarUsuario", {
         method: "POST",
         headers: {
@@ -145,7 +150,7 @@ function cadastrarFuncionario(){
             nomeServer: nome,
             emailServer: email,
             senhaServer: senha,
-            confirmar_senhaServer: confirmar_senha,
+            clienteServer: cliente,
             cargoServer: cargo
         }),
     })

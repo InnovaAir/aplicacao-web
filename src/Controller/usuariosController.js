@@ -41,6 +41,44 @@ function cadastrar(req, res) {
     }
 }
 
+
+function cadastrarUsuario(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var nome = req.body.nomeServer;
+    var email = req.body.emailServer;
+    var senha = req.body.senhaServer;
+    var cliente = req.body.clienteServer;
+    var cargo = req.body.cargoServer;
+
+    // Faça as validações dos valores
+    if (!nome) {
+        return res.status(400).json({ error: "Seu nome está faltando!" });
+    }
+    if (!email) {
+        return res.status(400).json({ error: "Seu email está faltando!" });
+    }
+    if (!senha) {
+        return res.status(400).json({ error: "Sua senha está faltando!" });
+    }
+    if (!cliente) {
+        return res.status(400).json({ error: "O cliente está faltando!" });
+    }
+    if (!cargo) {
+        return res.status(400).json({ error: "O cargo está faltando!" });
+    } else {
+    
+        usuarioModel.cadastrarUsuario(nome, email, senha, cliente, cargo)
+    .then((resultado) => {
+        res.json(resultado); 
+    })
+    .catch((erro) => {
+        console.log("Erro ao cadastrar:", erro);
+        res.status(500).json({ error: "Erro ao cadastrar no banco de dados!" });
+    });
+
+    }
+}
+
 function entrar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
@@ -64,9 +102,12 @@ function entrar(req, res) {
                                     nome: resultadoAutenticar[0].nome,
                                     email: resultadoAutenticar[0].email,
                                     senha: resultadoAutenticar[0].senha,
+                                    cliente: resultadoAutenticar[0].fkCliente,
                                     cargo: resultadoAutenticar[0].fkCargo
                                 });
                             }else{
+                                console.log(`Nome de usuário ou senha invalidos`);
+                                
                                 div_mensagem.innerHTML = `<span style='color:#ff0000; font-weight:bold;'>Nome de usuário ou senha invalidos</span><br>`;
                             };
                         }
@@ -107,6 +148,7 @@ function listarCargo(req,res){
 
 module.exports = {
     cadastrar,
+    cadastrarUsuario,
     entrar,
     listarCargo
 }
