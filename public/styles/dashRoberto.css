@@ -1,0 +1,114 @@
+body {
+    height: 100vh;
+    width: 100%;
+}
+
+.tamanho_dash {
+    height: 100%;
+    width: 98%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    /* border: 2px solid red; */
+}
+
+.container_componente {
+    width: 95%;
+    height: 95%;
+    /* border: 2px solid red; */
+}
+
+.titulo {
+    height: 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* border: 2px solid red; */
+}
+
+#titulo_01 {
+    font-size: 30px;
+    color: #5271FF;
+}
+
+#titulo_02 {
+    color: #8BA0FF;
+}
+
+.select-wrapper {
+    display: flex;
+    gap: 2rem;
+    /* border: 2px solid red; */
+}
+  
+.custom-select {
+    position: relative;
+    min-width: 200px;
+}
+  
+.custom-select select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #aaa;
+    padding: 8px 24px 8px 0;
+    font-size: 16px;
+    color: #555;
+    width: 100%;
+    cursor: pointer;
+}
+  
+.custom-select::after {
+    content: "▼";
+    font-size: 12px;
+    color: #555;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* GRÁFICOS */
+.box_grafico {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 2px solid red;
+}
+
+.grafico_alinhado {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo_grafico1, .titulo_grafico2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.grafico_01, .tabela {
+    width: 100%;
+    height: 100%;
+    border: 2px solid red;
+}
+
+.kpi_container {
+    height: 25%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 2px solid red;
+}
+
+.box_kpi {
+    height: 100%;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid rgb(170, 170, 170);
+}

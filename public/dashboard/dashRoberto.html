@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/MenuLateral.css" />
+    <link rel="stylesheet" href="../styles/dashRoberto.css" />
+    <link rel="stylesheet" href="../styles/menu_mobile.css" />
+
+    <title>Visão geral</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+
+<body>
+    <button class="botao_abrir" onclick="abrirMenu()">☰</button>
+
+    <div class="barra_lateral" id="menu">
+        <div class="fechar_barrinha">
+            <button class="botao_fechar" onclick="fecharMenu()">✖</button>
+        </div>
+        <div class="logo_container">
+            <img src="../assets/InnovaairWhite.png" alt="" />
+        </div>
+
+        <span id="user_logado">Olá, Usuário</span>
+        <div class="opcoes">
+            <div class="container1">
+                <u>
+                    <li><a href="visaoGeral.html" class="agora">Visão geral</a></li>
+                    <li><a href="tempoReal.html">Tempo real</a></li>
+                    <li><a href="listaMaquinas.html">Lista de máquinas</a></li>
+                    <li><a href="CadastrarMaquina.html">Cadastrar Máquina</a></li>
+                    <li><a href="suporte.html">Suporte</a></li>
+                </u>
+            </div>
+            <div class="container2">
+                <u>
+                    <li><a href="suporte.html">Fale conosco!</a></li>
+                </u>
+            </div>
+        </div>
+    </div>
+    <div class="menu_mobile">
+        <button class="botao_menu_mobile" onclick="abrirMenuMobile()">☰</button>
+        <div class="logo_container">
+            <img src="../assets/InnovaairWhite.png" alt="" />
+        </div>
+    </div>
+    <div class="novo_menu">
+        <a href="visaoGeral.html" class="agora">Visão geral</a>
+        <a href="tempoReal.html">Tempo real</a>
+        <a href="listaMaquinas.html">Lista de máquinas</a>
+        <a href="NovosCadastros.html">Cadastros</a>
+        <a href="suporte.html">Suporte</a>
+        <a href="suporte.html">Fale conosco!</a>
+    </div>
+
+    <div class="tamanho_dash">
+        <div class="container_componente">
+            <div class="titulo">
+                <span id="titulo_01">
+                    <b>Análise de Componentes por Companhia Aérea</b>
+                </span>
+                <span id="titulo_02">
+                    <i><b>*Selecione os filtros para a visualização</b></i>
+                </span>
+            </div>
+
+            <div class="select-wrapper">
+                <div class="custom-select">
+                  <select id="select_aeroporto">
+                    <option value="" selected disabled>Selecione o Aeroporto</option>
+                    <option value="gru">Guarulhos</option>
+                    <option value="cgh">Congonhas</option>
+                  </select>
+                </div>
+              
+                <div class="custom-select">
+                  <select id="select_intervalo">
+                    <option value="" selected disabled>Selecione o intervalo</option>
+                    <option value="7">Últimos 7 dias</option>
+                    <option value="15">Últimos 15 dias</option>
+                    <option value="30">Últimos 30 dias</option>
+                  </select>
+                </div>
+            </div>  
+
+            <div class="box_grafico">
+                <div class="grafico_alinhado">
+                    <div class="titulo_grafico1">
+                        <span id="titulo_01">
+                            Nível de alertas por componente
+                        </span>
+                        <span id="titulo_02">
+                            <i>*Quantidade de acordo com o intervalo selecionado</i>
+                        </span>
+                    </div>
+                    <div class="grafico_01">
+                        <div id="chart_barras"></div>
+                    </div>
+                </div>
+
+                <div class="grafico_alinhado">
+                    <div class="titulo_grafico2">
+                        <span id="titulo_01">
+                            Lista de alertas por nível de gravidade
+                        </span>
+                        <span id="titulo_02">
+                            <i>*De acordo com o nível selecionado</i>
+                        </span>
+                    </div>
+
+                    <div class="select-wrapper">
+                        <div class="custom-select">
+                          <select id="select_aeroporto">
+                            <option value="" selected disabled>Selecione o nível de gravidade</option>
+                            <option value="baixo">Baixo</option>
+                            <option value="Médio">Médio</option>
+                            <option value="Grave">Grave</option>
+                          </select>
+                        </div>
+                      
+                        <div class="custom-select">
+                          <select id="select_intervalo">
+                            <option value="" selected disabled>Selecione o componente</option>
+                            <option value="cpu">CPU</option>
+                            <option value="ram">Memória RAM</option>
+                            <option value="disco">Disco Rígido</option>
+                          </select>
+                        </div>
+                    </div>  
+
+                    <div class="tabela">
+                    </div>
+                    
+                    <div class="kpi_container">
+                        <div class="box_kpi">
+                            <span>Total de máquinas</span>
+                            <span><b>900</b></span>
+                        </div>
+                        <div class="box_kpi">
+                            <span>Total de alertas {selecionado}</span>
+                            <span><b>68</b></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script src="../js/animacaoMenu.js"></script>
+
+<script>
+    var options = {
+      series: [
+        {
+          name: 'Normal',
+          data: [70, 60, 90]
+        },
+        {
+          name: 'Médio',
+          data: [65, 75, 80]
+        },
+        {
+          name: 'Grave',
+          data: [80, 68, 72]
+        },
+        {
+          name: 'Crítico',
+          data: [55, 50, 78]
+        }
+      ],
+      chart: {
+        type: 'bar',
+        height: 430
+      },
+      colors: ['#00E396', '#FEB019', '#FF4560', '#775DD0'],
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          dataLabels: {
+            position: 'top'
+          }
+        }
+      },
+      dataLabels: {
+        enabled: true,
+        offsetX: -6,
+        style: {
+          fontSize: '12px',
+          colors: ['#fff']
+        },
+        formatter: function (val) {
+          return val + "%";
+        }
+      },
+      stroke: {
+        show: true,
+        width: 1,
+        colors: ['#fff']
+      },
+      tooltip: {
+        shared: true,
+        intersect: false
+      },
+      xaxis: {
+        categories: ["CPU", "RAM", "Disco"],
+        max: 100
+      }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart_barras"), options);
+    chart.render();
+
+    abrirMenu();
+</script>
