@@ -16,6 +16,43 @@
 
 <body>
     <button class="botao_abrir" onclick="abrirMenu()">☰</button>
+    <!-- 
+    teste para sobreposição do botão "Expandir" -->
+    <div class="Expandir">
+        <div class="expandir1">
+            <div class="expandir graficoCPU">
+                <div class="titulosExpandir"></div>
+                <div style=" padding-left:2%; ; align-self:flex-start" class="titulosExpandir">
+                    <div class="tituloContainer">CPU</div>
+                    <div class="subtituloContainer">% de utilização</div>
+                </div>
+                <div id="graficosExpandirCPU"></div>
+            </div>
+            <div class="expandir graficoRAM">
+                <div style=" padding-left:2%; ; align-self:flex-start" class="titulosExpandir">
+                    <div class="tituloContainer">RAM</div>
+                    <div class="subtituloContainer">Uso de memória</div>
+                </div>
+                <div id="graficosExpandirRAM"></div>
+            </div>
+        </div>
+        <div class="expandir2">
+            <div class="expandir graficoRede">
+                <div style=" padding-left:2%; ; align-self:flex-start" class="titulosExpandir">
+                    <div class="tituloContainer">Rede</div>
+                    <div class="subtituloContainer">Taxa de transferência</div>
+                </div>
+                <div id="graficosExpandirRede"></div>
+            </div>
+            <div class="expandir graficoDisco">
+                <div style=" padding-left:2%; ; align-self:flex-start" class="titulosExpandir">
+                    <div class="tituloContainer">Disco</div>
+                    <div class="subtituloContainer">Capacidade utilizada</div>
+                </div>
+                <div id="graficosExpandirDisco"></div>
+            </div>
+        </div>
+    </div>
 
     <div class="barra_lateral" id="menu">
         <div class="fechar_barrinha">
@@ -200,7 +237,7 @@
                             <div class="secaoMaquinas">
                                 <div style="width:100%" class="maquinaLegenda numeroTotem">Totem-f001-a</div>
                                 <div style="width:50%" class="maquinaLegenda usoCPU">
-                                    <div  style="background-color:greenyellow;" class="bola"></div>
+                                    <div style="background-color:greenyellow;" class="bola"></div>
                                     15%
                                 </div>
                                 <div style="width:50%" class="maquinaLegenda usoRam">
@@ -222,13 +259,13 @@
                                     id="buttonExpandir" onclick="logPopup()">Expandir</button>
 
                             </div>
-                         
 
-                        
 
-                            
 
-                            
+
+
+
+
 
 
 
@@ -253,7 +290,7 @@
 
 
     //grafico barras
-    var options = {
+    var barOptions = {
         series: [{
             name: 'Alerta Baixo',
             data: [4, 6, 5, 5]
@@ -266,7 +303,7 @@
         }],
         chart: {
             type: 'bar',
-            height: '300',
+            height: '000',
             width: '100%',
         },
         plotOptions: {
@@ -304,13 +341,73 @@
         }
     };
 
-    var chart = new ApexCharts(document.querySelector(".graficoAlertas"), options);
+    var chart = new ApexCharts(document.querySelector(".graficoAlertas"), barOptions);
+    chart.render();
+
+
+    var series = {
+        monthDataSeries1: {
+            prices: [150, 155, 160, 158, 162],
+            dates: [
+                "2025-04-01",
+                "2025-04-02",
+                "2025-04-03",
+                "2025-04-04",
+                "2025-04-05"
+            ]
+        }
+    };
+
+    // grafico Área 
+
+
+    var areaOptions = {
+        series: [{
+            name: "STOCK ABC",
+            data: series.monthDataSeries1.prices
+        }],
+        chart: {
+            type: 'area',
+            height: '70%',
+            width: '100%',
+            zoom: {
+                enabled: false
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'straight'
+        },
+        title: {
+            text: 'Fundamental Analysis of Stocks',
+            align: 'left'
+        },
+        subtitle: {
+            text: 'Price Movements',
+            align: 'left'
+        },
+        labels: series.monthDataSeries1.dates,
+        xaxis: {
+            type: 'datetime',
+        },
+        yaxis: {
+            opposite: true
+        },
+        legend: {
+            horizontalAlign: 'left'
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#graficosExpandirCPU"), areaOptions);
     chart.render();
 
 
 
+
     // grafico rosca
-    var options = {
+    var roscaOptions = {
         series: [50, 15, 15, 7.5, 12.5],
         labels: ['Nenhum alerta', 'Um alerta', 'Dois alertas', 'Três alertas', 'Quatro alertas'],
         legend: {
@@ -337,7 +434,7 @@
         }]
     };
 
-    var chart = new ApexCharts(document.querySelector("#graficoPizzas"), options);
+    var chart = new ApexCharts(document.querySelector("#graficoPizzas"), roscaOptions);
     chart.render();
 
 

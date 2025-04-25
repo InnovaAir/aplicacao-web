@@ -1,10 +1,10 @@
-body{
+body {
     display: flex;
 }
 
 
-.child {    
-    
+.child {
+
     background-color: rgb(255, 255, 255);
     overflow-x: auto;
     overflow-y: auto;
@@ -16,22 +16,115 @@ body{
     gap: 2rem;
 }
 
-.content{
+.content {
     height: 100vh;
-    width: 80%; 
+    width: 80%;
     overflow-y: hidden;
     transition: all 0.3s ease-in-out;
+
+}
+
+#graficosExpandir{
+    background-color: cadetblue;
+    width: 100%;
+    min-height: 1%;
+    max-height:70%;
+    overflow:hidden;
+    display: flex;
     
+    
+}
+
+#graficosExpandirCPU{
+     background-color: cadetblue;
+    width: 100%;
+    min-height: 1%;
+    max-height:70%;
+    overflow:hidden;
+    display: flex;
+
+}
+
+#graficosExpandirRAM{
+     background-color: cadetblue;
+    width: 100%;
+    min-height: 1%;
+    max-height:70%;
+    overflow:hidden;
+    display: flex;
+
+}
+
+#graficosExpandirRede{
+     background-color: cadetblue;
+    width: 100%;
+    min-height: 1%;
+    max-height:70%;
+    overflow:hidden;
+    display: flex;
+
+}
+
+#graficosExpandirDisco{
+     background-color: cadetblue;
+    width: 100%;
+    min-height: 1%;
+    max-height:70%;
+    overflow:hidden;
+    display: flex;
+
+}
+
+
+.Expandir {
+    position: absolute;
+    background-color: red;
+    width: 80vw;
+    height: 90vh;
+    align-self: center;
+    margin-left: 10%;
+    margin-right: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+
+}
+
+.expandir {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: whitesmoke;
+    height: 90%;
+    width: 48%;
+}
+
+.expandir1 {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: blue;
+    height: 50%;
+}
+
+.expandir2 {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: darkseagreen;
+    height: 50%;
 }
 
 .conteudo-principal {
     transition: margin-left 0.3s ease-in-out;
     margin-left: 0;
-  }
-  
-  .conteudo-principal.menu-aberto {
-    margin-left: 13vw; /* Igual à largura do menu */
-  }
+}
+
+.conteudo-principal.menu-aberto {
+    margin-left: 13vw;
+    /* Igual à largura do menu */
+}
 
 .tituloContainer {
     display: flex;
@@ -51,7 +144,7 @@ body{
     font-size: medium;
     font-style: italic;
     color: #8BA0FF;
-  
+
     display: flex;
     flex-direction: column;
 
@@ -65,14 +158,14 @@ body{
     flex-direction: column;
     width: 100%;
     display: flex;
-    overflow-y:visible;
+    overflow-y: visible;
 
 }
 
 
 .scrollMaquinas {
     width: 95%;
-    scrollbar-color:#5573ff #fff;
+    scrollbar-color: #5573ff #fff;
     height: 60%;
     display: flex;
     flex-direction: column;
@@ -98,7 +191,7 @@ body{
 }
 
 .bola {
-    border: solid .1px #8BA0FF ;
+    border: solid .1px #8BA0FF;
     height: 10px;
     width: 10px;
     margin-right: 5px;
@@ -126,8 +219,8 @@ body{
     overflow: hidden;
 }
 
-#buttonExpandir{
-   
+#buttonExpandir {
+
     background-color: #5573ff;
     border-radius: 10px;
     display: flex;
@@ -136,8 +229,8 @@ body{
     transition: 1s;
 }
 
-#buttonExpandir::hover{
-scale: 1.2;
+#buttonExpandir::hover {
+    scale: 1.2;
 }
 
 .swal-height {
@@ -146,7 +239,7 @@ scale: 1.2;
 
 
 .section1 {
-   
+
     height: 120%;
     gap: 2vh;
     width: 100%;
@@ -159,8 +252,8 @@ scale: 1.2;
 }
 
 .subSection1 {
-    
-    height: fit-content;  
+
+    height: fit-content;
     padding-bottom: 50px;
     display: flex;
     flex-direction: row;
@@ -168,24 +261,24 @@ scale: 1.2;
     min-width: 1%;
     gap: 1%;
     width: 100%;
-   
+
 
 
 
 }
 
 .subSection2 {
- 
-  
+
+
     display: flex;
     flex-direction: row;
     margin-left: 1%;
     margin-top: 30px;
-    height:100%;
+    height: 100%;
     gap: 50px;
 }
 
-.legendaSecao{
+.legendaSecao {
     margin: 2px;
     width: 100%;
     flex-direction: column;
@@ -224,9 +317,9 @@ scale: 1.2;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-} 
+}
 
-.InformacaoAlertas{
+.InformacaoAlertas {
 
     display: flex;
     flex-direction: column;
@@ -235,14 +328,14 @@ scale: 1.2;
     width: 60%;
 }
 
-.graficoAlertas{
+.graficoAlertas {
     height: max-content;
     width: 100%;
     border: 2px solid lightgray;
     overflow: hidden;
 }
 
-.alertasLog{
+.alertasLog {
     background-color: white;
     padding: 2%;
     position: fixed;
@@ -250,7 +343,7 @@ scale: 1.2;
     width: 60%;
 }
 
-.alertaStats{
+.alertaStats {
     display: flex;
     flex-direction: column;
     gap: 20%;
@@ -260,7 +353,7 @@ scale: 1.2;
     width: 25vw;
     margin-bottom: 16px;
     overflow: auto;
-    
+
 }
 
 #dados {
@@ -278,10 +371,10 @@ scale: 1.2;
 
 #graficoPizzas {
     border: 2px solid lightgray;
-    width:100%;
+    width: 100%;
     height: fit-content;
-    
-    
+
+
 
 }
 
@@ -294,8 +387,8 @@ scale: 1.2;
     background-color: white;
     height: fit-content;
     width: 80%;
-    
-    font-size: 100%; 
+
+    font-size: 100%;
     color: gray;
     justify-content: center;
     display: flex;
@@ -325,12 +418,12 @@ scale: 1.2;
 
 }
 
-.scrollLog{
+.scrollLog {
     width: 100%;
     height: 60vh;
     overflow-x: auto;
     overflow-y: scroll;
-    
+
 }
 
 .secaoLog {
@@ -364,12 +457,12 @@ scale: 1.2;
     max-width: 60%;
 
 
- 
+
 
     .scrollMaquinas::-webkit-scrollbar-thumb {
         background-color: #8BA0FF;
     }
-    
+
 
     .scrollMaquinas::-webkit-scrollbar-button {
         display: none;
