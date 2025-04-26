@@ -415,12 +415,72 @@
     }
 
     // funções para criar um gráfico diferente para cada componente
-    criarGraficoArea("#graficosExpandirCPU", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "adada");
-    criarGraficoArea("#graficosExpandirRAM", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "adada");
-    criarGraficoArea("#graficosExpandirRede", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "adada");
-    criarGraficoArea("#graficosExpandirDisco", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "adada");
+    criarGraficoArea("#graficosExpandirCPU", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "Frequência");
+    criarGraficoArea("#graficosExpandirRAM", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "Frequência");
+    criarGraficoArea("#graficosExpandirRede", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "MBs");
 
+// grafico barras stacked
+var options = {
+    series: [
+    {
+      name: 'Espaço Utilizado',
+      group: 'budget',
+      data: [60, 25]
+    },
+    
+  
+    {
+      name: 'Espaço Total',
+      group: 'budget',
+      data: [40, 75]
+    },
+    
+   
+  ],
+    chart: {
+    type: 'bar',
+    height: '70%',
+    width: '100%',
+    stacked: true,
+  },
+  stroke: {
+    width: 1,
+    colors: ['#fff']
+  },
+  dataLabels: {
+    formatter: (val) => {
+      return val + '%'
+    }
+  },
+  plotOptions: {
+    bar: {
+      horizontal: true
+    }
+  },
+  xaxis: {
+    categories: [
+      'Disco 1',
+      'Disco 2',
+      
+    ],
+    labels: {
+      formatter: (val) => {
+        return val  + '%'
+      }
+    }
+  },
+  fill: {
+    opacity: 1,
+  },
+  colors: ['#80c7fd', '#008FFB', '#80f1cb', '#00E396'],
+  legend: {
+    position: 'top',
+    horizontalAlign: 'left'
+  }
+  };
 
+  var chart = new ApexCharts(document.querySelector("#graficosExpandirDisco"), options);
+  chart.render();
 
     // grafico rosca
     var roscaOptions = {
