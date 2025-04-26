@@ -137,7 +137,7 @@ function limparFormulario(){
 }
 
 function cadastrarFuncionario(nome, email, senha, cliente, cargo){
-    fetch("/usuarios/cadastrarUsuario", {
+    fetch("/usuarios/cadastrarFuncionario", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

@@ -51,6 +51,13 @@ CREATE TABLE IF NOT EXISTS filial (
   CONSTRAINT fk_filial_endereco FOREIGN KEY (fkEndereco) REFERENCES endereco (idEndereco)
 );
 
+
+CREATE TABLE IF NOT EXISTS usuarioFilial(
+	fkUsuario INT NOT NULL,
+    fkFilial INT NOT NULL,
+    primary key (fkUsuario, fkFilial)
+);
+
 CREATE TABLE IF NOT EXISTS maquina (
   idMaquina INT PRIMARY KEY AUTO_INCREMENT,
   fkFilial INT NOT NULL, #Fk Não-Relacional // Por ser outro database

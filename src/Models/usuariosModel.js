@@ -33,16 +33,36 @@ function cadastrar(razaoSocial, cnpj, email, telefone, responsavel, senha) {
         });
 }
 
-function cadastrarUsuario(nome, email, senha, cliente, cargo) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", razaoSocial, email, telefone, responsavel, cnpj, senha);
+function cadastrarFuncionario(nome, email, senha, cliente, cargo) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():",nome , email, senha, cliente, cargo);
 
     var instrucaoSqlCliente = `
         INSERT INTO usuario (nome, email, senha, fkCliente, fkCargo) 
-        VALUES ('${nome}', '${email}', '${senha}', '${cliente}', '${cargo}');
+        VALUES ('${nome}', '${email}', '${senha}', 2, 2);
     `;
 
     console.log("Executando a instrução SQL Cliente: \n" + instrucaoSqlCliente);
-    return database.executar(instrucaoSqlCliente);
+    return database.executar(instrucaoSqlCliente)
+        .then((resultadoFilial) => {
+            console.log("Cliente inserido com sucesso: ", resultadoFilial);
+
+            var instrucaoSqlUsuario = `
+                INSERT INTO usuario (nome, email, senha, fkCliente, fkcargo) 
+                VALUES ('${responsavel}', '${email}', '${senha}', '${resultadoFilial.insertId}', ${2});
+            `;
+        
+            console.log("Executando a instrução SQL Usuário: \n" + instrucaoSqlUsuario);
+
+            return database.executar(instrucaoSqlUsuario);
+        })
+        .then((resultadoUsuario) => {
+            console.log("Usuário inserido com sucesso: ", resultadoUsuario);
+            return resultadoUsuario;
+        })
+        .catch((erro) => {
+            console.log("Erro ao cadastrar: ", erro);
+            throw erro;
+        });
 }
 
 function entrar(email, senha) {
@@ -82,7 +102,7 @@ function listarFiliais(){
 
 module.exports = {
     cadastrar,
-    cadastrarUsuario,
+    cadastrarFuncionario,
     entrar,
     listarCargo,
     listarFiliais

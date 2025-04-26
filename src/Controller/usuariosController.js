@@ -42,7 +42,7 @@ function cadastrar(req, res) {
 }
 
 
-function cadastrarUsuario(req, res) {
+function cadastrarFuncionario(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
     var email = req.body.emailServer;
@@ -67,7 +67,7 @@ function cadastrarUsuario(req, res) {
         return res.status(400).json({ error: "O cargo está faltando!" });
     } else {
     
-        usuarioModel.cadastrarUsuario(nome, email, senha, cliente, cargo)
+        usuarioModel.cadastrarFuncionario(nome, email, senha, cliente, cargo)
     .then((resultado) => {
         res.json(resultado); 
     })
@@ -160,7 +160,7 @@ function listarFiliais(req,res){
 
 module.exports = {
     cadastrar,
-    cadastrarUsuario,
+    cadastrarFuncionario,
     entrar,
     listarCargo,
     listarFiliais
