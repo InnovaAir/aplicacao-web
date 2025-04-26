@@ -72,16 +72,16 @@
       <div class="select-wrapper">
         <div class="custom-select">
           <select id="select_aeroporto">
-            <option value="" selected disabled>Selecione o Aeroporto</option>
-            <option value="gru">Guarulhos</option>
+            <option value="" disabled>Selecione o Aeroporto</option>
+            <option value="gru" selected>Guarulhos</option>
             <option value="cgh">Congonhas</option>
           </select>
         </div>
 
         <div class="custom-select">
           <select id="select_intervalo">
-            <option value="" selected disabled>Selecione o intervalo</option>
-            <option value="7">Últimos 7 dias</option>
+            <option value="" disabled>Selecione o intervalo</option>
+            <option value="7" selected>Últimos 7 dias</option>
             <option value="15">Últimos 15 dias</option>
             <option value="30">Últimos 30 dias</option>
           </select>
@@ -103,14 +103,14 @@
           </div>
         </div>
 
-        <div class="box">
+        <div class="box" id="grafico_periodo">
           <div class="kpi_alinhada">
             <div class="titulo_grafico2">
               <span id="titulo_01">
                 Periodicidade de alertas
               </span>
               <span id="titulo_02">
-                <i>*Quantidade por horario</i>
+                <i>*Horario do dia com mais alertas, no intervalo selecionado</i>
               </span>
             </div>
 
@@ -141,9 +141,9 @@
             <div class="select-wrapper">
               <div class="custom-select">
                 <select id="select_aeroporto">
-                  <option value="" selected disabled>Selecione o nível do alerta</option>
+                  <option value="" disabled>Selecione o nível do alerta</option>
                   <option value="baixo">Baixo</option>
-                  <option value="alto">Alto</option>
+                  <option value="alto" selected>Alto</option>
                   <option value="critico">Crítico</option>
                 </select>
               </div>
@@ -151,7 +151,7 @@
               <div class="custom-select">
                 <select id="select_intervalo">
                   <option value="" selected disabled>Selecione o componente</option>
-                  <option value="cpu">CPU</option>
+                  <option value="processador" selected>Processador</option>
                   <option value="ram">RAM</option>
                   <option value="disco">Disco</option>
                 </select>
@@ -165,35 +165,35 @@
             <table class="tabela-alertas">
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>Componente</th>
                   <th>Nível</th>
                   <th>Total Alertas</th>
+                  <th>Qtd. máquinas c/ componente</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>ID_maquina-001</td>
                   <td>
                     Processador <br><small>I3 7200u</small>
                   </td>
                   <td><span style="color: red;">▲</span> ALTO</td>
                   <td>7</td>
+                  <td>21</td>
                 </tr>
-                  <td>ID_maquina-002</td>
-                  <td>
-                    Processador <br><small>I3 7200u</small>
-                  </td>
-                  <td><span style="color: red;">▲</span> ALTO</td>
-                  <td>5</td>
+                <td>
+                  Processador <br><small>Pentium g5400</small>
+                </td>
+                <td><span style="color: red;">▲</span> ALTO</td>
+                <td>5</td>
+                <td>12</td>
                 </tr>
                 <tr>
-                  <td>ID_maquina-003</td>
                   <td>
-                    Processador <br><small>I3 7200u</small>
+                    Processador <br><small>Ryzen 3 3200g</small>
                   </td>
                   <td><span style="color: red;">▲</span> ALTO</td>
                   <td>2</td>
+                  <td>43</td>
                 </tr>
               </tbody>
             </table>
@@ -348,7 +348,7 @@
 
     },
     title: {
-      text: 'Horario do dia com mais alertas, no intervalo selecionado.',
+      text: 'Quantidade de alertas pelo período do dia',
       floating: true,
       offsetY: 330,
       align: 'center',
