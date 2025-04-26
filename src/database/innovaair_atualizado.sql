@@ -7,9 +7,9 @@ USE innovaair;
 CREATE TABLE IF NOT EXISTS cliente (
   idCliente INT PRIMARY KEY AUTO_INCREMENT,
   razaoSocial VARCHAR(105) NOT NULL,
-  cnpj CHAR(18) NOT NULL,
+  cnpj CHAR(14) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  telefone VARCHAR(13) NOT NULL
+  telefone VARCHAR(11) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS cargo (
@@ -50,7 +50,6 @@ CREATE TABLE IF NOT EXISTS filial (
   CONSTRAINT fk_filial_cliente FOREIGN KEY (fkCliente) REFERENCES cliente (idCliente),
   CONSTRAINT fk_filial_endereco FOREIGN KEY (fkEndereco) REFERENCES endereco (idEndereco)
 );
-
 
 CREATE TABLE IF NOT EXISTS usuarioFilial(
 	fkUsuario INT NOT NULL,
@@ -124,11 +123,11 @@ INSERT INTO endereco (cep, logradouro, numero, complemento, bairro, cidade, esta
 ('91010-971', 'Av. Severo Dulius', '9000', 'Terminal 1', 'São João', 'Porto Alegre', 'RS', 'Sul'); -- Salgado Filho
 
 INSERT INTO filial (terminal, setor, fkCliente, fkEndereco) VALUES
-('Terminal 3 - GRU', 'Embarque Internacional', 1, 1),  -- GRU
-('Terminal 1 - Galeão', 'Carga Aérea', 2, 2),  -- Galeão
-('Terminal de Confins', 'Administrativo', 3, 3),  -- Confins
-('Terminal Principal - Afonso Pena', 'Segurança', 4, 4),  -- Curitiba
-('Terminal 1 - Salgado Filho', 'Operações', 5, 5);  -- Porto Alegre
+('GRU', 'Embarque Internacional', 1, 1),  -- GRU
+('Galeão', 'Carga Aérea', 2, 2),  -- Galeão
+('de Confins', 'Administrativo', 2, 3),  -- Confins
+('Principal - Afonso Pena', 'Segurança', 2, 4),  -- Curitiba
+('Salgado Filho', 'Operações', 2, 5);  -- Porto Alegre
 
 SELECT * from maquina;
 SELECT * from componente;

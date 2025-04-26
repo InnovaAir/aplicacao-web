@@ -49,6 +49,7 @@ function cadastrarFuncionario(req, res) {
     var senha = req.body.senhaServer;
     var cliente = req.body.clienteServer;
     var cargo = req.body.cargoServer;
+    var filial = req.body.filialServer;
 
     // Faça as validações dos valores
     if (!nome) {
@@ -65,9 +66,12 @@ function cadastrarFuncionario(req, res) {
     }
     if (!cargo) {
         return res.status(400).json({ error: "O cargo está faltando!" });
+    }
+    if (!filial) {
+        return res.status(400).json({ error: "A filial está faltando!" });
     } else {
     
-        usuarioModel.cadastrarFuncionario(nome, email, senha, cliente, cargo)
+        usuarioModel.cadastrarFuncionario(nome, email, senha, cliente, cargo, filial)
     .then((resultado) => {
         res.json(resultado); 
     })

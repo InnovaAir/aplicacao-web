@@ -136,7 +136,7 @@ function limparFormulario(){
     document.getElementById("slc_cargo").value = "0";
 }
 
-function cadastrarFuncionario(nome, email, senha, cliente, cargo){
+function cadastrarFuncionario(nome, email, senha, cliente, cargo, filial){
     fetch("/usuarios/cadastrarFuncionario", {
         method: "POST",
         headers: {
@@ -147,7 +147,8 @@ function cadastrarFuncionario(nome, email, senha, cliente, cargo){
             emailServer: email,
             senhaServer: senha,
             clienteServer: cliente,
-            cargoServer: cargo
+            cargoServer: cargo,
+            filialServer: filial
         }),
     })
     .then(function (resposta) {

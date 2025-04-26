@@ -33,7 +33,7 @@ function cadastrar(razaoSocial, cnpj, email, telefone, responsavel, senha) {
         });
 }
 
-function cadastrarFuncionario(nome, email, senha, cliente, cargo) {
+function cadastrarFuncionario(nome, email, senha, cliente, cargo, filial) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():",nome , email, senha, cliente, cargo);
 
     var instrucaoSqlCliente = `
@@ -43,12 +43,12 @@ function cadastrarFuncionario(nome, email, senha, cliente, cargo) {
 
     console.log("Executando a instrução SQL Cliente: \n" + instrucaoSqlCliente);
     return database.executar(instrucaoSqlCliente)
-        .then((resultadoFilial) => {
-            console.log("Cliente inserido com sucesso: ", resultadoFilial);
+        .then((resultadoCliente) => {
+            console.log("Cliente inserido com sucesso: ", resultadoCliente);
 
             var instrucaoSqlUsuario = `
-                INSERT INTO usuario (nome, email, senha, fkCliente, fkcargo) 
-                VALUES ('${responsavel}', '${email}', '${senha}', '${resultadoFilial.insertId}', ${2});
+                INSERT INTO usuarioFilial (fkUsuario, fkFilial) 
+                VALUES ('${resultadoCliente.insertId}', '${filial}');
             `;
         
             console.log("Executando a instrução SQL Usuário: \n" + instrucaoSqlUsuario);
