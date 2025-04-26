@@ -18,41 +18,7 @@
     <button class="botao_abrir" onclick="abrirMenu()">☰</button>
     <!-- 
     teste para sobreposição do botão "Expandir" -->
-    <div class="Expandir">
-        <div class="expandir1">
-            <div class="expandir graficoCPU">
-                <div class="titulosExpandir"></div>
-                <div style=" padding-left:2%; ; align-self:flex-start" class="titulosExpandir">
-                    <div class="tituloContainer">CPU</div>
-                    <div class="subtituloContainer">% de utilização</div>
-                </div>
-                <div id="graficosExpandirCPU"></div>
-            </div>
-            <div class="expandir graficoRAM">
-                <div style=" padding-left:2%; ; align-self:flex-start" class="titulosExpandir">
-                    <div class="tituloContainer">RAM</div>
-                    <div class="subtituloContainer">Uso de memória</div>
-                </div>
-                <div id="graficosExpandirRAM"></div>
-            </div>
-        </div>
-        <div class="expandir2">
-            <div class="expandir graficoRede">
-                <div style=" padding-left:2%; ; align-self:flex-start" class="titulosExpandir">
-                    <div class="tituloContainer">Rede</div>
-                    <div class="subtituloContainer">Taxa de transferência</div>
-                </div>
-                <div id="graficosExpandirRede"></div>
-            </div>
-            <div class="expandir graficoDisco">
-                <div style=" padding-left:2%; ; align-self:flex-start" class="titulosExpandir">
-                    <div class="tituloContainer">Disco</div>
-                    <div class="subtituloContainer">Capacidade utilizada</div>
-                </div>
-                <div id="graficosExpandirDisco"></div>
-            </div>
-        </div>
-    </div>
+
 
     <div class="barra_lateral" id="menu">
         <div class="fechar_barrinha">
@@ -95,6 +61,47 @@
         <a href="suporte.html">Fale conosco!</a>
     </div>
     <div class="child">
+        <div class="Expandir">
+            <button onclick="fecharExpandir()" id="fecharExpandir">
+                <img src="../assets/marca-cruzada.png" alt="">
+            </button>
+            <div class="expandir1">
+                <div class="expandirComponente graficoCPU">
+                    <div class="titulosExpandir"></div>
+                    <div style=" padding-left:2%; ; align-self:flex-start" class="titulosExpandir">
+                        <div class="tituloContainer">CPU</div>
+                        <div class="subtituloContainer">% de utilização</div>
+                    </div>
+                    <div id="graficosExpandirCPU"></div>
+                </div>
+                <div class="expandirComponente graficoRAM">
+                    <div style=" padding-left:2%; ; align-self:flex-start" class="titulosExpandir">
+                        <div class="tituloContainer">RAM</div>
+                        <div class="subtituloContainer">Uso de memória</div>
+                    </div>
+                    <div id="graficosExpandirRAM"></div>
+                </div>
+            </div>
+            <div class="expandir2">
+                <div class="expandirComponente graficoRede">
+                    <div style=" padding-left:2%; ; align-self:flex-start" class="titulosExpandir">
+                        <div class="tituloContainer">Rede</div>
+                        <div class="subtituloContainer">Taxa de transferência</div>
+                    </div>
+                    <div id="graficosExpandirRede"></div>
+                </div>
+                <div class="expandirComponente graficoDisco">
+                    <div style=" padding-left:2%; ; align-self:flex-start" class="titulosExpandir">
+                        <div class="tituloContainer">Disco</div>
+                        <div class="subtituloContainer">Capacidade utilizada</div>
+                    </div>
+                    <div id="graficosExpandirDisco"></div>
+                </div>
+            </div>
+        </div>
+        <div class="escurecerExpandir"
+            style="height: 100vh; width:100vw; background-color:black; filter:opacity(20%); position:fixed; left:0; right:0; z-index:3; display:none">
+        </div>
         <div id="tela" class="content">
             <div style="margin-top: 20px;" class="tituloContainer">Análise em tempo real</div>
             <div class="subtituloContainer">
@@ -109,6 +116,7 @@
                     </select>
                 </div>
             </div>
+
             <div class="section1">
 
                 <!-- gráficos antigos irrelevantes -->
@@ -180,6 +188,8 @@
 
 
                 </div> -->
+
+
 
                 <div class="subSection2">
                     <div class="listaMaquinas">
@@ -256,7 +266,7 @@
                                 <div style="width:100%" class="maquinaLegenda tempoAtividade">24d 12h 32min 155
                                 </div>
                                 <button style="color: white; font-weight: 600;width:60%;; margin-right:3%"
-                                    id="buttonExpandir" onclick="logPopup()">Expandir</button>
+                                    id="buttonExpandir" onclick="abrirExpandir()">Expandir</button>
 
                             </div>
 
@@ -360,55 +370,55 @@
 
     // grafico Área 
 
-function criarGraficoArea(divNome, data, labels, subtitulo){
-    var areaOptions = {
-        series: [{
-            name: "STOCK ABC",
-            data: data,
-        }],
-        chart: {
-            type: 'area',
-            height: '70%',
-            width: '100%',
-            zoom: {
+    function criarGraficoArea(divNome, data, labels, subtitulo) {
+        var areaOptions = {
+            series: [{
+                name: "STOCK ABC",
+                data: data,
+            }],
+            chart: {
+                type: 'area',
+                height: '70%',
+                width: '100%',
+                zoom: {
+                    enabled: false
+                }
+            },
+            dataLabels: {
                 enabled: false
+            },
+            stroke: {
+                curve: 'straight'
+            },
+            title: {
+
+                align: 'left'
+            },
+            subtitle: {
+                text: subtitulo,
+                align: 'left'
+            },
+            labels: labels,
+            xaxis: {
+                type: 'datetime',
+            },
+            yaxis: {
+                opposite: true
+            },
+            legend: {
+                horizontalAlign: 'left'
             }
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            curve: 'straight'
-        },
-        title: {
-           
-            align: 'left'
-        },
-        subtitle: {
-            text: subtitulo,
-            align: 'left'
-        },
-        labels: labels,
-        xaxis: {
-            type: 'datetime',
-        },
-        yaxis: {
-            opposite: true
-        },
-        legend: {
-            horizontalAlign: 'left'
-        }
-    };
+        };
 
-    var chart = new ApexCharts(document.querySelector(divNome), areaOptions);
-    chart.render();
-}
+        var chart = new ApexCharts(document.querySelector(divNome), areaOptions);
+        chart.render();
+    }
 
-// funções para criar um gráfico diferente para cada componente
-criarGraficoArea("#graficosExpandirCPU", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "adada");
-criarGraficoArea("#graficosExpandirRAM", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "adada");
-criarGraficoArea("#graficosExpandirRede", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "adada");
-criarGraficoArea("#graficosExpandirDisco", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "adada");
+    // funções para criar um gráfico diferente para cada componente
+    criarGraficoArea("#graficosExpandirCPU", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "adada");
+    criarGraficoArea("#graficosExpandirRAM", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "adada");
+    criarGraficoArea("#graficosExpandirRede", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "adada");
+    criarGraficoArea("#graficosExpandirDisco", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "adada");
 
 
 
@@ -610,6 +620,16 @@ criarGraficoArea("#graficosExpandirDisco", series.monthDataSeries1.prices, serie
         `,
             cancelButtonAriaLabel: "Thumbs down"
         });
+    }
+
+    function abrirExpandir() {
+        document.querySelector(".Expandir").style.display = "flex";
+        document.querySelector(".escurecerExpandir").style.display = "block";
+    }
+    
+    function fecharExpandir() {
+        document.querySelector(".Expandir").style.display = "none";
+        document.querySelector(".escurecerExpandir").style.display = "none";
     }
 
 
