@@ -134,6 +134,7 @@ function limparFormulario(){
     document.getElementById("ipt_senha").value = "";
     document.getElementById("ipt_confirmar_senha").value = "";
     document.getElementById("slc_cargo").value = "0";
+    document.getElementById("slc_filial").value = "0";
 }
 
 function cadastrarFuncionario(nome, email, senha, cliente, cargo, filial){
@@ -154,18 +155,36 @@ function cadastrarFuncionario(nome, email, senha, cliente, cargo, filial){
     .then(function (resposta) {
         console.log("resposta do servidor: ", resposta);
         if (resposta.ok) {
+            Swal.fire({
+                title: "Cadastro realizado com sucesso!",
+                text: "Clique em OK para sair!",
+                icon: "success"
+            }).then(() => {
+                limparFormulario();
+            });
+            return resposta.json();
         } else {
-            return resposta.text();
-        }
-    })
-    .then(function (erroTexto) {
-        if (erroTexto) {
-            console.log("Erro retornado do servidor:", erroTexto);
-            mensagemErro.innerHTML = erroTexto;
+            return resposta.text().then(erroTexto => {
+                throw new Error(erroTexto || "Erro ao cadastrar");
+            });
         }
     })
     .catch(function (erro) {
         console.log("Erro na requisição:", erro);
-        mensagemErro.innerHTML = "Erro ao tentar realizar o cadastro. Tente novamente.";
+        Swal.fire({
+            title: "Erro!",
+            text: erro.message || "Erro ao tentar realizar o cadastro. Tente novamente.",
+            icon: "error"
+        });
     });
+    // .then(function (erroTexto) {
+    //     if (erroTexto) {
+    //         console.log("Erro retornado do servidor:", erroTexto);
+    //         mensagemErro.innerHTML = erroTexto;
+    //     }
+    // })
+    // .catch(function (erro) {
+    //     console.log("Erro na requisição:", erro);
+    //     mensagemErro.innerHTML = "Erro ao tentar realizar o cadastro. Tente novamente.";
+    // });
 }
