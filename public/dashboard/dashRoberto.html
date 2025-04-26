@@ -92,10 +92,10 @@
         <div class="grafico_alinhado">
           <div class="titulo_grafico1">
             <span id="titulo_01">
-              Nível de alertas por componente
+              Quantidade de alertas por componente
             </span>
             <span id="titulo_02">
-              <i>*Quantidade de acordo com o intervalo selecionado</i>
+              <i>*Um componente pode emitir mais de um alerta, organizado pelos níveis de alerta.</i>
             </span>
           </div>
           <div class="grafico_01">
@@ -141,18 +141,19 @@
             <div class="select-wrapper">
               <div class="custom-select">
                 <select id="select_aeroporto">
-                  <option value="" selected disabled>Selecione o Aeroporto</option>
-                  <option value="gru">Guarulhos</option>
-                  <option value="cgh">Congonhas</option>
+                  <option value="" selected disabled>Nível do alerta</option>
+                  <option value="baixo">Baixo</option>
+                  <option value="alto">Alto</option>
+                  <option value="critico">Crítico</option>
                 </select>
               </div>
               
               <div class="custom-select">
                 <select id="select_intervalo">
-                  <option value="" selected disabled>Selecione o intervalo</option>
-                  <option value="7">Últimos 7 dias</option>
-                  <option value="15">Últimos 15 dias</option>
-                  <option value="30">Últimos 30 dias</option>
+                  <option value="" selected disabled>Selecione o componente</option>
+                  <option value="cpu">CPU</option>
+                  <option value="ram">RAM</option>
+                  <option value="disco">Disco</option>
                 </select>
               </div>
             </div>
@@ -176,23 +177,23 @@
                   <td>
                     Processador <br><small>I3 7200u</small>
                   </td>
-                  <td>GRAVE</td>
-                  <td>25</td>
+                  <td><span style="color: red;">▲</span> ALTO</td>
+                  <td>7</td>
                 </tr>
                   <td>ID_maquina-002</td>
                   <td>
                     Processador <br><small>I3 7200u</small>
                   </td>
-                  <td>GRAVE</td>
-                  <td>18</td>
+                  <td><span style="color: red;">▲</span> ALTO</td>
+                  <td>5</td>
                 </tr>
                 <tr>
                   <td>ID_maquina-003</td>
                   <td>
                     Processador <br><small>I3 7200u</small>
                   </td>
-                  <td>GRAVE</td>
-                  <td>25</td>
+                  <td><span style="color: red;">▲</span> ALTO</td>
+                  <td>2</td>
                 </tr>
               </tbody>
             </table>
@@ -200,12 +201,12 @@
           
           <div class="kpi_empilhada">
             <div class="kpi_tabela">
-              <span id="titulo_kpi">Total de máquinas</span>
+              <span id="titulo_kpi">Quantidade de máquinas registradas</span>
               <span id="valor_kpi"><b>900</b></span>
             </div>
             <div class="kpi_tabela">
-              <span id="titulo_kpi">Total de alertas {selecionado}</span>
-              <span id="valor_kpi"><b>68</b></span>
+              <span id="titulo_kpi">Nível de alerta com mais registros</span>
+              <span id="valor_kpi"><b><span style="color: red;">▲</span> ALTO</b></span>
             </div>
           </div>
         </div>
@@ -223,22 +224,22 @@
     series: [
       {
         name: 'Baixo',
-        data: [65, 75, 80]
+        data: [6, 10, 2]
       },
       {
-        name: 'Médio',
-        data: [80, 68, 72]
+        name: 'Alto',
+        data: [14, 21, 23]
       },
       {
         name: 'Crítico',
-        data: [55, 50, 78]
+        data: [2, 3, 5]
       }
     ],
     chart: {
       type: 'bar',
       height: 430
     },
-    colors: ['#00E396', '#FEB019', '#FF4560', '#775DD0'],
+    colors: ['#ff9900', '#ff0000', '#8400ff'],
     plotOptions: {
       bar: {
         horizontal: true,
@@ -269,7 +270,7 @@
     },
     xaxis: {
       categories: ["CPU", "RAM", "Disco"],
-      max: 100
+      max: 30
     }
   };
 
@@ -280,7 +281,7 @@
   var options = {
     series: [{
       name: 'Inflation',
-      data: [32, 20, 7, 19]
+      data: [28, 7, 32, 19]
     }],
     chart: {
       height: 350,
