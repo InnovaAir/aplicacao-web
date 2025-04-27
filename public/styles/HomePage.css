@@ -154,7 +154,7 @@ body{
     text-align: center;
     width: 80%;
     height: 30%;
-    margin-top: 4rem;
+ 
     position: absolute;
     text-shadow: 0px 0px 15px #5272ff91;
 }
@@ -382,10 +382,7 @@ margin-top: 50%;
 
 @media screen and (max-width: 768px) {
 
-    .homeInfo{
-       
-        
-    }
+   
     
     .homeInfo h1{
         font-size: 2rem;
