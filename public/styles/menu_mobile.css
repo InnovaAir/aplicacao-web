@@ -28,10 +28,12 @@
 
 
 @media (max-width: 768px) {
+    
+
     .menu_mobile {
         display: flex; 
     }
-
+    
     .barra_lateral {
         display: none; 
     }

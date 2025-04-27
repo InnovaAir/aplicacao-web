@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/menu_mobile.css">
     <link rel="stylesheet" href="../styles/MenuLateral.css">
     <link rel="stylesheet" href="../styles/dispositivo.css">
+    <link rel="stylesheet" href="../styles/estilo.css">
     <title>Visão geral</title>
 </head>
 
@@ -41,6 +43,8 @@
       </div>
 
     <div class="dispositivoContainer">
+        <div class="InfoEDash">
+
         <div class="containerInfo1">
             <div>
                 <h3>Nome: Máquina Recepção 10</h3>
@@ -75,25 +79,30 @@
                 <canvas id="myChart3"></canvas>
             </div>
         </div>
+    </div>
+
 
         <div class="containerInfo3">
-            <div>
-                <h3>Tempo de Uso</h3>
-                <div class="tempoBox">
-                    <div class="tempoDivBox">23d 50h 12m 23s</div>
+            <div class="tempoEAlerta">
+                <div class="containerTempo">
+                    <h3>Tempo de Uso</h3>
+                    <div class="tempoBox">
+                        <div class="tempoDivBox">23d 50h 12m 23s</div>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <h3>Histórico de Alertas</h3>
-                <div class="tempoBox">
-                    <div class="alertaBox">Memória RAM em uso: 24GB de 32GB (75%) no servidor web</div>
-                    <div class="alertaBox">Memória RAM em uso: 278.2H50c de 32GB (85%) no servidor web</div>
-                    <div class="alertaBox">Memória RAM em uso: 30GB de 32GB (95%) no servidor web</div>
-                    <div class="alertaBox">Memória RAM em uso: 32GB de 32GB (100%) no servidor web</div>
+                <div class="containerAlertas">
+                    <h3>Histórico de Alertas</h3>
+                    <div class="containerAlertaBox">
+                        <div class="alertaBox">Memória RAM em uso: 24GB de 32GB (75%) no servidor web</div>
+                        <div class="alertaBox">Memória RAM em uso: 278.2H50c de 32GB (85%) no servidor web</div>
+                        <div class="alertaBox">Memória RAM em uso: 30GB de 32GB (95%) no servidor web</div>
+                        <div class="alertaBox">Memória RAM em uso: 32GB de 32GB (100%) no servidor web</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
