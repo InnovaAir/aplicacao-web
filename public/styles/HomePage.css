@@ -119,11 +119,18 @@ body{
 }
 
 .homeInfo{
+    background-image: url(../assets/Monitoramento-proativo-jpg.webp);
+    background-repeat:no-repeat;
+    height: 50vh;
+    background-size: cover;
+    padding: 20%;
+    padding-bottom: 200px;
+    margin-bottom: -120px;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 50rem;
 }
 
 .sloganHome {
@@ -131,6 +138,7 @@ body{
     color: #5271FF;
     display: flex;
     justify-content: center;
+    
     align-items: center;
     z-index: 99999;
 }
@@ -144,39 +152,43 @@ body{
     align-items: center;
     justify-content: center;
     text-align: center;
-    width: 50%;
+    width: 80%;
     height: 30%;
     margin-top: 4rem;
     position: absolute;
     text-shadow: 0px 0px 15px #5272ff91;
 }
 
+.logoHome{
+    width: 20vw;
+    z-index: 3;
+  
+}
+
 .imgHome{
-   
-    position: absolute;
-    justify-self: center;
-    z-index: -99999;
-    height: 150%;
+position: absolute;
+background-repeat: no-repeat;
+height: 1000px;
+background-size: contain;
+width: 1000px;
+z-index: 1;
+margin-top: 50%;
+
+    
+  
+
 }
 
 .blackFilter{
-    max-height: 200%;
-    max-width: 200%;
+    height: 100vh;
     position: absolute;
     justify-self: center;
     z-index: -99998;
-    height: 140%;
-    width: 140%;
-    margin-top: 5rem;
     filter: opacity(60%);
+    
 }
 
-.logoHome{
-    max-width: 100%;
-    max-height: 100%;
-    width: 30%;
-    margin-bottom: 5rem;
-}
+
 
 .divLine{
     background-color: #5271FF;
@@ -190,7 +202,6 @@ body{
 
 .sobreNosInfo{
     
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -372,17 +383,16 @@ body{
 @media screen and (max-width: 768px) {
 
     .homeInfo{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 80vh;
+       
+        
     }
     
     .homeInfo h1{
         font-size: 2rem;
         font-style: italic;
         color: white;
+        padding-top: 10%;
+
         display: flex;
         align-items: center;
         justify-content: center;
@@ -396,12 +406,7 @@ body{
     }
     
     .imgHome {
-        height: 100vh !important;
-        object-fit:fill !important; /* Garante que a imagem cubra o espaço sem distorcer */
-        position: absolute !important; /* Mantém fixo na tela */
-        left: 0;
-        z-index: -99999;
-        
+      
         
     }
     
@@ -416,12 +421,7 @@ body{
         overflow-x: hidden;
     }
     
-    .logoHome{
-        margin-left: 20px;
-        max-height: 50%;
-        height: 10%;
-        margin-bottom: 3rem;
-    }
+   
 }
 
 @media screen and (max-width: 768px) {
@@ -546,8 +546,9 @@ body{
         max-width: 80%;
         border-radius: 2rem;
         padding: 3rem;
-        padding-left: 2.5rem;
-        padding-right: 2.5rem;
+        padding-right: 5rem;
+        padding-left: 5rem;
+        margin-bottom: 1rem;
         box-shadow: 15px 15px 20px #2d42a046;
     }
 }
