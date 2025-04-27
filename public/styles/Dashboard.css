@@ -156,7 +156,10 @@ font-size: 2.5rem;
     }
 
     .kpi.dois h1 {
+        display: flex;
         font-size: 1rem;
+        text-align: center;
+        display: block;
     }
 
     .kpi.dois p {
@@ -223,11 +226,14 @@ font-size: 2.5rem;
 @media screen and (max-width: 1024px) and (max-height: 600px){
 
     .kpi.dois h1 {
-        text-align: center;
+        display: flex;
         font-size: 1rem;
+        text-align: center;
+        display: block;
     }
     
     .grafico-linear .titulo, .ranking-incidentes .titulo {
+        text-align: center;
         font-size: 1.2rem;
     }
 }

@@ -4,43 +4,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/menu_mobile.css">
     <link rel="stylesheet" href="../styles/MenuLateral.css">
     <link rel="stylesheet" href="../styles/dispositivo.css">
-    <link rel="stylesheet" href="../styles/estilo.css">
+    <link rel="stylesheet" href="../styles/menu_mobile.css">
+    <!-- <link rel="stylesheet" href="../styles/estilo.css"> -->
     <title>Visão geral</title>
 </head>
 
 <body>
     <button class="botao_abrir" onclick="abrirMenu()">☰</button>
 
-    <div class="barra_lateral" id="menu">
-        <div class="fechar_barrinha">
-          <button class="botao_fechar" onclick="fecharMenu()">✖</button>
-        </div>
-        <div class="logo_container">
-          <img src="../assets/InnovaairWhite.png" alt="" />
-        </div>
-    
-    
-        <span id="user_logado">Olá, Usuário</span>
-        <div class="opcoes">
-          <div class="container1">
-            <u>
-              <li><a href="visaoGeral.html">Visão geral</a></li>
-              <li><a href="tempoReal.html"  class="agora">Tempo real</a></li>
-              <li><a href="listaMaquinas.html" >Lista de máquinas</a></li>
-              <li><a href="CadastrarMaquina.html">Cadastrar Máquina</a></li>
-              <li><a href="suporte.html">Suporte</a></li>
-            </u>
-          </div>
-          <div class="container2">
-            <u>
-              <li><a href="suporte.html">Fale conosco!</a></li>
-            </u>
-          </div>
-        </div>
+  <div class="barra_lateral" id="menu">
+    <div class="fechar_barrinha">
+      <button class="botao_fechar" onclick="fecharMenu()">✖</button>
+    </div>
+    <div class="logo_container">
+      <img src="../assets/InnovaairWhite.png" alt="" />
+    </div>
+
+
+    <span id="user_logado">Olá, Usuário</span>
+    <div class="opcoes">
+      <div class="container1">
+        <u>
+          <li><a href="visaoGeral.html">Visão geral</a></li>
+          <li><a href="tempoReal.html" class="agora">Tempo real</a></li>
+          <li><a href="listaMaquinas.html">Lista de máquinas</a></li>
+          <li><a href="CadastrarMaquina.html">Cadastrar Máquina</a></li>
+          <li><a href="suporte.html">Suporte</a></li>
+        </u>
       </div>
+      <div class="container2">
+        <u>
+          <li><a href="suporte.html">Fale conosco!</a></li>
+        </u>
+      </div>
+    </div>
+  </div>
+  <div class="menu_mobile">
+    <button class="botao_menu_mobile" onclick="abrirMenuMobile()">☰</button>
+    <div class="logo_container">
+      <img src="../assets/InnovaairWhite.png" alt="" />
+    </div>
+
+  </div>
+  <div class="novo_menu">
+    <a href="visaoGeral.html">Visão geral</a>
+    <a href="tempoReal.html" class="agora">Tempo real</a>
+    <a href="listaMaquinas.html">Lista de máquinas</a>
+    <a href="NovosCadastros.html">Cadastros</a>
+    <a href="suporte.html">Suporte</a>
+    <a href="suporte.html">Fale conosco!</a>
+  </div>
+      
 
     <div class="dispositivoContainer">
         <div class="InfoEDash">
