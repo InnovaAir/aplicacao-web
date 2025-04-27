@@ -9,6 +9,10 @@
     padding: 4vw;
 }
 
+.InfoEDash{
+    display: flex;
+    flex-direction: row;
+}
 
 .containerInfo1{
     display: flex;
@@ -78,6 +82,11 @@
         margin: 5vh 2vw;
         height: auto;
         padding: 1vh;
+    }
+
+    .InfoEDash{
+        display: flex;
+        flex-direction: column;
     }
 
     .tempoBox, .containerAlertaBox {
