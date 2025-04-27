@@ -9,7 +9,7 @@ body {
     overflow-x: auto;
     overflow-y: auto;
     height: 100vh;
-    width: 100%;
+    width: 100vw;
     flex-direction: column;
     display: flex;
     align-items: center;
@@ -18,7 +18,7 @@ body {
 
 .content {
     height: 100vh;
-    width: 80%;
+    width: 90%;
     overflow-y: hidden;
     transition: all 0.3s ease-in-out;
 
@@ -162,10 +162,11 @@ body {
 
 .tituloContainer {
     display: flex;
+    width: fit-content;
     flex-direction: row;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
-    font-size: xx-large;
+    font-size: 150%;
     color: #5573ff;
 
 }
@@ -193,12 +194,11 @@ body {
     width: 100%;
     display: flex;
     overflow-y: visible;
-
 }
 
 
 .scrollMaquinas {
-    width: 95%;
+    width: 100%;
     scrollbar-color: #5573ff #fff;
     height: 60%;
     display: flex;
@@ -207,20 +207,25 @@ body {
     overflow-x: auto;
     overflow-y: scroll;
 
+    
+
+
 }
 
 .secaoMaquinas {
     width: 100%;
+    padding-block: 1%;
     margin-top: 5px;
-    height: 4vh;
+    height: fit-content;
     border-radius: 10px;
     background-color: #dde3ff;
     gap: 0.2%;
     flex-direction: row;
     display: flex;
+    overflow-wrap:anywhere;
     text-wrap: nowrap;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
 
 }
 
@@ -228,16 +233,20 @@ body {
     border: solid .1px #8BA0FF;
     height: 10px;
     width: 10px;
+    scale: 100%;
     margin-right: 5px;
     border-radius: 50%;
 }
 
 .legendasMaquinas {
     width: 100%;
+    height: fit-content;
     border-bottom: solid 2px #5573ff;
     text-wrap: nowrap;
+    overflow-wrap:anywhere;
+
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     gap: 0.2%;
     flex-direction: row;
 }
@@ -245,11 +254,16 @@ body {
 .maquinaLegenda {
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
-    width: 100%;
-    font-size: 13px;
+    max-width: fit-content;
+    text-wrap:wrap;
+    overflow-wrap:anywhere;
+
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    font-size: 1.5vmax;
     margin-left: 4px;
     display: flex;
-    text-overflow: ellipsis;
+
     overflow: hidden;
 }
 
@@ -260,6 +274,7 @@ body {
     border: none;
     display: flex;
     align-items: center;
+    overflow-wrap:anywhere;
     justify-content: center;
     transition: all 0.2s ease;
 }
@@ -277,7 +292,8 @@ body {
 
     height: 120%;
     gap: 2vh;
-    width: 100%;
+    width: 99%;
+    /* background-color: saddlebrown; */
     flex-direction: column;
     display: flex;
 }
@@ -286,7 +302,7 @@ body {
     width: 100%;
 }
 
-.subSection1 {
+/* .subSection1 {
 
     height: fit-content;
     padding-bottom: 50px;
@@ -297,19 +313,17 @@ body {
     gap: 1%;
     width: 100%;
 
-
-
-
-}
+} */
 
 .subSection2 {
 
-
+    /* background-color: lightgreen; */
     display: flex;
     flex-direction: row;
     margin-left: 1%;
     margin-top: 30px;
     height: 100%;
+    width: 100%;
     gap: 50px;
 }
 
@@ -487,7 +501,7 @@ body {
 
 .selectBox {
     color: gray;
-    height: 40px;
+    height: 100%;
     min-width: 40%;
     max-width: 60%;
 
@@ -519,7 +533,7 @@ body {
     }
 
 
-    @media (max-width: 768px) {
+    /* @media (max-width: 768px) {
         .container {
             margin-left: 0;
         }
@@ -568,5 +582,5 @@ body {
         .titulo {
             margin: 0;
         }
-    }
+    } */
 }

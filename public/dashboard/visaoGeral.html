@@ -46,12 +46,7 @@
             </div>
         </div>
     </div>
-    <div class="menu_mobile">
-        <button class="botao_menu_mobile" onclick="abrirMenuMobile()">☰</button>
-        <div class="logo_container">
-            <img src="../assets/InnovaairWhite.png" alt="" />
-        </div>
-    </div>
+
     <div class="novo_menu">
         <a href="visaoGeral.html" class="agora">Visão geral</a>
         <a href="tempoReal.html">Tempo real</a>
@@ -103,8 +98,8 @@
             style="height: 100vh; width:100vw; background-color:black; filter:opacity(20%); position:fixed; left:0; right:0; z-index:3; display:none">
         </div>
         <div id="tela" class="content">
-            <div style="margin-top: 20px;" class="tituloContainer">Análise em tempo real</div>
-            <div class="subtituloContainer">
+            <div style="margin-top: 20px; margin-left:3vw" class="tituloContainer">Análise em tempo real</div>
+            <div style="margin-left:3vw" class="subtituloContainer">
                 *De acordo com a última captura obtida
                 <div style="width: 40%; margin-top:10px">
                     <select class="selectBox selectFilial">
@@ -218,55 +213,66 @@
                         </div>
                         <div class="scrollMaquinas">
                             <div class="legendasMaquinas">
-                                <div style="color: black; font-weight: 600;width:100%" class="maquinaLegenda">Nome
+                                <div style="color: black; font-weight: 600;width:100%; margin-inline:1%"
+                                    class="maquinaLegenda">Nome
                                     do
                                     totem</div>
-                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Uso CPU
+                                <div style="color: black; font-weight: 600;width:100%; margin-inline:1%"
+                                    class="maquinaLegenda">Uso CPU
                                 </div>
-                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Uso RAM
+                                <div style="color: black; font-weight: 600;width:100%; margin-inline:1%"
+                                    class="maquinaLegenda">Uso RAM
                                 </div>
-                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Uso
+                                <div style="color: black; font-weight: 600;width:100%; margin-inline:1%"
+                                    class="maquinaLegenda">Uso
                                     Disco
                                 </div>
-                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">Ping
+                                <div style="color: black; font-weight: 600;width:100%; margin-inline:1%"
+                                    class="maquinaLegenda">Ping
                                 </div>
-                                <div style="color: black; font-weight: 600;width:50%" class="maquinaLegenda">
+                                <div style="color: black; font-weight: 600;width:100%; margin-inline:1%"
+                                    class="maquinaLegenda">
                                     Processos
                                 </div>
-                                <div style="color: black; font-weight: 600;width:100%" class="maquinaLegenda">Tempo
+                                <div style="color: black; font-weight: 600;width:100%; margin-inline:1%"
+                                    class="maquinaLegenda">Tempo
                                     de
                                     Atividade
                                 </div>
-                                <div style="color: black; font-weight: 600;width:60%; margin-right:3%"
-                                    class="maquinaLegenda"></div>
+                                <div style="font-weight: 600;width:100%; margin-right:2%;" class="maquinaLegenda">
+                                    <button style="color: white; font-weight: 600;width:fit-content; height:fit-content; margin-right:2%; font-size:1.5vmax; visibility:hidden;   overflow-wrap:anywhere;
+                                    " id="buttonExpandir" onclick="">Expandir</button>
+                                </div>
 
                             </div>
 
                             <!-- secaoMaquina é a "barra" azul com os dados da maquina -->
 
                             <div class="secaoMaquinas">
-                                <div style="width:100%" class="maquinaLegenda numeroTotem">Totem-f001-a</div>
-                                <div style="width:50%" class="maquinaLegenda usoCPU">
+                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda numeroTotem">
+                                    Totem-f001-a</div>
+                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda usoCPU">
                                     <div style="background-color:greenyellow;" class="bola"></div>
                                     15%
                                 </div>
-                                <div style="width:50%" class="maquinaLegenda usoRam">
+                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda usoRam">
                                     <div style="background-color:greenyellow;" class="bola"></div>
                                     45%
                                 </div>
-                                <div style="width:50%" class="maquinaLegenda usoDisco">
+                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda usoDisco">
                                     <div style="background-color:greenyellow;" class="bola"></div>
                                     45%
                                 </div>
-                                <div style="width:50%" class="maquinaLegenda ping">
+                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda ping">
                                     <div style="background-color:greenyellow;" class="bola"></div>
                                     120ms
                                 </div>
-                                <div style="width:50%" class="maquinaLegenda Processos">19283</div>
-                                <div style="width:100%" class="maquinaLegenda tempoAtividade">24d 12h 32min 155
+                                <div style="width:100%; margin-inline:1%; " class="maquinaLegenda Processos">19283</div>
+                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda tempoAtividade">24d 12h
+                                    32min 155
                                 </div>
-                                <button style="color: white; font-weight: 600;width:60%;; margin-right:3%"
-                                    id="buttonExpandir" onclick="abrirExpandir()">Expandir</button>
+                                <button style="color: white; font-weight: 600;width:fit-content; height:fit-content; margin-right:2%; font-size:1.5vmax;    overflow-wrap:anywhere;
+" id="buttonExpandir" onclick="abrirExpandir()">Expandir</button>
 
                             </div>
 
@@ -419,68 +425,68 @@
     criarGraficoArea("#graficosExpandirRAM", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "Frequência");
     criarGraficoArea("#graficosExpandirRede", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "MBs");
 
-// grafico barras stacked
-var options = {
-    series: [
-    {
-      name: 'Espaço Utilizado',
-      group: 'budget',
-      data: [60, 25]
-    },
-    
-  
-    {
-      name: 'Espaço Total',
-      group: 'budget',
-      data: [40, 75]
-    },
-    
-   
-  ],
-    chart: {
-    type: 'bar',
-    height: '70%',
-    width: '100%',
-    stacked: true,
-  },
-  stroke: {
-    width: 1,
-    colors: ['#fff']
-  },
-  dataLabels: {
-    formatter: (val) => {
-      return val + '%'
-    }
-  },
-  plotOptions: {
-    bar: {
-      horizontal: true
-    }
-  },
-  xaxis: {
-    categories: [
-      'Disco 1',
-      'Disco 2',
-      
-    ],
-    labels: {
-      formatter: (val) => {
-        return val  + '%'
-      }
-    }
-  },
-  fill: {
-    opacity: 1,
-  },
-  colors: ['#80c7fd', '#008FFB', '#80f1cb', '#00E396'],
-  legend: {
-    position: 'top',
-    horizontalAlign: 'left'
-  }
-  };
+    // grafico barras stacked
+    var options = {
+        series: [
+            {
+                name: 'Espaço Utilizado',
+                group: 'budget',
+                data: [60, 25]
+            },
 
-  var chart = new ApexCharts(document.querySelector("#graficosExpandirDisco"), options);
-  chart.render();
+
+            {
+                name: 'Espaço Total',
+                group: 'budget',
+                data: [40, 75]
+            },
+
+
+        ],
+        chart: {
+            type: 'bar',
+            height: '70%',
+            width: '100%',
+            stacked: true,
+        },
+        stroke: {
+            width: 1,
+            colors: ['#fff']
+        },
+        dataLabels: {
+            formatter: (val) => {
+                return val + '%'
+            }
+        },
+        plotOptions: {
+            bar: {
+                horizontal: true
+            }
+        },
+        xaxis: {
+            categories: [
+                'Disco 1',
+                'Disco 2',
+
+            ],
+            labels: {
+                formatter: (val) => {
+                    return val + '%'
+                }
+            }
+        },
+        fill: {
+            opacity: 1,
+        },
+        colors: ['#80c7fd', '#008FFB', '#80f1cb', '#00E396'],
+        legend: {
+            position: 'top',
+            horizontalAlign: 'left'
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#graficosExpandirDisco"), options);
+    chart.render();
 
     // grafico rosca
     var roscaOptions = {
@@ -686,7 +692,7 @@ var options = {
         document.querySelector(".Expandir").style.display = "flex";
         document.querySelector(".escurecerExpandir").style.display = "block";
     }
-    
+
     function fecharExpandir() {
         document.querySelector(".Expandir").style.display = "none";
         document.querySelector(".escurecerExpandir").style.display = "none";
