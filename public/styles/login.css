@@ -16,7 +16,7 @@
 
 
 .box_voltar {
-    margin: 10px;
+    margin: 30px;
     margin-left: 30px;
     position: absolute;
     align-items: center;
@@ -82,7 +82,6 @@
     flex-direction: column;
     align-self: center;
     gap: 3rem;
-    padding: 2rem 0rem 2rem 2rem;
 }
 
 .fields h1, p {
@@ -92,20 +91,22 @@
 .titulo {
     flex-grow: 1;
     flex-grow: 1;
-    font-size: 2rem;
+    font-size: 1.5rem;
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
 .fields .inputs {
+    justify-content: center;
+    align-items: center;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
 .inputs input {
-    width: 85%;
+    width: 80%;
     height: 2.5rem;
     border-radius: 50px;
     border: 2px solid #5271FF;
@@ -213,6 +214,7 @@
         font-size: 1.2rem;
         width: 85%;
         height: 2.5rem;
+        align-self: center;
     }
     .navbar-mobile {
         background-color: #5271FF;
