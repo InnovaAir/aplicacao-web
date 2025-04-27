@@ -1,96 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../styles/MenuLateral.css" />
-    <link rel="stylesheet" href="../styles/gerenc_filial.css" />
-    <link rel="stylesheet" href="../styles/menu_mobile.css" />
-
-    <title>Gerenciamento de Filials</title>
-    <script src="https://cdn.jsdelivr.net/npxm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gerenciamento de Métrica</title>
+  <script src="https://cdn.jsdelivr.net/npxm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/estilo.css">
 </head>
-
 <body>
-    <button class="botao_abrir" onclick="abrirMenu()">☰</button>
 
-    <div class="barra_lateral" id="menu">
-        <div class="fechar_barrinha">
-            <button class="botao_fechar" onclick="fecharMenu()">✖</button>
+<div class="sidebar" id="sidebar">
+  <div class="d-flex justify-content-center align-items-center px-3 w-100">
+        <div class="logo">
+          <img src="../assets/InnovaairWhite.png" alt="Logo">
         </div>
-        <div class="logo_container">
-            <img src="../assets/InnovaairWhite.png" alt="" />
-        </div>
+    <button class="btn btn-light d-lg-none" type="button" onclick="toggleSidebar()" style="border-radius: 8px;">
+      ☰
+    </button>
+  </div>
 
-        <span id="user_logado">Olá, Usuário</span>
-        <div class="opcoes">
-            <div class="container1">
-                <u>
-                    <li><a href="visaoGeral.html" class="agora">Visão geral</a></li>
-                    <li><a href="tempoReal.html">Tempo real</a></li>
-                    <li><a href="listaMaquinas.html">Lista de máquinas</a></li>
-                    <li><a href="CadastrarMaquina.html">Cadastrar Máquina</a></li>
-                    <li><a href="suporte.html">Suporte</a></li>
-                </u>
-            </div>
-            <div class="container2">
-                <u>
-                    <li><a href="suporte.html">Fale conosco!</a></li>
-                </u>
-            </div>
+  <nav class="flex-column">
+    <a href="visaoGeral.html">Visão geral</a>
+    <a href="tempoReal.html">Tempo real</a>
+    <a href="listaMaquinas.html">Lista de máquinas</a>
+    <a href="NovosCadastros.html"><strong>Cadastrar Máquina</strong></a>
+    <a href="suporte.html">Suporte</a>
+    <div class="logout mt-3">
+      <a href="NovosCadastros.html"><strong>Sair</strong></a>
+    </div>
+  </nav>
+</div>
+
+<div class="main d-flex justify-content-center align-items-center">
+    <div id="tela" class="form-card container-fluid bg-white w-100">
+      <div class="row">
+        <div class="col-12">
+          <div class="tituloContainer">
+            <h1>Gerenciamento de Filiais</h1>
+          </div>
         </div>
-    </div>
-    <div class="menu_mobile">
-        <button class="botao_menu_mobile" onclick="abrirMenuMobile()">☰</button>
-        <div class="logo_container">
-            <img src="../assets/InnovaairWhite.png" alt="" />
+  
+        <div class="col-12 mb-4">
+          <div class="subtituloContainer">
+            <div style="width: 40%; margin-top:10px">
+              <button class="exibir" onclick="modalAdicionar()">Adicionar nova filial</button>
+            </div>
+          </div>
         </div>
-    </div>
-    <div class="novo_menu">
-        <a href="visaoGeral.html" class="agora">Visão geral</a>
-        <a href="tempoReal.html">Tempo real</a>
-        <a href="listaMaquinas.html">Lista de máquinas</a>
-        <a href="NovosCadastros.html">Cadastros</a>
-        <a href="suporte.html">Suporte</a>
-        <a href="suporte.html">Fale conosco!</a>
-    </div>
-    <div id="tela" style="background-color: white;" class="container">
-        <div class="child">
-            <div class="tituloContainer">Gerenciamento de Filiais</div>
-            <div style="margin-top: -30px;" class="subtituloContainer">
-                <div style="width: 40%; margin-top:10px">
-                    <button class="exibir" onclick="modalAdicionar()">Adicionar nova filial</button>
+  
+        <div class="col-12">
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <div class="card maquina-generic">
+                <div class="card-body">
+                  <h5 class="card-title" id="filial-i">Aeroporto, Terminal (Setor)</h5>
+                  <p class="card-text" id="endereco-i">CEP - Logradouro, Número (Bairro) - Cidade (Estado)</p>
+                  <div>
+                    <button class="btn btn-primary" onclick="modalEdicao()">Editar</button>
+                    <button class="btn btn-danger" onclick="modalConfirmarExclusao()">Excluir</button>
+                  </div>
                 </div>
+              </div>
             </div>
-            <div class="section1">
-                <div class="grid-maquinas">
-                    <div class="maquina-generic">
-                        <span id="filial-i">Aeroporto, Terminal (Setor)</span>
-                        <span id="endereco-i">CEP - Logradouro, Número (Bairro) - Cidade (Estado)</span>
-                        <div>
-                            <button class="exibir" onclick="modalEdicao()">Editar</button>
-                            <button class="exibir" onclick="modalConfirmarExclusao()">Excluir</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
     </div>
-    </div>
-    </div>
-    </div>
+  </div>
+
 </body>
-
 </html>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../js/animacaoMenu.js"></script>
 <!-- Sweet Alert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('show');
+  }
     function modalEdicao(idEndereco, nomeEndereco, cep, logradouro, numero, complemento, bairro, cidade, estado) {
         Swal.fire({
             title: `Atualização da métrica <br> <i id='metrica-selecionada'>${nomeEndereco}</i>`,

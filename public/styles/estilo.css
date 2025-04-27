@@ -1,0 +1,178 @@
+body {
+    margin: 0;
+    background-color: #f8f9fa;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background: linear-gradient(45deg, rgba(152, 170, 255, 1) 25%, rgba(82, 113, 255, 1) 57%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 125px 0;
+    position: fixed;
+    height: 100vh;
+    transition: all 0.3s;
+  }
+  
+  .sidebar .logo {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar .logo img {
+    max-width: 120px;
+  }
+  
+  .sidebar nav {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .sidebar nav a {
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .sidebar nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+  }
+  
+  .sidebar .logout {
+    text-align: center;
+    padding: 10px 0;
+  }
+  
+  .sidebar .logout a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .sidebar .logout a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+  
+  .main {
+    margin-left: 250px;
+    padding: 40px;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  .form-card {
+    background: white;
+    border-radius: 15px;
+    border: 1px solid #8BA0FF;
+    padding: 30px;
+    box-shadow: 5px 5px 10px #9e9e9e;
+  }
+  
+  .form-control {
+    border: 1px solid #8BA0FF;
+    border-radius: 8px;
+  }
+  
+  .form-select {
+    border: 1px solid #8BA0FF;
+    border-radius: 10px;
+    height: 39px;
+    margin-bottom: 5%;
+  }
+  
+  .form-label {
+    color: #5271FF;
+    font-weight: 500;
+  }
+  
+  .btn-primary {
+    background-color: #8BA0FF;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    font-weight: bold;
+  }
+  
+  .btn-primary:hover {
+    background-color: #5271FF;
+  }
+  
+  .top-bar {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #5271FF;
+    font-weight: bold;
+    font-size: 40px;
+  }
+  
+  /* Responsivo */
+  @media (max-width: 992px) {
+    /* Ajuste para o menu lateral */
+    .sidebar {
+      width: 100%;
+      height: auto;
+      flex-direction: column;
+      padding: 10px;
+      position: relative;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
+      transition: transform 0.3s ease; /* Efeito suave para o menu */
+    }
+  
+    .logo {
+      width: 100%;
+    }
+  
+    /* Ocultar a navegação por padrão */
+    .sidebar nav {
+      display: none;
+    }
+  
+    /* Mostrar a navegação quando o menu for ativado */
+    .sidebar.show nav {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      align-items: center; /* Alinhar os itens centralizados */
+    }
+  
+    /* Melhorar a área principal (conteúdo) */
+    .main {
+      margin-left: 0;
+      padding: 20px;
+      width: 100%;
+    }
+  
+    /* Botão para abrir o menu (hamburguer) */
+    .sidebar-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+    }
+  
+    .sidebar-toggle div {
+      width: 30px;
+      height: 4px;
+      background-color: #fff;
+      transition: transform 0.3s ease;
+    }
+  }

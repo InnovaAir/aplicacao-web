@@ -1,177 +1,257 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novos Cadastros</title>
-    <link rel="stylesheet" href="../styles/MenuLateral.css">
-    <link rel="stylesheet" href="../styles/NovosCadastros.css">
-    <link rel="stylesheet" href="../styles/menu_mobile.css">
-    <link rel="icon" href="../public/assets/favicon.ico" type="favicon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard Cadastro de Máquina</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/responsividade.css">
+  <style>
+    body {
+    margin: 0;
+    background-color: #f8f9fa;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 250px;
+    background: linear-gradient(45deg, rgba(152, 170, 255, 1) 25%, rgba(82, 113, 255, 1) 57%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 125px 0;
+    position: fixed;
+    height: 100vh;
+    transition: all 0.3s;
+  }
+  .sidebar .logo {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .sidebar .logo img {
+    max-width: 120px;
+  }
+  .sidebar nav {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .sidebar nav a {
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+  }
+  .sidebar nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+  }
+  .sidebar .logout {
+    text-align: center;
+    padding: 10px 0;
+  }
+  .sidebar .logout a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .sidebar .logout a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+  .main {
+    margin-left: 250px;
+    padding: 40px;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .form-card {
+    background: white;
+    border-radius: 15px;
+    border: 1px solid #8BA0FF;
+    padding: 30px;
+    box-shadow: 5px 5px 10px #9e9e9e;
+    max-width: 900px;
+    width: 100%;
+  }
+  .form-control {
+    border: 1px solid #8BA0FF;
+    border-radius: 8px;
+  }
+  .form-select {
+    border: 1px solid #8BA0FF;
+    border-radius: 10px;
+    height: 39px;
+    margin-bottom: 5%;
+  }
+  .form-label {
+    color: #5271FF;
+    font-weight: 500;
+  }
+  .btn-primary {
+    background-color: #8BA0FF;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    font-weight: bold;
+  }
+  .btn-primary:hover {
+    background-color: #5271FF;
+  }
+  .top-bar {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #5271FF;
+    font-weight: bold;
+    font-size: 40px;
+  }
+  /* Responsivo */
+  @media (max-width: 992px) {
+      /* Ajuste para o menu lateral */
+      .sidebar {
+          width: 100%;
+          height: auto;
+          flex-direction: column;
+          padding: 10px;
+          position: relative;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
+          transition: transform 0.3s ease; /* Efeito suave para o menu */
+      }
+      .logo{
+          width: 100%;
+      }
+
+      /* Ocultar a navegação por padrão */
+      .sidebar nav {
+          display: none;
+      }
+
+      /* Mostrar a navegação quando o menu for ativado */
+      .sidebar.show nav {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          align-items: center; /* Alinhar os itens centralizados */
+      }
+
+      /* Melhorar a área principal (conteúdo) */
+      .main {
+          margin-left: 0;
+          padding: 20px;
+          width: 100%;
+      }
+
+      /* Botão para abrir o menu (hamburguer) */
+      .sidebar-toggle {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          width: 30px;
+          height: 20px;
+          cursor: pointer;
+      }
+
+      .sidebar-toggle div {
+          width: 30px;
+          height: 4px;
+          background-color: #fff;
+          transition: transform 0.3s ease;
+      }
+  }
+  </style>
 </head>
-
 <body>
-    <button class="botao_abrir" onclick="abrirMenu()">☰</button>
 
-    <div class="barra_lateral" id="menu">
-        <div class="fechar_barrinha">
-            <button class="botao_fechar" onclick="fecharMenu()">✖</button>
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="d-flex justify-content-center align-items-center px-3 w-100">
+        <div class="logo">
+          <img src="../assets/InnovaairWhite.png" alt="Logo">
         </div>
-        <div class="logo_container">
-            <img src="../assets/InnovaairWhite.png" alt="" />
-        </div>
+    <button class="btn btn-light d-lg-none" type="button" onclick="toggleSidebar()" style="border-radius: 8px;">
+      ☰
+    </button>
+  </div>
 
-        <span id="user_logado">Olá, Usuário</span>
-        <div class="opcoes">
-            <div class="container1">
-                <u>
-                    <li><a href="visaoGeral.html">Visão geral</a></li>
-                    <li><a href="tempoReal.html">Tempo real</a></li>
-                    <li><a href="listaMaquinas.html">Lista de máquinas</a></li>
-                    <li><a href="NovosCadastros.html" class="agora">Cadastrar Máquina</a></li>
-                    <li><a href="suporte.html">Suporte</a></li>
-                </u>
-            </div>
-            <div class="container2">
-                <u>
-                    <li><a href="suporte.html">Fale conosco!</a></li>
-                </u>
-            </div>
-        </div>
+  <nav class="flex-column">
+    <a href="visaoGeral.html">Visão geral</a>
+    <a href="tempoReal.html">Tempo real</a>
+    <a href="listaMaquinas.html">Lista de máquinas</a>
+    <a href="NovosCadastros.html"><strong>Cadastrar Máquina</strong></a>
+    <a href="suporte.html">Suporte</a>
+    <div class="logout mt-3">
+      <a href="NovosCadastros.html"><strong>Sair</strong></a>
     </div>
-    <div class="menu_mobile">
-        <button class="botao_menu_mobile" onclick="abrirMenuMobile()">☰</button>
-        <div class="logo_container">
-            <img src="../assets/InnovaairWhite.png" alt="" />
-        </div>
+  </nav>
+</div>
 
+<!-- Área principal -->
+<div class="main justify-content-center align-items-center">
+  <div class="form-card ">
+    <div class="top-bar">
+      Cadastrar Máquina
     </div>
-    <div class="novo_menu">
-        <a href="visaoGeral.html" >Visão geral</a>
-        <a href="tempoReal.html">Tempo real</a>
-        <a href="listaMaquinas.html">Lista de máquinas</a>
-        <a href="CadastrarMaquina.html" class="agora">Cadastrar Máquina</a>
-        <a href="suporte.html">Suporte</a>
-        <a href="suporte.html">Fale conosco!</a>
-    </div>
-
-    <div class="tela" id="tela">
-        <div class="logo_container">
-          <span class="CommumText" id="Mensagem_Usuario">Olá, Usuário!</span>
+    <form>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Endereço</label>
+          <select class="form-select">
+            <option selected>Endereço 1</option>
+            <option>Endereço 2</option>
+          </select>
         </div>
-
-        <div class="box_cadastros">
-            <h1 class="CommumText">Cadastrar Máquina</h1>
-            <div class="Caixa">
-                <!-- <div class="colunaImagem">
-                    <div class="imagem"></div>
-                </div> -->
-
-                <div class="coluna">
-                    <!-- <div class="TextBox">
-                        <h2>Cadastrar Dispositivo</h2>
-                        <span>Clique em "adicionar" para cadastrar um novo dispositivo para monitamento.</span>
-                    </div> -->
-
-                    <div id="div_disp" class="dispositivo">
-                        <div class="InputsCadastro">
-                            <div class="coluna">
-                                <span>Endereço</span>
-                            <select name="select" id="slc_endereco">
-                                <option value="end1">Endereço 1</option>
-                                <option value="end2">Endereço 2</option>
-                                <option value="end3">Endereço 3</option>
-                            </select>
-                                <span>Setor</span>
-                                <input type="text" name="" id="ipt_Setor">
-                                <span>Número Serial</span>
-                                <input type="text" name="" id="ipt_NumeroSerial">
-                                <span>RAM</span>
-                                <input type="text" name="" id="ipt_RAM">
-                            </div>
-                            <div class="coluna">
-                                <span>CPU</span>
-                                <input type="text" name="" id="ipt_CPU">
-                                <span>Sistema Operacional</span>
-                                <input type="text" name="" id="ipt_SO">
-                                <span>Placa de Rede</span>
-                                <input type="text" name="" id="ipt_PlacaDeRede">
-                                <span>Disco</span>
-                                <input type="text" name="" id="ipt_Disco">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="resposta" id="div_respDisp"></div>
-
-                    <div class="botoes">
-                        <!-- <div id="aD" class="adicionarDisp">
-                            <button class="botao" onclick="addDispositivo()">Adicionar</button>
-                        </div> -->
-                        <div id="cD" class="cadastrarDisp">
-                            <button class="botao" onclick="cadastrarDispositivo()">Cadastrar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Comentei o cadastrar colaborado  ~Guilherme-->
-             
-            <!-- <div class="Caixa">
-                <div class="colunaImagem">
-                    <div class="imagem"></div>
-                </div>
-
-                <div class="coluna">
-                    <div class="TextBox">
-                        <h2>Cadastrar Colaborador</h2>
-                        <span>Clique em ”adicionar” para cadastrar um novo colaborador.</span>
-                    </div>
-
-                    <div id="div_colab" class="colaborador">
-                        <div class="InputsCadastro">
-                            <div class="coluna">
-                                <span>Nome:</span>
-                                <input type="text" name="" id="ipt_nome">
-                                <span>Tipos de Usuário:</span>
-                                <input type="text" name="" id="ipt_usertype">
-                                <span>E-mail:</span>
-                                <input type="text" name="" id="ipt_email">
-                                <span>Senha:</span>
-                                <input type="text" name="" id="ipt_senha">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="resposta" id="div_respColab"></div>
-
-                    <div class="botoes">
-                        <div id="aC" class="adicionarColab">
-                            <button class="botao" onclick="addColaborador()">Adicionar</button>
-                        </div>
-                        <div id="cC" class="cadastrarColab">
-                            <button class="botao" onclick="cadastrarColaborador()">Cadastrar</button>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+        <div class="col-md-6">
+          <label class="form-label">CPU</label>
+          <input type="text" class="form-control" placeholder="Ex: Intel i7">
         </div>
-    </div>
-</body>
-<script src="../js/NovosCadastros.js"></script>
-<script src="../js/animacaoMenu.js"></script>
+        <div class="col-md-6">
+          <label class="form-label">Setor</label>
+          <input type="text" class="form-control" placeholder="Ex: TI">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Sistema Operacional</label>
+          <input type="text" class="form-control" placeholder="Ex: Windows 10">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Número Serial</label>
+          <input type="text" class="form-control" placeholder="Ex: 12345-ABCDE">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Placa de Rede</label>
+          <input type="text" class="form-control" placeholder="Ex: Realtek PCIe">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">RAM</label>
+          <input type="text" class="form-control" placeholder="Ex: 16 GB">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Disco</label>
+          <input type="text" class="form-control" placeholder="Ex: 512 GB SSD">
+        </div>
+      </div>
+      <div class="mt-4">
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+      </div>
+    </form>
+  </div>
+</div>
 
-</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    function abrirMenu() {
-        document.getElementById("menu").classList.add("menu-aberto");
-        document.getElementById("tela").classList.add("tela-movida");
-    }
-    function fecharMenu() {
-        document.getElementById("menu").classList.remove("menu-aberto");
-        document.getElementById("tela").classList.remove("tela-movida");
-    }
-    abrirMenu();
-
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('show');
+  }
 </script>
+</body>
+</html>
