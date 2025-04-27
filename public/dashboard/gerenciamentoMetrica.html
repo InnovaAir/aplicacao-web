@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+<<<<<<< Updated upstream
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gerenciamento de Métrica</title>
@@ -8,6 +9,15 @@
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../styles/estilo.css">
+=======
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/MenuLateral.css" />
+    <link rel="stylesheet" href="../styles/gerenc_metrica.css" />
+    <link rel="stylesheet" href="../styles/menu_mobile.css" />
+
+    <title>Gerenciamento de Métrica</title>
+>>>>>>> Stashed changes
 </head>
 <body>
 
@@ -30,8 +40,36 @@
     <div class="logout mt-3">
       <a href="NovosCadastros.html"><strong>Sair</strong></a>
     </div>
+<<<<<<< Updated upstream
   </nav>
 </div>
+=======
+    <div class="menu_mobile">
+        <button class="botao_menu_mobile" onclick="abrirMenuMobile()">☰</button>
+        <div class="logo_container">
+            <img src="../assets/InnovaairWhite.png" alt="" />
+        </div>
+    </div>
+    <div class="novo_menu">
+        <a href="visaoGeral.html" class="agora">Visão geral</a>
+        <a href="tempoReal.html">Tempo real</a>
+        <a href="listaMaquinas.html">Lista de máquinas</a>
+        <a href="NovosCadastros.html">Cadastros</a>
+        <a href="suporte.html">Suporte</a>
+        <a href="suporte.html">Fale conosco!</a>
+    </div>
+    <div id="tela" style="background-color: white;" class="container">
+        <div class="child">
+            <div class="tituloContainer">Gerenciamento de Métricas</div>
+            <div class="subtituloContainer">
+                <select id="select_filial" class="selectBox selectFilial">
+                    <option value="" disabled selected>Escolher filial</option>
+                    <option value="volvo">opção</option>
+                </select>
+            </div>
+            <div class="section1">
+                <div id="grid-maquinas" class="grid-maquinas">
+>>>>>>> Stashed changes
 
 <div class="main d-flex justify-content-center align-items-center">
   <div class="container d-flex justify-content-center align-items-center w-100">
@@ -64,6 +102,7 @@
                     <button class="btn btn-secondary exibir-metricas" onclick="modalAdicionar()">Adicionar nova métrica</button>
                   </div>
                 </div>
+<<<<<<< Updated upstream
               </div>
               <div class="col-md-4 mb-3">
                 <div class="card maquina-generic">
@@ -74,6 +113,11 @@
                     <button class="btn btn-primary exibir-metricas">Exibir métricas</button>
                     <button class="btn btn-secondary exibir-metricas" onclick="modalAdicionar()">Adicionar nova métrica</button>
                   </div>
+=======
+                <div class="subSection2">
+                    <div id="tituloMaquina" class="tituloContainer"></div>
+                    <div id="components" class="componentsContainer"></div>
+>>>>>>> Stashed changes
                 </div>
               </div>
               <div class="col-md-4 mb-3">
@@ -147,23 +191,174 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+<<<<<<< Updated upstream
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     sidebar.classList.toggle('show');
   }
 function modalAdicionar(idMaquina) {
+=======
+
+    // Plotar as opções do Select
+    document.body.onload = () => {
+        var json_filiais = null;
+
+        // Insere no Select as opções de Filiais
+        fetch(`/cadastros/metricas/listar/filiais/${sessionStorage.CLIENTE_USUARIO}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((answer) => {
+                answer.json().then(json_select => {
+                    json_filiais = json_select;
+
+                    var select_filial = document.getElementById("select_filial");
+
+                    select_filial.innerHTML = `<option selected disabled value="null">Selecione uma filial</option>`
+
+
+                    for (let i = 0; i < json_filiais.length; i++) {
+                        const filialAtual = json_filiais[i];
+
+                        // Insere cada opção 
+                        select_filial.innerHTML += `<option value="${filialAtual.idFilial}">${filialAtual.logradouro}(${filialAtual.complemento}) - ${filialAtual.terminal}/${filialAtual.setor} - ${filialAtual.estado} </option>`
+                    }
+                })
+            })
+            .catch(() => {
+                print("Erro ao realizar o Fetch")
+            });
+    };
+
+    // Ao selecionar, listar as máquinas
+    document.getElementById('select_filial').onchange = () => {
+
+        var selectFilial = document.getElementById("select_filial");
+
+        var grid = document.getElementById("grid-maquinas");
+
+        grid.innerHTML = ``;
+
+        fetch(`/cadastros/metricas/listar/totens/${selectFilial.value}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }).then((answer) => {
+            answer.json().then((array_json) => {
+
+                if (array_json.length == 0) {
+                    Swal.fire({
+                        title: "Ooops...",
+                        icon: "error",
+                        text: "Esta filial não há máquinas!",
+                        showCloseButton: false,
+                        showCancelButton: false,
+                        timer: 2000,
+                    })
+                }
+
+                for (let i = 0; i < array_json.length; i++) {
+                    const totem = array_json[i];
+
+                    grid.innerHTML += `
+                        <div class="maquina-generic">
+                            <span id="idHostMac">${totem.idMaquina} - ${totem.hostname} (${totem.enderecoMac} - ${totem.numeroSerial}</span>
+                            <button class="exibir-metricas" onclick="exibirComponentes(${totem.idMaquina}, '${totem.hostname}', '${totem.enderecoMac}')" >Exibir métricas</button>
+                        </div>`
+                }
+            })
+        })
+
+    }
+
+    function exibirComponentes(idMaquina, hostname, MacAdress) {
+        var bucket_componentes = document.getElementById("components");
+
+        bucket_componentes.innerHTML = ``;
+
+        fetch(`/cadastros/metricas/listar/componentes/${idMaquina}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }).then((answer) => {
+            answer.json().then((array_json) => {
+
+                if (array_json.length == 0) {
+                    Swal.fire({
+                        title: "Ooops...",
+                        icon: "error",
+                        text: "Máquina selecionada não possui componentes",
+                        showCloseButton: false,
+                        showCancelButton: false,
+                        confirmButtonColor: '#5573ff',
+                        confirmButtonText: `<i class=""></i> Confirmar`,
+                        timer: 2000,
+                    })
+                    document.getElementById("tituloMaquina").innerHTML = ``;
+                    return;
+                }
+
+                document.getElementById("tituloMaquina").innerHTML = `Máquina: ${idMaquina} - ${hostname} (${MacAdress})`;
+
+                for (let i = 0; i < array_json.length; i++) {
+                    const componente = array_json[i];
+
+                    // Requisitar as metricas do componente
+                    fetch(`/cadastros/metricas/listar/${componente.idComponente}`, {
+                        method: 'GET',
+                        headers: {
+                            "Content-Type": "application/json",
+                        }
+                    }).then((answer) => {
+                        answer.json().then((array_json) => {
+                            bucket_componentes.innerHTML += `
+                                <div id="comp_${componente.idComponente}" class="componentBucket">
+                                    <span>Categoria: ${componente.componente}</span>
+                                    <span>Especificação: ${componente.especificacao}</span>
+                                    <button class="exibir-metricas" onclick="modalAdicionar(${idMaquina}, '${hostname}', '${MacAdress}' ,${componente.idComponente})">Adicionar nova  métrica</button>
+                                </div>
+                                `
+
+                            for (let j = 0; j < array_json.length; j++) {
+                                const metrica = array_json[j];
+
+                                document.getElementById(`comp_${componente.idComponente}`).innerHTML += `
+                                    <div class="componentDiv">
+                                        <span>(${metrica.idMetrica}) Métrica: ${metrica.metrica}:</span>
+                                        <span>Limite Máximo: ${metrica.limiteMaximo}</span>
+                                        <span>Limite Mínimo: ${metrica.limiteMinimo}</span>
+                                        <div class="list-options">
+                                            <button class="editar-metrica" onclick="modalEdicao(${metrica.idMetrica}, ${idMaquina}, '${hostname}', '${MacAdress}')">Editar</button>
+                                            <button class="remover-metrica" onclick="modalConfirmarExclusao(${metrica.idMetrica}, '${metrica.metrica}', ${idMaquina}, '${hostname}', '${MacAdress}')">Remover</button>
+                                        </div>
+                                    </div>`
+                            }
+                        })
+                    })
+                }
+            })
+        })
+    }
+
+    // Exibe o modal e adiciona nova métrica
+    function modalAdicionar(idMaquina, hostname, mac, idComponente) {
+>>>>>>> Stashed changes
         Swal.fire({
-            title: `Adicioar nova métrica</i>`,
+            title: `Adicionar nova métrica</i>`,
             html: `
             <div class="container-update">
                 <div class="row-modal">
                     <span>Métrica:</span> <input id="metrica" type="text" placeholder="Insira a métrica">
                 </div>
                 <div class="row-modal">
-                    <span>Limite máximo:</span> <input id="metrica" type="text" placeholder="Insira o limite máximo">
+                    <span>Limite máximo:</span> <input id="limite-max" type="text" placeholder="Insira o limite máximo">
                 </div>
                 <div class="row-modal">
-                    <span>Limite mínimo:</span> <input id="metrica" type="text" placeholder="Insira o limite mínimo">
+                    <span>Limite mínimo:</span> <input id="limite-min" type="text" placeholder="Insira o limite mínimo">
                 </div>
                 <p>Caso queira deixar a métrica sem limite, deixe o campo vázio.</p>
             </div>  
@@ -172,54 +367,178 @@ function modalAdicionar(idMaquina) {
             showCancelButton: true,
             focusConfirm: false,
             confirmButtonColor: '#5573ff',
-            confirmButtonText: `<i class=""></i> Confirmar`,
+            confirmButtonText: `<i">Confirmar</i>`,
             cancelButtonColor: 'red',
-            cancelButtonText: `<i class=""></i> Cancelar`
-        });
+            cancelButtonText: `<i>Cancelar</i>`
+        }).then((log) => {
 
-        var new_maximo = document.getElementById("limite-maximo-exist").value;
-        var new_minimo = document.getElementById("limite-minimo-exist").value;
-    }
+            if (log.isConfirmed) {
+                var metrica = document.getElementById("metrica");
 
-    function modalEdicao(idMetrica, nomeMetrica, limiteMaximo, limiteMinimo) {
-        
+                if (metrica.value != null || metrica.value != ``) {
+                    metrica = document.getElementById("metrica").value;
+                } else {
+                    Swal.fire({
+                        title: "Falha!",
+                        timer: 2000,
+                        text: "A nome da métrica está vázio!",
+                        icon: "error"
+                    })
+                }
 
-        Swal.fire({
-            title: `Atualização da métrica <br> <i id='metrica-selecionada'>${nomeMetrica}</i>`,
-            html: `
-            <div class="container-update">
-                <div class="row-modal">
-                    <span id="limite-maximo-exist">Limite Máximo:</span> <input type="text" value="${limiteMaximo}">
-                </div>
-                <div class="row-modal">
-                    <span id="limite-minimo-exist">Limite Mínimo:</span> <input type="text" value="${limiteMinimo}">
-                </div>
-            </div>
-            `,
-            showCloseButton: false,
-            showCancelButton: true,
-            focusConfirm: false,
-            confirmButtonColor: '#5573ff',
-            confirmButtonText: `<i class=""></i> Confirmar`,
-            cancelButtonColor: 'red',
-            cancelButtonText: `<i class=""></i> Cancelar`
-        });
+                var maximo = document.getElementById("limite-max");
+                var minimo = document.getElementById("limite-min");
 
-        var new_maximo = document.getElementById("limite-maximo-exist").value;
-        var new_minimo = document.getElementById("limite-minimo-exist").value;
+                var repeat = false;
 
-    }
+                if (isNaN(maximo.value) || isNaN(minimo.value)) {
+                    Swal.fire({
+                        title: "Falha!",
+                        text: "Os limites devem ser números!",
+                        icon: "error"
+                    }).then(() => {
+                        repeat = true;
+                    })
+                }
 
-    function modalConfirmarExclusao(idMetrica) {
-        Swal.fire({
-            title: "Deseja realmente apagar a métrica ${nome?}",
-            showCloseButton: false,
-            showCancelButton: true,
-            confirmButtonColor: '#5573ff',
-            confirmButtonText: `<i class=""></i> Confirmar`,
-            cancelButtonColor: 'red',
-            cancelButtonText: `<i class=""></i> Cancelar`
+                if (repeat) {
+                    return modalAdicionar();
+                }
+
+                if (maximo.value != null || maximo.value != ``) {
+                    maximo = document.getElementById("limite-max").value;
+                } else {
+                    maximo = null;
+                }
+
+                if (minimo.value != null || minimo.value != ``) {
+                    minimo = document.getElementById("limite-min").value;
+                } else {
+                    minimo = null;
+                }
+
+                console.log(idComponente)
+                console.log(metrica)
+                console.log(maximo)
+                console.log(minimo)
+
+                fetch(`/cadastros/metricas/adicionar`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        fk: idComponente,
+                        metrica: metrica,
+                        max: maximo,
+                        min: minimo
+                    })
+                }).then(() => {
+                    // Limpa o antigo texto
+                    document.getElementById(`comp_${idComponente}`).innerHTML == ``;
+
+                    // Atualiza o texto após cadastrar
+                    exibirComponentes(idMaquina, hostname, mac);
+                })
+            }
         })
+    }
+
+    function modalEdicao(idMetrica, idMaquina, hostname, mac) {
+        // Requisita as informações da métrica
+        fetch(`/cadastros/metricas/ver-unica/${idMetrica}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }).then((answer) => {
+            answer.json().then((metrica) => {
+                metrica = metrica[0];
+
+                Swal.fire({
+                    title: `Atualização da métrica <br> <i id='metrica-selecionada'>${metrica.metrica}</i>`,
+                    html: `
+                    <div class="container-update">
+                        <div class="row-modal">
+                            <span>Limite Máximo:</span> <input id="limite-maximo-exist" type="text" value="${metrica.limiteMaximo}">
+                        </div>
+                        <div class="row-modal">
+                            <span>Limite Mínimo:</span> <input id="limite-minimo-exist" type="text" value="${metrica.limiteMinimo}">
+                        </div>
+                    </div>
+                    `,
+                    showCloseButton: false,
+                    showCancelButton: true,
+                    focusConfirm: false,
+                    confirmButtonColor: '#5573ff',
+                    confirmButtonText: `<i class=""></i> Confirmar`,
+                    cancelButtonColor: 'red',
+                    cancelButtonText: `<i class=""></i> Cancelar`
+                }).then((log) => {
+
+                    if (log.isConfirmed) {
+
+                        var new_maximo = document.getElementById("limite-maximo-exist");
+                        var new_minimo = document.getElementById("limite-minimo-exist");
+
+                        fetch(`/cadastros/metricas/atualizar`, {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                fk: idMetrica,
+                                min: new_minimo.value,
+                                max: new_maximo.value,
+                            })
+                        }).then((answer) => {
+                        })
+                        Swal.fire({
+                            title: "Atualização!",
+                            timer: 2000,
+                            text: `A métrica ${metrica.metrica} foi alterada com sucesso!`,
+                            icon: "update"
+                        })
+                        exibirComponentes(idMaquina, hostname, mac)
+                    }
+                })
+            })
+        })
+    }
+
+    function modalConfirmarExclusao(idMetrica, nomeMetrica, idMaquina, hostname, mac) {
+        Swal.fire({
+            title: `Deseja realmente apagar a métrica ${nomeMetrica}?`,
+            icon: "question",
+            confirmButtonColor: '#5573ff',
+            confirmButtonText: `<i class=""></i> Confirmar`,
+            cancelButtonColor: 'red',
+            cancelButtonText: `<i class=""></i> Cancelar`,
+            showCloseButton: false,
+            showCancelButton: true,
+            confirmButtonColor: '#5573ff',
+        })
+            .then((log) => {
+                if (log.isConfirmed) {
+                    fetch(`/cadastros/metricas/deletar/${idMetrica}`, {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    })
+
+                    Swal.fire({
+                        title: `Métrica removida com sucesso!`,
+                        icon: "success",
+                        showCloseButton: false,
+                        showConfirmButton: false,
+                        showCancelButton: false,
+                        timer: 2000,
+                    })
+
+                    exibirComponentes(idMaquina, hostname, mac)
+                }
+            })
     }
 
 </script>
