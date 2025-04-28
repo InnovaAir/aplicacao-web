@@ -119,6 +119,7 @@
 <script src="../js/validar.js"></script>
 <script src="../js/validacaoFuncionario.js"></script>
 <script>
+    listarCargo()
     function abrirMenu() {
         document.getElementById("menu").classList.add("menu-aberto");
         document.getElementById("tela").classList.add("tela-movida");
@@ -128,8 +129,7 @@
         document.getElementById("tela").classList.remove("tela-movida");
     }
     abrirMenu();
-
-    //mostrar cargos
+function listarCargo(){
     fetch("/usuarios/listarCargo", {
         method: "POST",
         headers: {
@@ -207,4 +207,6 @@
             console.log("A consulta foi mal sucedida devido a um erro com o Banco de dados!");
             console.log(`#ERRO: ${erro}`);
         });
+}
+    //mostrar cargos
 </script>
