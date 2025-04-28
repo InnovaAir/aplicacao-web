@@ -16,7 +16,7 @@
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
-<body onload="checarSessao()">
+<body>
   <button class="botao_abrir" onclick="abrirMenu()">☰</button>
 
   <div class="sidebar" id="sidebar">
@@ -55,7 +55,7 @@
     <div class="container_componente">
       <div class="titulo">
         <span id="titulo_01">
-          <b>Análise Geral por Companhia Aérea</b>
+          <b>Análise Geral por Endereço</b>
         </span>
         <span id="titulo_02">
           <i><b>*Selecione os filtros para a visualização</b></i>
@@ -66,7 +66,7 @@
         <div class="custom-select">
           <select id="select_aeroporto">
             <option value="" disabled>Selecione o Aeroporto</option>
-            <option value="gru" selected>Guarulhos</option>
+            <option value="gru" selected>GRU</option>
             <option value="cgh">Congonhas</option>
           </select>
         </div>
@@ -85,7 +85,7 @@
         <div class="grafico_alinhado">
           <div class="titulo_grafico1">
             <span id="titulo_01">
-              Quantidade de alertas por componente
+              Quantidade de alertas por categoria do componente
             </span>
             <span id="titulo_02">
               <i>*Um componente pode emitir mais de um alerta, organizado pelos níveis de alerta.</i>
@@ -124,7 +124,7 @@
           <div class="titulo_grafico3">
             <div class="titulo_alinhado">
               <span id="titulo_01">
-                Lista de máquinas
+                Lista de Componentes
               </span>
               <span id="titulo_02">
                 <i>*Por nível de gravidade do alerta</i>
