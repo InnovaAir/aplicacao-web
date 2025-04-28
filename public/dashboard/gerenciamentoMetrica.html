@@ -204,7 +204,7 @@ function modalAdicionar(idMaquina) {
         var json_filiais = null;
 
         // Insere no Select as opções de Filiais
-        fetch(`/cadastros/metricas/listar/filiais/${sessionStorage.CLIENTE_USUARIO}`, {
+        fetch(`/cadastros/metricas/listar/filiais/${sessionStorage.idUsuario}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

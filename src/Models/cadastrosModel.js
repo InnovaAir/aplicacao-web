@@ -1,9 +1,9 @@
 const cli = require("nodemon/lib/cli");
 var database = require("../database/config");
 
-function listarFiliais(fkCliente) {
+function listarFiliais(idUsuario) {
     var instrucaoSql = `
-        SELECT * FROM filial as f JOIN endereco as e ON f.fkEndereco = e.idEndereco WHERE f.fkCliente = ${fkCliente};
+        SELECT idFilial, terminal, setor from usuario join usuarioFilial on fkUsuario = idUsuario join filial on fkFilial = idFilial where idUsuario = ${idUsuario};
     `;
     console.log(`Listando filiais...`)
     return database.executar(instrucaoSql);

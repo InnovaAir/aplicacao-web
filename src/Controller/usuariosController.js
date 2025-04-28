@@ -96,20 +96,17 @@ function entrar(req, res) {
             .then(
                 function (resultadoAutenticar) {
                     if (resultadoAutenticar.length == 1) {
-                        if (resultadoAutenticar[0].email){
                             console.log(resultadoAutenticar);
                             // Adicionando validacao para saber se o usuario e a senha esta exatamente igual ao que esta no banco de dados
                             // e retornando mensagem de erro caso não esteja.
                             console.log(resultadoAutenticar);
                             res.json({
-                                id: resultadoAutenticar[0].idUsuario,
-                                nome: resultadoAutenticar[0].nome,
-                                email: resultadoAutenticar[0].email,
-                                senha: resultadoAutenticar[0].senha,
-                                cliente: resultadoAutenticar[0].fkCliente,
-                                cargo: resultadoAutenticar[0].fkCargo
+                                idUsuario: resultadoAutenticar[0].idUsuario,
+                                idFilial: resultadoAutenticar[0].idFilial,
+                                fkCliente: resultadoAutenticar[0].fkCliente,
+                                fkCargo: resultadoAutenticar[0].fkCargo
                             });
-                        }
+                        
 
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");

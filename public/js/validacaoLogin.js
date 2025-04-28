@@ -104,14 +104,11 @@ function entrar(email, senha){
             resposta.json().then(json => {
                 console.log(json);
                 console.log(JSON.stringify(json));
-                // sessionStorage.ID_USUARIO = json.id;
-                sessionStorage.NOME_USUARIO = json.nome;
-                sessionStorage.EMAIL_USUARIO = json.email;
-                sessionStorage.CARGO_USUARIO = json.cargo;
-                sessionStorage.CLIENTE_USUARIO = json.cliente;
-                //alert("Login Realizado com sucesso!");
-                // alterando redirecionamento para pagina index
-                if (json.cargo == 1){
+                sessionStorage.idUsuario = json.idUsuario;
+                sessionStorage.idFilial = json.idFilial;
+                sessionStorage.fkCliente = json.fkCliente;
+                sessionStorage.fkCargo = json.fkCargo;
+                if (json.fkCargo == 1){
                     let timerInterval;
                     Swal.fire({
                       icon: "success",
@@ -138,7 +135,7 @@ function entrar(email, senha){
                     setTimeout(function () {
                         window.location = "./cadastroEmpresa.html";
                     }, 1350); // apenas para exibir o loading
-                }else if (json.cargo == 2){
+                }else if (json.fkCargo == 2){
                     let timerInterval;
                     Swal.fire({
                       icon: "success",
@@ -165,7 +162,7 @@ function entrar(email, senha){
                     setTimeout(function () {
                         window.location = "./dashboard/cadastrarFuncionario.html";
                     }, 1350); // apenas para exibir o loading
-                }else if (json.cargo == 3){
+                }else if (json.fkCargo == 3){
                     let timerInterval;
                     Swal.fire({
                       icon: "success",
@@ -192,7 +189,7 @@ function entrar(email, senha){
                     setTimeout(function () {
                         window.location = "./dashboard/dashboard_analista.html";
                     }, 1350); // apenas para exibir o loading
-                }else if (json.cargo == 4){
+                }else if (json.fkCargo == 4){
                     let timerInterval;
                     Swal.fire({
                       icon: "success",

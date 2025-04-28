@@ -213,59 +213,36 @@
 <script src="../js/animacaoMenu.js"></script>
 
 <script>
-  var options = {
-    series: [
-      {
-        name: 'Baixo',
-        data: [6, 10, 2, 31]
-      },
-      {
-        name: 'Alto',
-        data: [14, 21, 23, 12]
-      },
-      {
-        name: 'Crítico',
-        data: [2, 3, 5, 10]
-      }
-    ],
-    chart: {
-      type: 'bar',
-      height: 430
-    },
-    colors: ['#ff9900', '#ff0000', '#8400ff'],
-    plotOptions: {
-      bar: {
-        horizontal: true,
-        dataLabels: {
-          position: 'top'
-        }
-      }
-    },
-    dataLabels: {
-      enabled: true,
-      offsetX: -6,
-      style: {
-        fontSize: '12px',
-        colors: ['#fff']
-      },
-      formatter: function (val) {
-        return val;
-      }
-    },
-    stroke: {
-      show: true,
-      width: 1,
-      colors: ['#fff']
-    },
-    tooltip: {
-      shared: true,
-      intersect: false
-    },
-    xaxis: {
-      categories: ["CPU", "RAM", "Disco", "Rede"],
-      max: 30
-    }
-  };
+obterFiliaisGerente()
+function obterFiliaisGerente(){
+
+  fetch(`/cadastros/metricas/listar/filiais/${sessionStorage.idUsuario}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((answer) => {
+                answer.json().then(json_select => {
+                    json_filiais = json_select;
+
+                    var select_aeroporto = document.getElementById("select_aeroporto");
+
+                    select_aeroporto.innerHTML = `<option selected disabled value="null">Selecione um aeroporto</option>`
+
+
+                    for (let i = 0; i < json_filiais.length; i++) {
+                        var filialAtual = json_filiais[i];
+
+                        // Insere cada opção 
+                        select_aeroporto.innerHTML += `<option value="${filialAtual.idFilial}">${filialAtual.terminal}</option>`
+                    }
+                })
+            })
+            .catch(() => {
+                print("Erro ao realizar o Fetch")
+            });
+    };
 
   var chart = new ApexCharts(document.querySelector("#chart_barras"), options);
   chart.render();

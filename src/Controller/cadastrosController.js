@@ -1,14 +1,14 @@
 var cadastrosModel = require("../Models/cadastrosModel");
 
 function listarFiliais(req, res) {
-    var fkCliente = req.params.fk;
+    var idUsuario = req.params.fk;
 
     // Faça as validações dos valores    
-    if (fkCliente == null) {
+    if (idUsuario == null) {
         res.status(400).send("ID do Cliente está nulo!");
     }
 
-    cadastrosModel.listarFiliais(fkCliente)
+    cadastrosModel.listarFiliais(idUsuario)
         .then((resultado) => {
             res.json(resultado);
         })

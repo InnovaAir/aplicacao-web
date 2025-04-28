@@ -68,18 +68,14 @@ function cadastrarFuncionario(nome, email, senha, cliente, cargo, filial) {
 function entrar(email, senha) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function autenticar(): ", email, senha)
     var instrucaoSql = `
-        SELECT idUsuario, u.nome, u.email as email, fil.fkCliente, u.fkCargo FROM usuario u
-        JOIN usuarioFilial as uf
-        ON uf.fkUsuario = u.idUsuario
-        JOIN filial as fil
-        ON uf.fkFilial = fil.idFilial
-        JOIN cliente c on c.idCliente = fil.fkCliente    
-        WHERE u.email = '${email}' AND u.senha = '${senha}';
+        SELECT idUsuario, filial.fkCliente, fkCargo, idFilial FROM usuario
+        JOIN usuarioFilial
+        ON fkUsuario = idUsuario
+        JOIN filial
+        ON fkFilial = idFilial
+        JOIN cliente on idCliente = filial.fkCliente    
+        WHERE usuario.email = '${email}' AND senha = '${senha}';
     `;
-    // var instrucaoSql = `
-    //     SELECT * FROM usuario
-    //     WHERE email = '${email}' AND senha = '${senha}';
-    // `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
