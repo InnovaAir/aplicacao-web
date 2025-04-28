@@ -125,7 +125,6 @@ body{
     background-size: cover;
     padding: 20%;
     padding-bottom: 200px;
-    margin-bottom: -120px;
     width: 100vw;
     justify-content: center;
     align-items: center;
@@ -327,8 +326,8 @@ margin-top: 50%;
     font-style: italic;
     font-size: 3rem;
     color: white;
-    margin: 1.5rem;
-    margin-top: -2rem;
+
+    margin-top: 2rem;
     text-shadow: 4px 4px 0px #2d42a0;
 }
 
@@ -425,9 +424,6 @@ margin-top: 50%;
     #tituloSobreNos{
         font-style: italic;
         font-size: 1.5rem;
-        color: white;
-        margin: 1.5rem;
-        margin-top: 2rem;
         text-shadow: 4px 4px 0px #2d42a0;
     }
 }
