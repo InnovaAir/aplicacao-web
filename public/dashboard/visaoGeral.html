@@ -30,7 +30,7 @@
     </style>
 </head>
 
-<body onload="checarSessao()" class="visao_geral">
+<body class="visao_geral">
     <button class="botao_abrir" onclick="abrirMenu()">☰</button>
     <!-- 
     teste para sobreposição do botão "Expandir" -->
@@ -110,7 +110,6 @@
             </div>
 
             <div class="section1">
-
                 <!-- gráficos antigos irrelevantes -->
                 <!-- <div class="subSection1">
 
@@ -182,7 +181,6 @@
                 </div> -->
 
 
-
                 <div class="subSection2">
                     <div class="listaMaquinas">
                         <div class="tituloContainer">Lista de máquinas
@@ -207,6 +205,36 @@
                                 </select>
                             </div>
 
+                        </div>
+                        <div style="display: flex; gap: 2%;">
+                            <div
+                                style="width: fit-content; border: 3px solid #EFEFEF; padding: 1%; display: flex; flex-direction: column;">
+                                <span style="font-size: 1.1vw;">Total de máquinas c/ Alerta</span
+                                    style="font-size: 1.1vw;">
+                                <span style="font-size: 1.25vw;"><strong>1 Máquina</strong></span>
+                            </div>
+                            <div
+                                style="width: fit-content; border: 3px solid #EFEFEF; padding: 1%; display: flex; flex-direction: column;">
+                                <span style="font-size: 1.1vw;">Legenda das cores</span style="font-size: 1.1vw;">
+                                <div style="display: flex; flex-direction: row; gap: 20px;">
+                                    <div style="display: flex; align-items: center;">
+                                        <div style="background-color:greenyellow;" class="bola"></div>
+                                        <span style="font-style: italic;">Nenhum alerta</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center;">
+                                        <div style="background-color:yellow;" class="bola"></div>
+                                        <span style="font-style: italic;">Nivel baixo</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center;">
+                                        <div style="background-color:orange;" class="bola"></div>
+                                        <span style="font-style: italic;">Nível alto</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center;">
+                                        <div style="background-color:red;" class="bola"></div>
+                                        <span style="font-style: italic;">Nivel crítico</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="scrollMaquinas">
                             <div class="legendasMaquinas">
