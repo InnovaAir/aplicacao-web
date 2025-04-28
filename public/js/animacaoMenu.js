@@ -17,3 +17,9 @@ function abrirMenu() {
         novoMenu.style.display = 'flex';
     }
 }
+
+function checarSessao() {
+  if (sessionStorage.length == 0) {
+      document.location.href = "../index.html"
+  }
+}

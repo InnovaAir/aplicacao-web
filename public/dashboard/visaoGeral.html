@@ -7,68 +7,51 @@
     <link rel="stylesheet" href="../styles/MenuLateral.css" />
     <link rel="stylesheet" href="../styles/visao_geral.css" />
     <link rel="stylesheet" href="../styles/menu_mobile.css" />
+    <link rel="stylesheet" href="../styles/estilo.css">
 
-    <title>Visão geral</title>
+    <title>Análise em tempo Real</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     <style>
-        .visao_geral .botao_abrir{
-        display: block;
-    }
-    .visao_geral .barra_lateral{
-        display: block;
-    }
+        .visao_geral .botao_abrir {
+            display: block;
+        }
 
-    .visao_geral .opcoes{
-        font-size: 2vw; 
+        .visao_geral .barra_lateral {
+            display: block;
+        }
 
-    }
+        .visao_geral .opcoes {
+            font-size: 2vw;
+
+        }
     </style>
 </head>
 
-<body class="visao_geral">
+<body onload="checarSessao()" class="visao_geral">
     <button class="botao_abrir" onclick="abrirMenu()">☰</button>
     <!-- 
     teste para sobreposição do botão "Expandir" -->
 
-
-    <div class="barra_lateral" id="menu">
-        <div class="fechar_barrinha">
-            <button class="botao_fechar" onclick="fecharMenu()">✖</button>
-        </div>
-        <div class="logo_container">
-            <img src="../assets/InnovaairWhite.png" alt="" />
-        </div>
-
-        <span id="user_logado">Olá, Usuário</span>
-        <div class="opcoes">
-            <div class="container1">
-                <u>
-                    <li><a href="visaoGeral.html" class="agora">Visão geral</a></li>
-                    <li><a href="tempoReal.html">Tempo real</a></li>
-                    <li><a href="listaMaquinas.html">Lista de máquinas</a></li>
-                    <li><a href="CadastrarMaquina.html">Cadastrar Máquina</a></li>
-                    <li><a href="suporte.html">Suporte</a></li>
-                </u>
-            </div>
-            <div class="container2">
-                <u>
-                    <li><a href="suporte.html">Fale conosco!</a></li>
-                </u>
+    <div class="sidebar" id="sidebar">
+        <div class="d-flex justify-content-center align-items-center px-3 w-100">
+            <div class="logo">
+                <img src="../assets/InnovaairWhite.png" alt="Logo">
             </div>
         </div>
+        <nav class="flex-column">
+            <a style="display: none;" href="dashRoberto.html">Visão geral</a>
+            <a style="display: none;" href="cadastrarFuncionario.html"><strong>Cadastrar Funcionario</strong></a>
+            <a href="visaoGeral.html"><strong>Análise em tempo real</strong></a>
+            <a href="suporte.html">Suporte</a>
+            <div class="logout mt-3">
+                <a onclick="limparSessao()" href="../index.html"><strong>Sair</strong></a>
+            </div>
+        </nav>
     </div>
 
-    <div class="novo_menu">
-        <a href="visaoGeral.html" class="agora">Visão geral</a>
-        <a href="tempoReal.html">Tempo real</a>
-        <a href="listaMaquinas.html">Lista de máquinas</a>
-        <a href="NovosCadastros.html">Cadastros</a>
-        <a href="suporte.html">Suporte</a>
-        <a href="suporte.html">Fale conosco!</a>
-    </div>
     <div class="child">
         <div class="Expandir">
             <button onclick="fecharExpandir()" id="fecharExpandir">
@@ -270,24 +253,49 @@
                                     15%
                                 </div>
                                 <div style="width:100%; margin-inline:1%" class="maquinaLegenda usoRam">
-                                    <div style="background-color:greenyellow;" class="bola"></div>
-                                    45%
+                                    <div style="background-color:red;" class="bola"></div>
+                                    95%
                                 </div>
                                 <div style="width:100%; margin-inline:1%" class="maquinaLegenda usoDisco">
-                                    <div style="background-color:greenyellow;" class="bola"></div>
+                                    <div style="background-color:orange;" class="bola"></div>
                                     45%
                                 </div>
                                 <div style="width:100%; margin-inline:1%" class="maquinaLegenda ping">
                                     <div style="background-color:greenyellow;" class="bola"></div>
                                     120ms
                                 </div>
-                                <div style="width:100%; margin-inline:1%; " class="maquinaLegenda Processos">19283</div>
+                                <div style="width:100%; margin-inline:1%; " class="maquinaLegenda Processos">162</div>
                                 <div style="width:100%; margin-inline:1%" class="maquinaLegenda tempoAtividade">24d 12h
-                                    32min 155
+                                    32min 15s
                                 </div>
                                 <button style="color: white; font-weight: 600;width:fit-content; height:fit-content; margin-right:2%; font-size:1.5vmax;    overflow-wrap:anywhere;
 " id="buttonExpandir" onclick="abrirExpandir()">Expandir</button>
-
+                            </div>
+                            <div class="secaoMaquinas">
+                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda numeroTotem">
+                                    Totem-f002-a</div>
+                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda usoCPU">
+                                    <div style="background-color:greenyellow;" class="bola"></div>
+                                    20%
+                                </div>
+                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda usoRam">
+                                    <div style="background-color:greenyellow;" class="bola"></div>
+                                    37%
+                                </div>
+                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda usoDisco">
+                                    <div style="background-color:greenyellow;" class="bola"></div>
+                                    52%
+                                </div>
+                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda ping">
+                                    <div style="background-color:greenyellow;" class="bola"></div>
+                                    92ms
+                                </div>
+                                <div style="width:100%; margin-inline:1%; " class="maquinaLegenda Processos">132</div>
+                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda tempoAtividade">12d 09h
+                                    54min 45s
+                                </div>
+                                <button style="color: white; font-weight: 600;width:fit-content; height:fit-content; margin-right:2%; font-size:1.5vmax;    overflow-wrap:anywhere;
+" id="buttonExpandir" onclick="abrirExpandir()">Expandir</button>
                             </div>
 
 
@@ -377,13 +385,33 @@
 
     var series = {
         monthDataSeries1: {
-            prices: [150, 155, 160, 158, 162],
+            prices: [62, 57, 29, 52, 15],
             dates: [
-                "2025-04-01",
-                "2025-04-02",
-                "2025-04-03",
-                "2025-04-04",
-                "2025-04-05"
+                "10:00:00",
+                "10:20:00",
+                "10:40:00",
+                "11:00:00",
+                "11:20:00"
+            ]
+        },
+        monthDataSeries2: {
+            prices: [65, 77, 82, 89, 95],
+            dates: [
+                "10:00:00",
+                "10:20:00",
+                "10:40:00",
+                "11:00:00",
+                "11:20:00"
+            ]
+        },
+        monthDataSeries3: {
+            prices: [119, 127, 90, 99, 120],
+            dates: [
+                "10:00:00",
+                "10:20:00",
+                "10:40:00",
+                "11:00:00",
+                "11:20:00"
             ]
         }
     };
@@ -419,9 +447,6 @@
                 align: 'left'
             },
             labels: labels,
-            xaxis: {
-                type: 'datetime',
-            },
             yaxis: {
                 opposite: true
             },
@@ -436,8 +461,8 @@
 
     // funções para criar um gráfico diferente para cada componente
     criarGraficoArea("#graficosExpandirCPU", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "Frequência");
-    criarGraficoArea("#graficosExpandirRAM", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "Frequência");
-    criarGraficoArea("#graficosExpandirRede", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "MBs");
+    criarGraficoArea("#graficosExpandirRAM", series.monthDataSeries2.prices, series.monthDataSeries1.dates, "Frequência");
+    criarGraficoArea("#graficosExpandirRede", series.monthDataSeries3.prices, series.monthDataSeries1.dates, "MBs");
 
     // grafico barras stacked
     var options = {
@@ -445,14 +470,14 @@
             {
                 name: 'Espaço Utilizado',
                 group: 'budget',
-                data: [60, 25]
+                data: [90]
             },
 
 
             {
-                name: 'Espaço Total',
+                name: 'Espaço Livre',
                 group: 'budget',
-                data: [40, 75]
+                data: [10]
             },
 
 
@@ -479,10 +504,9 @@
         },
         xaxis: {
             categories: [
-                'Disco 1',
-                'Disco 2',
-
+                'Disco 1'
             ],
+            max: 100,
             labels: {
                 formatter: (val) => {
                     return val + '%'

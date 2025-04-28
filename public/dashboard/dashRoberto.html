@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="../styles/MenuLateral.css" />
   <link rel="stylesheet" href="../styles/dashRoberto.css" />
   <link rel="stylesheet" href="../styles/menu_mobile.css" />
+  <link rel="stylesheet" href="../styles/estilo.css" />
+
 
   <title>Visão geral</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -14,35 +16,26 @@
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
-<body>
+<body onload="checarSessao()">
   <button class="botao_abrir" onclick="abrirMenu()">☰</button>
 
-  <div class="barra_lateral" id="menu">
-    <div class="fechar_barrinha">
-      <button class="botao_fechar" onclick="fecharMenu()">✖</button>
+  <div class="sidebar" id="sidebar">
+    <div class="d-flex justify-content-center align-items-center px-3 w-100">
+        <div class="logo">
+            <img src="../assets/InnovaairWhite.png" alt="Logo">
+        </div>
     </div>
-    <div class="logo_container">
-      <img src="../assets/InnovaairWhite.png" alt="" />
-    </div>
+    <nav class="flex-column">
+        <a style="display: none;" href="dashRoberto.html">Visão geral</a>
+        <a style="display: none;" href="cadastrarFuncionario.html"><strong>Cadastrar Funcionario</strong></a>
+        <a href="visaoGeral.html"><strong>Análise em tempo real</strong></a>
+        <a href="suporte.html">Suporte</a>
+        <div class="logout mt-3">
+            <a onclick="limparSessao()" href="../index.html"><strong>Sair</strong></a>
+        </div>
+    </nav>
+</div>
 
-    <span id="user_logado">Olá, Usuário</span>
-    <div class="opcoes">
-      <div class="container1">
-        <u>
-          <li><a href="visaoGeral.html" class="agora">Visão geral</a></li>
-          <li><a href="tempoReal.html">Tempo real</a></li>
-          <li><a href="listaMaquinas.html">Lista de máquinas</a></li>
-          <li><a href="CadastrarMaquina.html">Cadastrar Máquina</a></li>
-          <li><a href="suporte.html">Suporte</a></li>
-        </u>
-      </div>
-      <div class="container2">
-        <u>
-          <li><a href="index.html">Sair</a></li>
-        </u>
-      </div>
-    </div>
-  </div>
   <div class="menu_mobile">
     <button class="botao_menu_mobile" onclick="abrirMenuMobile()">☰</button>
     <div class="logo_container">
@@ -224,15 +217,15 @@
     series: [
       {
         name: 'Baixo',
-        data: [6, 10, 2]
+        data: [6, 10, 2, 31]
       },
       {
         name: 'Alto',
-        data: [14, 21, 23]
+        data: [14, 21, 23, 12]
       },
       {
         name: 'Crítico',
-        data: [2, 3, 5]
+        data: [2, 3, 5, 10]
       }
     ],
     chart: {
@@ -269,7 +262,7 @@
       intersect: false
     },
     xaxis: {
-      categories: ["CPU", "RAM", "Disco"],
+      categories: ["CPU", "RAM", "Disco", "Rede"],
       max: 30
     }
   };

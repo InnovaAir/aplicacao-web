@@ -217,7 +217,7 @@ function entrar(email, senha){
                       }
                     });
                     setTimeout(function () {
-                        window.location = "./dashboard/tempoReal.html";
+                        window.location = "./dashboard/visaoGeral.html";
                     }, 1350); // apenas para exibir o loading
                 }
             })

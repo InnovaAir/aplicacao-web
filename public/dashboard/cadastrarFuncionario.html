@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../styles/MenuLateral.css">
     <link rel="stylesheet" href="../styles/NovosCadastros.css">
     <link rel="stylesheet" href="../styles/menu_mobile.css">
+    <link rel="stylesheet" href="../styles/estilo.css">
     <link rel="icon" href="../public/assets/favicon.ico" type="favicon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
@@ -22,6 +23,7 @@
             margin-bottom: 8px;
             display: block;
         }
+
         .input-erro {
             border: 1px solid red !important;
         }
@@ -37,26 +39,24 @@
     </style>
 </head>
 
-<body>
-    <button class="botao_abrir" onclick="abrirMenu()">☰</button>
-
-    <div class="barra_lateral" id="menu">
-        <div class="fechar_barrinha">
-            <button class="botao_fechar" onclick="fecharMenu()">✖</button>
-        </div>
-        <div class="logo_container">
-            <img src="../assets/InnovaairWhite.png" alt="" />
-        </div>
-
-        <span id="user_logado">Olá, Gerente</span>
-        <div class="opcoes">
-            <div class="container1">
-                <u>
-                    <li><a href="cadastroEmpresa.html">Cadastrar Funcionario</a></li>
-                </u>
+<body onload="checarSessao()">
+    <div class="sidebar" id="sidebar">
+        <div class="d-flex justify-content-center align-items-center px-3 w-100">
+            <div class="logo">
+                <img src="../assets/InnovaairWhite.png" alt="Logo">
             </div>
         </div>
+        <nav class="flex-column">
+            <a href="dashRoberto.html">Visão geral</a>
+            <a href="cadastrarFuncionario.html"><strong>Cadastrar Funcionario</strong></a>
+            <a style="display: none;" href="visaoGeral.html">Analise tempo real</a>
+            <a style="display: none;" href="suporte.html">Suporte</a>
+            <div class="logout mt-3">
+                <a onclick="limparSessao()" href="../index.html"><strong>Sair</strong></a>
+            </div>
+        </nav>
     </div>
+
     <div class="menu_mobile">
         <button class="botao_menu_mobile" onclick="abrirMenuMobile()">☰</button>
         <div class="logo_container">
@@ -65,12 +65,12 @@
 
     </div>
     <div class="novo_menu">
-        <a href="visaoGeral.html" >Visão geral</a>
+        <a href="visaoGeral.html">Visão geral</a>
     </div>
 
     <div class="tela" id="tela">
         <div class="logo_container">
-          <!-- <span class="CommumText" id="Mensagem_Usuario">Olá, Gerente!</span> -->
+            <!-- <span class="CommumText" id="Mensagem_Usuario">Olá, Gerente!</span> -->
         </div>
 
         <div class="box_cadastros">
@@ -84,7 +84,7 @@
                                 <input id="ipt_nome" type="text">
                                 <span>Cargo</span>
                                 <select name="select" id="slc_cargo">
-                                    <option value="" disabled selected>Selecione o Cargo do funcionario</option>    
+                                    <option value="" disabled selected>Selecione o Cargo do funcionario</option>
                                 </select>
                                 <span>Senha</span>
                                 <input id="ipt_senha" type="password">
@@ -94,7 +94,8 @@
                                 <input id="ipt_email" type="text">
                                 <span>Filiais</span>
                                 <select name="select" id="slc_filial">
-                                    <option value="" disabled selected>Selecione a filial que o usuario será associado</option>  
+                                    <option value="" disabled selected>Selecione a filial que o usuario será associado
+                                    </option>
                                 </select>
                                 <span>Confirmar senha</span>
                                 <input id="ipt_confirmar_senha" type="password">
@@ -113,9 +114,10 @@
         </div>
     </div>
 </body>
+
 </html>
 <script src="../js/validar.js"></script>
-<script src="../js/valid    acaoFuncionario.js"></script>
+<script src="../js/validacaoFuncionario.js"></script>
 <script>
     function abrirMenu() {
         document.getElementById("menu").classList.add("menu-aberto");
@@ -126,83 +128,83 @@
         document.getElementById("tela").classList.remove("tela-movida");
     }
     abrirMenu();
-    
+
     //mostrar cargos
     fetch("/usuarios/listarCargo", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
     })
-    // Após a solicitação ser concluída, o then é executado. A função recebe o objeto da resposta.
-    .then(function (resposta) {
-        // Verifica se a resposta foi bem-sucedida
-        if (resposta.ok) {
-        if (resposta.status === 204) {
-            throw "Nenhum resultado encontrado!";
-        }
-            return resposta.json();
-        } else {
-            throw "Houve um erro na API!";
-        }
-    })
-        .then(function (resposta){
+        // Após a solicitação ser concluída, o then é executado. A função recebe o objeto da resposta.
+        .then(function (resposta) {
+            // Verifica se a resposta foi bem-sucedida
+            if (resposta.ok) {
+                if (resposta.status === 204) {
+                    throw "Nenhum resultado encontrado!";
+                }
+                return resposta.json();
+            } else {
+                throw "Houve um erro na API!";
+            }
+        })
+        .then(function (resposta) {
             cargos = "";
             console.log("cargos recebidas:", JSON.stringify(resposta));
 
-            for(var i = 1; i< resposta.length; i++){
+            for (var i = 1; i < resposta.length; i++) {
 
-            var cargo = resposta[i];
-            var id = cargo.idcargo;
-            var nome = cargo.nome;
-            cargos += `<option value="${id}">${nome}</option>`;
-            console.log(`id: ${i}; cargo: ${JSON.stringify(cargo)}`);
+                var cargo = resposta[i];
+                var id = cargo.idcargo;
+                var nome = cargo.nome;
+                cargos += `<option value="${id}">${nome}</option>`;
+                console.log(`id: ${i}; cargo: ${JSON.stringify(cargo)}`);
             }
 
             slc_cargo.innerHTML += cargos;
         })
         .catch(function (erro) {
-        console.log("A consulta foi mal sucedida devido a um erro com o Banco de dados!");
-        console.log(`#ERRO: ${erro}`);
-    });
+            console.log("A consulta foi mal sucedida devido a um erro com o Banco de dados!");
+            console.log(`#ERRO: ${erro}`);
+        });
 
     // mostrar filiais
     fetch("/usuarios/listarFiliais", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
     })
-    // Após a solicitação ser concluída, o then é executado. A função recebe o objeto da resposta.
-    .then(function (resposta) {
-        // Verifica se a resposta foi bem-sucedida
-        if (resposta.ok) {
-        if (resposta.status === 204) {
-            throw "Nenhum resultado encontrado!";
-        }
-            return resposta.json();
-        } else {
-            throw "Houve um erro na API!";
-        }
-    })
-        .then(function (resposta){
+        // Após a solicitação ser concluída, o then é executado. A função recebe o objeto da resposta.
+        .then(function (resposta) {
+            // Verifica se a resposta foi bem-sucedida
+            if (resposta.ok) {
+                if (resposta.status === 204) {
+                    throw "Nenhum resultado encontrado!";
+                }
+                return resposta.json();
+            } else {
+                throw "Houve um erro na API!";
+            }
+        })
+        .then(function (resposta) {
             filiais = "";
             console.log("filiais recebidas:", JSON.stringify(resposta));
 
-            for(var i = 0; i< resposta.length; i++){
+            for (var i = 0; i < resposta.length; i++) {
 
-            var filial = resposta[i];
-            var id = filial.idFilial;
-            var terminal = filial.terminal;
-            // var setor = filial.setor;
-            filiais += `<option value="${id}">${terminal}</option>`;
-            console.log(`id: ${i}; filial: ${JSON.stringify(filial)}`);
+                var filial = resposta[i];
+                var id = filial.idFilial;
+                var terminal = filial.terminal;
+                // var setor = filial.setor;
+                filiais += `<option value="${id}">${terminal}</option>`;
+                console.log(`id: ${i}; filial: ${JSON.stringify(filial)}`);
             }
 
             slc_filial.innerHTML += filiais;
         })
         .catch(function (erro) {
-        console.log("A consulta foi mal sucedida devido a um erro com o Banco de dados!");
-        console.log(`#ERRO: ${erro}`);
-    });
+            console.log("A consulta foi mal sucedida devido a um erro com o Banco de dados!");
+            console.log(`#ERRO: ${erro}`);
+        });
 </script>

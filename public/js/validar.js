@@ -1,3 +1,7 @@
+function limparSessao() {
+    sessionStorage.clear();
+}
+
 function validarFormulario() {
     // Limpando mensagens anteriores
     limparMensagensErro();

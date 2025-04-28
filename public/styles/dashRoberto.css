@@ -5,7 +5,8 @@ body {
 
 .tamanho_dash {
     height: 94%;
-    width: 94%;
+    margin-left: 15%;
+    width: 80%;
     display: flex;
     justify-content: flex-end;
     align-items: center;

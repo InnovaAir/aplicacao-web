@@ -7,38 +7,31 @@
     <link rel="stylesheet" href="../styles/Suporte.css">
     <link rel="stylesheet" href="../styles/MenuLateral.css">
     <link rel="stylesheet" href="../styles/menu_mobile.css">
+    <link rel="stylesheet" href="../styles/estilo.css">
+
     <script src="../js/animacaoMenu.js"></script>
     <link rel="icon" href="../public/assets/favicon.ico" type="favicon">
 </head>
-<body>
+<body onload="checarSessao()  ">
     <button class="botao_abrir" onclick="abrirMenu()">☰</button>
 
-  <div class="barra_lateral" id="menu">
-    <div class="fechar_barrinha">
-      <button class="botao_fechar" onclick="fecharMenu()">✖</button>
-    </div>
-    <div class="logo_container">
-      <img src="../assets/InnovaairWhite.png" alt="" />
-    </div>
-
-    <span id="user_logado">Olá, Usuário</span>
-    <div class="opcoes">
-      <div class="container1">
-        <u>
-            <li><a href="visaoGeral.html">Visão geral</a></li>
-            <li><a href="tempoReal.html">Tempo real</a></li>
-            <li><a href="listaMaquinas.html">Lista de máquinas</a></li>
-            <li><a href="CadastrarMaquina.html">Cadastrar Máquina</a></li>
-            <li><a href="suporte.html" class="agora">Suporte</a></li>
-        </u>
-    </div>
-      <div class="container2">
-        <u>
-          <li><a href="suporte.html">Fale conosco!</a></li>
-        </u>
+    <div class="sidebar" id="sidebar">
+      <div class="d-flex justify-content-center align-items-center px-3 w-100">
+          <div class="logo">
+              <img src="../assets/InnovaairWhite.png" alt="Logo">
+          </div>
       </div>
-    </div>
+      <nav class="flex-column">
+          <a style="display: none;" href="dashRoberto.html">Visão geral</a>
+          <a style="display: none;" href="cadastrarFuncionario.html"><strong>Cadastrar Funcionario</strong></a>
+          <a href="visaoGeral.html">Análise em tempo real</a>
+          <a href="suporte.html"><strong>Suporte</strong></a>
+          <div class="logout mt-3">
+              <a onclick="limparSessao()" href="../index.html"><strong>Sair</strong></a>
+          </div>
+      </nav>
   </div>
+
   <div class="menu_mobile">
     <button class="botao_menu_mobile" onclick="abrirMenuMobile()">☰</button>
     <div class="logo_container">
