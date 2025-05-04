@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<<<<<<< Updated upstream
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gerenciamento de Métrica</title>
@@ -9,7 +8,6 @@
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../styles/estilo.css">
-=======
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../styles/MenuLateral.css" />
@@ -17,7 +15,6 @@
     <link rel="stylesheet" href="../styles/menu_mobile.css" />
 
     <title>Gerenciamento de Métrica</title>
->>>>>>> Stashed changes
 </head>
 <body>
 
@@ -40,10 +37,8 @@
     <div class="logout mt-3">
       <a href="NovosCadastros.html"><strong>Sair</strong></a>
     </div>
-<<<<<<< Updated upstream
   </nav>
 </div>
-=======
     <div class="menu_mobile">
         <button class="botao_menu_mobile" onclick="abrirMenuMobile()">☰</button>
         <div class="logo_container">
@@ -69,7 +64,6 @@
             </div>
             <div class="section1">
                 <div id="grid-maquinas" class="grid-maquinas">
->>>>>>> Stashed changes
 
 <div class="main d-flex justify-content-center align-items-center">
   <div class="container d-flex justify-content-center align-items-center w-100">
@@ -102,7 +96,6 @@
                     <button class="btn btn-secondary exibir-metricas" onclick="modalAdicionar()">Adicionar nova métrica</button>
                   </div>
                 </div>
-<<<<<<< Updated upstream
               </div>
               <div class="col-md-4 mb-3">
                 <div class="card maquina-generic">
@@ -113,11 +106,9 @@
                     <button class="btn btn-primary exibir-metricas">Exibir métricas</button>
                     <button class="btn btn-secondary exibir-metricas" onclick="modalAdicionar()">Adicionar nova métrica</button>
                   </div>
-=======
                 <div class="subSection2">
                     <div id="tituloMaquina" class="tituloContainer"></div>
                     <div id="components" class="componentsContainer"></div>
->>>>>>> Stashed changes
                 </div>
               </div>
               <div class="col-md-4 mb-3">
@@ -191,13 +182,13 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-<<<<<<< Updated upstream
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     sidebar.classList.toggle('show');
   }
-function modalAdicionar(idMaquina) {
-=======
+
+    // Fechei as chaves da função 04-05-25
+    function modalAdicionar(idMaquina) {
 
     // Plotar as opções do Select
     document.body.onload = () => {
@@ -231,7 +222,7 @@ function modalAdicionar(idMaquina) {
                 print("Erro ao realizar o Fetch")
             });
     };
-
+    }
     // Ao selecionar, listar as máquinas
     document.getElementById('select_filial').onchange = () => {
 
@@ -346,7 +337,6 @@ function modalAdicionar(idMaquina) {
 
     // Exibe o modal e adiciona nova métrica
     function modalAdicionar(idMaquina, hostname, mac, idComponente) {
->>>>>>> Stashed changes
         Swal.fire({
             title: `Adicionar nova métrica</i>`,
             html: `
