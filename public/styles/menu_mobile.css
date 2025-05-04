@@ -1,4 +1,3 @@
-
 .novo_menu {
     display: none;
     flex-direction: column;
@@ -26,10 +25,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-
 @media (max-width: 768px) {
-    
-
     .menu_mobile {
         display: flex; 
     }

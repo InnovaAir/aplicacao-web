@@ -31,7 +31,6 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    
 }
 
 .estrutura_forms{
@@ -66,7 +65,6 @@ h1{
     font-family: "Rubik", sans-serif;
     font-size: 20px;
     border: 1px black solid;
-
 }
 
 .estrutura_forms label{
@@ -87,7 +85,6 @@ h1{
 
 .estrutura_forms button:hover{
     background-color: rgb(58, 94, 255);
-
 }
 
 textarea{
@@ -97,7 +94,7 @@ textarea{
     border-radius: 8px;
     background-color: #efefef;
     outline-color: rgb(82, 113, 255);
-    resize: none; /* Impede o redimensionamento */
+    resize: none;
     box-sizing: border-box;
     padding: 5px;
     font-family: "Rubik", sans-serif;

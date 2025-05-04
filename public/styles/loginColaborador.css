@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-   
 }
 
 .registre-se {
@@ -174,7 +173,6 @@
     align-items: center;
     justify-content: center;
     gap: 5px;
-  
 }
 
 .permaencer-conectado input {

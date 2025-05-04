@@ -188,14 +188,6 @@ body {
     text-overflow: ellipsis;
 }
 
-.secaoLog .logMaquina {}
-
-.secaoLog .logNivel {}
-
-.secaoLog .logComponente {}
-
-.secaoLog .logMomento {}
-
 .selects {
     align-items: center;
     top: 40%;

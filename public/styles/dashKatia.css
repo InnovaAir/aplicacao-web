@@ -2,9 +2,7 @@ body {
     display: flex;
 }
 
-
 .child {
-
     background-color: rgb(255, 255, 255);
     overflow-x: auto;
     overflow-y: auto;
@@ -22,58 +20,46 @@ body {
     width: 90%;
     overflow-y: hidden;
     transition: all 0.3s ease-in-out;
-
 }
 
 #graficosExpandir{
-    
     width: 100%;
     min-height: 1%;
     max-height:70%;
     overflow:hidden;
     display: flex;
-    
-    
 }
 
 #graficosExpandirCPU{
-     
     width: 100%;
     min-height: 1%;
     max-height:70%;
     overflow:hidden;
     display: flex;
-
 }
 
 #graficosExpandirRAM{
-     
     width: 100%;
     min-height: 1%;
     max-height:70%;
     overflow:hidden;
     display: flex;
-
 }
 
 #graficosExpandirRede{
-     
     width: 100%;
     min-height: 1%;
     max-height:70%;
     overflow:hidden;
     display: flex;
-
 }
 
 #graficosExpandirDisco{
-     
     width: 100%;
     min-height: 1%;
     max-height:70%;
     overflow:hidden;
     display: flex;
-
 }
 
 
@@ -89,7 +75,6 @@ body {
     flex-direction: column;
     background-color: whitesmoke;
     z-index: 4;
-
 }
 
 #fecharExpandir{
@@ -112,7 +97,6 @@ body {
 
 #fecharExpandir:hover{
     filter: brightness(120%);
-    
 }
 
 #fecharExpandir:active{
@@ -121,7 +105,6 @@ body {
 
 #fecharExpandir img{
     height: 80%;
-    
 }
 
 .expandirComponente {
@@ -129,7 +112,6 @@ body {
     align-items: center;
     display: flex;
     flex-direction: column;
-   
     border: solid gray 1px;
     height: 90%;
     width: 48%;
@@ -139,7 +121,6 @@ body {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-   
     height: 50%;
 }
 
@@ -148,7 +129,6 @@ body {
     justify-content: space-evenly;
     align-items: center;
     height: 50%;
-   
 }
 
 .conteudo-principal {
@@ -158,7 +138,6 @@ body {
 
 .conteudo-principal.menu-aberto {
     margin-left: 13vw;
-    /* Igual à largura do menu */
 }
 
 .tituloContainer {
@@ -169,7 +148,6 @@ body {
     font-weight: 700;
     font-size: 40px;
     color: #5573ff;
-
 }
 
 .subtituloContainer {
@@ -180,11 +158,8 @@ body {
     font-size: medium;
     font-style: italic;
     color: #8BA0FF;
-
     display: flex;
     flex-direction: column;
-
-
 }
 
 .listaMaquinas {
@@ -207,10 +182,6 @@ body {
     align-items: center;
     overflow-x: auto;
     overflow-y: scroll;
-
-    
-
-
 }
 
 .secaoMaquinas {
@@ -227,7 +198,6 @@ body {
     text-wrap: nowrap;
     align-items: center;
     justify-content: space-evenly;
-
 }
 
 .bola {
@@ -245,7 +215,6 @@ body {
     border-bottom: solid 2px #5573ff;
     text-wrap: nowrap;
     overflow-wrap:anywhere;
-
     display: flex;
     justify-content: space-evenly;
     gap: 0.2%;
@@ -256,20 +225,17 @@ body {
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
     max-width: fit-content;
-    text-wrap:wrap;
-    overflow-wrap:anywhere;
-
+    text-wrap: wrap;
+    overflow-wrap: anywhere;
     flex-wrap: wrap;
     justify-content: space-evenly;
     font-size: 1.5vmax;
     margin-left: 4px;
     display: flex;
-
     overflow: hidden;
 }
 
 #buttonExpandir {
-
     background-color: #5573ff;
     border-radius: 10px;
     border: none;
@@ -288,13 +254,10 @@ body {
     height: 80px;
 }
 
-
 .section1 {
-
     height: 120%;
     gap: 2vh;
     width: 99%;
-    /* background-color: saddlebrown; */
     flex-direction: column;
     display: flex;
 }
@@ -303,22 +266,7 @@ body {
     width: 100%;
 }
 
-/* .subSection1 {
-
-    height: fit-content;
-    padding-bottom: 50px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    min-width: 1%;
-    gap: 1%;
-    width: 100%;
-
-} */
-
 .subSection2 {
-
-    /* background-color: lightgreen; */
     display: flex;
     flex-direction: row;
     margin-left: 1%;
@@ -334,8 +282,6 @@ body {
     flex-direction: column;
     display: flex;
 }
-
-
 
 .grafico {
     width: 100%;
@@ -403,11 +349,9 @@ body {
     width: 25vw;
     margin-bottom: 16px;
     overflow: auto;
-
 }
 
 #dados {
-
     height: 30%;
     width: 100%;
     overflow: hidden;
@@ -415,7 +359,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
 
@@ -423,33 +366,24 @@ body {
     border: 2px solid lightgray;
     width: 100%;
     height: fit-content;
-
-
-
 }
 
 
 .totemTitulo {
-
     padding-left: 10px;
     padding-right: 10px;
     border: 2px solid lightgray;
     background-color: white;
     height: fit-content;
     width: 80%;
-
     font-size: 100%;
     color: gray;
     justify-content: center;
     display: flex;
     flex-direction: column;
-
-
-
 }
 
 #totemDado {
-
     font-weight: 600;
     overflow: hidden;
     width: 100%;
@@ -465,7 +399,6 @@ body {
     flex-direction: row;
     height: fit-content;
     width: 100%;
-
 }
 
 .scrollLog {
@@ -473,12 +406,9 @@ body {
     height: 60vh;
     overflow-x: auto;
     overflow-y: scroll;
-
 }
 
 .secaoLog {
-
-
     align-items: center;
     align-self: center;
     background-color: #dde3ff;
@@ -506,21 +436,15 @@ body {
     min-width: 40%;
     max-width: 60%;
 
-
-
-
     .scrollMaquinas::-webkit-scrollbar-thumb {
         background-color: #8BA0FF;
     }
-
 
     .scrollMaquinas::-webkit-scrollbar-button {
         display: none;
         height: 0;
         width: 0;
     }
-
-
 
     .tabela table {
         text-align: center;
@@ -532,58 +456,4 @@ body {
     th {
         border: 1px solid #8BA0FF;
     }
-
-    
-
-
-    /* @media (max-width: 768px) {
-        .container {
-            margin-left: 0;
-        }
-
-        .barra_lateral {
-            display: none;
-
-        }
-
-        .child {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            padding: 0.5rem;
-            transition: all .25 ease-in-out;
-        }
-
-        .section1,
-        .section2 {
-            width: 100%;
-            gap: 3rem;
-            font-size: 1.2rem;
-        }
-
-        .section1 p,
-        .section2 p {
-            margin: 0;
-        }
-
-        .section1 select {
-            width: 100%;
-        }
-
-
-
-        .InformacaoTotens {
-            display: flex;
-            justify-content: flex-start;
-        }
-
-        .tabela table {
-            width: 100%;
-
-        }
-
-        .titulo {
-            margin: 0;
-        }
-    } */
 }

@@ -172,10 +172,6 @@ background-size: contain;
 width: 1000px;
 z-index: 1;
 margin-top: 50%;
-
-    
-  
-
 }
 
 .blackFilter{
@@ -184,10 +180,7 @@ margin-top: 50%;
     justify-self: center;
     z-index: -99998;
     filter: opacity(60%);
-    
 }
-
-
 
 .divLine{
     background-color: #5271FF;
@@ -201,7 +194,6 @@ margin-top: 50%;
 }
 
 .sobreNosInfo{
-    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -211,12 +203,10 @@ margin-top: 50%;
     width: 100vw;
     min-height: 100vh;
     padding: 40px;
-    
 }
 
 .sobreNosInfo p{
     max-width: 70%;
-    
 }
 
 .sobreNosComputerInfo {
@@ -322,17 +312,13 @@ margin-top: 50%;
     cursor: hand;
 }
 
-
 #tituloSobreNos{
     font-style: italic;
     font-size: 3rem;
     color: white;
-
     margin-top: 2rem;
     text-shadow: 4px 4px 0px #2d42a0;
 }
-
-
 
 .componentesInfo{
     overflow: visible;
@@ -381,9 +367,6 @@ margin-top: 50%;
 }
 
 @media screen and (max-width: 768px) {
-
-   
-    
     .homeInfo h1{
         font-size: 2rem;
         font-style: italic;
@@ -402,11 +385,6 @@ margin-top: 50%;
         text-shadow: 0px 0px 15px #5272ff91;
     }
     
-    .imgHome {
-      
-        
-    }
-    
     .blackFilter{
         height: 140vh !important;
         width: 150vw !important;
@@ -416,9 +394,7 @@ margin-top: 50%;
         z-index: -99998;
         filter: opacity(60%);
         overflow-x: hidden;
-    }
-    
-   
+    } 
 }
 
 @media screen and (max-width: 768px) {

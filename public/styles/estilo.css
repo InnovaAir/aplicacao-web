@@ -124,42 +124,37 @@ body {
   
   /* Responsivo */
   @media (max-width: 992px) {
-    /* Ajuste para o menu lateral */
     .sidebar {
       width: 100%;
       height: auto;
       flex-direction: column;
       padding: 10px;
       position: relative;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
-      transition: transform 0.3s ease; /* Efeito suave para o menu */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
     }
   
     .logo {
       width: 100%;
     }
   
-    /* Ocultar a navegação por padrão */
     .sidebar nav {
       display: none;
     }
   
-    /* Mostrar a navegação quando o menu for ativado */
     .sidebar.show nav {
       display: flex;
       flex-direction: column;
       width: 100%;
-      align-items: center; /* Alinhar os itens centralizados */
+      align-items: center;
     }
   
-    /* Melhorar a área principal (conteúdo) */
     .main {
       margin-left: 0;
       padding: 20px;
       width: 100%;
     }
   
-    /* Botão para abrir o menu (hamburguer) */
     .sidebar-toggle {
       display: flex;
       flex-direction: column;

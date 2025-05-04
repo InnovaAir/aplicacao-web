@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-   
 }
 
 .registre-se {
@@ -12,8 +11,6 @@
 .navbar-mobile {
     display: none;
 }
-
-
 
 .box_voltar {
     margin: 30px;
@@ -60,7 +57,6 @@
     margin: 20px;
     color: #5271FF;
     transition: 0.1s;
-    
 }
 
 .backButton:hover{
@@ -74,7 +70,6 @@
     border-radius: 50px;
     display: flex;
 }
-
 
 .fields {
     flex: 1;
@@ -122,7 +117,6 @@
     flex: 1;
     gap: 10px;
     border-radius: 50px;
-
     display: flex;
     align-items: center;
     justify-content: center;

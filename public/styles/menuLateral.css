@@ -8,30 +8,13 @@ body {
   font-size: 16px;
   overflow-x: hidden;
   transition: margin-left 0.3s ease-in-out;
-  /* background-color: rgb(101, 40, 187); */
   background: rgb(238, 244, 255);
   background-color: #ffffff;
-/*   background: -moz-linear-gradient(
-    144deg,
-    rgba(238, 244, 255, 1) 37%,
-    rgba(175, 190, 255, 1) 100%
-  );
-  background: -webkit-linear-gradient(
-    144deg,
-    rgba(238, 244, 255, 1) 37%,
-    rgba(175, 190, 255, 1) 100%
-  );
-  background: linear-gradient(
-    144deg,
-    rgba(238, 244, 255, 1) 37%,
-    rgba(175, 190, 255, 1) 100%
-  );   */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eef4ff",endColorstr="#afbeff",GradientType=1);
 }
 .botao_abrir {
   position: fixed;
   top: 20px;
-  /* left: 20px; */
   font-size: 24px;
   background: none;
   border: none;
@@ -72,7 +55,6 @@ body {
       padding: 5px;
       background: none;
       border: none;
-      /* background-color: red; */
     }
   }
   .logo_container {
@@ -187,13 +169,8 @@ body {
 }
 
 #user_logado {
-  /* font-family: "Rubik", sans-serif; */
-  /* font-size: 22px; */
   color: white;
   width: 100%;
   display: flex;
   justify-content: center;
-  /* margin-left: 2rem; */
-  /* text-align: center; */
-  /* background-color: red; */
 }

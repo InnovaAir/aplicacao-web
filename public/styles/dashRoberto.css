@@ -11,13 +11,11 @@ body {
     justify-content: flex-end;
     align-items: center;
     transition: all .25 ease-in-out;
-    /* border: 2px solid red; */
 }
 
 .container_componente {
     width: 95%;
     height: 95%;
-    /* border: 2px solid red; */
 }
 
 .titulo {
@@ -25,7 +23,6 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    /* border: 2px solid red; */
 }
 
 #titulo_01 {
@@ -50,7 +47,6 @@ body {
     display: flex;
     gap: 2rem;
     margin-bottom: 25px;
-    /* border: 2px solid red; */
 }
   
 .custom-select {
@@ -89,7 +85,6 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* border: 2px solid red; */
 }
 
 .box {

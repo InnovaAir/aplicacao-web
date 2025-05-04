@@ -131,21 +131,9 @@ body {
     font-size: 14px;
 }
 
-/* .adicionarDisp {
-    display: none;
-} */
-
 .cadastrarDisp {
     display: flex;
 }
-
-/* .adicionarColab {
-    display: flex;
-} */
-
-/* .cadastrarColab {
-    display: none;
-} */
 
 .dispositivo {
     display: block;
@@ -183,5 +171,4 @@ body {
     .tela-movida {
         margin-left: 0;
     }
-
 }
