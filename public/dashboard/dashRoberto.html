@@ -6,9 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../styles/menuLateral.css" />
   <link rel="stylesheet" href="../styles/dashRoberto.css" />
-  <link rel="stylesheet" href="../styles/menu_mobile.css" />
   <link rel="stylesheet" href="../styles/estilo.css" />
-
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <title>Visão geral</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -17,39 +16,31 @@
 </head>
 
 <body>
-  <button class="botao_abrir" onclick="abrirMenu()">☰</button>
 
   <div class="sidebar" id="sidebar">
     <div class="d-flex justify-content-center align-items-center px-3 w-100">
-        <div class="logo">
+          <div class="logo">
             <img src="../assets/InnovaairWhite.png" alt="Logo">
-        </div>
+          </div>
+      <button class="btn btn-light d-lg-none" type="button" onclick="toggleSidebar()" style="border-radius: 8px;  position:absolute;right:5vw;">
+        ☰
+      </button>
     </div>
+  
     <nav class="flex-column">
-        <a href="dashRoberto.html">Visão geral</a>
-        <a href="cadastrarFuncionario.html"><strong>Cadastrar Funcionario</strong></a>
-        <a style="display: none;" href="visaoGeral.html"><strong>Análise em tempo real</strong></a>
-        <a style="display: none;" href="suporte.html">Suporte</a>
-        <div class="logout mt-3">
-            <a onclick="limparSessao()" href="../index.html"><strong>Sair</strong></a>
-        </div>
+      <a href="visaoGeral.html">Visão geral</a>
+      <a href="tempoReal.html">Tempo real</a>
+      <a href="listaMaquinas.html">Lista de máquinas</a>
+      <a href="NovosCadastros.html"><strong>Cadastrar Máquina</strong></a>
+      <a href="suporte.html">Suporte</a>
+      <div class="logout mt-3">
+        <a href="NovosCadastros.html"><strong>Sair</strong></a>
+      </div>
     </nav>
-</div>
+  </div>
 
-  <div class="menu_mobile">
-    <button class="botao_menu_mobile" onclick="abrirMenuMobile()">☰</button>
-    <div class="logo_container">
-      <img src="../assets/InnovaairWhite.png" alt="" />
-    </div>
-  </div>
-  <div class="novo_menu">
-    <a href="visaoGeral.html" class="agora">Visão geral</a>
-    <a href="tempoReal.html">Tempo real</a>
-    <a href="listaMaquinas.html">Lista de máquinas</a>
-    <a href="NovosCadastros.html">Cadastros</a>
-    <a href="suporte.html">Suporte</a>
-    <a href="suporte.html">Fale conosco!</a>
-  </div>
+  
+
 
   <div id="tela" class="tamanho_dash">
     <div class="container_componente">
@@ -213,7 +204,13 @@
 <script src="../js/animacaoMenu.js"></script>
 
 <script>
-obterFiliaisGerente()
+
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('show');
+  }
+  
+<!-- obterFiliaisGerente() -->
 function obterFiliaisGerente(){
 
   fetch(`/cadastros/metricas/listar/filiais/${sessionStorage.idUsuario}`, {
