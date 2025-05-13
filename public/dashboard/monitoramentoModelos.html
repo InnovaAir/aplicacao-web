@@ -18,7 +18,8 @@
     <title>Alertas por modelo</title>
 </head>
 
-<body>
+<body onload="tamanhoBarra()
+">
 
     <div class="sidebar" id="sidebar">
         <div class="d-flex justify-content-center align-items-center px-3 w-100">
@@ -57,17 +58,33 @@
         <a href="suporte.html">Suporte</a>
         <a href="suporte.html">Fale conosco!</a>
     </div>
-    <div id="tela" style="background-color: red;" class="container">
-        <div class="child">
-            <div class="tituloContainer">Alertas por modelo</div>
-            <div class="subtituloContainer">
-                <select id="select_filial" class="selectBox selectFilial">
-                    <option value="" disabled selected>Escolher filial</option>
-                    <option value="volvo">opção</option>
-                </select>
-            </div>
-            <div class="section1">
-                <div class="listaModelos"></div>
+    <div class="main d-flex justify-content-center align-items-center" style="padding: 10px;">
+        <div id="tela" style="background-color: red;" class="container">
+            <div class="child">
+
+
+                <div class="tituloContainer">Alertas por modelo</div>
+                <div class="subtituloContainer">
+                    <select id="select_filial" class="selectBox">
+                        <option value="filial" disabled selected>Escolher filial</option>
+                        <option value="volvo">opção</option>
+                    </select>
+                    <select id="select_modelo" class="selectBox">
+                        <option value="periodo" disabled selected>Escolher período</option>
+                        <option value="volvo">opção</option>
+                    </select>
+
+                </div>
+
+                <div class="section1">
+                    <div class="listaModelos">
+                        <div class="barraAlertas">
+                            <div class="aleCpu" style="background-color: red;height:100%"></div>
+                            <div class="aleRam" style="background-color: yellow;height:100%"></div>
+                            <div class="aleDisco" style="background-color: rgb(21, 181, 255); height:100%"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -77,6 +94,100 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+
+    function tamanhoBarra() {
+        var tamanhototal = 90;
+        var tamanhoCpu = tamanhototal / 4;
+        var tamanhoRam = tamanhototal / 6;
+        var tamanhoDisco = tamanhototal / 4;
+        document.querySelector(".barraAlertas").style.width = tamanhototal + "%";
+        document.querySelector(".aleCpu").style.width = tamanhoCpu + "%";
+        document.querySelector(".aleRam").style.width = tamanhoRam + "%";
+        document.querySelector(".aleDisco").style.width = tamanhoDisco + "%";
+
+    }
+
+
+    // grafico bar
+    var options = {
+        series: [{
+            name: 'Marine Sprite',
+            data: [44, 55, 41, 37, 22, 43, 21]
+        }, {
+            name: 'Striking Calf',
+            data: [53, 32, 33, 52, 13, 43, 32]
+        }, {
+            name: 'Tank Picture',
+            data: [12, 17, 11, 9, 15, 11, 20]
+        }, {
+            name: 'Bucket Slope',
+            data: [9, 7, 5, 8, 6, 9, 4]
+        }, {
+            name: 'Reborn Kid',
+            data: [25, 12, 19, 32, 25, 24, 10]
+        }],
+        chart: {
+            type: 'bar',
+            height: "100%",
+            width: '100%',
+            stacked: true,
+        },
+        plotOptions: {
+            bar: {
+                horizontal: true,
+                dataLabels: {
+                    total: {
+                        enabled: true,
+                        offsetX: 0,
+                        style: {
+                            fontSize: '13px',
+                            fontWeight: 900
+                        }
+                    }
+                }
+            },
+        },
+        stroke: {
+            width: 1,
+            colors: ['#fff']
+        },
+        title: {
+            text: 'Fiction Books Sales'
+        },
+        xaxis: {
+            categories: [2008, 2009, 2010, 2011, 2012, 2013, 2014],
+            labels: {
+                formatter: function (val) {
+                    return val + "K"
+                }
+            }
+        },
+        yaxis: {
+            title: {
+                text: undefined
+            },
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + "K"
+                }
+            }
+        },
+        fill: {
+            opacity: 1
+        },
+        legend: {
+            position: 'top',
+            horizontalAlign: 'left',
+            offsetX: 40
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("."), options);
+    chart.render();
+
+
     function toggleSidebar() {
         const sidebar = document.getElementById('sidebar');
         sidebar.classList.toggle('show');

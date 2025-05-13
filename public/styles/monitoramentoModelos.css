@@ -8,15 +8,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all .3s ease-in-out;
-
 }
 
 .child {
-    width: 90%;
+    width: 100%;
     height: 100vh;
     background-color: rgb(197, 255, 231);
-    border-radius: 20p1x;
     flex-direction: column;
     display: flex;
     gap: 2rem;
@@ -25,11 +22,18 @@ body {
 }
 
 .listaModelos{
-    
     background-color: #5573ff;
-    width: 80%;
+    width: 100%;
     border: solid fuchsia;
-    height: 80%;
+    height: 100%;
+}
+
+.barraAlertas{
+    border: solid 2px rgb(39, 39, 39);
+    width: 30px;
+    display: flex;
+    height: 30px;
+    background-color: rgb(218, 218, 218);
 }
 
 .tituloContainer {
@@ -44,11 +48,12 @@ body {
 }
 
 .subtituloContainer {
-    display: grid;
+    display: flex;
+    gap: 1%;
 }
 
 .section1 {
-    width: 90%;
+
     border: solid tan;
     height: 100%;
     flex-direction: column;
@@ -91,91 +96,7 @@ body {
     gap: 1rem;
 }
 
-.InformacaoTotens {
 
-    display: flex;
-    height: 100%;
-    width: 40%;
-    align-items: center;
-    flex-direction: column;
-}
-
-.InformacaoAlertas {
-
-    height: 100%;
-    width: 60%;
-}
-
-.graficoAlertas {
-    border: 2px solid lightgray;
-    overflow: hidden;
-}
-
-.alertasLog {
-    width: 35%;
-}
-
-#dados {
-
-    height: 30%;
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-}
-
-
-#graficoPizzas {
-    border: 2px solid lightgray;
-    width: 100%;
-    height: 70%;
-    overflow: hidden;
-
-
-}
-
-
-.totemTitulo {
-
-    padding-left: 1%;
-    margin: 1%;
-    border: 2px solid lightgray;
-    background-color: white;
-    height: 60%;
-    width: 97%;
-    margin-inline: 2%;
-    font-size: 90%;
-    color: gray;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-
-
-
-}
-
-#totemDado {
-    margin-left: 4%;
-    font-weight: 600;
-    overflow: hidden;
-    width: 100%;
-    text-overflow: ellipsis;
-    font-size: 180%;
-    color: black;
-}
-
-.TotensQTD {
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    width: 100%;
-
-}
 
 .scrollLog {
     width: 100%;
@@ -185,19 +106,6 @@ body {
 
 }
 
-.secaoLog {
-
-
-    align-items: center;
-    align-self: center;
-    background-color: #dde3ff;
-    display: flex;
-    width: 100%;
-    height: 4vh;
-    flex-shrink: 0;
-    border-radius: 14px;
-    text-overflow: ellipsis;
-}
 
 .selects {
     align-items: center;
@@ -210,18 +118,9 @@ body {
 .selectBox {
     color: gray;
     height: 40px;
-    width: 20vw;
+    width: 20%;
 
 
-    scrollLog {
-        overflow-y: scroll;
-        gap: 2%;
-        display: flex;
-        height: 100%;
-        width: 30%;
-        flex-direction: column;
-
-    }
 
     .scrollLog::-webkit-scrollbar-thumb {
         background-color: #8BA0FF;
@@ -234,16 +133,6 @@ body {
     }
 
 
-    .tabela table {
-        text-align: center;
-        height: 50%;
-        border: 1px solid #8BA0FF;
-    }
-
-    .tabela td,
-    th {
-        border: 1px solid #8BA0FF;
-    }
 
 
     @media (max-width: 768px) {
