@@ -1,0 +1,458 @@
+body {
+    z-index: 2;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .3s ease-in-out;
+
+}
+
+.child {
+    width: 90%;
+    height: 100vh;
+    background-color: rgb(197, 255, 231);
+    border-radius: 20p1x;
+    flex-direction: column;
+    display: flex;
+    gap: 2rem;
+
+
+}
+
+.listaModelos{
+    
+    background-color: #5573ff;
+    width: 80%;
+    border: solid fuchsia;
+    height: 80%;
+}
+
+.tituloContainer {
+    display: flex;
+    flex-direction: row;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 20px;
+    font-weight: 700;
+    font-size: xx-large;
+    color: #5573ff;
+
+}
+
+.subtituloContainer {
+    display: grid;
+}
+
+.section1 {
+    width: 90%;
+    border: solid tan;
+    height: 100%;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section1 select {
+    width: 100%;
+}
+
+.subSection2 {
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    gap: 5%;
+}
+
+
+
+.grafico {
+    width: 100%;
+    height: 300px;
+    min-height: 300px;
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+
+.titulo {
+    color: #8BA0FF;
+}
+
+.section2 {
+
+    width: 50%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.InformacaoTotens {
+
+    display: flex;
+    height: 100%;
+    width: 40%;
+    align-items: center;
+    flex-direction: column;
+}
+
+.InformacaoAlertas {
+
+    height: 100%;
+    width: 60%;
+}
+
+.graficoAlertas {
+    border: 2px solid lightgray;
+    overflow: hidden;
+}
+
+.alertasLog {
+    width: 35%;
+}
+
+#dados {
+
+    height: 30%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+#graficoPizzas {
+    border: 2px solid lightgray;
+    width: 100%;
+    height: 70%;
+    overflow: hidden;
+
+
+}
+
+
+.totemTitulo {
+
+    padding-left: 1%;
+    margin: 1%;
+    border: 2px solid lightgray;
+    background-color: white;
+    height: 60%;
+    width: 97%;
+    margin-inline: 2%;
+    font-size: 90%;
+    color: gray;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+
+
+
+}
+
+#totemDado {
+    margin-left: 4%;
+    font-weight: 600;
+    overflow: hidden;
+    width: 100%;
+    text-overflow: ellipsis;
+    font-size: 180%;
+    color: black;
+}
+
+.TotensQTD {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+
+}
+
+.scrollLog {
+    width: 100%;
+    height: 80%;
+    overflow-x: auto;
+    overflow-y: scroll;
+
+}
+
+.secaoLog {
+
+
+    align-items: center;
+    align-self: center;
+    background-color: #dde3ff;
+    display: flex;
+    width: 100%;
+    height: 4vh;
+    flex-shrink: 0;
+    border-radius: 14px;
+    text-overflow: ellipsis;
+}
+
+.selects {
+    align-items: center;
+    top: 40%;
+    justify-content: space-evenly;
+    display: flex;
+    width: 60%;
+}
+
+.selectBox {
+    color: gray;
+    height: 40px;
+    width: 20vw;
+
+
+    scrollLog {
+        overflow-y: scroll;
+        gap: 2%;
+        display: flex;
+        height: 100%;
+        width: 30%;
+        flex-direction: column;
+
+    }
+
+    .scrollLog::-webkit-scrollbar-thumb {
+        background-color: #8BA0FF;
+    }
+
+    .scrollLog::-webkit-scrollbar-button {
+        display: none;
+        height: 0;
+        width: 0;
+    }
+
+
+    .tabela table {
+        text-align: center;
+        height: 50%;
+        border: 1px solid #8BA0FF;
+    }
+
+    .tabela td,
+    th {
+        border: 1px solid #8BA0FF;
+    }
+
+
+    @media (max-width: 768px) {
+        .container {
+            margin-left: 0;
+        }
+
+        .barra_lateral {
+            display: none;
+
+        }
+
+        .child {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 0.5rem;
+            overflow-y: scroll;
+        }
+
+        .section1,
+        .section2 {
+            width: 100%;
+            gap: 3rem;
+            font-size: 1.2rem;
+        }
+
+        .section1 p,
+        .section2 p {
+            margin: 0;
+        }
+
+        .section1 select {
+            width: 100%;
+        }
+
+
+
+        .InformacaoTotens {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .tabela table {
+            width: 100%;
+
+        }
+
+        .titulo {
+            margin: 0;
+        }
+    }
+}
+
+/* Grid maquinas */
+.grid-maquinas {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20%;
+
+    width: 100%;
+    height: fit-content;
+    min-width: 1%;
+    gap: 5%;
+}
+
+.maquina-generic {
+    display: flex;
+    flex-direction: column;
+
+    width: calc(100% - 5%);
+    height: fit-content;
+
+    border: #DDE1E6 2px solid;
+    padding: 5% 5%;
+    gap: 1vh;
+}
+
+.maquina-generic p {
+    width: 100%;
+}
+
+/* Especificação da maquina selecionada */
+
+.componentsContainer {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20%;
+    width: 100%;
+    height: 100%;
+    gap: 5%;
+    height: fit-content;
+}
+
+.componentBucket {
+    display: flex;
+    height: fit-content;
+    flex-direction: column;
+    border: #DDE1E6 2px solid;
+    padding: 2% 2%;
+    gap: 2.5vh;
+}
+
+.componentBucket #componentName {
+    font-weight: 600;
+    font-size: 1.25vw;
+}
+
+
+.componentDiv {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    padding: 1vh 1vw;
+    gap: 1vh;
+
+    border: #DDE1E6 2px solid;
+}
+
+.list-options {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    gap: 20%;
+}
+
+/* Botões */
+
+.exibir-metricas {
+    background-color: #D9D9D9;
+    color: #697077;
+    width: fit-content;
+    padding: 0.5vw;
+    border-radius: 1vw;
+}
+
+.editar-metrica {
+    background-color: #FF9C9C;
+    padding: 0.5vw;
+    border-radius: 1vw;
+}
+
+.remover-metrica {
+    background-color: #D9D9D9;
+    padding: 0.5vw;
+    border-radius: 1vw;
+}
+
+.confirmar-edicao-metrica {
+    background-color: #D9D9D9;
+    padding: 0.5vw;
+    border-radius: 1vw;
+}
+/* modal */
+
+.modalEditar {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    width: 25vw;
+    background-color: #fff;
+    left: calc(50% - 15vw);
+    top: calc(25%);
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+
+    padding: 2vw;
+    gap: 1vh;
+    z-index: 10;
+    border: #DDE1E6 2px solid;
+}
+
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: calc(25%); opacity: 1}
+  }
+
+.container-modal {
+    display: flex;
+    flex-direction: row;
+    width: 25vw;
+    height: min-content;
+    gap: 10vw;
+
+    span {
+        width: fit-content;
+        font-size: 1.4vw;
+        font-weight: 600;
+    }
+
+    img {
+        width: auto;
+        height: 100%;
+    }
+}
+
+.title-component {
+    font-weight: 500;
+}
+
+.container-update {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.row-modal {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 1vw;
+}
