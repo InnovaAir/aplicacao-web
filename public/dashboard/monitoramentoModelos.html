@@ -87,14 +87,19 @@
                                 <div class="item">Preço</div>
                                 <!-- Estatisticas -->
                                 <div class="item">1</div>
+
+                                <!-- modelo estático para testes -->
                                 <div class="item" style="display: flex; justify-content:flex-start">
                                     <div class="barraAlertas">
-                                        <div class="aleCpu" style="background-color: red;height:100%"></div>
+                                        <div class="aleCpu" style="background-color: red;height:100%; font-size:80%;align-items:center;
+                                        justify-content:center; display:flex">30</div>
                                         <div class="aleRam" style="background-color: yellow;height:100%"></div>
                                         <div class="aleDisco" style="background-color: cyan; height:100%">
                                         </div>
                                     </div>
                                 </div>
+                                <!-- ------------------------- -->
+
                                 <div class="item">3</div>
                                 <div class="item">4</div>
 
@@ -119,7 +124,7 @@
 
 <script>
 
-         //-----------------------------------
+    //-----------------------------------
 
     // ISSO VAI SER EXCLUIDO APÓS IMPLEMENTAR OS ALERTAS DINAMICOS
     function tamanhoBarra() {
@@ -133,7 +138,7 @@
         document.querySelector(".aleDisco").style.width = tamanhoDisco + "%";
 
     }
-     //-----------------------------------
+    //-----------------------------------
 
     var modelos = [
         {
@@ -166,26 +171,27 @@
 
 
         const alertaDiv = document.createElement("div");
-        alertaDiv.className = "item";
+        alertaDiv.className = "item ";
         alertaDiv.style.display = "flex";
         alertaDiv.style.justifyContent = "flex-start"
 
         const barraAlertas = document.createElement("div");
         barraAlertas.style.width = tamanhototal + "%";
         barraAlertas.className = "barraAlertas";
-        barraAlertas.style.justifySelf="flex-start"
+        barraAlertas.style.justifySelf = "flex-start"
 
         if (m.alertas.cpu) {
             const cpu = document.createElement("div");
-            cpu.className = "aleCpu";
+            cpu.className = "aleCpu hoverBarra";
             cpu.style.backgroundColor = "red";
             cpu.style.height = "100%";
             cpu.style.width = tamanhoCpu + "%";
+            cpu.style.display = "flex";
             barraAlertas.appendChild(cpu);
         }
         if (m.alertas.ram) {
             const ram = document.createElement("div");
-            ram.className = "aleRam";
+            ram.className = "aleRam hoverBarra";
             ram.style.backgroundColor = "yellow";
             ram.style.height = "100%";
             ram.style.width = tamanhoRam + "%";
@@ -193,7 +199,7 @@
         }
         if (m.alertas.disco) {
             const disco = document.createElement("div");
-            disco.className = "aleDisco";
+            disco.className = "aleDisco hoverBarra";
             disco.style.backgroundColor = "cyan";
             disco.style.height = "100%";
             disco.style.width = tamanhoDisco + "%";
@@ -206,15 +212,15 @@
         // seção "Quantidade"
 
         const quantidade = document.createElement("div");
-        quantidade.className = "item";
+        quantidade.className = "item ";
         quantidade.textContent = m.quantidade;
         lista.appendChild(quantidade)
 
         // seção "Preco"
 
         const preco = document.createElement("div")
-        preco.className="item"
-        preco.textContent=m.preco;
+        preco.className = "item "
+        preco.textContent = m.preco;
         lista.appendChild(preco)
 
     }
@@ -222,7 +228,7 @@
 
 
 
-    
+
 
 
     // grafico bar

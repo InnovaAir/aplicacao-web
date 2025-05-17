@@ -20,31 +20,25 @@ body {
     display: grid;
     border: solid navajowhite 1px;
 } */
-.item{
-    background-color: chartreuse;
+.item {
     border: solid 1.3px;
-    
+
 }
 
-.grid{
+.grid {
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr 1fr ;
+    grid-template-columns: 1fr 4fr 1fr 1fr;
     justify-content: center;
-	margin: 5px;
-	background: tomato;
-	text-align: center;
-	font-size: 1em;
-    
+    margin: 5px;
+    background: tomato;
+    text-align: center;
+    font-size: 1em;
+
 
 }
 
 
-.grid-template-columns-3 {
-    background-color: darkblue;
 
-
-    
-}
 
 .child {
     width: 100%;
@@ -53,7 +47,7 @@ body {
     flex-direction: column;
     display: flex;
     gap: 2rem;
-    padding-inline:2% ;
+    padding-inline: 2%;
 
 
 
@@ -71,23 +65,31 @@ body {
     align-self: center;
 }
 
-.listaModelos{
+.listaModelos {
     background-color: #5573ff;
     align-self: center;
     width: 100%;
     height: 100%;
 }
 
-.barraAlertas{
+.barraAlertas {
     border: solid 2px rgb(39, 39, 39);
     border-radius: 40px;
     display: flex;
     align-self: center;
     height: 80%;
     margin-left: 3px;
-    overflow: auto;
+    overflow: hidden;
     background-color: rgb(218, 218, 218);
 }
+
+/* efeito ao colocar o mouse em cima da barra (inutilizado por enquanto) */
+/* .hoverBarra{
+    transition: 0.1s;
+}
+.hoverBarra:hover{
+    filter:contrast(50%);
+} */
 
 .tituloContainer {
     display: flex;
@@ -329,6 +331,7 @@ body {
     padding: 0.5vw;
     border-radius: 1vw;
 }
+
 /* modal */
 
 .modalEditar {
@@ -342,7 +345,7 @@ body {
     animation-name: animatetop;
     animation-duration: 0.4s;
 
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
     padding: 2vw;
     gap: 1vh;
@@ -351,9 +354,16 @@ body {
 }
 
 @keyframes animatetop {
-    from {top: -300px; opacity: 0}
-    to {top: calc(25%); opacity: 1}
-  }
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: calc(25%);
+        opacity: 1
+    }
+}
 
 .container-modal {
     display: flex;
