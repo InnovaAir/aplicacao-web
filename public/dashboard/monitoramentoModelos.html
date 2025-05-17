@@ -79,29 +79,29 @@
                 <div class="section1">
                     <div class="container listaModelos">
                         <div>
-                            <section class="grid grid-template-columns-3">
-                                <div class="tituloLista">
-                                 <div class="item">Modelo</div>
+                            <section class="grid grid-template-columns-3" id="lista">
+                                <!-- Titulos -->
+                                <div class="item">Modelo</div>
                                 <div class="item">Alertas</div>
                                 <div class="item">Quantidade</div>
-                                 <div class="item">Preço</div>
-</div>
-                                <div class="cedula">
+                                <div class="item">Preço</div>
+                                <!-- Estatisticas -->
                                 <div class="item">1</div>
-                                <div class="item" style="display: flex; justify-content:center">
+                                <div class="item" style="display: flex; justify-content:flex-start">
                                     <div class="barraAlertas">
-                            <div class="aleCpu" style="background-color: red;height:100%"></div>
-                            <div class="aleRam" style="background-color: yellow;height:100%"></div>
-                            <div class="aleDisco" style="background-color: rgb(21, 181, 255); height:100%"></div>
+                                        <div class="aleCpu" style="background-color: red;height:100%"></div>
+                                        <div class="aleRam" style="background-color: yellow;height:100%"></div>
+                                        <div class="aleDisco" style="background-color: rgb(21, 181, 255); height:100%">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="item">3</div>
                                 <div class="item">4</div>
-                                </div>
+
                             </section>
-                            
+
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -112,8 +112,16 @@
 </html>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
 <script>
 
+         //-----------------------------------
+
+    // ISSO VAI SER EXCLUIDO APÓS IMPLEMENTAR OS ALERTAS DINAMICOS
     function tamanhoBarra() {
         var tamanhototal = 90;
         var tamanhoCpu = tamanhototal / 4;
@@ -125,6 +133,96 @@
         document.querySelector(".aleDisco").style.width = tamanhoDisco + "%";
 
     }
+     //-----------------------------------
+
+    var modelos = [
+        {
+            modelo: "1aaaa",
+            alertas: {
+                cpu: true,
+                ram: true,
+                disco: true
+            },
+            quantidade: "50",
+            preco: "3131"
+        }
+    ]
+
+    // criando novos modelos na lista grid
+
+    modelos.forEach((m) => {
+        // seção "Modelo"
+        const modeloDiv = document.createElement("div");
+        modeloDiv.className = "item";
+        modeloDiv.textContent = m.modelo;
+        lista.appendChild(modeloDiv);
+
+        // seção "Alertas"
+
+        var tamanhototal = m.quantidade;
+        var tamanhoCpu = tamanhototal / 1;
+        var tamanhoRam = tamanhototal / 2;
+        var tamanhoDisco = tamanhototal / 4;
+
+
+        const alertaDiv = document.createElement("div");
+        alertaDiv.className = "item";
+        alertaDiv.style.display = "flex";
+        alertaDiv.style.justifyContent = "flex-start"
+
+        const barraAlertas = document.createElement("div");
+        barraAlertas.style.width = tamanhototal + "%";
+        barraAlertas.className = "barraAlertas";
+        barraAlertas.style.justifySelf="flex-start"
+
+        if (m.alertas.cpu) {
+            const cpu = document.createElement("div");
+            cpu.className = "aleCpu";
+            cpu.style.backgroundColor = "red";
+            cpu.style.height = "100%";
+            cpu.style.width = tamanhoCpu + "%";
+            barraAlertas.appendChild(cpu);
+        }
+        if (m.alertas.ram) {
+            const ram = document.createElement("div");
+            ram.className = "aleRam";
+            ram.style.backgroundColor = "yellow";
+            ram.style.height = "100%";
+            ram.style.width = tamanhoRam + "%";
+            barraAlertas.appendChild(ram);
+        }
+        if (m.alertas.disco) {
+            const disco = document.createElement("div");
+            disco.className = "aleDisco";
+            disco.style.backgroundColor = "blue";
+            disco.style.height = "100%";
+            disco.style.width = tamanhoDisco + "%";
+            barraAlertas.appendChild(disco);
+        }
+
+        lista.appendChild(alertaDiv);
+        alertaDiv.appendChild(barraAlertas);
+
+        // seção "Quantidade"
+
+        const quantidade = document.createElement("div");
+        quantidade.className = "item";
+        quantidade.textContent = m.quantidade;
+        lista.appendChild(quantidade)
+
+        // seção "Preco"
+
+        const preco = document.createElement("div")
+        preco.className="item"
+        preco.textContent=m.preco;
+        lista.appendChild(preco)
+
+    }
+    )
+
+
+
+    
 
 
     // grafico bar
