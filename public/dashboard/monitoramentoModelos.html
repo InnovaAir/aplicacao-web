@@ -84,7 +84,7 @@
                                 <div class="item">Modelo</div>
                                 <div class="item">Alertas</div>
                                 <div class="item">Quantidade</div>
-                                <div class="item">Preço</div>
+
                                 <!-- Estatisticas -->
                                 <div class="item">1</div>
 
@@ -101,7 +101,7 @@
                                 <!-- ------------------------- -->
 
                                 <div class="item">3</div>
-                                <div class="item">4</div>
+
 
                             </section>
 
@@ -119,17 +119,38 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-
-
-
-    fetch(`/cadastros/metricas/listar/componentes/2`, {
+    fetch(`cadastros/metricas/listar/totens/2`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json"
         }
     }
     ).then((res) => res.json())
-        .then((testeRes) => console.log(testeRes))
+        .then(contador => {
+            let resultados = [];
+            let modeloAnterior = null;
+            let contagemAtual = 0;
+
+            for (let maquina of maquinas) {
+                let modeloAtual = maquina.nomeModelo;
+
+                if (modeloAtual !== modeloAnterior) {
+                    if (modeloAnterior !== null) {
+                        resultados.push({ modelo: modeloAnterior, quantidade: contagemAtual });
+                    }
+                    contagemAtual = 1;
+                    modeloAnterior = modeloAtual;
+                } else {
+                    contagemAtual++;
+                }
+            }
+
+            if (modeloAnterior !== null) {
+                resultados.push({ modelo: modeloAnterior, quantidade: contagemAtual });
+            }
+        }
+        )
+        .then(resultado => console.log(resultado))
         .catch(error => console.error(error));
 
     //-----------------------------------
@@ -156,8 +177,7 @@
                 ram: true,
                 disco: true
             },
-            quantidade: "50",
-            preco: "3131"
+            quantidade: "50"
         }
     ]
 

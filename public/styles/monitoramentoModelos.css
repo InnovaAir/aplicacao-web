@@ -21,13 +21,14 @@ body {
     border: solid navajowhite 1px;
 } */
 .item {
+    padding-block:  3px;
     border: solid 1.3px;
 
 }
 
 .grid {
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr 1fr;
+    grid-template-columns: 1fr 3fr 1fr;
     justify-content: center;
     margin: 5px;
     background: tomato;
