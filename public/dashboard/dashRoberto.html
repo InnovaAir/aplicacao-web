@@ -210,7 +210,7 @@
     sidebar.classList.toggle('show');
   }
   
-<!-- obterFiliaisGerente() -->
+obterFiliaisGerente()
 function obterFiliaisGerente(){
 
   fetch(`/cadastros/metricas/listar/filiais/${sessionStorage.idUsuario}`, {
@@ -240,6 +240,40 @@ function obterFiliaisGerente(){
                 print("Erro ao realizar o Fetch")
             });
     };
+
+  function obterDadosGerente(){
+    fetch("/dashboards/dashGerenteDados", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          idUsuarioServer: sessionStorage.idUsuario
+        }),
+    })
+    .then(function (resposta) {
+        console.log("resposta do servidor: ", resposta);
+        if (resposta.ok) {
+            console("SUCESSO AO OBTER DADOS DO GERENTE")
+            resposta.json().then(json => {
+              
+                });
+        } else {
+            // Se não foi ok, mostra mensagem de erro
+            return resposta.text().then(erroTexto => {
+                throw new Error(erroTexto || "Erro ao cadastrar");
+            });
+        }
+    })
+    .catch(function (erro) {
+        console.log("Erro na requisição:", erro);
+        Swal.fire({
+            title: "Erro!",
+            text: erro.message || "Erro ao tentar realizar o cadastro. Tente novamente.",
+            icon: "error"
+        });
+    });
+  }
 
   var chart = new ApexCharts(document.querySelector("#chart_barras"), options);
   chart.render();

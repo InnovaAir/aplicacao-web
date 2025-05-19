@@ -47,12 +47,12 @@ CREATE TABLE IF NOT EXISTS filial (
   setor VARCHAR(30) NOT NULL,
   fkCliente INT NOT NULL,
   fkEndereco INT NOT NULL,
-  CONSTRAINT fk_filial_cliente FOREIGN KEY (fkCliente) REFERENCES cliente (idCliente),
+  CONSTRAINT fk_filial_cliente FOREIGN KEY (fkCliente) REFERENCES cliente(idCliente),
   CONSTRAINT fk_filial_endereco FOREIGN KEY (fkEndereco) REFERENCES endereco (idEndereco)
 );
 
 CREATE TABLE IF NOT EXISTS usuarioFilial(
-	fkUsuario INT NOT NULL,
+    fkUsuario INT NOT NULL,
     fkFilial INT NOT NULL,
     primary key (fkUsuario, fkFilial)
 );
@@ -62,7 +62,8 @@ CREATE TABLE IF NOT EXISTS maquina (
   fkFilial INT NOT NULL, #Fk Não-Relacional // Por ser outro database
   numeroSerial VARCHAR(45) NOT NULL,
   enderecoMac VARCHAR(45) NOT NULL,
-  hostname VARCHAR(45) NOT NULL
+  hostname VARCHAR(45) NOT NULL,
+  CONSTRAINT filialMaquina FOREIGN KEY (fkFilial) REFERENCES filial(idFilial)
 );
 
 CREATE TABLE IF NOT EXISTS componente (
@@ -89,14 +90,6 @@ CREATE TABLE IF NOT EXISTS captura_alerta (
   gravidade VARCHAR(20) NOT NULL,
   fkMetrica INT NOT NULL,
   CONSTRAINT fk_alerta_metrica FOREIGN KEY (fkMetrica) REFERENCES metrica (idMetrica)
-);
-
-CREATE TABLE IF NOT EXISTS captura_historico (
-  idCapturaHistorico INT PRIMARY KEY AUTO_INCREMENT,
-  valorCapturado FLOAT NOT NULL,
-  momento DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  fkMetrica INT NOT NULL,
-  CONSTRAINT fk_historico_metrica FOREIGN KEY (fkMetrica) REFERENCES metrica (idMetrica)
 );
 
 INSERT INTO cliente (razaoSocial, cnpj, email, telefone) VALUES
@@ -128,57 +121,3 @@ INSERT INTO filial (terminal, setor, fkCliente, fkEndereco) VALUES
 ('de Confins', 'Administrativo', 2, 3),  -- Confins
 ('Principal - Afonso Pena', 'Segurança', 2, 4),  -- Curitiba
 ('Salgado Filho', 'Operações', 2, 5);  -- Porto Alegre
-
-SELECT * from maquina;
-SELECT * from componente;
-SELECT * from metrica;
-select * from cliente;
-select * from usuario;	
-select * from filial;
-select * from endereco;
-select * from cargo;
-SELECT idcargo,nome FROM cargo;
-
-SELECT u.idUsuario, u.nome, u.email as email, u.fkCliente, u.fkCargo FROM usuario u
-join cliente c on c.idCliente = u.fkCliente
-WHERE u.email = 'inovaair@technology.com' AND u.senha = 'Admin123@';
-
-SELECT * FROM usuario u
-join cliente c on c.idCliente = u.fkCliente
-WHERE u.email = 'inovaair@technology.com' AND u.senha = 'Admin123@';
-
-SELECT idComponente, componente, metrica, limiteMinimo, limiteMaximo, idMetrica from componente join maquina on idMaquina = fkMaquina join metrica on idComponente = fkComponente where idMaquina = 1;
-desc captura_historico;
-select * from captura_historico;
-# Trigger para inserir os alertas
-/*
-DELIMITER //
-CREATE TRIGGER after_insert_captura
-AFTER INSERT ON captura_historico
-FOR EACH ROW
-BEGIN
-    DECLARE v_limite_max INT;
-	DECLARE v_limite_min INT;
-
-    -- Busca o limiteMaximo da métrica correspondente
-    SELECT limiteMaximo, limiteMinimo
-    INTO v_limite_max, v_limite_min
-    FROM metrica
-    WHERE idMetrica = NEW.fkMetrica;
-    
-    -- Se o valor da nova captura for maior que o limite, cria alerta
-    IF NEW.valorCapturado > v_limite_max THEN
-        INSERT INTO captura_alerta (valorCapturado, momento, fkMetrica, gravidade)
-        VALUES (NEW.valorCapturado, NOW(), NEW.fkMetrica, 'Grave');
-    ELSEIF NEW.valorCapturado >= ((v_limite_min + v_limite_min)/2) and NEW.valorCapturado < v_limite_max THEN
-		INSERT INTO captura_alerta (valorCapturado, momento, fkMetrica, gravidade)
-        VALUES (NEW.valorCapturado, NOW(), NEW.fkMetrica, 'Médio');
-	ELSEIF NEW.valorCapturado < ((v_limite_min + v_limite_min)/2) and NEW.valorCapturado > v_limite_min THEN
-		INSERT INTO captura_alerta (valorCapturado, momento, fkMetrica, gravidade)
-        VALUES (NEW.valorCapturado, NOW(), NEW.fkMetrica, 'Baixo');   
-	ELSE 
-		INSERT INTO captura_alerta (valorCapturado, momento, fkMetrica, gravidade)
-        VALUES (NEW.valorCapturado, NOW(), NEW.fkMetrica, 'Nenhuma');
-    END IF;
-END//
-DELIMITER ;
