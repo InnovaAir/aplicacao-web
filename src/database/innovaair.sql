@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS maquina (
   fkFilial INT NOT NULL, #Fk Não-Relacional // Por ser outro database
   numeroSerial VARCHAR(45) NOT NULL,
   enderecoMac VARCHAR(45) NOT NULL,
+  nomeModelo VARCHAR(45) NOT NULL,
   hostname VARCHAR(45) NOT NULL,
   CONSTRAINT filialMaquina FOREIGN KEY (fkFilial) REFERENCES filial(idFilial)
 );
