@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="wclassth=device-wclassth, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/estilo.css">
+    <link rel="stylesheet" href="../styles/dashDesempenho.css">
+
+    <title>Desempenho</title>
+</head>
+
+    <h1>Gráfico de Desempenho por Totem</h1>
+    
+<body>
+
+<div class="box_geral"> <!-- Inicio Box Geral -->
+    
+    <div class="box_esqSuperior"> <!-- Inicio Box esqSuperior-->
+        <div class="box_select"> <!-- Inicio Box Select -->
+            <select class="slc_endereco">
+                <option value="">Endereço</option>
+            </select>
+            
+            <select class="slc_setor">
+                <option value="">Setor</option>
+            </select>
+            
+            <select class="slc_periodo">
+                <option value="">Periodo</option>
+            </select>
+        </div> <!-- Fim Box Select -->
+        
+        <!-- <div class="box_componentes"> Inicio Box Componentes
+            <h2>Componentes</h2>
+            
+            <div class="div_checkComponentes">
+                <label for="chk_todoComp">TODOS</label>
+                <input type="checkbox" class="chk_todosComp">
+                <label for="chk_cpu">CPU</label>
+                <input type="checkbox" class="chk_cpu">
+                <label for="chk_ram">RAM</label>
+                <input type="checkbox" class="chk_ram">
+                <label for="chk_disco">DISCO</label>
+                <input type="checkbox" class="chk_disco">
+            </div>
+        </div> Fim Box Componentes -->
+        
+        <div class="box_alertas"> <!-- Inicio Box Alertas -->
+            
+            <p><b>Nivel do Alerta</b></p>
+            <div class="div_checkAlertas">
+                
+                <div class="box_todosAlertas">
+                    <input type="checkbox" class="chk_todosAlerta">
+                    <label for="chk_todoAlerta">TODOS</label>
+                </div>
+                
+                <div class="box_alertaAlto">
+                    <input type="checkbox" class="chk_alto">
+                    <label for="chk_alto">ALTO</label>
+                </div>
+                
+                <div class="box_alertaCrit">
+                    <input type="checkbox" class="chk_crit">
+                    <label for="chk_crit">CRÍTICO</label>
+                </div>
+                
+            </div>
+        </div> <!-- Fim Box Alertas -->
+    </div> <!-- Fim Box esqSuperior-->
+        
+    <div class="box_dirSuperior"> <!-- Inicio Box dirSuperior-->
+        <div class="box_kpi"> <!-- Inicio Box KPI -->
+            
+            <div class="kpi_maqDesempenhoRuim">
+                <span>Total de Alertas</span>
+                <div class="kpi_totalAlerta">
+                    
+                </div>
+            </div>
+            
+            <div class="box_kpi_totalMaq">
+                <span>Total de Máquinas</span>
+                <div class="kpi_totalMaq">
+                    
+                </div>
+            </div>
+            
+            <div class="box_kpi_alertasCrit">
+                <span>Total de alertas Críticos</span>
+                <div class="kpi_alertasCrit">
+                    
+                </div>
+            </div>
+            
+        </div> <!-- Fim Box KPI -->
+        
+        <div class="box_dashboards"> <!-- Inicio Box Dashboard -->
+            
+            <div class="dash_desempenho">
+                
+            </div>
+            
+            <div class="dash_listaMaq">
+                
+            </div>
+            
+        </div> <!-- Fim Box Dashboard -->
+    </div> <!-- Fim Box dirSuperior-->
+</div> <!-- Fim Box Geral -->
+</body>
+</html>
