@@ -16,19 +16,31 @@ h1 {
     justify-content: space-between;
     align-items: flex-start;
     margin: 0 7%;
+    
+}
+
+.box_superior {
+    margin-top: 1%;
+    height: 22vh;
+    /* border: 1px solid red; */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .box_esqSuperior {
-    width: 60%;
+    width: 50%;
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-direction: column;
 }
 
 .box_dirSuperior {
-    width: 40%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 }
-
 
 .box_select {
     /* border: 1px solid red; */
@@ -44,6 +56,7 @@ h1 {
     text-align: center;
     background-color: #5865A6;
     color: white;
+    border-radius: 5%;
 }
 
 .slc_setor {
@@ -53,6 +66,7 @@ h1 {
     text-align: center;
     background-color: #5865A6;
     color: white;
+    border-radius: 5%;
 }
 
 .slc_periodo {
@@ -62,11 +76,12 @@ h1 {
     text-align: center;
     background-color: #5865A6;
     color: white;
+    border-radius: 5%;
 }
 
 .box_alertas {
     width: 14%;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 .box_alertas p {
@@ -86,6 +101,7 @@ h1 {
     gap: 10px;
     width: 39vh;
     height: 4vh;
+    border-radius: 5%;
 }
 
 .box_alertaCrit {
@@ -94,11 +110,62 @@ h1 {
 
 .box_kpi {
     display: flex;
-    width: 180vh;
-    justify-content: end;
-    gap: 100px;
+    width: 80vh;
+    justify-content: space-between;
+    /* gap: 100px; */
+    /* border: 5px solid green; */
 }
 
-.box_dirSuperior {
-    border: 1px solid red;
+.box_kpi {
+    height: 100%;
 }
+
+.kpi {
+    /* background-color: #E9EDFF; */
+    width: calc((100% / 3) - 30px); /*O calc você consegue fazer o cálculo para ser como medida dinâmica. Neste exemplo, eu dividi por 3 para que as divs ficassem de tamanhos iguais e -30px para ser como um gap*/
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.kpi p {
+    height: 30%;
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin: 0;
+    font-size: 1.2vw;
+    color: #5865A6;
+}
+
+.kpi_totalAlerta, .kpi_totalMaq, .kpi_alertasCrit {
+    display: flex;
+    justify-content: center;
+    border: 2px solid #A642F4;
+    border-radius: 5%;
+    background-color: #E9EDFF;
+    width: 70%;
+    height: calc(50% - 18px);
+
+}
+
+/* .box_kpi .kpi_totalAlerta,  .kpi_totalMaq, .kpi_alertasCrit {
+    border: 1px solid #A642F4;
+    background-color: #E9EDFF;
+    color: #5271FF;
+    justify-self: center;
+    height: 10vh;
+    width: calc((100% / 3) - 30px);
+    border-radius: 5%;
+}
+
+.box_kpi p {
+    color: #5865A6;
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 10px;
+} */
