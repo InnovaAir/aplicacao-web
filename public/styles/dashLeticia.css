@@ -1,0 +1,185 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.tela_geral {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.tela_geral_centralizada {
+    height: 90%;
+    width: 100%;
+    align-self: center;
+}
+
+.navbar {
+    height: 100%;
+    width: 8%;
+    border: 2px solid red;
+}
+
+.tela_dash {
+    height: 100%;
+    width: 97%;
+    border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.titulo01 {
+    font-size: 34px;
+}
+
+.titulo_alinhado {
+    display: flex;
+    flex-direction: column;
+}
+
+.titulos_dash {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#titulo_aeroporto {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.div_select {
+    display: flex;
+    flex-direction: column;
+}
+
+.select_alinhado {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 26%;
+}
+
+/* KPI's */
+
+#alertas_kpi_titulo {
+    font-size: 24px;
+}
+
+.box_kpi {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.box_kpi_nivel {
+    width: 35%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-size: 24px;
+}
+
+#numero_kpi {
+    font-size: 40px;
+}
+
+.taxa_kpi {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #568359;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.grafico {
+    height: 90%;
+    width: 100%;
+    border: 2px solid red;
+}
+
+.box_alinhada1 {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 2px solid red;
+}
+
+.box_alinhada2 {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 2px solid red;
+}
+
+.lateral {
+    display: flex;
+    flex-direction: row;
+    height: 80%;
+    justify-content: space-between;
+    border: 2px solid red;  
+}
+
+/* GRÁFICO */
+
+.head_grafico {
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.grafico_geral {
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 1px solid #5865A6;
+    border-radius: 5px;
+}
+
+/* KPI's 2 */
+
+.box_kpi_lateral {
+    background-color: #5865A6;
+    color: #fff;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.subtitulo {
+    text-align: center;
+}
+
+.kpi1 {
+    height: 20%;
+}
+
+.subtitulo {
+    height: 50%;
+    border: 2px solid red;
+}
+
+.kpi2 {
+    height: 100%;
+}
+
+.kpi3 {
+    height: 20%;
+}

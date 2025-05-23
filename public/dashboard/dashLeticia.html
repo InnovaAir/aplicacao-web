@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Desempenho</title>
+
+    <link rel="stylesheet" href="../styles/dashLeticia.css">
+</head>
+
+<body>
+    <div class="tela_geral">
+        <div class="navbar">Navbar</div>
+        
+        <div class="tela_geral_centralizada">
+
+            <div class="tela_dash">
+                <div class="titulos_dash">
+                    <div class="titulo_alinhado">
+                        <span class="titulo01"><b>Análise de Desempenho</b></span>
+                        <span><i>*Prevenção de alertas</i></span>
+                    </div>
+
+                    <div class="titulo_alinhado">
+                        <span class="titulo01" id="titulo_aeroporto"><b>Aeroporto X</b></span>
+                        <span><i>*Última atualização: 12/05/2025 - 14:52</i></span>
+                    </div>
+                </div>
+
+                <div class="select_alinhado">
+                    <div class="div_select">
+                        <span><b>Selecione o ano monitorado</b></span>
+                        <select id="select_ano">
+                            <option value="2024">2024</option>
+                            <option value="2025" selected>2025</option>
+                        </select>
+                    </div>
+
+                    <div class="div_select">
+                        <span><b>Selecione o componente</b></span>
+                        <select id="select_componente">
+                            <option value="todos" selected>TODOS</option>
+                            <option value="cpu">CPU</option>
+                            <option value="ram">RAM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="titulo_alinhado">
+                    <span id="alertas_kpi_titulo"><b>Quantidade de alertas prováveis</b></span>
+                    <span><i>*De acordo com a previsão e nível de alerta</i></span>
+                </div>
+
+                <div class="lateral">
+                    <div class="box_alinhada1">
+                        <div class="box_kpi">
+                            <div class="box_kpi_nivel" style="background-color: #DEC828; color: #fff;">
+                                <span>Nível: Baixo</span>
+                                <span id="numero_kpi"><b>10</b></span>
+                            </div>
+
+                            <div class="box_kpi_nivel" style="background-color: #DE2828; color: #fff;">
+                                <span>Nível: Alto</span>
+                                <span id="numero_kpi"><b>7</b></span>
+                            </div>
+
+                            <div class="box_kpi_nivel" style="background-color: #8258A6; color: #fff;">
+                                <span>Nível: Crítico</span>
+                                <span id="numero_kpi"><b>2</b></span>
+                            </div>
+                        </div>
+
+                        <div class="grafico_geral">
+                            <div class="head_grafico">
+                                <div class="titulo_alinhado">
+                                    <span id="alertas_kpi_titulo"><b>Previsão de desempenho dos componetes</b></span>
+                                    <span><i>*Baseado nos dados do último ano</i></span>
+                                </div>
+
+                                <div class="taxa_kpi">
+                                    <span style="font-size: 20px;">Taxa de confiabilidade:</span>
+                                    <span style="font-size: 25px;"><b>98.9%</b></span>
+                                </div>
+                            </div>
+                            <div class="grafico">Gráfico</div>
+                        </div>
+                    </div>
+
+                    <div class="box_alinhada2">
+                        <div class="box_kpi_lateral kpi1">
+                            <span>Total de alertas</span>
+                            <span><b>19</b></span>
+                        </div>
+
+                        <div class="subtitulo">
+                            <div class="box_kpi_lateral kpi2">
+                                <span>Componente com maior risco de alertas</span>
+                                <span><b>CPU</b></span>
+                                <span><b>51%</b></span>
+                            </div>
+                            <span><i>*Predominância em (%)</i></span>
+                        </div>
+
+                        <div class="box_kpi_lateral kpi3">
+                            <span>Maior pico</span>
+                            <span><b>Dezembro</b></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
