@@ -70,13 +70,21 @@
             <option value="30">Últimos 30 dias</option>
           </select>
         </div>
+                <div class="kpi_tabela">
+              <span id="titulo_kpi">Modelo com mais alertas:</span>
+              <span id="valor_kpi"><b>i3 7200 u</b></span>
+            </div>
+            <div class="kpi_tabela">
+              <span id="titulo_kpi">Modelo do mesmo componente com menos alertas:</span>
+              <span id="valor_kpi"><b>Ryzen 3 3200 GE</b></span>
+            </div>
       </div>
 
       <div class="box_grafico">
         <div class="grafico_alinhado">
           <div class="titulo_grafico1">
             <span id="titulo_01">
-              Quantidade de alertas por categoria do componente
+              Quantidade de alertas por modelo
             </span>
             <span id="titulo_02">
               <i>*Um componente pode emitir mais de um alerta, organizado pelos níveis de alerta.</i>
@@ -86,28 +94,6 @@
             <div id="chart_barras"></div>
           </div>
         </div>
-
-        <div class="box" id="grafico_periodo">
-          <div class="kpi_alinhada">
-            <div class="titulo_grafico2">
-              <span id="titulo_01">
-                Periodicidade de alertas
-              </span>
-              <span id="titulo_02">
-                <i>*Horario do dia com mais alertas, no intervalo selecionado</i>
-              </span>
-            </div>
-
-            <div class="box_kpi">
-              <span id="titulo_kpi">Intervalo com maior pico</span>
-              <b><span id="valor_kpi">Tarde</span> (13:00 → 18:00)</b>
-            </div>
-          </div>
-
-          <div class="grafico1">
-            <div id="chart_barras2"></div>
-          </div>
-        </div>
       </div>
 
       <div>
@@ -115,7 +101,7 @@
           <div class="titulo_grafico3">
             <div class="titulo_alinhado">
               <span id="titulo_01">
-                Lista de Componentes
+                Lista de Modelos
               </span>
               <span id="titulo_02">
                 <i>*Por nível de gravidade do alerta</i>
@@ -153,6 +139,7 @@
                   <th>Nível</th>
                   <th>Total Alertas</th>
                   <th>Qtd. máquinas c/ componente</th>
+                  <th>Porcentagem de alertas</th>
                 </tr>
               </thead>
               <tbody>
@@ -163,36 +150,29 @@
                   <td><span style="color: red;">▲</span> ALTO</td>
                   <td>7</td>
                   <td>21</td>
+                  <td>5%</td>
                 </tr>
                 <td>
                   Processador <br><small>Pentium g5400</small>
                 </td>
                 <td><span style="color: red;">▲</span> ALTO</td>
-                <td>5</td>
+                <td>576</td>
                 <td>12</td>
+                <td>86%</td>
                 </tr>
                 <tr>
                   <td>
                     Processador <br><small>Ryzen 3 3200g</small>
                   </td>
                   <td><span style="color: red;">▲</span> ALTO</td>
-                  <td>2</td>
+                  <td>1023</td>
                   <td>43</td>
+                  <td>43%</td>
                 </tr>
               </tbody>
             </table>
           </div>
           
-          <div class="kpi_empilhada">
-            <div class="kpi_tabela">
-              <span id="titulo_kpi">Quantidade de máquinas registradas</span>
-              <span id="valor_kpi"><b>900</b></span>
-            </div>
-            <div class="kpi_tabela">
-              <span id="titulo_kpi">Nível de alerta com mais registros</span>
-              <span id="valor_kpi"><b><span style="color: red;">▲</span> ALTO</b></span>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -204,6 +184,60 @@
 <script src="../js/animacaoMenu.js"></script>
 
 <script>
+
+var options = {
+    series: [
+      {
+        name: 'Baixo',
+        data: [6, 10, 2, 31]
+      },
+      {
+        name: 'Alto',
+        data: [14, 21, 23, 12]
+      },
+      {
+        name: 'Crítico',
+        data: [2, 3, 5, 10]
+      }
+    ],
+    chart: {
+      type: 'bar',
+      height: 220
+    },
+    colors: ['#ff9900', '#ff0000', '#8400ff'],
+    plotOptions: {
+      bar: {
+        horizontal: true,
+        dataLabels: {
+          position: 'top'
+        }
+      }
+    },
+    dataLabels: {
+      enabled: true,
+      offsetX: -6,
+      style: {
+        fontSize: '12px',
+        colors: ['#fff']
+      },
+      formatter: function (val) {
+        return val;
+      }
+    },
+    stroke: {
+      show: true,
+      width: 1,
+      colors: ['#fff']
+    },
+    tooltip: {
+      shared: true,
+      intersect: false
+    },
+    xaxis: {
+      categories: ["i3 7200u", "i4 2322u", "ryzen 4", "pentium 5"],
+      max: 30
+    }
+  };
 
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
@@ -277,91 +311,6 @@ function obterFiliaisGerente(){
 
   var chart = new ApexCharts(document.querySelector("#chart_barras"), options);
   chart.render();
-
-
-  var options = {
-    series: [{
-      name: 'Qtd.',
-      data: [28, 7, 32, 19]
-    }],
-    chart: {
-      height: 350,
-      type: 'bar',
-    },
-    plotOptions: {
-      bar: {
-        borderRadius: 10,
-        dataLabels: {
-          position: 'top',
-        },
-      }
-    },
-    dataLabels: {
-      enabled: true,
-      formatter: function (val) {
-        return val;
-      },
-      offsetY: -20,
-      style: {
-        fontSize: '12px',
-        colors: ["#304758"]
-      }
-    },
-
-    xaxis: {
-      categories: ["00h00 → 06h00", "07h00 → 12h00", "13h00 → 18h00", "19h00 → 23h00"],
-      position: 'top',
-      axisBorder: {
-        show: false
-      },
-      axisTicks: {
-        show: false
-      },
-      crosshairs: {
-        fill: {
-          type: 'gradient',
-          gradient: {
-            colorFrom: '#D8E3F0',
-            colorTo: '#BED1E6',
-            stops: [0, 100],
-            opacityFrom: 0.4,
-            opacityTo: 0.5,
-          }
-        }
-      },
-      tooltip: {
-        enabled: true,
-      }
-    },
-    yaxis: {
-      axisBorder: {
-        show: false
-      },
-      axisTicks: {
-        show: false,
-      },
-      labels: {
-        show: false,
-        formatter: function (val) {
-          return val;
-        }
-      }
-
-    },
-    title: {
-      text: 'Quantidade de alertas pelo período do dia',
-      floating: true,
-      offsetY: 330,
-      align: 'center',
-      style: {
-        color: '#444'
-      }
-    }
-  };
-
-  var chart = new ApexCharts(document.querySelector("#chart_barras2"), options);
-  chart.render();
-
 
   abrirMenu();
 </script>
