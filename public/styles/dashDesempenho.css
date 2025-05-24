@@ -1,171 +1,194 @@
-* {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 body {
-    display: flex;
-}
-
-h1 {
-    color: #5271FF;
-    margin-left: 7%;
+    height: 100vh;
+    width: 100vw;
 }
 
 .box_geral {
+    margin-left: 7vw;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin: 0 7%;
-    
+    flex-direction: row;
 }
 
-.box_superior {
-    margin-top: 1%;
-    height: 22vh;
-    /* border: 1px solid red; */
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-
-.box_esqSuperior {
-    width: 50%;
+.box_esquerda{
     /* border: 1px solid blue; */
-    display: flex;
-    flex-direction: column;
+    height: 99vh;
+    width: 47vw;
 }
 
-.box_dirSuperior {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+.box_direita {
+    /* border: 1px solid green; */
+    height: 99vh;
+    width: 46vw;
+    margin-left: 1vh;
 }
 
-.box_select {
+.div_titulo1{
     /* border: 1px solid red; */
-    width: 60%;
+    color: #0000A5;
+    font-size: 18px;
+}
+
+.div_selects {
     display: flex;
+    flex-direction: row;
+    /* border: 2px solid violet; */
     justify-content: space-between;
 }
 
-.slc_endereco {
-    width: 35%;
-    height: 40px;   
-    font-size: 20px;
-    text-align: center;
-    background-color: #5865A6;
-    color: white;
-    border-radius: 5%;
+.div_slcEnd,
+.div_slcPer,
+.div_slcAlerta{
+    /* border: 1px solid black; */
+    width: 11vw;
+    height: 3.5vh;
 }
 
-.slc_setor {
-    width: 20%;
-    height: 40px;
-    font-size: 20px;
-    text-align: center;
-    background-color: #5865A6;
-    color: white;
-    border-radius: 5%;
-}
-
-.slc_periodo {
-    width: 23%;
-    height: 40px;
-    font-size: 20px;
-    text-align: center;
-    background-color: #5865A6;
-    color: white;
-    border-radius: 5%;
-}
-
-.box_alertas {
-    width: 14%;
-    margin-top: 50px;
-}
-
-.box_alertas p {
-    color: #5271FF;
-    font-size: 20px;
-    margin-bottom: 5px;
-    width: 16vh;
-}
-
-.div_checkAlertas {
-    /* border: 1px solid red; */
-    background-color: #5865A6;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    width: 39vh;
-    height: 4vh;
-    border-radius: 5%;
-}
-
-.box_alertaCrit {
-    margin-right: 0.7vh;
-}
-
-.box_kpi {
-    display: flex;
-    width: 80vh;
-    justify-content: space-between;
-    /* gap: 100px; */
-    /* border: 5px solid green; */
-}
-
-.box_kpi {
+.div_slcEnd select,
+.div_slcPer select,
+.div_slcAlerta select{
+    width: 100%;
     height: 100%;
+    box-sizing: border-box;
 }
 
-.kpi {
-    /* background-color: #E9EDFF; */
-    width: calc((100% / 3) - 30px); /*O calc você consegue fazer o cálculo para ser como medida dinâmica. Neste exemplo, eu dividi por 3 para que as divs ficassem de tamanhos iguais e -30px para ser como um gap*/
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.kpi p {
-    height: 30%;
-    /* border: 1px solid red; */
+.div_kpis {
     display: flex;
     justify-content: center;
-    text-align: center;
-    align-items: center;
-    margin: 0;
-    font-size: 1.2vw;
-    color: #5865A6;
+    /* border: 3px solid red; */
+    margin-top: 4vh;
 }
 
-.kpi_totalAlerta, .kpi_totalMaq, .kpi_alertasCrit {
-    display: flex;
-    justify-content: center;
-    border: 2px solid #A642F4;
-    border-radius: 5%;
-    background-color: #E9EDFF;
-    width: 70%;
-    height: calc(50% - 18px);
-
-}
-
-/* .box_kpi .kpi_totalAlerta,  .kpi_totalMaq, .kpi_alertasCrit {
-    border: 1px solid #A642F4;
-    background-color: #E9EDFF;
-    color: #5271FF;
-    justify-self: center;
+.kpi_caixa {
+    background-color: #010176;
+    color: white;
+    padding: 1vh 2vw;
+    width: calc((100% - 2vw) / 3);
     height: 10vh;
-    width: calc((100% / 3) - 30px);
-    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #fff;
 }
 
-.box_kpi p {
-    color: #5865A6;
-    font-size: 25px;
+.kpi_titulo {
     text-align: center;
-    margin-bottom: 10px;
-} */
+    font-size: 0.9vw;
+    margin: 0;
+}
+
+.kpi_linha {
+    width: 80%;
+    border: 0.5px solid white;
+    margin: 0.5vh 0;
+}
+
+.kpi_valor {
+    font-size: 2vw;
+    font-weight: bold;
+    margin: 0;
+}
+
+.kpi_valor span {
+    display: inline-block;
+}
+
+.box_esquerdaBaixo{
+    /* border: 1px solid red; */
+    margin-top: 3vh;
+    height: 66vh;
+}
+
+.div_titulo2 {
+    /* border: 1px solid black; */
+    font-size: 2.5vh;
+    color: #5271FF;
+}
+
+.div_dashboard{
+    border: 1px solid green;
+    margin-top: 2vh;
+    height: 59vh;
+}
+
+.div_titulo3 {
+    /* border: 1px solid black; */
+    font-size: 2.5vh;
+    color: #5271FF;
+    text-align: center;
+    margin-top: 15vh;
+}
+
+.div_listaMaq{
+    border: 1px solid orange;
+    height: 60vh;
+    margin-right: 1vw;
+}
+
+.div_legenda {
+    display: flex;
+    justify-content: space-around;
+    margin: 2vh 0;
+    align-items: center;
+}
+
+.box_check {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 5px;
+    font-weight: bold;
+}
+
+.box_check input[type="checkbox"] {
+     display: none;
+}
+
+.check_box_suficiente,
+.check_box_mediano,
+.check_box_insuficiente {
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+.check_box_suficiente {
+    background-color: #74c074;
+}
+
+.check_box_mediano {
+    background-color: #EBEB00;
+}
+
+.check_box_insuficiente {
+    background-color: #FE6B6B;
+}
+
+.div_botaoCSV {
+    /* border: 1px solid green; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2vh;
+}
+
+
+.div_botaoCSV button {
+    background-color: #010176;
+    color: white;
+    font-weight: bold;
+    padding: 1vh 1.4vw;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.8vh;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.div_botaoCSV button:hover {
+    transform: scale(1.02);
+    transition: 0.3s ease;
+}

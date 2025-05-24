@@ -11,92 +11,122 @@
 
     <title>Desempenho</title>
   </head>
-  <h1>Gráfico de Desempenho por Totem</h1>
-
   <body>
-    <div class="box_geral">
-      <!-- Inicio Box Geral -->
-      
-      <div class="box_superior">
-        <!-- Inicio box superior-->
-        <div class="box_esqSuperior">
-          <!-- Inicio Box esqSuperior-->
-          <div class="box_select">
-            <!-- Inicio Box Select -->
-            <select class="slc_endereco">
-              <option value="">Endereço</option>
-            </select>
+    
+    <div class="box_geral"> <!-- Inicio Box geral-->
+      <div class="box_esquerda"> <!-- Inicio Box esquerda-->
+        
+        <div class="box_esquerdaCima"> <!-- Inicio Box esquerda cima-->
+          
+          <div class="div_titulo1">
+            <h1>Gráfico de Desempenho por Filial</h1>
 
-            <select class="slc_setor">
-              <option value="">Setor</option>
-            </select>
-
-            <select class="slc_periodo">
-              <option value="">Periodo</option>
-            </select>
           </div>
-          <!-- Fim Box Select -->
 
-          <div class="box_alertas">
-            <!-- Inicio Box Alertas -->
+          <div class="div_selects">
 
-            <p><b>Nivel do Alerta</b></p>
-            <div class="div_checkAlertas">
-              <div class="box_todosAlertas">
-                <input type="checkbox" class="chk_todosAlerta" />
-                <label for="chk_todoAlerta">TODOS</label>
-              </div>
-
-              <div class="box_alertaAlto">
-                <input type="checkbox" class="chk_alto" />
-                <label for="chk_alto">ALTO</label>
-              </div>
-
-              <div class="box_alertaCrit">
-                <input type="checkbox" class="chk_crit" />
-                <label for="chk_crit">CRÍTICO</label>
-              </div>
+            <div class="div_slcEnd">
+                <select id="slc_endereco">
+                  <option value="">Endereço</option>
+                </select>
             </div>
+
+            <div class="div_slcPer">
+              <select id="slc_periodo">
+                <option value="">Periodo</option>
+              </select>
+            </div>
+
+            <div class="div_slcAlerta">
+              <select id="div_alerta">
+                <option value="">Todos</option>
+              </select>
+            </div>
+
+
           </div>
-          <!-- Fim Box Alertas -->
+
+          <div class="div_kpis">
+            
+              <div class="kpi_caixa">
+                <p class="kpi_titulo">Máquinas com<br>Baixo Desempenho</p>
+                <hr class="kpi_linha">
+                <p class="kpi_valor"><span id="kpi_baixo">0</span></p>
+              </div>
+
+              <div class="kpi_caixa">
+                <p class="kpi_titulo">Total de máquinas</p>
+                <hr class="kpi_linha">
+                <p class="kpi_valor"><span id="kpi_total">0</span></p>
+              </div>
+
+              <div class="kpi_caixa">
+                <p class="kpi_titulo">Alertas Nível<br>Crítico</p>
+                <hr class="kpi_linha">
+                <p class="kpi_valor"><span id="kpi_alertas">0</span></p>
+              </div>
+
+          </div>
+
+        </div> <!-- Fim Box esquerda cima -->
+
+
+        <div class="box_esquerdaBaixo"> <!-- Inicio Box esquerda baixo-->
+
+          <div class="div_titulo2">
+              <span><b>Desempenho total das máquinas das Filiais (%)</b></span>
+          </div>
+
+          <div class="div_dashboard">
+
+          </div>
+
+        </div> <!-- Fim Box esquerda baixo-->
+
+
+      </div> <!-- Fim Box esquerda-->
+
+      <div class="box_direita"> <!-- Inicio Box direita-->
+        <div class="div_titulo3">
+            <span><b>Lista  das máquinas por filial</b></span>
         </div>
-        <!-- Fim Box esqSuperior-->
 
-        <div class="box_dirSuperior">
-          <!-- Inicio Box dirSuperior-->
-          <div class="box_kpi">
-            <!-- Inicio Box KPI -->
+        <div class="div_legenda">
 
-            <div class="kpi box_kpi_totalAlerta">
-              <p><b>Total de Alertas</b></p>
-              <div class="kpi_totalAlerta"></div>
-            </div>
+          <label class="box_check">
+            <input type="checkbox" id="suficiente">
+            <span class="check_box_suficiente"></span>
+            <span class="checkbox-text">Desempenho Suficiente</span>
+          </label>
 
-            <div class="kpi box_kpi_totalMaq">
-              <p><b>Total de Máquinas</b></p>
-              <div class="kpi_totalMaq"></div>
-            </div>
+          <label class="box_check">
+            <input type="checkbox" id="mediano">
+            <span class="check_box_mediano"></span>
+            <span class="checkbox-text">Desempenho Mediano</span>
+          </label>
 
-            <div class="kpi box_kpi_alertasCrit">
-              <p><b>Total de alertas Críticos</b></p>
-              <div class="kpi_alertasCrit"></div>
-            </div>
-          </div>
-          <!-- Fim Box KPI -->
+          <label class="box_check">
+            <input type="checkbox" id="insuficiente">
+            <span class="check_box_insuficiente"></span>
+            <span class="checkbox-text">Desempenho Insuficiente</span>
+          </label>
+          
         </div>
-        <!-- Fim Box dirSuperior-->
-      </div>
-      <!-- Fim box superior-->
 
-      <div class="box_dashboards">
-        <!-- Inicio Box Dashboard -->
+        <div class="div_listaMaq">
 
-        <div class="dash_desempenho"></div>
+        </div>
 
-        <div class="dash_listaMaq"></div>
-      </div>
-      <!-- Fim Box Dashboard -->
-    </div>
-    <!-- Fim Box Geral -->
+        <div class="div_botaoCSV">
+
+          <button>Baixar Relatório CSV</button>
+
+        </div>
+
+      </div> <!-- Fim Box direita-->
+
+    </div> <!-- Fim Box geral-->
+
+    
   </body>
 </html>
