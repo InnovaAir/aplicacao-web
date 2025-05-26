@@ -1,7 +1,7 @@
 var cadastrosModel = require("../Models/cadastrosModel");
 
 function listarFiliais(req, res) {
-    var idUsuario = req.params.fk;
+    var idUsuario = req.params.fk; 
 
     // Faça as validações dos valores    
     if (idUsuario == null) {
@@ -63,6 +63,24 @@ function listarMetricas(req, res) {
     }
 
     cadastrosModel.listarMetricas(fkComponente)
+        .then((resultado) => {
+            res.json(resultado);
+        })
+        .catch((erro) => {
+            console.log("Erro ao cadastrar:", erro);
+            res.status(500).json({ error: "Erro ao cadastrar no banco de dados!" });
+        });
+}
+
+function listarAlertas(req, res) {
+
+    var fkComponente = req.params.fk;
+
+    if (fkComponente == null) {
+        res.status(400).send("ID do Componente está nulo!");
+    }
+
+    cadastrosModel.listarAlertas(fkComponente)
         .then((resultado) => {
             res.json(resultado);
         })
@@ -295,6 +313,7 @@ module.exports = {
     listarTotens,
     listarComponentes,
     listarMetricas,
+    listarAlertas,
     verMetrica,
     listarEnderecos,
     verEndereco,

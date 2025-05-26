@@ -21,6 +21,10 @@ router.get("/metricas/listar/:fk", function (req, res) {
     cadastrosController.listarMetricas(req, res)
 })
 
+router.get("/metricas/alertas/:fk", function (req, res) {
+    cadastrosController.listarAlertas(req, res)
+})
+
 router.get("/metricas/ver-unica/:fk", function (req, res) {
     cadastrosController.verMetrica(req, res)
 })

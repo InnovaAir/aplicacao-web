@@ -25,19 +25,28 @@ function listarComponentes(fkMaquina) {
     return database.executar(instrucaoSql);
 }
 
-function listarMetricas(fkComponente) {
-    var instrucaoSql = `
-        SELECT * FROM metrica WHERE fkComponente = ${fkComponente}
-    `;
-    console.log(`Listando metrica...`)
-    return database.executar(instrucaoSql);
-}
 
 function verMetrica(idMetrica) {
     var instrucaoSql = `
         SELECT * FROM metrica WHERE idMetrica = ${idMetrica}
     `;
-    console.log(`Vendo metrica...`)
+    console.log(`Vendo metricas...`)
+    return database.executar(instrucaoSql);
+}
+
+function listarMetricas(fkComponente) {
+    var instrucaoSql = `
+        SELECT * FROM metrica WHERE fkComponente = ${fkComponente}
+    `;
+    console.log(`Listando metricas...`)
+    return database.executar(instrucaoSql);
+}
+
+function listarAlertas(fkMetrica) {
+    var instrucaoSql = `
+        SELECT * FROM captura_alerta WHERE fkMetrica = ${fkMetrica}
+    `;
+    console.log(`Listando alertas...`)
     return database.executar(instrucaoSql);
 }
 
@@ -144,6 +153,7 @@ module.exports = {
     listarTotens,
     listarComponentes,
     listarMetricas,
+    listarAlertas,
     verMetrica,
     verEndereco,
     adicionarMetrica,
