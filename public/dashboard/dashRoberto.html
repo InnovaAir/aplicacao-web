@@ -49,35 +49,48 @@
           <b>Análise Geral por Endereço</b>
         </span>
         <span id="titulo_02">
-          <i><b>*Selecione os filtros para a visualização</b></i>
+          <i><b>*Selecione os filtros para a visualização(aeroporto, período e componente)</b></i>
         </span>
       </div>
 
       <div class="select-wrapper">
         <div class="custom-select">
           <select id="select_aeroporto">
-            <option value="" disabled>Selecione o Aeroporto</option>
-            <option value="gru" selected>GRU</option>
+            <option value="" disabled selected>Selecione o Aeroporto</option>
+            <option value="gru">GRU</option>
             <option value="cgh">Congonhas</option>
           </select>
         </div>
 
         <div class="custom-select">
           <select id="select_intervalo">
-            <option value="" disabled>Selecione o intervalo</option>
-            <option value="7" selected>Últimos 7 dias</option>
+            <option value="" disabled selected>Selecione o intervalo</option>
+            <option value="7">Últimos 7 dias</option>
             <option value="15">Últimos 15 dias</option>
             <option value="30">Últimos 30 dias</option>
           </select>
         </div>
-                <div class="kpi_tabela">
-              <span id="titulo_kpi">Modelo com mais alertas:</span>
-              <span id="valor_kpi"><b>i3 7200 u</b></span>
-            </div>
-            <div class="kpi_tabela">
-              <span id="titulo_kpi">Modelo do mesmo componente com menos alertas:</span>
-              <span id="valor_kpi"><b>Ryzen 3 3200 GE</b></span>
-            </div>
+
+        <div class="custom-select">
+          <select id="select_componente">
+            <option value="" disabled selected>Todos os componentes</option>
+            <option value="cpu">CPU</option>
+            <option value="ram">RAM</option>
+            <option value="disco">DISCO</option>
+            <option value="rede">REDE</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="box_kpi">
+        <div class="kpi_tabela">
+          <span id="titulo_kpi">Modelo com mais alertas:</span>
+          <span id="valor_kpi"><b>i3 7200 u</b></span>
+        </div>
+        <div class="kpi_tabela">
+          <span id="titulo_kpi">Modelo do mesmo componente com menos alertas:</span>
+          <span id="valor_kpi"><b>Ryzen 3 3200 GE</b></span>
+        </div>
       </div>
 
       <div class="box_grafico">
@@ -136,7 +149,6 @@
               <thead>
                 <tr>
                   <th>Componente</th>
-                  <th>Nível</th>
                   <th>Total Alertas</th>
                   <th>Qtd. máquinas c/ componente</th>
                   <th>Porcentagem de alertas</th>
@@ -145,29 +157,42 @@
               <tbody>
                 <tr>
                   <td>
-                    Processador <br><small>I3 7200u</small>
+                    <span id="tabela_comp_1">Processador</span><br><small><span id="tabela_modelo_1">Ryzen 3 3200g</span></small>
                   </td>
-                  <td><span style="color: red;">▲</span> ALTO</td>
-                  <td>7</td>
-                  <td>21</td>
-                  <td>5%</td>
+                  <td id="tabela_total_1">7</td>
+                  <td id="tabela_qtd_1">21</td>
+                  <td id="tabela_perc_1">5%</td>
                 </tr>
                 <td>
-                  Processador <br><small>Pentium g5400</small>
+                  <span id="tabela_comp_2">Processador</span><br><small><span id="tabela_modelo_2">Ryzen 3 3200g</span></small>
                 </td>
-                <td><span style="color: red;">▲</span> ALTO</td>
-                <td>576</td>
-                <td>12</td>
-                <td>86%</td>
+                <td id="tabela_total_2">576</td>
+                <td id="tabela_qtd_2">12</td>
+                <td id="tabela_perc_2">86%</td>
                 </tr>
                 <tr>
                   <td>
-                    Processador <br><small>Ryzen 3 3200g</small>
+                    <span id="tabela_comp_3">Processador</span><br><small><span id="tabela_modelo_3">Ryzen 3 3200g</span></small>
                   </td>
-                  <td><span style="color: red;">▲</span> ALTO</td>
-                  <td>1023</td>
-                  <td>43</td>
-                  <td>43%</td>
+                  <td id="tabela_total_3">1023</td>
+                  <td id="tabela_qtd_3">43</td>
+                  <td id="tabela_perc_3">43%</td>
+                </tr>
+                                <tr>
+                  <td>
+                    <span id="tabela_comp_4">Processador</span><br><small><span id="tabela_modelo_4">Ryzen 3 3200g</span></small>
+                  </td>
+                  <td id="tabela_total_4">1023</td>
+                  <td id="tabela_qtd_4">43</td>
+                  <td id="tabela_perc_4">43%</td>
+                </tr>
+                                <tr>
+                  <td>
+                    <span id="tabela_comp_5">Processador</span><br><small><span id="tabela_modelo_5">Ryzen 3 3200g</span></small>
+                  </td>
+                  <td id="tabela_total_5">1023</td>
+                  <td id="tabela_qtd_5">43</td>
+                  <td id="tabela_perc_5">43%</td>
                 </tr>
               </tbody>
             </table>
@@ -184,12 +209,12 @@
 <script src="../js/animacaoMenu.js"></script>
 
 <script>
-
+modelosOrdenados = []
 var options = {
     series: [
       {
         name: 'Baixo',
-        data: [6, 10, 2, 31]
+        data: [10, 10, 10, 10]
       },
       {
         name: 'Alto',
@@ -202,7 +227,7 @@ var options = {
     ],
     chart: {
       type: 'bar',
-      height: 220
+      height: 440
     },
     colors: ['#ff9900', '#ff0000', '#8400ff'],
     plotOptions: {
@@ -239,12 +264,16 @@ var options = {
     }
   };
 
+var chart = new ApexCharts(document.querySelector("#chart_barras"), options);
+chart.render();
+
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     sidebar.classList.toggle('show');
   }
   
 obterFiliaisGerente()
+obterDadosGerente()
 function obterFiliaisGerente(){
 
   fetch(`/cadastros/metricas/listar/filiais/${sessionStorage.idUsuario}`, {
@@ -275,7 +304,7 @@ function obterFiliaisGerente(){
             });
     };
 
-  function obterDadosGerente(){
+function obterDadosGerente(){
     fetch("/dashboards/dashGerenteDados", {
         method: "POST",
         headers: {
@@ -288,9 +317,83 @@ function obterFiliaisGerente(){
     .then(function (resposta) {
         console.log("resposta do servidor: ", resposta);
         if (resposta.ok) {
-            console("SUCESSO AO OBTER DADOS DO GERENTE")
+            console.log("SUCESSO AO OBTER DADOS DO GERENTE")
             resposta.json().then(json => {
-              
+              json_dados = json
+              console.log(json_dados)
+              // Listar 5 modelos com mais alertas
+              menor  = 10**1000
+              for(i = 0; i < json_dados.length; i+=3){
+                qtdAtual = json_dados[i].qtdAlertas + json_dados[i+1].qtdAlertas + json_dados[i+2].qtdAlertas;
+                modelo = {
+                  "qtdAlertas":qtdAtual, 
+                  "especificacao":json_dados[i].especificacao, 
+                  "componente":json_dados[i].componente,
+                  "terminal":json_dados[i].terminal,
+                  "index": [i, i+1, i+2]
+                }
+                modelosOrdenados.push(modelo)
+              }
+                console.log(modelosOrdenados)
+                for(i = 1; i < modelosOrdenados.length; i++){
+                  for(j = 1; j < modelosOrdenados.length; j++){
+                    if(modelosOrdenados[j].qtdAlertas < menor){
+                      menor = modelosOrdenados[j].qtdAlertas
+                      indexMenor = j
+                    }
+                  }
+                  temp = modelosOrdenados[i]
+                  modelosOrdenados[i] = modelosOrdenados[indexMenor]
+                  modelosOrdenados[indexMenor] = temp
+                }
+                console.log(json_dados[modelosOrdenados[3].index[0]].qtdAlertas)
+                 alertaBaixo = [json_dados[modelosOrdenados[0].index[0]].qtdAlertas, json_dados[modelosOrdenados[1].index[0]].qtdAlertas, json_dados[modelosOrdenados[2].index[0]].qtdAlertas, json_dados[modelosOrdenados[3].index[0]].qtdAlertas, json_dados[modelosOrdenados[4].index[0]].qtdAlertas]
+                 alertaAlto = [json_dados[modelosOrdenados[0].index[1]].qtdAlertas, json_dados[modelosOrdenados[1].index[1]].qtdAlertas, json_dados[modelosOrdenados[2].index[1]].qtdAlertas, json_dados[modelosOrdenados[3].index[1]].qtdAlertas, json_dados[modelosOrdenados[4].index[1]].qtdAlertas]
+                 alertaCritico = [json_dados[modelosOrdenados[0].index[2]].qtdAlertas, json_dados[modelosOrdenados[1].index[2]].qtdAlertas, json_dados[modelosOrdenados[2].index[2]].qtdAlertas, json_dados[modelosOrdenados[3].index[2]].qtdAlertas, json_dados[modelosOrdenados[4].index[2]].qtdAlertas]
+                 nomesModelos = [modelosOrdenados[0].especificacao, modelosOrdenados[1].especificacao, modelosOrdenados[2].especificacao, modelosOrdenados[3].especificacao]
+                console.log(modelosOrdenados)
+                console.log(alertaBaixo)
+                console.log(alertaAlto)
+                console.log(alertaCritico)
+                console.log(nomesModelos)
+                max = modelosOrdenados[0].qtdAlertas
+                console.log(max)
+                                console.log(modelosOrdenados[1].componente)
+                chart.updateSeries([
+                  {
+                    name: 'Baixo',
+                    data: alertaBaixo
+                  },
+                  {
+                    name: 'Alto',
+                    data: alertaAlto
+                  },
+                  {
+                    name: 'Critico',
+                    data: alertaCritico
+                  }
+                ])
+                chart.updateOptions({
+                  xaxis: {
+                    categories: nomesModelos,
+                    max: max
+                  }
+                });
+                tabela_comp_1.innerHTML = modelosOrdenados[0].componente
+                tabela_comp_2.innerHTML = modelosOrdenados[1].componente
+                tabela_comp_3.innerHTML = modelosOrdenados[2].componente
+                tabela_comp_4.innerHTML = modelosOrdenados[3].componente
+                tabela_comp_5.innerHTML = modelosOrdenados[4].componente
+                tabela_modelo_1.innerHTML = modelosOrdenados[0].especificacao
+                tabela_modelo_2.innerHTML = modelosOrdenados[1].especificacao
+                tabela_modelo_3.innerHTML = modelosOrdenados[2].especificacao
+                tabela_modelo_4.innerHTML = modelosOrdenados[3].especificacao
+                tabela_modelo_5.innerHTML = modelosOrdenados[4].especificacao
+                tabela_total_1.innerHTML = modelosOrdenados[0].qtdAlertas
+                tabela_total_2.innerHTML = modelosOrdenados[1].qtdAlertas
+                tabela_total_3.innerHTML = modelosOrdenados[2].qtdAlertas
+                tabela_total_4.innerHTML = modelosOrdenados[3].qtdAlertas
+                tabela_total_5.innerHTML = modelosOrdenados[4].qtdAlertas
                 });
         } else {
             // Se não foi ok, mostra mensagem de erro
@@ -309,8 +412,48 @@ function obterFiliaisGerente(){
     });
   }
 
-  var chart = new ApexCharts(document.querySelector("#chart_barras"), options);
-  chart.render();
+  function obterDadosGerenteQtd(){
+    fetch("/dashboards/dashGerenteDadosQtd", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          modelo1Server: modelosOrdenados[0].especificacao,
+          modelo2Server: modelosOrdenados[1].especificacao,
+          modelo3Server: modelosOrdenados[2].especificacao,
+          modelo4Server: modelosOrdenados[3].especificacao,
+          modelo5Server: modelosOrdenados[4].especificacao,
+          idUsuarioServer: sessionStorage.idUsuario
+        }),
+    })
+    .then(function (resposta) {
+        console.log("resposta do servidor: ", resposta);
+        if (resposta.ok) {
+                      resposta.json().then(json => {
+                        qtdMaquinas = json;
+                        tabela_qtd_1.innerHTML = qtdMaquinas[0].qtdMaquinas;
+                        tabela_qtd_2.innerHTML = qtdMaquinas[1].qtdMaquinas;
+                        tabela_qtd_3.innerHTML = qtdMaquinas[2].qtdMaquinas;
+                        tabela_qtd_4.innerHTML = qtdMaquinas[3].qtdMaquinas;
+                        tabela_qtd_5.innerHTML = qtdMaquinas[4].qtdMaquinas;
+                      })
+        } else {
+            // Se não foi ok, mostra mensagem de erro
+            return resposta.text().then(erroTexto => {
+                throw new Error(erroTexto || "Erro ao cadastrar");
+            });
+        }
+    })
+    .catch(function (erro) {
+        console.log("Erro na requisição:", erro);
+        Swal.fire({
+            title: "Erro!",
+            text: erro.message,
+            icon: "error"
+        });
+    });
+  }
 
   abrirMenu();
 </script>

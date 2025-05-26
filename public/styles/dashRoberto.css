@@ -35,7 +35,7 @@ body {
 }
 
 #titulo_kpi {
-    font-size: 20px;
+    font-size: 30px;
     color: #555;
 }
 
@@ -101,7 +101,7 @@ body {
 }
 
 .grafico_alinhado {
-    width: 49%;
+    width: 100%;
 }
 
 .kpi_container {
@@ -190,11 +190,12 @@ body {
 }
 
 .kpi_tabela {
-    height: 40%;
     display: flex;
+    width: 25%;
+    align-items: start;
+    height: 80%;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     border: 1px solid rgb(170, 170, 170);
 }
 
@@ -203,4 +204,14 @@ body {
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+    font-size: 1rem;
+}
+
+.box_kpi{
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    justify-content: space-between;
+    border: 0;
+    height: 20%;
 }
