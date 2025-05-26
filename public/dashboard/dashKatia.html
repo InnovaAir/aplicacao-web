@@ -4,10 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../styles/menuLateral.css" />
-    <link rel="stylesheet" href="../styles/dashKatia" />
-    <link rel="stylesheet" href="../styles/menu_mobile.css" />
-    <link rel="stylesheet" href="../styles/estilo.css">
+    <link rel="stylesheet" href="../styles/dashKatia.css" />
 
     <title>Análise em tempo Real</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -30,743 +27,146 @@
     </style>
 </head>
 
-<body class="visao_geral">
-    <button class="botao_abrir" onclick="abrirMenu()">☰</button>
+<body>
+    <nav class="navigation-bar">
+        ada
+    </nav>
 
-    <div class="sidebar" id="sidebar">
-        <div class="d-flex justify-content-center align-items-center px-3 w-100">
-            <div class="logo">
-                <img src="../assets/InnovaairWhite.png" alt="Logo">
+    <div class="main">
+        <div class="title">
+            <h1>Análise em Tempo Real</h1>
+            <p>* Exibindo os aeroportos a qual você possui acesso</p>
+        </div>
+
+        <div class="indicators">
+            <div class="kpi">
+                <p>Endereço com mais alertas</p>
+                <h2 id="indicator_address">GRU Airport</h2>
+            </div>
+
+            <div class="kpi red">
+                <p>Totens em alerta</p>
+                <h2 id="indicator_alert">12</h2>
+            </div>
+
+            <div class="kpi green">
+                <p>Totens em atividade</p>
+                <h2 id="indicator_activity">12</h2>
+            </div>
+
+            <div class="kpi blue">
+                <p>Totens ociosos</p>
+                <h2 id="indicator_idle">12</h2>
+            </div>
+
+            <div class="legend">
+                <p>Legenda de alertas:</p>
+
+                <div class="container">
+                    <div class="box">
+                        <div class="ball-green ball"></div>
+                        <p>Normal</p>
+                    </div>
+
+                    <div class="box">
+                        <div class="ball-yellow ball"></div>
+                        <p>Baixo</p>
+                    </div>
+
+                    <div class="box">
+                        <div class="ball-orange ball"></div>
+                        <p>Alto</p>
+                    </div>
+
+                    <div class="box">
+                        <div class="ball-red ball"></div>
+                        <p>Crítico</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <nav class="flex-column">
-            <a style="display: none;" href="dashRoberto.html">Visão geral</a>
-            <a style="display: none;" href="cadastrarFuncionario.html"><strong>Cadastrar Funcionario</strong></a>
-            <a href="visaoGeral.html"><strong>Análise em tempo real</strong></a>
-            <a href="suporte.html">Suporte</a>
-            <div class="logout mt-3">
-                <a onclick="limparSessao()" href="../index.html"><strong>Sair</strong></a>
-            </div>
-        </nav>
-    </div>
 
-    <div class="child">
-        <div class="Expandir">
-            <button onclick="fecharExpandir()" id="fecharExpandir">
-                <img src="../assets/marca-cruzada.png" alt="">
-            </button>
-            <div class="expandir1">
-                <div class="expandirComponente graficoCPU">
-                    <div class="titulosExpandir"></div>
-                    <div style=" padding-left:2%; ; align-self:flex-start" class="titulosExpandir">
-                        <div class="tituloContainer">CPU</div>
-                        <div class="subtituloContainer">% de utilização</div>
+        <div class="dashboard">
+            <div class="totem-list">
+                <div class="box">
+                    <h1>Lista de Totens</h1>
+                    <div class="custom-select-wrapper">
+                        <select class="custom-select">
+                            <option>Todos os aeroportos</option>
+                            <option>GRU Airport</option>
+                            <option>CGH Airport</option>
+                            <option>SDU Airport</option>
+                        </select>
                     </div>
-                    <div id="graficosExpandirCPU"></div>
                 </div>
-                <div class="expandirComponente graficoRAM">
-                    <div style=" padding-left:2%; ; align-self:flex-start" class="titulosExpandir">
-                        <div class="tituloContainer">RAM</div>
-                        <div class="subtituloContainer">Uso de memória</div>
+                <p>*Selecione um endereço específico para ver melhor a situação dos totens</p>
+
+                <div class="list">
+                    <div class="header">
+                        <p>Nome do Totem</p>
+                        <p>Uso CPU</p>
+                        <p>Uso RAM</p>
+                        <p>Uso Disco</p>
+                        <p>Rede</p>
+                        <p>Alertas</p>
+                        <p>Desempenho</p>
+                        <p>Log de Alertas</p>
                     </div>
-                    <div id="graficosExpandirRAM"></div>
-                </div>
-            </div>
-            <div class="expandir2">
-                <div class="expandirComponente graficoRede">
-                    <div style=" padding-left:2%; ; align-self:flex-start" class="titulosExpandir">
-                        <div class="tituloContainer">Rede</div>
-                        <div class="subtituloContainer">Taxa de transferência</div>
-                    </div>
-                    <div id="graficosExpandirRede"></div>
-                </div>
-                <div class="expandirComponente graficoDisco">
-                    <div style=" padding-left:2%; ; align-self:flex-start" class="titulosExpandir">
-                        <div class="tituloContainer">Disco</div>
-                        <div class="subtituloContainer">Capacidade utilizada</div>
-                    </div>
-                    <div id="graficosExpandirDisco"></div>
-                </div>
-            </div>
-        </div>
-        <div class="escurecerExpandir"
-            style="height: 100vh; width:100vw; background-color:black; filter:opacity(20%); position:fixed; left:0; right:0; z-index:3; display:none">
-        </div>
-        <div id="tela" class="content">
-            <div style="margin-top: 20px; " class="tituloContainer">Análise em tempo real</div>
-            <div style="margin-top: 5px" class="subtituloContainer">
-                *De acordo com a última captura obtida
-                <div style="width: 40%; margin-top:10px">
-                    <select class="selectBox selectFilial">
-                        <option value="" disabled selected>Escolher filial</option>
-                        <option value="guarulhos">Aeropoto de Guarulhos </option>
-                        <option value="congonhas">Aeropoto de Congonhas</option>
-                        <option value="brasília">Aeropoto de Brasília</option>
-                        <option value="campinas">Aeropoto de Campinas</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="section1">
-                <!-- gráficos antigos irrelevantes -->
-                <!-- <div class="subSection1">
-
-                    <div class="InformacaoAlertas">
-
-                        <div class="legendaSecao">
-                            <div class="subtituloContainer"
-                                style="align-self: flex-start; font-size:25px; font-weight:500">Porcentagem de
-                                alertas
+                    <div class="line"></div>
+                    <div id="lines" class="lines">
+                        <div class="totem red">
+                            <p>desktop-csf912</p>
+                            <div class="box">
+                                <div class="ball-orange ball"></div>
+                                <span>77%</span>
                             </div>
-                            <div class="subtituloContainer" style="align-self: flex-start; font-size:15px">*No dia
-                                de
-                                hoje</div>
-                        </div>
-
-                        <div id="graficoPizzas">
-                        </div>
-
-                        <div id="dados">
-                            <div class="TotensQTD">
-                                <div class="totemTitulo">
-                                    Total de Totens
-                                    <div id="totemDado">48</div>
-                                </div>
-
-                                <div class="totemTitulo">
-                                    Totens em Alerta
-
-                                    <div id="totemDado">24</div>
-                                </div>
+                            <div class="box">
+                                <div class="ball-yellow ball"></div>
+                                <span>88%</span>
                             </div>
-
-
-                        </div>
-                    </div>
-
-
-                    <div class="InformacaoAlertas">
-                        <div class="legendaSecao">
-                            <div class="subtituloContainer"
-                                style="align-self: flex-start; font-size:25px; font-weight:500">Porcentagem de
-                                alertas
+                            <div class="box">
+                                <div class="ball-green ball"></div>
+                                <span>12%</span>
                             </div>
-                            <div class="subtituloContainer" style="align-self: flex-start; font-size:15px">*No dia
-                                de
-                                hoje</div>
-                        </div>
-                        <div class="graficoAlertas">
-
-                        </div>
-
-                    </div>
-
-                    <div class="alertaStats">
-
-                        <div style="height: 30%;" class="totemTitulo">
-                            Intervalo com maior pico
-                            <div id="totemDado" style="display: flex; align-items:flex-end;">Tarde <div
-                                    style="font-size: 50%; margin-left:2%; margin-bottom:4px">(13:00 - 18:00)</div>
+                            <div class="box">
+                                <div class="ball-green ball"></div>
+                                <span>12%</span>
                             </div>
-                        </div>
-                        <div style="height: 30%;" class="totemTitulo">
-                            Total de Alertas
-                            <div id="totemDado">150</div>
-                        </div>
-                    </div>
-
-
-                </div> -->
-
-
-                <div class="subSection2">
-                    <div class="listaMaquinas">
-                        <div class="tituloContainer">Lista de máquinas
-                            <div class="selects">
-                                <select class="selectBox selectFiltro">
-                                    <option value="" disabled selected>Filtro</option>
-                                    <option value="filtNome">Filtrar por Nome do Totem</option>
-                                    <option value="filtCPU">Filtrar por Uso de CPU</option>
-                                    <option value="filtRAM">Filtrar por Uso de RAM</option>
-                                    <option value="filtDisco">Filtrar por DISCO</option>
-                                    <option value="filtLatRed">Filtrar por Latência de Rede</option>
-                                    <option value="filtTempUso">Filtrar por Tempo de Uso</option>
-
-
-                                </select>
-
-                                <select class="selectBox selectOrdem">
-                                    <option value="" disabled selected>Ordem</option>
-                                    <option value="ordemCrescente">Ordem Crescente</option>
-                                    <option value="ordemDecrescente">Ordem Decrescente</option>
-
-                                </select>
-                            </div>
-
-                        </div>
-                        <div style="display: flex; gap: 2%;">
-                            <div
-                                style="width: fit-content; border: 3px solid #EFEFEF; padding: 1%; display: flex; flex-direction: column;">
-                                <span style="font-size: 1.1vw;">Total de máquinas c/ Alerta</span
-                                    style="font-size: 1.1vw;">
-                                <span style="font-size: 1.25vw;"><strong>1 Máquina</strong></span>
-                            </div>
-                            <div
-                                style="width: fit-content; border: 3px solid #EFEFEF; padding: 1%; display: flex; flex-direction: column;">
-                                <span style="font-size: 1.1vw;">Legenda das cores</span style="font-size: 1.1vw;">
-                                <div style="display: flex; flex-direction: row; gap: 20px;">
-                                    <div style="display: flex; align-items: center;">
-                                        <div style="background-color:greenyellow;" class="bola"></div>
-                                        <span style="font-style: italic;">Nenhum alerta</span>
-                                    </div>
-                                    <div style="display: flex; align-items: center;">
-                                        <div style="background-color:yellow;" class="bola"></div>
-                                        <span style="font-style: italic;">Nivel baixo</span>
-                                    </div>
-                                    <div style="display: flex; align-items: center;">
-                                        <div style="background-color:orange;" class="bola"></div>
-                                        <span style="font-style: italic;">Nível alto</span>
-                                    </div>
-                                    <div style="display: flex; align-items: center;">
-                                        <div style="background-color:red;" class="bola"></div>
-                                        <span style="font-style: italic;">Nivel crítico</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="scrollMaquinas">
-                            <div class="legendasMaquinas">
-                                <div style="color: black; font-weight: 600;width:100%; margin-inline:1%"
-                                    class="maquinaLegenda">Nome
-                                    do
-                                    totem</div>
-                                <div style="color: black; font-weight: 600;width:100%; margin-inline:1%"
-                                    class="maquinaLegenda">Uso CPU
-                                </div>
-                                <div style="color: black; font-weight: 600;width:100%; margin-inline:1%"
-                                    class="maquinaLegenda">Uso RAM
-                                </div>
-                                <div style="color: black; font-weight: 600;width:100%; margin-inline:1%"
-                                    class="maquinaLegenda">Uso
-                                    Disco
-                                </div>
-                                <div style="color: black; font-weight: 600;width:100%; margin-inline:1%"
-                                    class="maquinaLegenda">Ping
-                                </div>
-                                <div style="color: black; font-weight: 600;width:100%; margin-inline:1%"
-                                    class="maquinaLegenda">
-                                    Processos
-                                </div>
-                                <div style="color: black; font-weight: 600;width:100%; margin-inline:1%"
-                                    class="maquinaLegenda">Tempo
-                                    de
-                                    Atividade
-                                </div>
-                                <div style="font-weight: 600;width:100%; margin-right:2%;" class="maquinaLegenda">
-                                    <button style="color: white; font-weight: 600;width:fit-content; height:fit-content; margin-right:2%; font-size:1.5vmax; visibility:hidden;   overflow-wrap:anywhere;
-                                    " id="buttonExpandir" onclick="">Expandir</button>
-                                </div>
-
-                            </div>
-
-                            <!-- secaoMaquina é a "barra" azul com os dados da maquina -->
-
-                            <div class="secaoMaquinas">
-                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda numeroTotem">
-                                    Totem-f001-a</div>
-                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda usoCPU">
-                                    <div style="background-color:greenyellow;" class="bola"></div>
-                                    15%
-                                </div>
-                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda usoRam">
-                                    <div style="background-color:red;" class="bola"></div>
-                                    95%
-                                </div>
-                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda usoDisco">
-                                    <div style="background-color:orange;" class="bola"></div>
-                                    45%
-                                </div>
-                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda ping">
-                                    <div style="background-color:greenyellow;" class="bola"></div>
-                                    120ms
-                                </div>
-                                <div style="width:100%; margin-inline:1%; " class="maquinaLegenda Processos">162</div>
-                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda tempoAtividade">24d 12h
-                                    32min 15s
-                                </div>
-                                <button style="color: white; font-weight: 600;width:fit-content; height:fit-content; margin-right:2%; font-size:1.5vmax;    overflow-wrap:anywhere;
-" id="buttonExpandir" onclick="abrirExpandir()">Expandir</button>
-                            </div>
-                            <div class="secaoMaquinas">
-                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda numeroTotem">
-                                    Totem-f002-a</div>
-                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda usoCPU">
-                                    <div style="background-color:greenyellow;" class="bola"></div>
-                                    20%
-                                </div>
-                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda usoRam">
-                                    <div style="background-color:greenyellow;" class="bola"></div>
-                                    37%
-                                </div>
-                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda usoDisco">
-                                    <div style="background-color:greenyellow;" class="bola"></div>
-                                    52%
-                                </div>
-                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda ping">
-                                    <div style="background-color:greenyellow;" class="bola"></div>
-                                    92ms
-                                </div>
-                                <div style="width:100%; margin-inline:1%; " class="maquinaLegenda Processos">132</div>
-                                <div style="width:100%; margin-inline:1%" class="maquinaLegenda tempoAtividade">12d 09h
-                                    54min 45s
-                                </div>
-                                <button style="color: white; font-weight: 600;width:fit-content; height:fit-content; margin-right:2%; font-size:1.5vmax;    overflow-wrap:anywhere;
-" id="buttonExpandir" onclick="abrirExpandir()">Expandir</button>
-                            </div>
-
-
-
-
-
-
-
-
-
-
-
+                            <p>10</p>
+                            <button>Analisar</button>
+                            <button>Abrir</button>
                         </div>
 
                     </div>
                 </div>
+            </div>
+
+            <div class="alert-chart">
+                <h1>Alertas por Categoria</h1>
+                <p>*Exibindos os alertas do momento e não solucionados</p>
+                <div class="indicators">
+                    <div class="kpi">
+                        <p>Categoria com mais alerta</p>
+                        <h2>CPU</h2>
+                    </div>
+                    <div class="kpi">
+                        <p>Total de alertas</p>
+                        <h2>120</h2>
+                    </div>
+                </div>
+                <div id="alert-chart" class="graph"></div>
             </div>
         </div>
     </div>
-
-
 
 </body>
 
 </html>
-
-<script src="../js/animacaoMenu.js"></script>
-
+<script src="../js/backendFeitosa.js"></script>
 <script>
+    plotarListaMaquinas()
 
-function buscarDados(){
-    
-}
-
-
-    //grafico barras
-    var barOptions = {
-        series: [{
-            name: 'Alerta Baixo',
-            data: [4, 6, 5, 5]
-        }, {
-            name: 'Médio',
-            data: [6, 9, 10, 6]
-        }, {
-            name: 'Alto',
-            data: [5, 2, 6, 6]
-        }],
-        chart: {
-            type: 'bar',
-            height: '000',
-            width: '100%',
-        },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                borderRadius: 5,
-                borderRadiusApplication: 'end'
-            },
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
-        },
-        xaxis: {
-            categories: ['CPU', 'Disco', 'RAM', 'REDE'],
-        },
-        yaxis: {
-            title: {
-            }
-        },
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " alertas"
-                }
-            }
-        }
-    };
-
-    var chart = new ApexCharts(document.querySelector(".graficoAlertas"), barOptions);
-    chart.render();
-
-
-    var series = {
-        monthDataSeries1: {
-            prices: [62, 57, 29, 52, 15],
-            dates: [
-                "10:00:00",
-                "10:20:00",
-                "10:40:00",
-                "11:00:00",
-                "11:20:00"
-            ]
-        },
-        monthDataSeries2: {
-            prices: [65, 77, 82, 89, 95],
-            dates: [
-                "10:00:00",
-                "10:20:00",
-                "10:40:00",
-                "11:00:00",
-                "11:20:00"
-            ]
-        },
-        monthDataSeries3: {
-            prices: [119, 127, 90, 99, 120],
-            dates: [
-                "10:00:00",
-                "10:20:00",
-                "10:40:00",
-                "11:00:00",
-                "11:20:00"
-            ]
-        }
-    };
-
-    // grafico Área 
-
-    function criarGraficoArea(divNome, data, labels, subtitulo) {
-        var areaOptions = {
-            series: [{
-                name: "STOCK ABC",
-                data: data,
-            }],
-            chart: {
-                type: 'area',
-                height: '70%',
-                width: '100%',
-                zoom: {
-                    enabled: false
-                }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                curve: 'straight'
-            },
-            title: {
-
-                align: 'left'
-            },
-            subtitle: {
-                text: subtitulo,
-                align: 'left'
-            },
-            labels: labels,
-            yaxis: {
-                opposite: true
-            },
-            legend: {
-                horizontalAlign: 'left'
-            }
-        };
-
-        var chart = new ApexCharts(document.querySelector(divNome), areaOptions);
-        chart.render();
-    }
-
-    // funções para criar um gráfico diferente para cada componente
-    criarGraficoArea("#graficosExpandirCPU", series.monthDataSeries1.prices, series.monthDataSeries1.dates, "Frequência");
-    criarGraficoArea("#graficosExpandirRAM", series.monthDataSeries2.prices, series.monthDataSeries1.dates, "Frequência");
-    criarGraficoArea("#graficosExpandirRede", series.monthDataSeries3.prices, series.monthDataSeries1.dates, "MBs");
-
-    // grafico barras stacked
-    var options = {
-        series: [
-            {
-                name: 'Espaço Utilizado',
-                group: 'budget',
-                data: [90]
-            },
-
-
-            {
-                name: 'Espaço Livre',
-                group: 'budget',
-                data: [10]
-            },
-
-
-        ],
-        chart: {
-            type: 'bar',
-            height: '70%',
-            width: '100%',
-            stacked: true,
-        },
-        stroke: {
-            width: 1,
-            colors: ['#fff']
-        },
-        dataLabels: {
-            formatter: (val) => {
-                return val + '%'
-            }
-        },
-        plotOptions: {
-            bar: {
-                horizontal: true
-            }
-        },
-        xaxis: {
-            categories: [
-                'Disco 1'
-            ],
-            max: 100,
-            labels: {
-                formatter: (val) => {
-                    return val + '%'
-                }
-            }
-        },
-        fill: {
-            opacity: 1,
-        },
-        colors: ['#80c7fd', '#008FFB', '#80f1cb', '#00E396'],
-        legend: {
-            position: 'top',
-            horizontalAlign: 'left'
-        }
-    };
-
-    var chart = new ApexCharts(document.querySelector("#graficosExpandirDisco"), options);
-    chart.render();
-
-    // grafico rosca
-    var roscaOptions = {
-        series: [50, 15, 15, 7.5, 12.5],
-        labels: ['Nenhum alerta', 'Um alerta', 'Dois alertas', 'Três alertas', 'Quatro alertas'],
-        legend: {
-            position: 'right',
-            offsetY: 0,
-
-        },
-        chart: {
-            type: 'donut',
-            height: '200',
-            width: '100%',
-
-        },
-
-        responsive: [{
-            options: {
-                chart: {
-
-                },
-                legend: {
-                    position: 'bottom'
-                },
-            }
-        }]
-    };
-
-    var chart = new ApexCharts(document.querySelector("#graficoPizzas"), roscaOptions);
-    chart.render();
-
-
-    function logPopup() {
-        Swal.fire({
-            html: `
-              <p style="font-size: xx-large; font-weight: bold; color: #5271FF;" class="titulo">
-                                Log de alertas <p style="font-size: large; font-weight: light; color: #5271FF; margin-top:-20px" class="titulo">
-                                *Ordenado pelo momento
-                            </p>
-                            </p>
-              <div class="scrollLog">
-                                <div class="legendasMaquinas">
-                                    <div style="color: black; font-weight: 600; margin-left: 5px;width: 40%;"
-                                        class="maquinaLegenda">Máquina</div>
-                                    <div style="color: black;width: 30%; font-weight: 600;" class="maquinaLegenda">
-                                        Nível
-                                    </div>
-                                    <div style="color: black; font-weight: 600; width: 40%;" class="maquinaLegenda">
-                                        Componente</div>
-                                    <div style="color: black; font-weight: 600;width: 60%;" class="maquinaLegenda">
-                                        Momento
-                                    </div>
-
-
-                                </div>
-                                <div class="secaoLog">
-                                    <div style="margin-left: 3px;width: 40%;" class="maquinaLegenda logMaquina">
-                                        Totem-f001-a
-                                    </div>
-                                    <div style="width: 30%;" class="maquinaLegenda logNivel">Grave</div>
-                                    <div style="width: 40%;" class="maquinaLegenda logComponente">CPU</div>
-                                    <div style="width: 60%;" class="maquinaLegenda logMomento">14/04/2025 13:50
-                                    </div>
-                                </div>
-
-                                <!-- varios log para testes de scroll abaixo (apenas des-comente para teste)-->
-                                <!-- <div class="secaoLog"> 
-                            <div class="logMaquina">Totem-f001-a</div>
-                            <div class="logNivel">Grave</div>
-                            <div class="logComponente">CPU</div>
-                            <div class="logMomento">13:00</div>
-                        </div>
-                        <div class="secaoLog">
-                            <div class="logMaquina">Totem-f001-a</div>
-                            <div class="logNivel">Grave</div>
-                            <div class="logComponente">CPU</div>
-                            <div class="logMomento">13:00</div>
-                        </div>
-                        <div class="secaoLog">
-                            <div class="logMaquina">Totem-f001-a</div>
-                            <div class="logNivel">Grave</div>
-                            <div class="logComponente">CPU</div>
-                            <div class="logMomento">13:00</div>
-                        </div>
-                        <div class="secaoLog">
-                            <div class="logMaquina">Totem-f001-a</div>
-                            <div class="logNivel">Grave</div>
-                            <div class="logComponente">CPU</div>
-                            <div class="logMomento">13:00</div>
-                        </div>
-                        <div class="secaoLog">
-                            <div class="logMaquina">Totem-f001-a</div>
-                            <div class="logNivel">Grave</div>
-                            <div class="logComponente">CPU</div>
-                            <div class="logMomento">13:00</div>
-                        </div>
-                        <div class="secaoLog">
-                            <div class="logMaquina">Totem-f001-a</div>
-                            <div class="logNivel">Grave</div>
-                            <div class="logComponente">CPU</div>
-                            <div class="logMomento">13:00</div>
-                        </div>
-                        <div class="secaoLog">
-                            <div class="logMaquina">Totem-f001-a</div>
-                            <div class="logNivel">Grave</div>
-                            <div class="logComponente">CPU</div>
-                            <div class="logMomento">13:00</div>
-                        </div>
-                        <div class="secaoLog">
-                            <div class="logMaquina">Totem-f001-a</div>
-                            <div class="logNivel">Grave</div>
-                            <div class="logComponente">CPU</div>
-                            <div class="logMomento">13:00</div>
-                        </div>
-                        <div class="secaoLog">
-                            <div class="logMaquina">Totem-f001-a</div>
-                            <div class="logNivel">Grave</div>
-                            <div class="logComponente">CPU</div>
-                            <div class="logMomento">13:00</div>
-                        </div>
-                        <div class="secaoLog">
-                            <div class="logMaquina">Totem-f001-a</div>
-                            <div class="logNivel">Grave</div>
-                            <div class="logComponente">CPU</div>
-                            <div class="logMomento">13:00</div>
-                        </div>
-                        <div class="secaoLog">
-                            <div class="logMaquina">Totem-f001-a</div>
-                            <div class="logNivel">Grave</div>
-                            <div class="logComponente">CPU</div>
-                            <div class="logMomento">13:00</div>
-                        </div>
-                        <div class="secaoLog">
-                            <div class="logMaquina">Totem-f001-a</div>
-                            <div class="logNivel">Grave</div>
-                            <div class="logComponente">CPU</div>
-                            <div class="logMomento">13:00</div>
-                        </div>
-                        <div class="secaoLog">
-                            <div class="logMaquina">Totem-f001-a</div>
-                            <div class="logNivel">Grave</div>
-                            <div class="logComponente">CPU</div>
-                            <div class="logMomento">13:00</div>
-                        </div>
-                        <div class="secaoLog">
-                            <div class="logMaquina">Totem-f001-a</div>
-                            <div class="logNivel">Grave</div>
-                            <div class="logComponente">CPU</div>
-                            <div class="logMomento">13:00</div>
-                        </div>
-                        <div class="secaoLog">
-                            <div class="logMaquina">Totem-f001-a</div>
-                            <div class="logNivel">Grave</div>
-                            <div class="logComponente">CPU</div>
-                            <div class="logMomento">13:00</div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    </div> 
-
-    <!-- <div class="section1">
-                <select>
-                    <option value="">Aeroporto de Guarulhos</option>
-                    <option value="">Aeroporto de Congonhas</option>
-                    <option value="">Aeroporto Vira-copos</option>
-                </select>
-                <div class="kpi1">
-                    <p class="titulo">Informações de Máquina:</p>
-                    <p>Quantidade de máquinas: 23</p>
-                </div>
-                <div class="kpi2">
-                    <p class="titulo">Últimos alertas gerados</p>
-                    <p>20/10/2025 - 12:21:23 - CPU acima do limite esperado (CDA-5)</p>
-                    <p>02/10/2025 - CPU acima do limite esperado (CDA-5)</p>
-                </div>
-                <div class="grafico">
-                    <canvas id="graficoAlertas"></canvas>
-                </div>
-            <!-- </div> -->
-
-
-                            </div>
-        `,
-            showCloseButton: false,
-            showCancelButton: false,
-            focusConfirm: false,
-
-            confirmButtonAriaLabel: "Thumbs up, great!",
-            cancelButtonText: `
-          <i class="fa fa-thumbs-down"></i>
-        `,
-            cancelButtonAriaLabel: "Thumbs down"
-        });
-    }
-
-    function abrirExpandir() {
-        document.querySelector(".Expandir").style.display = "flex";
-        document.querySelector(".escurecerExpandir").style.display = "block";
-    }
-
-    function fecharExpandir() {
-        document.querySelector(".Expandir").style.display = "none";
-        document.querySelector(".escurecerExpandir").style.display = "none";
-    }
-
-
-
-
+    setInterval(() => {
+        plotarListaMaquinas()
+    }, 10000);
 </script>

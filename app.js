@@ -16,8 +16,9 @@ var HOST_APP = process.env.APP_HOST;
 var app = express();
 
 var indexRouter = require("./src/routes/index");
-var usuarios = require("./src/routes/usuarios");
-var cadastros = require("./src/routes/cadastros");
+var usuarios = require("./src/routes/usuarios")
+var cadastros = require("./src/routes/cadastros")
+var feitosaR = require("./src/routes/feitosa")
 var dashboards = require("./src/routes/dashboards");
 
 app.use(express.json());
@@ -30,7 +31,7 @@ app.use("/", indexRouter);
 app.use("/usuarios", usuarios);
 app.use("/cadastros", cadastros);
 app.use("/dashboards", dashboards);
-
+app.use("/dados", feitosaR);
 
 app.listen(PORTA_APP, function () {
     console.log(`

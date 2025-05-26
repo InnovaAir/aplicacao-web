@@ -76,7 +76,7 @@ function listarEnderecos(idCliente) {
     FROM endereco as e 
     LEFT JOIN filial as f ON f.fkEndereco = e.idEndereco 
     LEFT JOIN cliente as c ON f.fkCliente = c.idCliente 
-    WHERE f.fkEndereco IS NULL;
+    WHERE f.fkEndereco = ${idCliente}
     `;
 
     console.log(instrucaoSql)
