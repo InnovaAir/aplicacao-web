@@ -1,6 +1,7 @@
 *{
     padding: 0;
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .tela_geral {
@@ -18,13 +19,11 @@
 .navbar {
     height: 100%;
     width: 8%;
-    border: 2px solid red;
 }
 
 .tela_dash {
     height: 100%;
     width: 97%;
-    border: 2px solid red;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -48,6 +47,8 @@
 #titulo_aeroporto {
     display: flex;
     justify-content: flex-end;
+    border-right: 2px solid #5865A6;
+    padding-right: 10px;
 }
 
 .div_select {
@@ -83,6 +84,8 @@
     justify-content: center;
     text-align: center;
     font-size: 24px;
+    border-radius: 5px;
+    color: #fff;
 }
 
 #numero_kpi {
@@ -101,19 +104,12 @@
     border-radius: 5px;
 }
 
-.grafico {
-    height: 90%;
-    width: 100%;
-    border: 2px solid red;
-}
-
 .box_alinhada1 {
     width: 70%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    border: 2px solid red;
 }
 
 .box_alinhada2 {
@@ -122,24 +118,28 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 2px solid red;
 }
 
 .lateral {
     display: flex;
     flex-direction: row;
     height: 80%;
-    justify-content: space-between;
-    border: 2px solid red;  
+    justify-content: space-between;  
 }
 
 /* GRÁFICO */
 
+.grafico {
+    height: 90%;
+    width: 100%;
+}
+
 .head_grafico {
-    height: 10%;
+    height: 20%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 20px;
 }
 
 .grafico_geral {
@@ -161,6 +161,11 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    font-size: 24px;
+}
+
+.box_kpi_lateral i {
+    font-size: 18px;
 }
 
 .subtitulo {
@@ -173,11 +178,12 @@
 
 .subtitulo {
     height: 50%;
-    border: 2px solid red;
 }
 
 .kpi2 {
     height: 100%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .kpi3 {
