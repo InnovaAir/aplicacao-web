@@ -19,27 +19,27 @@
                 <div class="titulos_dash">
                     <div class="titulo_alinhado">
                         <span class="titulo01"><b>Análise de Desempenho</b></span>
-                        <span><i>*Prevenção de alertas</i></span>
+                        <span><i>⇀ Prevenção de alertas</i></span>
                     </div>
 
                     <div class="titulo_alinhado">
-                        <span class="titulo01" id="titulo_aeroporto"><b>Aeroporto X</b></span>
+                        <span class="titulo01" id="titulo_aeroporto"><b>Aeroporto Guarulhos</b></span>
                         <span id="titulo_aeroporto"><i>*Última atualização: 12/05/2025 - 14:52</i></span>
                     </div>
                 </div>
 
                 <div class="select_alinhado">
-                    <div class="div_select">
+                    <div class="div_select custom-select-wrapper">
                         <span><b>Selecione o ano monitorado</b></span>
-                        <select id="select_ano">
+                        <select id="select_ano" class="custom-select">
                             <option value="2024">2024</option>
                             <option value="2025" selected>2025</option>
                         </select>
                     </div>
 
-                    <div class="div_select">
+                    <div class="div_select custom-select-wrapper">
                         <span><b>Selecione o componente</b></span>
-                        <select id="select_componente">
+                        <select id="select_componente" class="custom-select">
                             <option value="todos" selected>TODOS</option>
                             <option value="cpu">CPU</option>
                             <option value="ram">RAM</option>
@@ -79,8 +79,12 @@
                                 </div>
 
                                 <div class="taxa_kpi">
-                                    <span style="font-size: 20px;">Taxa de confiabilidade:</span>
-                                    <span style="font-size: 25px;"><b>98.9%</b></span>
+                                    <div class="texto_taxa">
+                                        <span style="font-size: 20px;">Taxa de confiabilidade:</span>
+                                    </div>
+                                    <div class="texto_taxa">
+                                        <span style="font-size: 25px;"><b>98.9%</b></span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="grafico">
@@ -99,10 +103,10 @@
                         <div class="subtitulo">
                             <div class="box_kpi_lateral kpi2">
                                 <span>Componente com maior risco de alertas</span>
-                                <span id="numero_kpi"><b>CPU</b></span>
+                                <span id="numero_kpi" class="borda_inferior"><b>CPU</b></span>
                                 <span id="numero_kpi"><b>51%</b></span>
+                                <span><i>*Predominância em (%)</i></span>
                             </div>
-                            <span><i>*Predominância em (%)</i></span>
                         </div>
 
                         <div class="box_kpi_lateral kpi3">
@@ -123,15 +127,18 @@
 <script>
     var options = {
           series: [{
-          name: 'Sales',
-          data: [4, 3, 10, 9, 29, 19, 22, 9, 12, 7, 19, 5, 13, 9, 17, 2, 7, 5]
+          name: 'CPU',
+          data: [4, 3, 10, 9, 29, 19, 22, 9, 12, 7, 19, 5]
+        }, {
+          name: 'RAM',
+          data: [8, 6, 20, 18, 39, 10, 15, 4, 2, 14, 18, 10]
         }],
           chart: {
           height: 350,
           type: 'line',
         },
         forecastDataPoints: {
-          count: 7
+          count: 6
         },
         stroke: {
           width: 5,
@@ -139,11 +146,11 @@
         },
         xaxis: {
           type: 'datetime',
-          categories: ['1/11/2000', '2/11/2000', '3/11/2000', '4/11/2000', '5/11/2000', '6/11/2000', '7/11/2000', '8/11/2000', '9/11/2000', '10/11/2000', '11/11/2000', '12/11/2000', '1/11/2001', '2/11/2001', '3/11/2001','4/11/2001' ,'5/11/2001' ,'6/11/2001'],
+          categories: ['1/01/2000', '2/01/2000', '3/01/2000', '4/01/2000', '5/01/2000', '6/01/2000', '7/01/2000', '8/01/2000', '9/01/2000', '10/01/2000', '11/01/2000', '12/01/2000'],
           tickAmount: 10,
           labels: {
             formatter: function(value, timestamp, opts) {
-              return opts.dateFormatter(new Date(timestamp), 'dd MMM')
+              return opts.dateFormatter(new Date(timestamp), 'MMM')
             }
           }
         },
@@ -156,7 +163,6 @@
           }
         },
         fill: {
-          type: 'gradient',
           gradient: {
             shade: 'dark',
             gradientToColors: ['#FDD835'],
