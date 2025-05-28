@@ -2,22 +2,61 @@ totensAlerta = 0;
 totensOciosos = 0;
 totensNormal = 0;
 
-alertasCPU = 0;
-alertasRAM = 0;
-alertasDISCO = 0;
-alertasREDE = 0;
 
-function plotarListaMaquinas() {
-    fetch("/dados/array", {
+// FILTROS DOS 3 BOTÕES COLORIDOS ACIMA DA LISTA
+
+const filtros = document.querySelectorAll('.filtro');
+
+filtros.forEach(filtro => {
+  filtro.addEventListener('click', () => {
+    const selecionado = filtro.classList.contains('selecionado');
+
+    filtros.forEach(f => f.classList.remove('selecionado'));
+
+    if (!selecionado) {
+      filtro.classList.add('selecionado');
+      const tipoSelecionado = filtro.dataset.filtro;
+      filtrarPorDesempenho(tipoSelecionado);
+    } else {
+      
+      filtrarPorDesempenho(null);
+    }
+  });
+});
+
+
+
+// FILTRO DE ORDENAÇÃO DO HEADER DA LISTA
+
+let ordemCres = true;
+
+function ordenar(item) {
+  ordemCres = !ordemCres;
+
+  listaMaquinas.sort((a, b) => {
+    if (ordemCres) {
+      return a[item] > b[item] ? 1 : -1;
+    } else {
+      return a[item] < b[item] ? 1 : -1;
+    }
+  });
+
+  renderizarMaquinas();
+}
+
+function renderizarMaquinas(){
+
+    fetch("/dashDuduRoutes/dash-dudu", {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
         }
     }).then((answer) => {
+      console.log("Passou aqui")
         answer.json().then(async (json) => {
-            var list_totem = document.getElementById("lines");
+            var tabela_conteudo = document.getElementById("lines");
 
-            listToensHTML = ``
+            listTotensHTML = ``
 
             for (let i = 0; i < json.length; i++) {
                 const totemAtual = json[i];
@@ -91,7 +130,7 @@ function plotarListaMaquinas() {
             totensNormal = json.length - (totensOciosos + totensAlerta)
             getKPIs()
 
-            list_totem.innerHTML = listToensHTML;
+            tabela_conteudo.innerHTML = listToensHTML;
 
             var options = {
                 series: [alertasCPU, alertasDISCO, alertasRAM, alertasREDE],
@@ -123,43 +162,79 @@ function plotarListaMaquinas() {
 
         });
     });
+
 }
 
-function getKPIs() {
-    var kpi_alerta = document.getElementById("indicator_alert")
-    var kpi_normal = document.getElementById("indicator_activity")
-    var kpi_ocioso = document.getElementById("indicator_idle")
 
-    kpi_alerta.innerHTML = ""
-    kpi_normal.innerHTML = ""
-    kpi_ocioso.innerHTML = ""
+// DASHBOARD
 
-    kpi_alerta.innerHTML = totensAlerta;
-    kpi_normal.innerHTML = totensNormal;
-    kpi_ocioso.innerHTML = totensOciosos;
+const ctx = document.getElementById('graficoDesempenho').getContext('2d');
 
-    totensAlerta = 0
-    totensNormal = 0
-    totensOciosos = 0
-}
+const dados = [
+  { filial: 'Filial 1', desempenho: 90 },
+  { filial: 'Filial 4', desempenho: 55 },
+  { filial: 'Filial 2', desempenho: 30 },
+  { filial: 'Filial 3', desempenho: 20 }
+]; // dados estaticos só p plotar algo 
 
-function getAlertas(idMaquina) {
-    return fetch(`/dados/totalAlertas/today/${idMaquina}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
+
+
+
+// ordenação do pior pro melhor
+const dadosOrdenados = [...dados].sort((a, b) => a.desempenho - b.desempenho);
+
+// gerar labels
+const labels = dadosOrdenados.map(item => item.filial);
+const data = dadosOrdenados.map(item => item.desempenho);
+const backgroundColor = dadosOrdenados.map(item => {
+  if (item.desempenho <= 35) return '#ff3333';   
+  if (item.desempenho <= 65) return '#ffff33';
+  return '#00cc00';
+});
+
+// grafico
+const grafico = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels,
+    datasets: [{
+      label: 'Desempenho',
+      data,
+      backgroundColor,
+      borderWidth: 1
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    scales: {
+      x: {
+        beginAtZero: true,
+        max: 100,
+        ticks: {
+          callback: (val) => `${val}%`
+        },
+        title: {
+          display: true,
+          text: 'Desempenho',
+          color: '#0000A5',
+          font: {
+            weight: 'bold'
+          }
         }
-    })
-        .then((answer) => {
-            return answer.json();
-        })
-        .then((json) => {
-            return json[0].total;
-        });
-}
-
-function getEnderecos() {
-    fetch(`/dados/enderecos`, {
-        method: "GET",
-    })
-}
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Filiais',
+          color: '#0000A5',
+          font: {
+            weight: 'bold'
+          }
+        }
+      }
+    },
+    plugins: {
+      legend: { display: false }
+    }
+  }
+});

@@ -165,6 +165,33 @@ body {
     background-color: #FE6B6B;
 }
 
+.filtro {
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: transparent;
+    color: #000000;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.filtro.selecionado {
+    color: #010176;
+    background-color: rgba(1, 1, 118, 0.1);
+    color: #010176;
+}
+
+.filtro.selecionado::after {
+    content: ''; 
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #010176;
+}
+
 .div_botaoCSV {
     /* border: 1px solid green; */
     display: flex;
@@ -191,4 +218,63 @@ body {
 .div_botaoCSV button:hover {
     transform: scale(1.02);
     transition: 0.3s ease;
+}
+
+.tabela_cabecalho {
+    display: flex;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    border-bottom: 2px solid #010176;
+}
+
+.coluna {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.tabela_conteudo {
+    max-height: 55vh;
+    overflow-y: auto;
+}
+
+
+/* Cores dos fundos da lista */
+.red {
+    background-color: #ff000050;
+}
+
+.green {
+    background-color: #00A10050;
+}
+
+.blue {
+    background-color: #5271FF50;
+}
+
+/* Bola dos Indicadores */
+.ball {
+    width: 1vw;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    border: 0.125vw solid black;
+}
+
+.ball-green {
+    background-color: #00A100;
+}
+
+.ball-yellow {
+    background-color: #FFD900;
+}
+
+.ball-orange {
+    background-color: #FF8800;
+}
+
+.ball-red {
+    background-color: #FF0000;
 }
