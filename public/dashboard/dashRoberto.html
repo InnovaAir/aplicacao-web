@@ -55,7 +55,7 @@
 
       <div class="select-wrapper">
         <div class="custom-select">
-          <select id="select_aeroporto">
+          <select id="select_aeroporto" onchange="verificarSelect()">
             <option value="" disabled selected>Selecione o Aeroporto</option>
             <option value="gru">GRU</option>
             <option value="cgh">Congonhas</option>
@@ -63,17 +63,17 @@
         </div>
 
         <div class="custom-select">
-          <select id="select_intervalo">
-            <option value="" disabled selected>Selecione o intervalo</option>
+          <select id="select_intervalo" onchange="verificarSelect()">
+            <option value="" disabled>Selecione o intervalo</option>
             <option value="7">Últimos 7 dias</option>
             <option value="15">Últimos 15 dias</option>
-            <option value="30">Últimos 30 dias</option>
+            <option value="30" selected>Últimos 30 dias</option>
           </select>
         </div>
 
         <div class="custom-select">
-          <select id="select_componente">
-            <option value="" disabled selected>Todos os componentes</option>
+          <select id="select_componente" onchange="verificarSelect()">
+            <option value="" selected>Todos os componentes</option>
             <option value="cpu">CPU</option>
             <option value="ram">RAM</option>
             <option value="disco">DISCO</option>
@@ -123,7 +123,7 @@
             
             <div class="select-wrapper">
               <div class="custom-select">
-                <select id="select_aeroporto">
+                <select id="select_dps">
                   <option value="" disabled>Selecione o nível do alerta</option>
                   <option value="baixo">Baixo</option>
                   <option value="alto" selected>Alto</option>
@@ -132,7 +132,7 @@
               </div>
               
               <div class="custom-select">
-                <select id="select_intervalo">
+                <select id="select_componente2">
                   <option value="" selected disabled>Selecione o componente</option>
                   <option value="processador" selected>Processador</option>
                   <option value="ram">RAM</option>
@@ -209,7 +209,11 @@
 <script src="../js/animacaoMenu.js"></script>
 
 <script>
-modelosOrdenados = []
+let modelosOrdenados = []
+let json_dados = {};
+let qtdMaquinas = {};
+let filiais = []
+let json_filtrado = []
 var options = {
     series: [
       {
@@ -272,8 +276,19 @@ chart.render();
     sidebar.classList.toggle('show');
   }
   
+
+function selectPrenchido(){
+  aeroporto = select_aeroporto.value
+}
 obterFiliaisGerente()
-obterDadosGerente()
+
+async function executar() {
+await obterDadosGerente()
+await ordenarDados(json_dados)
+await obterDadosGerenteQtd()
+plotarDados(json_dados, qtdMaquinas)
+}
+executar()
 function obterFiliaisGerente(){
 
   fetch(`/cadastros/metricas/listar/filiais/${sessionStorage.idUsuario}`, {
@@ -288,14 +303,17 @@ function obterFiliaisGerente(){
 
                     var select_aeroporto = document.getElementById("select_aeroporto");
 
-                    select_aeroporto.innerHTML = `<option selected disabled value="null">Selecione um aeroporto</option>`
-
+                    select_aeroporto.innerHTML = `<option disabled value="null">Selecione um aeroporto</option>`
+                    select_aeroporto.innerHTML += `<option selected value="">Todos os meus aeroportos</option>`
 
                     for (let i = 0; i < json_filiais.length; i++) {
                         var filialAtual = json_filiais[i];
 
                         // Insere cada opção 
-                        select_aeroporto.innerHTML += `<option value="${filialAtual.idFilial}">${filialAtual.terminal}</option>`
+                        select_aeroporto.innerHTML += `<option value="${filialAtual.terminal}">${filialAtual.terminal}</option>`
+                    }
+                    for(i = 0; i < json_filiais.length; i++){
+                      filiais.push(json_filiais[i].terminal)
                     }
                 })
             })
@@ -304,8 +322,8 @@ function obterFiliaisGerente(){
             });
     };
 
-function obterDadosGerente(){
-    fetch("/dashboards/dashGerenteDados", {
+async function obterDadosGerente(){
+    resposta = await fetch("/dashboards/dashGerenteDados", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -314,16 +332,32 @@ function obterDadosGerente(){
           idUsuarioServer: sessionStorage.idUsuario
         }),
     })
-    .then(function (resposta) {
-        console.log("resposta do servidor: ", resposta);
-        if (resposta.ok) {
-            console.log("SUCESSO AO OBTER DADOS DO GERENTE")
-            resposta.json().then(json => {
-              json_dados = json
-              console.log(json_dados)
-              // Listar 5 modelos com mais alertas
-              menor  = 10**1000
-              for(i = 0; i < json_dados.length; i+=3){
+
+    json_dados = await resposta.json()
+  }
+
+async function obterDadosGerenteQtd(){
+    resposta = await fetch("/dashboards/dashGerenteDadosQtd", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          modelo1Server: modelosOrdenados[0].especificacao,
+          modelo2Server: modelosOrdenados[1].especificacao,
+          modelo3Server: modelosOrdenados[2].especificacao,
+          modelo4Server: modelosOrdenados[3].especificacao,
+          modelo5Server: modelosOrdenados[4].especificacao,
+          idUsuarioServer: sessionStorage.idUsuario
+        }),
+    })
+    
+    qtdMaquinas = await resposta.json()
+  }
+
+function ordenarDados(json_dados){
+  modelosOrdenados = []
+            for(i = 0; i < json_dados.length; i+=3){
                 qtdAtual = json_dados[i].qtdAlertas + json_dados[i+1].qtdAlertas + json_dados[i+2].qtdAlertas;
                 modelo = {
                   "qtdAlertas":qtdAtual, 
@@ -334,31 +368,26 @@ function obterDadosGerente(){
                 }
                 modelosOrdenados.push(modelo)
               }
-                console.log(modelosOrdenados)
-                for(i = 1; i < modelosOrdenados.length; i++){
-                  for(j = 1; j < modelosOrdenados.length; j++){
-                    if(modelosOrdenados[j].qtdAlertas < menor){
-                      menor = modelosOrdenados[j].qtdAlertas
-                      indexMenor = j
+                for(i = 0; i < modelosOrdenados.length; i++){
+                  indexMaior = i
+                  for(j = i; j < modelosOrdenados.length; j++){
+                    if(modelosOrdenados[j].qtdAlertas > modelosOrdenados[indexMaior].qtdAlertas){
+                      indexMaior = j
                     }
                   }
                   temp = modelosOrdenados[i]
-                  modelosOrdenados[i] = modelosOrdenados[indexMenor]
-                  modelosOrdenados[indexMenor] = temp
+                  modelosOrdenados[i] = modelosOrdenados[indexMaior]
+                  modelosOrdenados[indexMaior] = temp
                 }
-                console.log(json_dados[modelosOrdenados[3].index[0]].qtdAlertas)
+}
+
+function plotarDados(json_dados, qtdMaquinas){
+  console.log(json_dados[modelosOrdenados[0].index[0]].qtdAlertas)
                  alertaBaixo = [json_dados[modelosOrdenados[0].index[0]].qtdAlertas, json_dados[modelosOrdenados[1].index[0]].qtdAlertas, json_dados[modelosOrdenados[2].index[0]].qtdAlertas, json_dados[modelosOrdenados[3].index[0]].qtdAlertas, json_dados[modelosOrdenados[4].index[0]].qtdAlertas]
                  alertaAlto = [json_dados[modelosOrdenados[0].index[1]].qtdAlertas, json_dados[modelosOrdenados[1].index[1]].qtdAlertas, json_dados[modelosOrdenados[2].index[1]].qtdAlertas, json_dados[modelosOrdenados[3].index[1]].qtdAlertas, json_dados[modelosOrdenados[4].index[1]].qtdAlertas]
                  alertaCritico = [json_dados[modelosOrdenados[0].index[2]].qtdAlertas, json_dados[modelosOrdenados[1].index[2]].qtdAlertas, json_dados[modelosOrdenados[2].index[2]].qtdAlertas, json_dados[modelosOrdenados[3].index[2]].qtdAlertas, json_dados[modelosOrdenados[4].index[2]].qtdAlertas]
-                 nomesModelos = [modelosOrdenados[0].especificacao, modelosOrdenados[1].especificacao, modelosOrdenados[2].especificacao, modelosOrdenados[3].especificacao]
-                console.log(modelosOrdenados)
-                console.log(alertaBaixo)
-                console.log(alertaAlto)
-                console.log(alertaCritico)
-                console.log(nomesModelos)
+                 nomesModelos = [modelosOrdenados[0].especificacao, modelosOrdenados[1].especificacao, modelosOrdenados[2].especificacao, modelosOrdenados[3].especificacao, modelosOrdenados[4].especificacao]
                 max = modelosOrdenados[0].qtdAlertas
-                console.log(max)
-                                console.log(modelosOrdenados[1].componente)
                 chart.updateSeries([
                   {
                     name: 'Baixo',
@@ -394,66 +423,85 @@ function obterDadosGerente(){
                 tabela_total_3.innerHTML = modelosOrdenados[2].qtdAlertas
                 tabela_total_4.innerHTML = modelosOrdenados[3].qtdAlertas
                 tabela_total_5.innerHTML = modelosOrdenados[4].qtdAlertas
-                });
-        } else {
-            // Se não foi ok, mostra mensagem de erro
-            return resposta.text().then(erroTexto => {
-                throw new Error(erroTexto || "Erro ao cadastrar");
-            });
-        }
-    })
-    .catch(function (erro) {
-        console.log("Erro na requisição:", erro);
-        Swal.fire({
-            title: "Erro!",
-            text: erro.message || "Erro ao tentar realizar o cadastro. Tente novamente.",
-            icon: "error"
-        });
-    });
-  }
+                tabela_qtd_1.innerHTML = qtdMaquinas[0].qtdMaquinas;
+                tabela_qtd_2.innerHTML = qtdMaquinas[1].qtdMaquinas;
+                tabela_qtd_3.innerHTML = qtdMaquinas[2].qtdMaquinas;
+                tabela_qtd_4.innerHTML = qtdMaquinas[3].qtdMaquinas;
+                tabela_qtd_5.innerHTML = qtdMaquinas[4].qtdMaquinas;
+                tabela_perc_1.innerHTML = Math.round(modelosOrdenados[0].qtdAlertas*100/(qtdMaquinas[0].qtdMaquinas * 4 * 24 * 30)) + "%"
+                tabela_perc_2.innerHTML = Math.round(modelosOrdenados[1].qtdAlertas*100/(qtdMaquinas[1].qtdMaquinas * 4 * 24 * 30)) + "%"
+                tabela_perc_3.innerHTML = Math.round(modelosOrdenados[2].qtdAlertas*100/(qtdMaquinas[2].qtdMaquinas * 4 * 24 * 30)) + "%"
+                tabela_perc_4.innerHTML = Math.round(modelosOrdenados[3].qtdAlertas*100/(qtdMaquinas[3].qtdMaquinas * 4 * 24 * 30)) + "%"
+                tabela_perc_5.innerHTML = Math.round(modelosOrdenados[4].qtdAlertas*100/(qtdMaquinas[4].qtdMaquinas * 4 * 24 * 30)) + "%"
+}
 
-  function obterDadosGerenteQtd(){
-    fetch("/dashboards/dashGerenteDadosQtd", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          modelo1Server: modelosOrdenados[0].especificacao,
-          modelo2Server: modelosOrdenados[1].especificacao,
-          modelo3Server: modelosOrdenados[2].especificacao,
-          modelo4Server: modelosOrdenados[3].especificacao,
-          modelo5Server: modelosOrdenados[4].especificacao,
-          idUsuarioServer: sessionStorage.idUsuario
-        }),
-    })
-    .then(function (resposta) {
-        console.log("resposta do servidor: ", resposta);
-        if (resposta.ok) {
-                      resposta.json().then(json => {
-                        qtdMaquinas = json;
-                        tabela_qtd_1.innerHTML = qtdMaquinas[0].qtdMaquinas;
-                        tabela_qtd_2.innerHTML = qtdMaquinas[1].qtdMaquinas;
-                        tabela_qtd_3.innerHTML = qtdMaquinas[2].qtdMaquinas;
-                        tabela_qtd_4.innerHTML = qtdMaquinas[3].qtdMaquinas;
-                        tabela_qtd_5.innerHTML = qtdMaquinas[4].qtdMaquinas;
-                      })
-        } else {
-            // Se não foi ok, mostra mensagem de erro
-            return resposta.text().then(erroTexto => {
-                throw new Error(erroTexto || "Erro ao cadastrar");
-            });
-        }
-    })
-    .catch(function (erro) {
-        console.log("Erro na requisição:", erro);
-        Swal.fire({
-            title: "Erro!",
-            text: erro.message,
-            icon: "error"
-        });
-    });
+async function verificarSelect(){
+  var aeroportos = document.getElementById("select_aeroporto")
+  var aeroporto = aeroportos.value;
+  var intervalo = select_intervalo.value
+  var componente = select_componente.value
+  json_filtrado = [];
+  if(componente == ""){
+        ordenarDados(json_dados)
+        await obterDadosGerenteQtd()
+        await plotarDados(json_dados, qtdMaquinas)
   }
-
+  if(aeroporto == ""){
+            ordenarDados(json_dados)
+        await obterDadosGerenteQtd()
+        await plotarDados(json_dados, qtdMaquinas)
+  }
+  if(componente == "ram"){
+    for(i = 0; i < json_dados.length; i++){
+      if(json_dados[i].componente == 'RAM'){
+        json_filtrado.push(json_dados[i])
+      }
+    }
+        ordenarDados(json_filtrado)
+        await obterDadosGerenteQtd()
+        await plotarDados(json_filtrado, qtdMaquinas)
+  }
+  if(componente == "disco"){
+    for(i = 0; i < json_dados.length; i++){
+      if(json_dados[i].componente == 'Armazenamento'){
+        json_filtrado.push(json_dados[i])
+      }
+    }
+        ordenarDados(json_filtrado)
+        await obterDadosGerenteQtd()
+        await plotarDados(json_filtrado, qtdMaquinas)
+  }
+    if(componente == "rede"){
+    for(i = 0; i < json_dados.length; i++){
+      if(json_dados[i].componente == 'Rede'){
+        json_filtrado.push(json_dados[i])
+      }
+    }
+        ordenarDados(json_filtrado)
+        await obterDadosGerenteQtd()
+        await plotarDados(json_filtrado, qtdMaquinas)
+  }
+    if(componente == "cpu"){
+    for(i = 0; i < json_dados.length; i++){
+      if(json_dados[i].componente == 'Processador'){
+        json_filtrado.push(json_dados[i])
+      }
+    }
+        ordenarDados(json_filtrado)
+        await obterDadosGerenteQtd()
+        await plotarDados(json_filtrado, qtdMaquinas)
+  }
+  if(filiais.indexOf(aeroporto) != -1){
+    indice = filiais.indexOf(aeroporto)
+    for(i = 0; i < json_dados.length; i++){
+      if(json_dados[i].terminal == filiais[indice]){
+        json_filtrado.push(json_dados[i])
+      }
+    }
+      ordenarDados(json_filtrado)
+      await obterDadosGerenteQtd()
+      await plotarDados(json_filtrado, qtdMaquinas)
+  }
+}
   abrirMenu();
 </script>

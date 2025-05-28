@@ -95,7 +95,7 @@ function entrar(req, res) {
         usuarioModel.entrar(email, senha)
             .then(
                 function (resultadoAutenticar) {
-                    if (resultadoAutenticar.length == 1) {
+                    if (resultadoAutenticar.length >= 1) {
                             console.log(resultadoAutenticar);
                             // Adicionando validacao para saber se o usuario e a senha esta exatamente igual ao que esta no banco de dados
                             // e retornando mensagem de erro caso não esteja.
