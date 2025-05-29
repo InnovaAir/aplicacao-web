@@ -44,7 +44,29 @@ function listarDesempenhoPorFilial(idFilial){
   return database.executar(sql);
 };
 
+function qtdMaqMenorDsmp(idMaquina){
+  console.log("cheguei na model")
+
+
+  var sql = `
+    SELECT * FROM Maquina WHERE idMaquina = ${idMaquina}
+  `;
+ 
+  return database.executar(sql);
+}
+
+function getIdUsuario(idUsuario){
+  console.log("cheguei na model idUsuario")
+
+  var sql = `
+    SELECT * FROM Usuario WHERE idUsuario = ${idUsuario};
+  `;
+
+  return database.executar(sql)
+}
 
 module.exports = {
-  listarDesempenhoPorFilial
+  listarDesempenhoPorFilial,
+  qtdMaqMenorDsmp,
+  getIdUsuario
 };

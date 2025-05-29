@@ -1,7 +1,7 @@
 totensAlerta = 0;
 totensOciosos = 0;
 totensNormal = 0;
-
+idMaquina = 0;
 
 // FILTROS DOS 3 BOTÕES COLORIDOS ACIMA DA LISTA
 
@@ -76,6 +76,24 @@ function carregarMaquinas(dados) {
 console.log("Entrando no fetch");
 
 fetch('/dashDuduRoutes/dash-dudu')
+  .then(res => res.json())
+  .then(data => {
+    console.log('Entrei no fetch e tenho esses dados:', data);
+    carregarMaquinas(data);
+  })
+  .catch(err => console.error('Erro ao carregar os dados:', err));
+
+
+fetch(`/dashDuduRoutes/qtdMaqMenorDsmp/${idMaquina}`)
+  .then(res => res.json())
+  .then(data => {
+    console.log('Entrei no fetch e tenho esses dados:', data);
+    carregarMaquinas(data);
+  })
+  .catch(err => console.error('Erro ao carregar os dados:', err));
+
+
+fetch(`/dashDuduRoutes/getIdUsuario/${sessionStorage.idUsuario}`)
   .then(res => res.json())
   .then(data => {
     console.log('Entrei no fetch e tenho esses dados:', data);
