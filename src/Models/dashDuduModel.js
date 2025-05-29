@@ -44,16 +44,16 @@ function listarDesempenhoPorFilial(idFilial){
   return database.executar(sql);
 };
 
-function qtdMaqMenorDsmp(idMaquina){
-  console.log("cheguei na model")
+// function qtdMaqMenorDsmp(idMaquina){
+//   console.log("cheguei na model")
 
 
-  var sql = `
-    SELECT * FROM Maquina WHERE idMaquina = ${idMaquina}
-  `;
+//   var sql = `
+//     SELECT * FROM Maquina WHERE idMaquina = ${idMaquina}
+//   `;
  
-  return database.executar(sql);
-}
+//   return database.executar(sql);
+// }
 
 function getIdUsuario(idUsuario){
   console.log("cheguei na model idUsuario")
@@ -65,8 +65,17 @@ function getIdUsuario(idUsuario){
   return database.executar(sql)
 }
 
+// function getTotalMaq(idMaquina){
+//   console.log("cheguei na model do getTotalMaq")
+
+//   var slq = `
+//     SELECT COUNT(idMaquina) FROM maquina;
+//   `;
+
+//   return database.executar(sql)
+// }
+
 module.exports = {
   listarDesempenhoPorFilial,
-  qtdMaqMenorDsmp,
-  getIdUsuario
+  getIdUsuario,
 };

@@ -25,27 +25,27 @@ var obterDesempenho = async (req, res) => {
   }
 };
 
-function qtdMaqMenorDsmp(req, res){
-  var idMaquina = req.params.idMaquina;
+// function qtdMaqMenorDsmp(req, res){
+//   var idMaquina = req.params.idMaquina;
 
-  dashDuduModel.qtdMaqMenorDsmp(idMaquina)
-            .then((resultado) => {
-              console.log(resultado)
-            })
-            .catch((erro) => {
-                console.log("Erro ao obter dados do gerente:", erro);
-                res.status(500).json({ error: "Erro ao obter dados do gerente" });
-            });
+//   dashDuduModel.qtdMaqMenorDsmp(idMaquina)
+//             .then((resultado) => {
+//               console.log(resultado)
+//             })
+//             .catch((erro) => {
+//                 console.log("Erro ao obter dados do gerente:", erro);
+//                 res.status(500).json({ error: "Erro ao obter dados do gerente" });
+//             });
 
-    if (idMaquina == null) {
-          res.status(500).send("Deu ruim, id nulo")
-    }
-    else {
-      console.log("idMaquinas: ", idMaquina)
-      res.json();
+//     if (idMaquina == null) {
+//           res.status(500).send("Deu ruim, id nulo")
+//     }
+//     else {
+//       console.log("idMaquinas: ", idMaquina)
+//       res.json();
 
-    }
-}
+//     }
+// }
 
 function getIdUsuario(req, res){
   var idUsuario = req.params.idUsuario;
@@ -69,9 +69,13 @@ function getIdUsuario(req, res){
     }
 }
 
+// function getTotalMaq(req, res){
+//   var idMaquina = req.params.idMaquina;
+
+// }
+
 
 module.exports = {
   obterDesempenho,
-  qtdMaqMenorDsmp,
   getIdUsuario
 };
