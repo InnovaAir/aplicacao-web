@@ -83,9 +83,9 @@ fetch('/dashDuduRoutes/dash-dudu')
   })
   .catch(err => console.error('Erro ao carregar os dados:', err));
 
-
+// ARRUMAR ESSA ROTA PQ ELA N TA DEVOLVENDO NADA
 fetch(`/dashDuduRoutes/qtdMaqMenorDsmp/${idMaquina}`)
-  .then(res => res.json())
+  .then(res)
   .then(data => {
     console.log('Entrei no fetch e tenho esses dados:', data);
     carregarMaquinas(data);
@@ -94,7 +94,8 @@ fetch(`/dashDuduRoutes/qtdMaqMenorDsmp/${idMaquina}`)
 
 
 fetch(`/dashDuduRoutes/getIdUsuario/${sessionStorage.idUsuario}`)
-  .then(res => res.json())
+console.log("fetch 3")
+  .then(res)
   .then(data => {
     console.log('Entrei no fetch e tenho esses dados:', data);
     carregarMaquinas(data);
