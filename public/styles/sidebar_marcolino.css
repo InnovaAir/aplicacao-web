@@ -1,0 +1,86 @@
+/* Sidebar */
+#sidebar {
+    height: 100vh;
+    width: 60px; /* Inicia recolhido */
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #00126f;
+    padding-top: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1000;
+}
+
+#sidebar.expanded {
+    width: 220px;
+    align-items: flex-start;
+    padding-left: 20px;
+}
+
+/* Imagem no topo */
+#sidebar .logo {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#sidebar .logo img {
+    max-width: 80%;
+    height: auto;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+#sidebar.expanded .logo img {
+    max-width: 100%;
+}
+
+/* Links */
+#sidebar a {
+    padding: 12px 20px;
+    display: block;
+    color: #ccc;
+    text-decoration: none;
+    transition: 0.3s;
+    width: 100%;
+    white-space: nowrap;
+}
+
+#sidebar a:hover {
+    background-color: #00126f;
+    color: white;
+}
+
+/* Ícones alinhamento */
+#sidebar i {
+    margin-right: 10px;
+}
+
+/* Quando recolhido, esconde texto dos links */
+#sidebar:not(.expanded) a span {
+    display: none;
+}
+
+/* Centraliza ícones quando recolhido */
+#sidebar:not(.expanded) i {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+}
+
+/* Esconde o botão por padrão */
+#closeSidebar {
+  display: none;
+  background-color: #00126f;
+  color: #fff;
+  border-color: #ffffff;
+}
+
+/* Mostra o botão SOMENTE quando o sidebar estiver expandido */
+#sidebar.expanded #closeSidebar {
+  display: inline-block;
+}

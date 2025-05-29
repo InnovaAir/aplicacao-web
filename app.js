@@ -16,9 +16,10 @@ var HOST_APP = process.env.APP_HOST;
 var app = express();
 
 var indexRouter = require("./src/routes/index");
-var usuarios = require("./src/routes/usuarios")
-var cadastros = require("./src/routes/cadastros")
-var feitosaR = require("./src/routes/feitosa")
+var usuarios = require("./src/routes/usuarios");
+var cadastros = require("./src/routes/cadastros");
+var feitosaR = require("./src/routes/feitosa");
+var feitosaR = require("./src/routes/marcolino");
 var dashboards = require("./src/routes/dashboards");
 var dashDudu = require("./src/routes/dashDuduRoutes");
 
