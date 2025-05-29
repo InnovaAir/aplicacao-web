@@ -15,7 +15,7 @@ var obterDesempenho = async (req, res) => {
 
     var resultado = dados.map(linha => ({
       ...linha,
-      Desempenho: calcularDesempenho(linha)
+      desempenho: calcularDesempenho(linha)
     }));
 
     res.json(resultado);

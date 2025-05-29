@@ -61,22 +61,24 @@ function carregarMaquinas(dados) {
     var div = document.createElement('div');
     div.className = `totem ${classe}`;
     div.innerHTML = `
-      <div class="coluna">${maq.nomeTotem || '-'}</div>
-      <div class="coluna">${maq.setor || '-'}</div>
+      <div class="coluna">${maq.totem || '-'}</div>
+      <div class="coluna">${maq.filial || '-'}</div>
       <div class="coluna">${maq.critico || 0}</div>
       <div class="coluna">${maq.alto || 0}</div>
       <div class="coluna">${maq.baixo || 0}</div>
       <div class="coluna">${maq.total_alertas || 0}</div>
-      <div class="coluna">${desempenho !== 'N/A' ? desempenho + '%' : 'N/A'}</div>
+      <div class="coluna">${maq.desempenho !== undefined ? maq.desempenho + '%' : 'N/A'}</div>
     `;
     lista.appendChild(div);
   });
 }
 
+console.log("Entrando no fetch");
+
 fetch('/dashDuduRoutes/dash-dudu')
   .then(res => res.json())
   .then(data => {
-    console.log('Dados recebidos:', data);
+    console.log('Entrei no fetch e tenho esses dados:', data);
     carregarMaquinas(data);
   })
   .catch(err => console.error('Erro ao carregar os dados:', err));

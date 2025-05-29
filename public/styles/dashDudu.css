@@ -307,13 +307,13 @@ body {
 }
 
 .totem.red {
-  background-color: #f8d7da;
+  background-color: rgba(255, 0, 0, 0.5);
 }
 
 .totem.yellow {
-  background-color: #fff3cd;
+  background-color: rgba(255, 255, 0, 0.5);
 }
 
 .totem.green {
-  background-color: #d4edda;
+  background-color: rgba(0, 170, 0, 0.3);
 }

@@ -25,12 +25,12 @@ var database = require("../database/config");
 var listarDesempenhoPorFilial = async (idFilial) => {
   var sql = `
     SELECT
-        m.hostname AS Totem,
-        f.setor as Filial,
-        SUM(CASE WHEN ca.gravidade = 'critico' THEN 1 ELSE 0 END) AS Critico,
-        SUM(CASE WHEN ca.gravidade = 'alto' THEN 1 ELSE 0 END) AS Alto,
-        SUM(CASE WHEN ca.gravidade = 'baixo' THEN 1 ELSE 0 END) AS Baixo,
-        COUNT(*) AS "Total de Alertas"
+        m.hostname AS totem,
+        f.setor as filial,
+        SUM(CASE WHEN ca.gravidade = 'critico' THEN 1 ELSE 0 END) AS critico,
+        SUM(CASE WHEN ca.gravidade = 'alto' THEN 1 ELSE 0 END) AS alto,
+        SUM(CASE WHEN ca.gravidade = 'baixo' THEN 1 ELSE 0 END) AS baixo,
+        SUM(CASE WHEN ca.gravidade IN ('critico', 'alto', 'baixo') THEN 1 ELSE 0 END) AS total_alertas
     FROM captura_alerta ca
     JOIN metrica me ON ca.fkMetrica = me.idMetrica
     JOIN componente c ON me.fkComponente = c.idComponente
