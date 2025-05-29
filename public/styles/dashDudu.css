@@ -278,3 +278,42 @@ body {
 .ball-red {
     background-color: #FF0000;
 }
+
+.div_listaMaq {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.tabela_cabecalho {
+  display: flex;
+  font-weight: bold;
+  background-color: #f0f0f0;
+}
+
+.tabela_conteudo {
+  display: flex;
+  flex-direction: column;
+}
+
+.totem {
+  display: flex;
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.coluna {
+  flex: 1;
+  text-align: center;
+}
+
+.totem.red {
+  background-color: #f8d7da;
+}
+
+.totem.yellow {
+  background-color: #fff3cd;
+}
+
+.totem.green {
+  background-color: #d4edda;
+}

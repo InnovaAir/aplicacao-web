@@ -41,10 +41,45 @@ function ordenar(item) {
     }
   });
 
-  renderizarMaquinas();
+  carregarMaquinas();
 }
 
+function carregarMaquinas(dados) {
+  var lista = document.getElementById('lista_maquinas');
+  lista.innerHTML = '';
 
+  dados.forEach(maq => {
+    var desempenho = maq.desempenho != null ? maq.desempenho.toFixed(0) : 'N/A';
+
+    var classe = 'green';
+    if (desempenho !== 'N/A') {
+      var valor = parseInt(desempenho);
+      if (valor < 30) classe = 'red';
+      else if (valor < 70) classe = 'yellow';
+    }
+
+    var div = document.createElement('div');
+    div.className = `totem ${classe}`;
+    div.innerHTML = `
+      <div class="coluna">${maq.nomeTotem || '-'}</div>
+      <div class="coluna">${maq.setor || '-'}</div>
+      <div class="coluna">${maq.critico || 0}</div>
+      <div class="coluna">${maq.alto || 0}</div>
+      <div class="coluna">${maq.baixo || 0}</div>
+      <div class="coluna">${maq.total_alertas || 0}</div>
+      <div class="coluna">${desempenho !== 'N/A' ? desempenho + '%' : 'N/A'}</div>
+    `;
+    lista.appendChild(div);
+  });
+}
+
+fetch('/dashDuduRoutes/dash-dudu')
+  .then(res => res.json())
+  .then(data => {
+    console.log('Dados recebidos:', data);
+    carregarMaquinas(data);
+  })
+  .catch(err => console.error('Erro ao carregar os dados:', err));
 
 
 // DASHBOARD
