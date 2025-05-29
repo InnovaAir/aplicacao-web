@@ -22,7 +22,7 @@ var database = require("../database/config");
 //   return database.executar(sql);
 // };
 
-var listarDesempenhoPorFilial = async (idFilial) => {
+function listarDesempenhoPorFilial(idFilial){
   var sql = `
     SELECT
         m.hostname AS totem,
