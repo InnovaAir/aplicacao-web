@@ -38,11 +38,11 @@
         <h2 class="text-center fw-bold">
           Total de alertas por componente
           <br>
-          <small class="text-secondary">(últimos 6 meses)</small>
+          <h2 class="text-center fw-bold">(últimos 6 meses)</h2>
         </h2>
 
         <div class="row justify-content-center">
-          <div class="col-12 col-lg-10">
+          <div class="col-12 col-lg-11">
             <div class="row text-center my-2 no-gap-row">
               <div class="col-sm-6 col-md-3">
                 <div class="card-alert alert-cpu">
@@ -74,14 +74,16 @@
 
         <div class="row">
           <div class="col-md-6">
-            <h5 class="text-center fw-bold">Alertas Mensais (Últimos 6 meses)</h5>
-            <div class="border rounded p-2" style="height: 65vh;">
+            <h4 class="text-center fw-bold">Alertas Mensais (Últimos 6 meses)</h4>
+            <h6 class="text-center fw-bold">Clique na legenda para selecionar o tipo de componente</h6>
+            <div class="border rounded p-2" style="height: 59vh;">
               <canvas id="chartMensal" class="w-100 h-100"></canvas>
             </div>
           </div>
           <div class="col-md-6">
             <h5 class="text-center fw-bold">Alertas por filiais (últimos 6 meses)</h5>
-            <div class="border rounded p-2" style="height: 65vh;">
+            <h6 class="text-center fw-bold">Clique na barra para selecionar os componentes de uma filial</h6>
+            <div class="border rounded p-2" style="height: 59vh;">
               <canvas id="chartFiliais" class="w-100 h-100"></canvas>
             </div>
           </div>

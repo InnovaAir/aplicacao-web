@@ -32,13 +32,44 @@ const chartMensal = new Chart(ctxMensal, {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-            legend: { position: 'top' },
+            legend: {
+                position: 'top',
+                labels:{
+                    color: '#000000',
+                    weight: 'bold' // negrito (opcional)
+                }
+            },
             datalabels: {
                 color: '#ffffff',
                 font: { weight: 'bold', size: 20 }
             }
         },
-        scales: { y: { beginAtZero: true } }
+    scales: { 
+        x: {
+            beginAtZero: true,
+            title: {
+                display: true,
+                text: 'Meses',
+                color: '#000000', // cor do título
+                font: {
+                    size: 18,       // tamanho da fonte
+                    weight: 'bold', // negrito (opcional)
+                }
+                }
+        },
+        y: {
+            beginAtZero: true,
+            title: {
+                display: true,
+                text: 'Alertas',
+                color: '#000000', // cor do título
+                font: {
+                    size: 18,       // tamanho da fonte
+                    weight: 'bold', // negrito (opcional)
+                }
+                }
+        }
+    }
     },
     plugins: [ChartDataLabels]
 });
@@ -58,6 +89,7 @@ const chartFiliais = new Chart(ctxFiliais, {
         responsive: true,
         maintainAspectRatio: false,
         onClick: trocarMensal,
+        color: '#000000',
         plugins: {
             datalabels: {
                 color: '#ffffff',
@@ -76,7 +108,32 @@ const chartFiliais = new Chart(ctxFiliais, {
                 }
             }
         },
-        scales: { y: { beginAtZero: true } }
+        scales: { 
+        x: {
+            beginAtZero: true,
+            title: {
+                display: true,
+                text: 'Filiais',
+                color: '#000000', // cor do título
+                font: {
+                    size: 18,       // tamanho da fonte
+                    weight: 'bold', // negrito (opcional)
+                }
+                }
+        },
+        y: {
+            beginAtZero: true,
+            title: {
+                display: true,
+                text: 'Alertas',
+                color: '#000000', // cor do título
+                font: {
+                    size: 18,       // tamanho da fonte
+                    weight: 'bold', // negrito (opcional)
+                }
+                }
+        }
+        }
     },
     plugins: [ChartDataLabels]
 });
