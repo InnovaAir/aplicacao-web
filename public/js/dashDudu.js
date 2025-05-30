@@ -49,6 +49,15 @@ function ordenar(item) {
 }
 
 function carregarMaquinas(dados) {
+  console.log(dados)
+  console.log(dados[0].critico)
+  qtdMaquinas = dados.length;
+  qtdMaqMenorDsmp = dados.filter(dado => dado.desempenho < 35).length
+  total = 0;
+  for(i = 0; i < dados.length; i++){
+    total += parseInt(dados[i].critico)
+  }
+
   var lista = document.getElementById('lista_maquinas');
   lista.innerHTML = '';
 
@@ -74,13 +83,19 @@ function carregarMaquinas(dados) {
       <div class="coluna">${maq.desempenho !== undefined ? maq.desempenho + '%' : 'N/A'}</div>
     `;
     lista.appendChild(div);
+
+    kpi_total.innerHTML = qtdMaquinas;
+    kpi_baixo.innerHTML = qtdMaqMenorDsmp;
+    kpi_alertas.innerHTML = total
+
   });
 }
 
 // Fetch 1
 console.log("Entrando no fetch");
 
-fetch(`/dashDuduRoutes/dash-dudu/${sessionStorage.idUsuario}`, {
+async function dashDudu(){
+await fetch(`/dashDuduRoutes/dash-dudu/${sessionStorage.idUsuario}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -92,61 +107,21 @@ fetch(`/dashDuduRoutes/dash-dudu/${sessionStorage.idUsuario}`, {
     console.log("fetch 1");
     console.log('Entrei no fetch e tenho esses dados:', data);  
     carregarMaquinas(data);
+
   })
   .catch(err => console.error('Erro ao carregar os dados:', err));
-
-
-// Fetch 2
-console.log("fetch 2");
-
-fetch(`/dashDuduRoutes/qtdMaqMenorDsmp/${idMaquina}`)
-  .then(response => response.text())
-  .then(data => {
-    console.log("Entrei no fetch e tenho esses dados:", data);
-
-    const qtdElemento = document.getElementById("kpi_baixo");
-    if (qtdElemento) {
-      qtdElemento.textContent = data;
-    }
-  })
-  .catch(err => {
-    console.error("Erro ao carregar os dados:", err);
-  });
-
+}
 
 // Fetch 3
-fetch(`/dashDuduRoutes/getIdUsuario/${sessionStorage.idUsuario}`)
+async function getIdUsuario(){
+await fetch(`/dashDuduRoutes/getIdUsuario/${sessionStorage.idUsuario}`)
   .then(res => res.json())
   .then(data => {
     console.log('Entrei no fetch e tenho esses dados:', data);
     carregarMaquinas(data);
   })
   .catch(err => console.error('Erro ao carregar os dados:', err));
-
-
-// Fetch 4
-let url = '/dashDuduRoutes/getTotalMaq';
-
-if (sessionStorage.idFilial && sessionStorage.idFilial !== "null") {
-  url += `?idFilial=${sessionStorage.idFilial}`;
 }
-
-fetch(url)
-  .then(res => res.json())
-  .then(data => {
-    console.log("Total de máquinas recebidas:", data);
-    const span = document.getElementById("kpi_total");
-    if (data && data.length > 0) {
-      span.textContent = data[0].total_maquinas;
-    } else {
-      span.textContent = "--";
-    }
-  })
-  .catch(err => {
-    console.error("Erro ao buscar total de máquinas:", err);
-    document.getElementById("kpi_total").textContent = "--";
-  });
-
 
 // Listando endereços
 // fetch('/dashDuduRoutes/enderecos')
@@ -171,7 +146,8 @@ fetch(url)
 
 //   if (!idEndereco) return;
 
-  fetch(`/cadastros/metricas/listar/filiais/${sessionStorage.idUsuario}`, {
+async function listarFiliais(){
+await fetch(`/cadastros/metricas/listar/filiais/${sessionStorage.idUsuario}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -199,18 +175,17 @@ fetch(url)
             .catch(() => {
                 print("Erro ao realizar o Fetch")
             });
-    // };
+    }
 
-
-    async function aplicarFiltro(){
-  var aeroportos = document.getElementById("slc_filial")
-  var aeroporto = aeroportos.value;
-  dados_filtrados = dados_json;
-  const semanas = {
-    "1": 1,
-    "2": 2,
-    "4": 4
-  }
+  async function aplicarFiltro(){
+    var aeroportos = document.getElementById("slc_filial")
+    var aeroporto = aeroportos.value;
+    dados_filtrados = dados_json;
+    const semanas = {
+      "1": 1,
+      "2": 2,
+      "4": 4
+    }
   
   console.log(filiais)
   console.log(aeroporto)
@@ -238,9 +213,6 @@ const dados = [
   { filial: 'Filial 2', desempenho: 30 },
   { filial: 'Filial 3', desempenho: 20 }
 ]; // dados estaticos só p plotar algo 
-
-
-
 
 // ordenação do pior pro melhor
 const dadosOrdenados = [...dados].sort((a, b) => a.desempenho - b.desempenho);
@@ -300,3 +272,11 @@ const grafico = new Chart(ctx, {
     }
   }
 });
+
+async function executar(){
+await getIdUsuario()
+await listarFiliais()
+await dashDudu()
+aplicarFiltro()
+}
+executar()

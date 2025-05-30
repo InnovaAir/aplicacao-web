@@ -106,7 +106,7 @@ function getTotalMaq(req, res) {
 module.exports = {
   obterDesempenho,
   qtdMaqMenorDsmp,
-  getTotalMaq,
+  // getTotalMaq,
   // listarEnderecos,
   // listarFiliais,
   getIdUsuario

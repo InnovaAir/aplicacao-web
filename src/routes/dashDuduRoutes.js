@@ -20,9 +20,9 @@ router.get('/getIdUsuario/:idMaquina', (req, res) => {
     dashDuduController.getTotalMaq(req, res);
 });
 
-router.get('/getTotalMaq', (req, res) => {
-  dashDuduController.getTotalMaq(req, res);
-});
+// router.get('/getTotalMaq', (req, res) => {
+//   dashDuduController.getTotalMaq(req, res);
+// });
 
 
 

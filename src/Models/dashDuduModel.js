@@ -24,7 +24,7 @@ var database = require("../database/config");
 
 function listarDesempenhoPorFilial(idUsuario) {
   var sql = `
-    select * from dashRobertoDesempenho;
+    select * from dashRobertoDesempenho WHERE usuario = ${idUsuario};
   `;
 
   const params = [];
@@ -76,7 +76,7 @@ function getTotalMaq(idFilial){
     SELECT COUNT(m.idMaquina) AS total_maquinas
     FROM maquina m
     LEFT JOIN filial f ON m.fkFilial = f.idFilial
-    ${idFilial ? `WHERE f.idFilial = ${idFilial}` : ''}
+    WHERE f.idFilial = ${idFilial}
   `;
   return database.executar(sql);
 }
