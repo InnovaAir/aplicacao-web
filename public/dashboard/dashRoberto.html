@@ -337,39 +337,66 @@ async function obterDadosGerente(){
   }
 
 async function obterDadosGerenteQtd(){
-    resposta = await fetch("/dashboards/dashGerenteDadosQtd", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          modelo1Server: modelosOrdenados[0].especificacao,
-          modelo2Server: modelosOrdenados[1].especificacao,
-          modelo3Server: modelosOrdenados[2].especificacao,
-          modelo4Server: modelosOrdenados[3].especificacao,
-          modelo5Server: modelosOrdenados[4].especificacao,
-          idUsuarioServer: sessionStorage.idUsuario
-        }),
-    })
+    // resposta = await fetch("/dashboards/dashGerenteDadosQtd", {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       modelo1Server: modelosOrdenados[0].especificacao,
+    //       modelo2Server: modelosOrdenados[1].especificacao,
+    //       modelo3Server: modelosOrdenados[2].especificacao,
+    //       modelo4Server: modelosOrdenados[3].especificacao,
+    //       modelo5Server: modelosOrdenados[4].especificacao,
+    //       idUsuarioServer: sessionStorage.idUsuario
+    //     }),
+    // })
     
-    qtdMaquinas = await resposta.json()
+    // qtdMaquinas = await resposta.json()
   }
 
 function ordenarDados(json_dados){
-  modelosOrdenados = []
   console.log(json_dados)
-  console.log(json_dados[2].qtdAlertas)
-            for(i = 0; i < json_dados.length; i+=3){
-                qtdAtual = json_dados[i].qtdAlertas + json_dados[i+1].qtdAlertas + json_dados[i+2].qtdAlertas;
+  modelosOrdenados = []
+  var modelos = []
+  var baixo = 0;
+  var alto = 0;
+  var critico = 0;
+  var qtdAtual = 0;
+  var modelo = []
+  for(i = 0; i < json_dados.length; i++){
+    if(!modelos.includes(json_dados[i].especificacao)){
+      modelos.push(json_dados[i].especificacao)
+    }
+  }
+            for(i = 0; i < modelos.length; i++){
+              baixo = 0;
+              alto = 0;
+              critico = 0;
+              qtdAtual = 0;
+              modelo = json_dados.filter(m => m.especificacao == modelos[i])
+                for(j = 0; j < modelo.length; j++){
+                  if(modelo[j].gravidade == 'baixo'){
+                    baixo+=modelo[j].qtdAlertas
+                  }
+                  else if(modelo[j].gravidade == 'alto'){
+                    alto+=modelo[j].qtdAlertas
+                  }
+                  else if(modelo[j].gravidade == 'critico'){
+                    critico+=modelo[j].qtdAlertas
+                  }
+                qtdAtual+= modelo[j].qtdAlertas
+                }
                 modelo = {
                   "qtdAlertas":qtdAtual, 
-                  "especificacao":json_dados[i].especificacao, 
-                  "componente":json_dados[i].componente,
-                  "terminal":json_dados[i].terminal,
-                  "index": [i, i+1, i+2]
+                  "especificacao":modelo[0].especificacao, 
+                  "componente":modelo[0].componente,
+                  "terminal":modelo[0].terminal,
+                  "alertas": [baixo, alto, critico]
                 }
-                modelosOrdenados.push(modelo)
+                                             modelosOrdenados.push(modelo)
               }
+                             console.log(modelosOrdenados)
                 for(i = 0; i < modelosOrdenados.length; i++){
                   indexMaior = i
                   for(j = i; j < modelosOrdenados.length; j++){
@@ -381,13 +408,18 @@ function ordenarDados(json_dados){
                   modelosOrdenados[i] = modelosOrdenados[indexMaior]
                   modelosOrdenados[indexMaior] = temp
                 }
+                qtdMaquinas1 = json_dados.filter(dado => dado.especificacao == modelosOrdenados[0].especificacao).length
+                qtdMaquinas2 = json_dados.filter(dado => dado.especificacao == modelosOrdenados[1].especificacao).length
+                qtdMaquinas3 = json_dados.filter(dado => dado.especificacao == modelosOrdenados[2].especificacao).length
+                qtdMaquinas4 = json_dados.filter(dado => dado.especificacao == modelosOrdenados[3].especificacao).length
+                qtdMaquinas5 = json_dados.filter(dado => dado.especificacao == modelosOrdenados[4].especificacao).length
+                qtdMaquinas = [qtdMaquinas1, qtdMaquinas2, qtdMaquinas3, qtdMaquinas4, qtdMaquinas5]
 }
 
 function plotarDados(json_dados, qtdMaquinas){
-  console.log(json_dados[modelosOrdenados[0].index[0]].qtdAlertas)
-                 alertaBaixo = [json_dados[modelosOrdenados[0].index[0]].qtdAlertas, json_dados[modelosOrdenados[1].index[0]].qtdAlertas, json_dados[modelosOrdenados[2].index[0]].qtdAlertas, json_dados[modelosOrdenados[3].index[0]].qtdAlertas, json_dados[modelosOrdenados[4].index[0]].qtdAlertas]
-                 alertaAlto = [json_dados[modelosOrdenados[0].index[1]].qtdAlertas, json_dados[modelosOrdenados[1].index[1]].qtdAlertas, json_dados[modelosOrdenados[2].index[1]].qtdAlertas, json_dados[modelosOrdenados[3].index[1]].qtdAlertas, json_dados[modelosOrdenados[4].index[1]].qtdAlertas]
-                 alertaCritico = [json_dados[modelosOrdenados[0].index[2]].qtdAlertas, json_dados[modelosOrdenados[1].index[2]].qtdAlertas, json_dados[modelosOrdenados[2].index[2]].qtdAlertas, json_dados[modelosOrdenados[3].index[2]].qtdAlertas, json_dados[modelosOrdenados[4].index[2]].qtdAlertas]
+                 alertaBaixo = [modelosOrdenados[0].alertas[0], modelosOrdenados[1].alertas[0], modelosOrdenados[2].alertas[0], modelosOrdenados[3].alertas[0], modelosOrdenados[4].alertas[0]]
+                 alertaAlto = [modelosOrdenados[0].alertas[1], modelosOrdenados[1].alertas[1], modelosOrdenados[2].alertas[1], modelosOrdenados[3].alertas[1], modelosOrdenados[4].alertas[1]]
+                 alertaCritico = [modelosOrdenados[0].alertas[2], modelosOrdenados[2].alertas[2], modelosOrdenados[2].alertas[2], modelosOrdenados[3].alertas[2], modelosOrdenados[4].alertas[2]]
                  nomesModelos = [modelosOrdenados[0].especificacao, modelosOrdenados[1].especificacao, modelosOrdenados[2].especificacao, modelosOrdenados[3].especificacao, modelosOrdenados[4].especificacao]
                 max = modelosOrdenados[0].qtdAlertas
                 chart.updateSeries([
@@ -425,16 +457,16 @@ function plotarDados(json_dados, qtdMaquinas){
                 tabela_total_3.innerHTML = modelosOrdenados[2].qtdAlertas
                 tabela_total_4.innerHTML = modelosOrdenados[3].qtdAlertas
                 tabela_total_5.innerHTML = modelosOrdenados[4].qtdAlertas
-                tabela_qtd_1.innerHTML = qtdMaquinas[0].qtdMaquinas;
-                tabela_qtd_2.innerHTML = qtdMaquinas[1].qtdMaquinas;
-                tabela_qtd_3.innerHTML = qtdMaquinas[2].qtdMaquinas;
-                tabela_qtd_4.innerHTML = qtdMaquinas[3].qtdMaquinas;
-                tabela_qtd_5.innerHTML = qtdMaquinas[4].qtdMaquinas;
-                tabela_perc_1.innerHTML = Math.round(modelosOrdenados[0].qtdAlertas*100/(qtdMaquinas[0].qtdMaquinas * 4 * 24 * 30)) + "%"
-                tabela_perc_2.innerHTML = Math.round(modelosOrdenados[1].qtdAlertas*100/(qtdMaquinas[1].qtdMaquinas * 4 * 24 * 30)) + "%"
-                tabela_perc_3.innerHTML = Math.round(modelosOrdenados[2].qtdAlertas*100/(qtdMaquinas[2].qtdMaquinas * 4 * 24 * 30)) + "%"
-                tabela_perc_4.innerHTML = Math.round(modelosOrdenados[3].qtdAlertas*100/(qtdMaquinas[3].qtdMaquinas * 4 * 24 * 30)) + "%"
-                tabela_perc_5.innerHTML = Math.round(modelosOrdenados[4].qtdAlertas*100/(qtdMaquinas[4].qtdMaquinas * 4 * 24 * 30)) + "%"
+                tabela_qtd_1.innerHTML = qtdMaquinas[0];
+                tabela_qtd_2.innerHTML = qtdMaquinas[1];
+                tabela_qtd_3.innerHTML = qtdMaquinas[2];
+                tabela_qtd_4.innerHTML = qtdMaquinas[3];
+                tabela_qtd_5.innerHTML = qtdMaquinas[4];
+                tabela_perc_1.innerHTML = Math.round(modelosOrdenados[0].qtdAlertas*100/(qtdMaquinas[0] * 4 * 24 * 30)) + "%"
+                tabela_perc_2.innerHTML = Math.round(modelosOrdenados[1].qtdAlertas*100/(qtdMaquinas[1] * 4 * 24 * 30)) + "%"
+                tabela_perc_3.innerHTML = Math.round(modelosOrdenados[2].qtdAlertas*100/(qtdMaquinas[2] * 4 * 24 * 30)) + "%"
+                tabela_perc_4.innerHTML = Math.round(modelosOrdenados[3].qtdAlertas*100/(qtdMaquinas[3] * 4 * 24 * 30)) + "%"
+                tabela_perc_5.innerHTML = Math.round(modelosOrdenados[4].qtdAlertas*100/(qtdMaquinas[4] * 4 * 24 * 30)) + "%"
 }
 
 async function aplicarFiltro(){
@@ -468,9 +500,6 @@ async function aplicarFiltro(){
     }
     }
     dados_filtrados = dados_filtrados2
-  }
-  if(intervalo == semanas[intervalo]){
-    dados_filtrados = dados_filtrados.filter(dado => dado.semanas <= semanas[intervalo])
   }
   // filtro endereco
   ordenarDados(dados_filtrados)
