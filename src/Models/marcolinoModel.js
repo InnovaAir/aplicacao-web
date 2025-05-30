@@ -1,18 +1,19 @@
 var database = require("../database/config");
 
 function dashGerenteDados(idUsuario){
-        var instrucaoSql = `select * from dashRobertoModelos;`;
-    console.log("Executando instrução:", instrucaoSql)
-    return database.executar(instrucaoSql);
-}
-
-function dashGerenteDadosQtd(modelo1, modelo2, modelo3, modelo4, modelo5, idUsuario){
-        var instrucaoSql = `select count(especificacao) as qtdMaquinas, especificacao, fkMaquina from componente join maquina on fkMaquina = idMaquina join filial on maquina.fkFilial = idFilial join usuarioFilial on usuarioFilial.fkFilial = idFilial join usuario on fkUsuario = idUsuario where especificacao = '${modelo1}' or especificacao = '${modelo2}' or especificacao = '${modelo3}'  or especificacao = '${modelo4}'  or especificacao = '${modelo5}' and idUsuario = ${idUsuario} group by fkMaquina, especificacao;`;
+            var instrucaoSql = `select f.terminal, COUNT(a.idCapturaAlerta) AS total_alertas
+                                from captura_alerta a
+                                join metrica me on a.fkMetrica = me.idMetrica
+                                join componente c ON me.fkComponente = c.idComponente
+                                join maquina m ON c.fkMaquina = m.idMaquina
+                                join filial f ON m.fkFilial = f.idFilial
+                                where f.fkcliente = 2
+                                group by f.terminal
+                                order by f.terminal, total_alertas desc;`;
     console.log("Executando instrução:", instrucaoSql)
     return database.executar(instrucaoSql);
 }
 
 module.exports = {
-dashGerenteDados,
-dashGerenteDadosQtd
+    dashGerenteDados
 }

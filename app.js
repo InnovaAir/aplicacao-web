@@ -19,7 +19,7 @@ var indexRouter = require("./src/routes/index");
 var usuarios = require("./src/routes/usuarios");
 var cadastros = require("./src/routes/cadastros");
 var feitosaR = require("./src/routes/feitosa");
-var feitosaR = require("./src/routes/marcolino");
+var marcolino = require("./src/routes/marcolino");
 var dashboards = require("./src/routes/dashboards");
 var dashDudu = require("./src/routes/dashDuduRoutes");
 
@@ -35,6 +35,7 @@ app.use("/cadastros", cadastros);
 app.use("/dashboards", dashboards);
 app.use("/dashDuduRoutes", dashDudu);
 app.use("/dados", feitosaR);
+app.use("/marcolino", marcolino);
 
 app.listen(PORTA_APP, function () {
     console.log(`

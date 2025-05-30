@@ -152,3 +152,52 @@ function trocarMensal(evt, elements) {
         // }
     }
 }
+
+function mostrar(){
+    plotarkpi();
+    plotarMensal();
+    plotarFilial();
+}
+
+function plotarkpi(){
+}
+
+function plotarMensal(){
+}
+
+function plotarFilial(){
+    var clientefk = sessionStorage.fkCliente;
+
+    // fetch("/marcolino/plotarFilial", {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify({
+    //         clientefkServer: clientefk,
+    //     })
+    // }).then(function (resposta) {
+    //     console.log("ESTOU NO THEN DO plotarFilial()!")
+
+    //     if (resposta.ok) {
+    //         console.log(resposta);
+
+    //         resposta.json().then(json => {
+    //             console.log(json);
+    //             console.log(JSON.stringify(json));
+                for (var i = 0;i<resposta.length;i++) {
+                    var filial = resposta[i];
+                    var nome = filial.nome;
+                    var qtdAletas = filial.alertas;
+                }
+    //         })
+    //     } else {
+        //     //Adicionando uma mensagem, caso aconteça um erro ao plotar as filiais
+    //         console.log("Houve um erro no fetch ao tentar plotar as filiais!");
+    //         resposta.text().then(texto => {
+    //             console.error(texto);
+    //         });
+    //     }
+
+    // });
+}

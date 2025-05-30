@@ -15,9 +15,6 @@ function dashGerenteDados(req, res){
 
 function dashGerenteDadosQtd(req, res){
     modelo1 = req.body.modelo1Server;
-    modelo2 = req.body.modelo2Server;
-    modelo3 = req.body.modelo3Server;
-    modelo4 = req.body.modelo4Server;
     modelo5 = req.body.modelo5Server;
     idUsuario = req.body.idUsuarioServer;
     dashboardsModel.dashGerenteDadosQtd(modelo1, modelo2, modelo3, modelo4, modelo5, idUsuario)
