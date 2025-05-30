@@ -44,16 +44,34 @@ function listarDesempenhoPorFilial(idFilial){
   return database.executar(sql);
 };
 
-// function qtdMaqMenorDsmp(idMaquina){
-//   console.log("cheguei na model")
+function qtdMaqMenorDsmp(idFilial){
+  console.log("cheguei na model")
 
+  var sql = `
+  SELECT COUNT(*) AS qtd_maquinas_abaixo_35 
+FROM (
+  SELECT
+    m.idMaquina,
+    (100 - COALESCE(SUM(CASE
+      WHEN LOWER(ca.gravidade) = 'critico' THEN 2
+      WHEN LOWER(ca.gravidade) = 'alto' THEN 1
+      ELSE 0
+    END), 0)) AS desempenho
+  FROM maquina AS m
+  LEFT JOIN componente c ON c.fkMaquina = m.idMaquina
+  LEFT JOIN metrica mt ON mt.fkComponente = c.idComponente
+  LEFT JOIN captura_alerta ca ON ca.fkMetrica = mt.idMetrica
+  LEFT JOIN filial f ON m.fkFilial = f.idFilial
+  WHERE ca.momento >= NOW() - INTERVAL 1 DAY
+  ${idFilial ? `AND f.idFilial = ${idFilial}` : ''}
+  GROUP BY m.idMaquina
+) sub
+WHERE desempenho < 35;
 
-//   var sql = `
-//     SELECT * FROM Maquina WHERE idMaquina = ${idMaquina}
-//   `;
+  `;
  
-//   return database.executar(sql);
-// }
+  return database.executar(sql);
+}
 
 function getIdUsuario(idUsuario){
   console.log("cheguei na model idUsuario")
@@ -77,5 +95,6 @@ function getIdUsuario(idUsuario){
 
 module.exports = {
   listarDesempenhoPorFilial,
-  getIdUsuario,
+  qtdMaqMenorDsmp,
+  getIdUsuario
 };

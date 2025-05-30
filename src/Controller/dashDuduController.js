@@ -25,34 +25,35 @@ var obterDesempenho = async (req, res) => {
   }
 };
 
-// function qtdMaqMenorDsmp(req, res){
-//   var idMaquina = req.params.idMaquina;
+function qtdMaqMenorDsmp(req, res){
 
-//   dashDuduModel.qtdMaqMenorDsmp(idMaquina)
-//             .then((resultado) => {
-//               console.log(resultado)
-//             })
-//             .catch((erro) => {
-//                 console.log("Erro ao obter dados do gerente:", erro);
-//                 res.status(500).json({ error: "Erro ao obter dados do gerente" });
-//             });
+  console.log("cheguei no controller qtdMaqMenorDsmp");
 
-//     if (idMaquina == null) {
-//           res.status(500).send("Deu ruim, id nulo")
-//     }
-//     else {
-//       console.log("idMaquinas: ", idMaquina)
-//       res.json();
-
-//     }
-// }
+  dashDuduModel.qtdMaqMenorDsmp()
+    .then(resultado => {
+      console.log("Resultado da model no controller:", resultado);
+      if (resultado.length > 0) {
+        res.send(resultado[0].qtd_maquinas_abaixo_35.toString());
+      } else {
+        if (resultado.length > 0) {
+          res.send(resultado[0].qtd_maquinas_abaixo_35.toString());
+        } else {
+          res.send("0");
+        }
+      }
+    })
+    .catch(erro => {
+      console.error("Erro no controller:", erro);
+      res.status(500).send("Erro ao buscar dados");
+    });
+}
 
 function getIdUsuario(req, res){
   var idUsuario = req.params.idUsuario;
 
   dashDuduModel.getIdUsuario(idUsuario)
   .then((resultado) => {
-              console.log(resultado)
+              // console.log(resultado)
             })
             .catch((erro) => {
                 console.log("Erro ao obter dados do gerente:", erro);
@@ -77,5 +78,6 @@ function getIdUsuario(req, res){
 
 module.exports = {
   obterDesempenho,
+  qtdMaqMenorDsmp,
   getIdUsuario
 };

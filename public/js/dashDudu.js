@@ -79,19 +79,29 @@ fetch('/dashDuduRoutes/dash-dudu')
   .then(res => res.json())
   .then(data => {
     console.log("fetch 1");
-    console.log('Entrei no fetch e tenho esses dados:', data);
+    console.log('Entrei no fetch e tenho esses dados:', data);  
     carregarMaquinas(data);
   })
   .catch(err => console.error('Erro ao carregar os dados:', err));
 
 // ARRUMAR ESSA ROTA PQ ELA N TA DEVOLVENDO NADA
-// fetch(`/dashDuduRoutes/qtdMaqMenorDsmp/${idMaquina}`)
-//   console.log("fetch 2")
-//   .then(resultado => {
-//     console.log('Entrei no fetch e tenho esses dados:', resultado);
-//     carregarMaquinas(data);
-//   })
-//   .catch(err => console.error('Erro ao carregar os dados:', err));
+console.log("fetch 2");
+
+fetch(`/dashDuduRoutes/qtdMaqMenorDsmp/${idMaquina}`)
+  .then(response => response.text())
+  .then(data => {
+    console.log("Entrei no fetch e tenho esses dados:", data);
+
+    // Exibir o valor recebido em algum lugar da página
+    const qtdElemento = document.getElementById("kpi_baixo");
+    if (qtdElemento) {
+      qtdElemento.textContent = data;
+    }
+  })
+  .catch(err => {
+    console.error("Erro ao carregar os dados:", err);
+  });
+
 
 
 // fetch(`/dashDuduRoutes/getIdUsuario/${sessionStorage.idUsuario}`)
