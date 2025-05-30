@@ -22,27 +22,37 @@ var database = require("../database/config");
 //   return database.executar(sql);
 // };
 
-function listarDesempenhoPorFilial(idFilial){
-  var sql = `
+function listarDesempenhoPorFilial(idFilial) {
+  let sql = `
     SELECT
-        m.hostname AS totem,
-        f.setor as filial,
-        SUM(CASE WHEN ca.gravidade = 'critico' THEN 1 ELSE 0 END) AS critico,
-        SUM(CASE WHEN ca.gravidade = 'alto' THEN 1 ELSE 0 END) AS alto,
-        SUM(CASE WHEN ca.gravidade = 'baixo' THEN 1 ELSE 0 END) AS baixo,
-        SUM(CASE WHEN ca.gravidade IN ('critico', 'alto', 'baixo') THEN 1 ELSE 0 END) AS total_alertas
-    FROM captura_alerta ca
-    JOIN metrica me ON ca.fkMetrica = me.idMetrica
-    JOIN componente c ON me.fkComponente = c.idComponente
-    JOIN maquina m ON c.fkMaquina = m.idMaquina
+      m.hostname AS totem,
+      f.setor AS filial,
+      SUM(CASE WHEN ca.gravidade = 'critico' THEN 1 ELSE 0 END) AS critico,
+      SUM(CASE WHEN ca.gravidade = 'alto' THEN 1 ELSE 0 END) AS alto,
+      SUM(CASE WHEN ca.gravidade = 'baixo' THEN 1 ELSE 0 END) AS baixo,
+      SUM(CASE WHEN ca.gravidade IN ('critico', 'alto', 'baixo') THEN 1 ELSE 0 END) AS total_alertas
+    FROM maquina m
     JOIN filial f ON m.fkFilial = f.idFilial
-    WHERE ca.momento >= NOW() - INTERVAL 1 DAY
-    ${idFilial ? `AND m.fkFilial = ${idFilial}` : ''}
+    LEFT JOIN componente c ON c.fkMaquina = m.idMaquina
+    LEFT JOIN metrica me ON me.fkComponente = c.idComponente
+    LEFT JOIN captura_alerta ca ON ca.fkMetrica = me.idMetrica AND ca.momento >= NOW() - INTERVAL 1 DAY
+    WHERE 1=1
+  `;
+
+  const params = [];
+
+  if (idFilial) {
+    sql += ` AND m.fkFilial = ?`;
+    params.push(idFilial);
+  }
+
+  sql += `
     GROUP BY m.hostname, f.setor
   `;
 
-  return database.executar(sql);
-};
+  return database.executar(sql, params);
+}
+
 
 function qtdMaqMenorDsmp(idFilial){
   console.log("cheguei na model")
@@ -67,7 +77,6 @@ FROM (
   GROUP BY m.idMaquina
 ) sub
 WHERE desempenho < 35;
-
   `;
  
   return database.executar(sql);
@@ -77,24 +86,49 @@ function getIdUsuario(idUsuario){
   console.log("cheguei na model idUsuario")
 
   var sql = `
-    SELECT * FROM Usuario WHERE idUsuario = ${idUsuario};
+  SELECT * FROM usuario WHERE idUsuario = ${idUsuario}
   `;
+  return database.executar(sql, [idUsuario]);
 
-  return database.executar(sql)
 }
 
-// function getTotalMaq(idMaquina){
-//   console.log("cheguei na model do getTotalMaq")
+function getTotalMaq(idFilial){
+  var sql = `
+    SELECT COUNT(m.idMaquina) AS total_maquinas
+    FROM maquina m
+    LEFT JOIN filial f ON m.fkFilial = f.idFilial
+    ${idFilial ? `WHERE f.idFilial = ${idFilial}` : ''}
+  `;
+  return database.executar(sql);
+}
 
-//   var slq = `
-//     SELECT COUNT(idMaquina) FROM maquina;
-//   `;
+function listarEnderecos() {
+  var sql = `
+    SELECT idEndereco, cep, logradouro, numero, complemento, bairro, cidade, estado
+    FROM endereco
+    ORDER BY cidade, bairro, logradouro;
+  `;
 
-//   return database.executar(sql)
-// }
+  return database.executar(sql);
+}
+
+function listarFiliais(idEndereco) {
+  const sql = `
+    SELECT idFilial, setor AS nomeFilial
+    FROM filial
+    WHERE fkEndereco = ?
+    ORDER BY setor;
+  `;
+
+  return database.executar(sql, [idEndereco]);
+}
+
 
 module.exports = {
   listarDesempenhoPorFilial,
   qtdMaqMenorDsmp,
+  getTotalMaq,
+  listarEnderecos,
+  listarFiliais,
   getIdUsuario
 };

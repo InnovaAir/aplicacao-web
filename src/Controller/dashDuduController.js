@@ -51,33 +51,63 @@ function qtdMaqMenorDsmp(req, res){
 function getIdUsuario(req, res){
   var idUsuario = req.params.idUsuario;
 
+  if (!idUsuario) {
+    return res.status(400).send("Deu ruim, id nulo");
+  }
+
   dashDuduModel.getIdUsuario(idUsuario)
-  .then((resultado) => {
-              // console.log(resultado)
-            })
-            .catch((erro) => {
-                console.log("Erro ao obter dados do gerente:", erro);
-                res.status(500).json({ error: "Erro ao obter dados do gerente" });
-            });
-
-    if (idUsuario == null) {
-          res.status(500).send("Deu ruim, id nulo")
-    }
-    else {
-      console.log("idUsuario: ", idUsuario)
-      res.json();
-
-    }
+    .then((resultado) => {
+      console.log("Resultado do getIdUsuario:", resultado);
+      res.json(resultado);
+    })
+    .catch((erro) => {
+      console.log("Erro ao obter dados do gerente:", erro);
+      res.status(500).json({ error: "Erro ao obter dados do gerente" });
+    });
 }
 
-// function getTotalMaq(req, res){
-//   var idMaquina = req.params.idMaquina;
 
-// }
+function getTotalMaq(req, res) {
+  var idFilial = req.query.idFilial;
+
+  dashDuduModel.getTotalMaq(idFilial)
+    .then((resultado) => {
+      res.json(resultado);
+    })
+    .catch((erro) => {
+      console.log("Erro ao obter total de máquinas:", erro);
+      res.status(500).json({ erro: "Erro ao obter total de máquinas" });
+    });
+}
+
+async function listarEnderecos(req, res) {
+  try {
+    const dados = await dashDuduModel.listarEnderecos();
+    res.json(dados);
+  } catch (erro) {
+    console.error('Erro ao obter endereços:', erro);
+    res.status(500).json({ erro: 'Erro ao obter endereços' });
+  }
+}
+
+async function listarFiliais(req, res) {
+  try {
+    const idEndereco = req.params.idEndereco;
+    const dados = await dashDuduModel.listarFiliais(idEndereco);
+    res.json(dados);
+  } catch (erro) {
+    console.error('Erro ao obter filiais:', erro);
+    res.status(500).json({ erro: 'Erro ao obter filiais' });
+  }
+}
+
 
 
 module.exports = {
   obterDesempenho,
   qtdMaqMenorDsmp,
+  getTotalMaq,
+  listarEnderecos,
+  listarFiliais,
   getIdUsuario
 };

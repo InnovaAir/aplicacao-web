@@ -12,13 +12,23 @@ router.get('/qtdMaqMenorDsmp/:idMaquina', (req, res) => {
     dashDuduController.qtdMaqMenorDsmp(req, res);
 });
 
-// router.get('/getIdUsuario/:idUsuario', (req, res) => {
-//     dashDuduController.getIdUsuario(req, res);
-// });
+router.get('/getIdUsuario/:idUsuario', (req, res) => {
+    dashDuduController.getIdUsuario(req, res);
+});
 
-// router.get('/getIdUsuario/:idMaquina', (req, res) => {
-//     dashDuduController.getTotalMaq(req, res);
-// });
+router.get('/getIdUsuario/:idMaquina', (req, res) => {
+    dashDuduController.getTotalMaq(req, res);
+});
+
+router.get('/getTotalMaq', (req, res) => {
+  dashDuduController.getTotalMaq(req, res);
+});
+
+router.get('/enderecos',  dashDuduController.listarEnderecos);
+
+router.get('/filiais/:idEndereco', (req, res) => {
+  dashDuduController.listarFiliais(req, res);
+});
 
 
 module.exports = router;

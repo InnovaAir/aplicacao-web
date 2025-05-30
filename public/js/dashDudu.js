@@ -1,3 +1,5 @@
+sessionStorage.idFilial = null;
+
 totensAlerta = 0;
 totensOciosos = 0;
 totensNormal = 0;
@@ -73,6 +75,7 @@ function carregarMaquinas(dados) {
   });
 }
 
+// Fetch 1
 console.log("Entrando no fetch");
 
 fetch('/dashDuduRoutes/dash-dudu')
@@ -84,7 +87,8 @@ fetch('/dashDuduRoutes/dash-dudu')
   })
   .catch(err => console.error('Erro ao carregar os dados:', err));
 
-// ARRUMAR ESSA ROTA PQ ELA N TA DEVOLVENDO NADA
+
+// Fetch 2
 console.log("fetch 2");
 
 fetch(`/dashDuduRoutes/qtdMaqMenorDsmp/${idMaquina}`)
@@ -103,15 +107,82 @@ fetch(`/dashDuduRoutes/qtdMaqMenorDsmp/${idMaquina}`)
   });
 
 
+// Fetch 3
+fetch(`/dashDuduRoutes/getIdUsuario/${sessionStorage.idUsuario}`)
+  .then(res => res.json())
+  .then(data => {
+    console.log('Entrei no fetch e tenho esses dados:', data);
+    carregarMaquinas(data);
+  })
+  .catch(err => console.error('Erro ao carregar os dados:', err));
 
-// fetch(`/dashDuduRoutes/getIdUsuario/${sessionStorage.idUsuario}`)
-// console.log("fetch 3")
-//   .then(res)
+
+// Fetch 4
+let url = '/dashDuduRoutes/getTotalMaq';
+
+if (sessionStorage.idFilial && sessionStorage.idFilial !== "null") {
+  url += `?idFilial=${sessionStorage.idFilial}`;
+}
+
+fetch(url)
+  .then(res => res.json())
+  .then(data => {
+    console.log("Total de máquinas recebidas:", data);
+    const span = document.getElementById("kpi_total");
+    if (data && data.length > 0) {
+      span.textContent = data[0].total_maquinas;
+    } else {
+      span.textContent = "--";
+    }
+  })
+  .catch(err => {
+    console.error("Erro ao buscar total de máquinas:", err);
+    document.getElementById("kpi_total").textContent = "--";
+  });
+
+
+// Listando endereços
+// fetch('/dashDuduRoutes/enderecos')
+//   .then(res => res.json())
 //   .then(data => {
-//     console.log('Entrei no fetch e tenho esses dados:', data);
-//     carregarMaquinas(data);
+//     const enderecoSelect = document.getElementById('slc_endereco');
+//     data.forEach(endereco => {
+//       const label = `${endereco.cidade} - ${endereco.bairro} - ${endereco.logradouro}, ${endereco.numero}`;
+//       const option = document.createElement('option');
+//       option.value = endereco.idEndereco;
+//       option.textContent = label;
+//       enderecoSelect.appendChild(option);
+//     });
 //   })
-//   .catch(err => console.error('Erro ao carregar os dados:', err));
+//   .catch(err => console.error('Erro ao carregar endereços:', err));
+
+
+// document.getElementById('slc_endereco').addEventListener('change', (e) => {
+//   const idEndereco = e.target.value;
+//   const filialSelect = document.getElementById('slc_filial');
+//   filialSelect.innerHTML = '<option value="">Filial</option>';
+
+//   if (!idEndereco) return;
+
+//   fetch(`/dashDuduRoutes/filiais/${idEndereco}`)
+//     .then(res => res.json())
+//     .then(data => {
+//       data.forEach(filial => {
+//         const option = document.createElement('option');
+//         option.value = filial.idFilial;
+//         option.textContent = filial.nomeFilial;
+//         filialSelect.appendChild(option);
+//       });
+//     })
+//     .catch(err => console.error('Erro ao carregar filiais:', err));
+// });
+
+// function selecionarFilial() {
+//   const filialSelect = document.getElementById('slc_filial');
+//   const filialSelecionada = filialSelect.value;
+//   console.log('Filial selecionada:', filialSelecionada);
+// }
+
 
 
 // DASHBOARD
