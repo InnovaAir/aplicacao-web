@@ -4,6 +4,8 @@ totensAlerta = 0;
 totensOciosos = 0;
 totensNormal = 0;
 idMaquina = 0;
+filiais = [];
+dados_json = [];
 
 // FILTROS DOS 3 BOTÕES COLORIDOS ACIMA DA LISTA
 
@@ -64,7 +66,7 @@ function carregarMaquinas(dados) {
     div.className = `totem ${classe}`;
     div.innerHTML = `
       <div class="coluna">${maq.totem || '-'}</div>
-      <div class="coluna">${maq.filial || '-'}</div>
+      <div class="coluna">${maq.terminal || '-'}</div>
       <div class="coluna">${maq.critico || 0}</div>
       <div class="coluna">${maq.alto || 0}</div>
       <div class="coluna">${maq.baixo || 0}</div>
@@ -78,9 +80,15 @@ function carregarMaquinas(dados) {
 // Fetch 1
 console.log("Entrando no fetch");
 
-fetch('/dashDuduRoutes/dash-dudu')
+fetch(`/dashDuduRoutes/dash-dudu/${sessionStorage.idUsuario}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+          })        
   .then(res => res.json())
   .then(data => {
+    dados_json = data
     console.log("fetch 1");
     console.log('Entrei no fetch e tenho esses dados:', data);  
     carregarMaquinas(data);
@@ -96,7 +104,6 @@ fetch(`/dashDuduRoutes/qtdMaqMenorDsmp/${idMaquina}`)
   .then(data => {
     console.log("Entrei no fetch e tenho esses dados:", data);
 
-    // Exibir o valor recebido em algum lugar da página
     const qtdElemento = document.getElementById("kpi_baixo");
     if (qtdElemento) {
       qtdElemento.textContent = data;
@@ -164,27 +171,63 @@ fetch(url)
 
 //   if (!idEndereco) return;
 
-//   fetch(`/dashDuduRoutes/filiais/${idEndereco}`)
-//     .then(res => res.json())
-//     .then(data => {
-//       data.forEach(filial => {
-//         const option = document.createElement('option');
-//         option.value = filial.idFilial;
-//         option.textContent = filial.nomeFilial;
-//         filialSelect.appendChild(option);
-//       });
-//     })
-//     .catch(err => console.error('Erro ao carregar filiais:', err));
-// });
+  fetch(`/cadastros/metricas/listar/filiais/${sessionStorage.idUsuario}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((answer) => {
+                answer.json().then(json_select => {
+                    json_filiais = json_select;
 
-// function selecionarFilial() {
-//   const filialSelect = document.getElementById('slc_filial');
-//   const filialSelecionada = filialSelect.value;
-//   console.log('Filial selecionada:', filialSelecionada);
-// }
+                    // var select_aeroporto = document.getElementById("slc_filial");
+
+                    slc_filial.innerHTML = `<option disabled value="null">Selecione um aeroporto</option>`
+                    slc_filial.innerHTML += `<option selected value="">Todos os meus aeroportos</option>`
+
+                    for (let i = 0; i < json_filiais.length; i++) {
+                        var filialAtual = json_filiais[i];
+
+                        slc_filial.innerHTML += `<option value="${filialAtual.terminal}">${filialAtual.terminal}</option>`
+                    }
+                    for(i = 0; i < json_filiais.length; i++){
+                      filiais.push(json_filiais[i].terminal)
+                    }
+                })
+            })
+            .catch(() => {
+                print("Erro ao realizar o Fetch")
+            });
+    // };
 
 
-
+    async function aplicarFiltro(){
+  var aeroportos = document.getElementById("slc_filial")
+  var aeroporto = aeroportos.value;
+  dados_filtrados = dados_json;
+  const semanas = {
+    "1": 1,
+    "2": 2,
+    "4": 4
+  }
+  
+  console.log(filiais)
+  console.log(aeroporto)
+  // filtro endereco
+  if(filiais.indexOf(aeroporto) != -1){
+    var dados_filtrados2 = [];
+        indice = filiais.indexOf(aeroporto)
+      for (i = 0; i < dados_filtrados.length; i++){
+      if(dados_filtrados[i].terminal == filiais[indice]){
+        dados_filtrados2.push(dados_json[i])
+    }
+    }
+    dados_filtrados = dados_filtrados2
+    console.log(dados_filtrados)
+  }
+  carregarMaquinas(dados_filtrados)
+    }
 // DASHBOARD
 
 const ctx = document.getElementById('graficoDesempenho').getContext('2d');

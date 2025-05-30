@@ -4,7 +4,7 @@ var router = express.Router();
 var dashDuduController = require('../Controller/dashDuduController');
 
 
-router.get('/dash-dudu', (req, res) => {
+router.get('/dash-dudu/:idUsuario', (req, res) => {
     dashDuduController.obterDesempenho(req, res);
 });
 
@@ -24,11 +24,6 @@ router.get('/getTotalMaq', (req, res) => {
   dashDuduController.getTotalMaq(req, res);
 });
 
-router.get('/enderecos',  dashDuduController.listarEnderecos);
-
-router.get('/filiais/:idEndereco', (req, res) => {
-  dashDuduController.listarFiliais(req, res);
-});
 
 
 module.exports = router;

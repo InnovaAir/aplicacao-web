@@ -22,33 +22,12 @@ var database = require("../database/config");
 //   return database.executar(sql);
 // };
 
-function listarDesempenhoPorFilial(idFilial) {
-  let sql = `
-    SELECT
-      m.hostname AS totem,
-      f.setor AS filial,
-      SUM(CASE WHEN ca.gravidade = 'critico' THEN 1 ELSE 0 END) AS critico,
-      SUM(CASE WHEN ca.gravidade = 'alto' THEN 1 ELSE 0 END) AS alto,
-      SUM(CASE WHEN ca.gravidade = 'baixo' THEN 1 ELSE 0 END) AS baixo,
-      SUM(CASE WHEN ca.gravidade IN ('critico', 'alto', 'baixo') THEN 1 ELSE 0 END) AS total_alertas
-    FROM maquina m
-    JOIN filial f ON m.fkFilial = f.idFilial
-    LEFT JOIN componente c ON c.fkMaquina = m.idMaquina
-    LEFT JOIN metrica me ON me.fkComponente = c.idComponente
-    LEFT JOIN captura_alerta ca ON ca.fkMetrica = me.idMetrica AND ca.momento >= NOW() - INTERVAL 1 DAY
-    WHERE 1=1
+function listarDesempenhoPorFilial(idUsuario) {
+  var sql = `
+    select * from dashRobertoDesempenho;
   `;
 
   const params = [];
-
-  if (idFilial) {
-    sql += ` AND m.fkFilial = ?`;
-    params.push(idFilial);
-  }
-
-  sql += `
-    GROUP BY m.hostname, f.setor
-  `;
 
   return database.executar(sql, params);
 }
@@ -102,33 +81,33 @@ function getTotalMaq(idFilial){
   return database.executar(sql);
 }
 
-function listarEnderecos() {
-  var sql = `
-    SELECT idEndereco, cep, logradouro, numero, complemento, bairro, cidade, estado
-    FROM endereco
-    ORDER BY cidade, bairro, logradouro;
-  `;
+// function listarEnderecos() {
+//   var sql = `
+//     SELECT idEndereco, cep, logradouro, numero, complemento, bairro, cidade, estado
+//     FROM endereco
+//     ORDER BY cidade, bairro, logradouro;
+//   `;
 
-  return database.executar(sql);
-}
+//   return database.executar(sql);
+// }
 
-function listarFiliais(idEndereco) {
-  const sql = `
-    SELECT idFilial, setor AS nomeFilial
-    FROM filial
-    WHERE fkEndereco = ?
-    ORDER BY setor;
-  `;
+// function listarFiliais(idEndereco) {
+//   const sql = `
+//     SELECT idFilial, terminal AS nomeFilial
+//     FROM filial
+//     WHERE fkEndereco = ?
+//     ORDER BY terminal;
+//   `;
 
-  return database.executar(sql, [idEndereco]);
-}
+//   return database.executar(sql, [idEndereco]);
+// }
 
 
 module.exports = {
   listarDesempenhoPorFilial,
   qtdMaqMenorDsmp,
   getTotalMaq,
-  listarEnderecos,
-  listarFiliais,
+  // listarEnderecos,
+  // listarFiliais,
   getIdUsuario
 };

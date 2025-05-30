@@ -458,6 +458,7 @@ async function aplicarFiltro(){
     dados_filtrados = dados_filtrados.filter(dado => dado.componente == componentes[componente])
   }
   
+  // filtro endereco
   if(filiais.indexOf(aeroporto) != -1){
     var dados_filtrados2 = [];
         indice = filiais.indexOf(aeroporto)
@@ -471,6 +472,7 @@ async function aplicarFiltro(){
   if(intervalo == semanas[intervalo]){
     dados_filtrados = dados_filtrados.filter(dado => dado.semanas <= semanas[intervalo])
   }
+  // filtro endereco
   ordenarDados(dados_filtrados)
   await obterDadosGerenteQtd()
   await plotarDados(dados_filtrados, qtdMaquinas)

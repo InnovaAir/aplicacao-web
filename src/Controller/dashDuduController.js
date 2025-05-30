@@ -7,9 +7,9 @@ var calcularDesempenho = (linha) => {
 
 var obterDesempenho = async (req, res) => {
   try {
-    // var idFilial = 1;
-    var idFilial = req.query.idFilial;
-    let dados = await dashDuduModel.listarDesempenhoPorFilial(idFilial);
+
+    var idUsuario = req.params.idUsuario;
+    let dados = await dashDuduModel.listarDesempenhoPorFilial(idUsuario);
 
     console.log("Dados model:", dados);
 
@@ -80,26 +80,26 @@ function getTotalMaq(req, res) {
     });
 }
 
-async function listarEnderecos(req, res) {
-  try {
-    const dados = await dashDuduModel.listarEnderecos();
-    res.json(dados);
-  } catch (erro) {
-    console.error('Erro ao obter endereços:', erro);
-    res.status(500).json({ erro: 'Erro ao obter endereços' });
-  }
-}
+// async function listarEnderecos(req, res) {
+//   try {
+//     const dados = await dashDuduModel.listarEnderecos();
+//     res.status(200).json(dados);
+//   } catch (erro) {
+//     console.error('Erro ao obter endereços:', erro);
+//     res.status(500).json({ erro: 'Erro ao obter endereços' });
+//   }
+// }
 
-async function listarFiliais(req, res) {
-  try {
-    const idEndereco = req.params.idEndereco;
-    const dados = await dashDuduModel.listarFiliais(idEndereco);
-    res.json(dados);
-  } catch (erro) {
-    console.error('Erro ao obter filiais:', erro);
-    res.status(500).json({ erro: 'Erro ao obter filiais' });
-  }
-}
+// async function listarFiliais(req, res) {
+//   try {
+//     const idEndereco = req.params.idEndereco;
+//     const dados = await dashDuduModel.listarFiliais(idEndereco);
+//     res.status(200).json(dados);
+//   } catch (erro) {
+//     console.error('Erro ao obter filiais:', erro);
+//     res.status(500).json({ erro: 'Erro ao obter filiais' });
+//   }
+// }
 
 
 
@@ -107,7 +107,7 @@ module.exports = {
   obterDesempenho,
   qtdMaqMenorDsmp,
   getTotalMaq,
-  listarEnderecos,
-  listarFiliais,
+  // listarEnderecos,
+  // listarFiliais,
   getIdUsuario
 };

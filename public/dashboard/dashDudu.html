@@ -8,6 +8,7 @@
     />
     <link rel="stylesheet" href="../styles/estilo.css" />
     <link rel="stylesheet" href="../styles/dashDudu.css" />
+    
 
     <title>Desempenho</title>
   </head>
@@ -26,14 +27,14 @@
 
           <div class="div_selects">
 
-            <div class="div_slcEnd">
+            <!-- <div class="div_slcEnd">
                 <select id="slc_endereco">
                   <option value="">Endereço</option>
                 </select>
-            </div>
+            </div> -->
 
             <div class="div_slcFil">
-              <select id="slc_filial" onchange="selecionarFilial()">  
+              <select id="slc_filial" onchange="aplicarFiltro()">  
                   <option value="">Filial</option>
               </select>
 
@@ -123,7 +124,7 @@
 
           <div class="tabela_cabecalho">
             <div class="coluna" onclick="ordenarPor('nome')">Nome do Tótem</div>
-            <div class="coluna" onclick="ordenarPor('setor')">Setor</div>
+            <div class="coluna" onclick="ordenarPor('setor')">Terminal</div>
             <div class="coluna" onclick="ordenarPor('critico')">Alertas Crítico</div>
             <div class="coluna" onclick="ordenarPor('alto')">Alertas <br> Alto</div>
             <div class="coluna" onclick="ordenarPor('baixo')">Alertas <br> Baixo</div>
