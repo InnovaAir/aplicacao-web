@@ -8,6 +8,8 @@ let filiais = [];
 let dados_json = [];
 let filtroTerminalSelecionado = null;
 let filtroDesempenhoSelecionado = null;
+let campoSelecionado = null;
+let ordemCrescente = true;
 
 const filtros = document.querySelectorAll('.filtro');
 
@@ -36,7 +38,6 @@ function aplicarFiltro() {
 function aplicarFiltrosCombinados() {
   let dadosFiltrados = dados_json;
 
-  // Filtra por desempenho
   if (filtroDesempenhoSelecionado === "verde") {
     dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 70);
   } else if (filtroDesempenhoSelecionado === "amarelo") {
@@ -45,12 +46,16 @@ function aplicarFiltrosCombinados() {
     dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho < 30);
   }
 
-  // Filtra por terminal
   if (filtroTerminalSelecionado && filiais.includes(filtroTerminalSelecionado)) {
     dadosFiltrados = dadosFiltrados.filter(maq => maq.terminal === filtroTerminalSelecionado);
   }
 
-  carregarMaquinas(dadosFiltrados);
+  if (campoSelecionado) {
+    ordenarPor(campoSelecionado, false, dadosFiltrados);
+  } 
+  else {
+    carregarMaquinas(dadosFiltrados)
+  }
 }
 
 function carregarMaquinas(dados) {
@@ -155,6 +160,100 @@ async function getIdUsuario(){
   }
 }
 
+const ordemInicialPorCampo = {
+  totem: true,
+  setor: true,
+  critico: false,
+  alto: false,
+  baixo: false,
+  total: false,
+  desempenho: true
+};
+
+function ordenarPor(campo, inverter = true, dadosParaOrdenar = null) {
+  if (inverter) {
+    if (campoSelecionado === campo) {
+      ordemCrescente = !ordemCrescente;
+    } 
+    else {
+      campoSelecionado = campo;
+      ordemCrescente = true;
+    }
+  } 
+  else {
+    campoSelecionado = campo;
+  }
+
+  let dados = dadosParaOrdenar ? [...dadosParaOrdenar] : [...dados_json];
+
+  dados.sort((a, b) => {
+    let valorA = a[campo];
+    let valorB = b[campo];
+
+    if (valorA == null) valorA = '';
+    if (valorB == null) valorB = '';
+
+    const ehNumero = !isNaN(valorA) && !isNaN(valorB);
+
+    if (ehNumero) {
+      valorA = Number(valorA);
+      valorB = Number(valorB);
+    } 
+    else {
+      if (campo === 'totem') {
+        const re = /^(\D*)(\d+)$/;
+        const matchA = valorA.match(re);
+        const matchB = valorB.match(re);
+        if (matchA && matchB && matchA[1] === matchB[1]) {
+          valorA = parseInt(matchA[2]);
+          valorB = parseInt(matchB[2]);
+        } 
+        else {
+          valorA = valorA.toLowerCase();
+          valorB = valorB.toLowerCase();
+        }
+      } 
+      else {
+        valorA = valorA.toString().toLowerCase();
+        valorB = valorB.toString().toLowerCase();
+      }
+    }
+
+    if (ordemCrescente) {
+      return valorA > valorB ? 1 : valorA < valorB ? -1 : 0;
+    } 
+    else {
+      return valorA < valorB ? 1 : valorA > valorB ? -1 : 0;
+    }
+  });
+
+  carregarMaquinas(dados);
+}
+
+function ordenarColuna(campo) {
+  campoSelecionado = campo;
+  ordemCrescente = campoSelecionado === campo ? !ordemCrescente : true;
+
+  let dadosFiltrados = dados_json;
+
+  if (filtroDesempenhoSelecionado === "verde") {
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 70);
+  } 
+  else if (filtroDesempenhoSelecionado === "amarelo") {
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 30 && maq.desempenho < 70);
+  } 
+  else if (filtroDesempenhoSelecionado === "vermelho") {
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho < 30);
+  }
+
+  if (filtroTerminalSelecionado && filiais.includes(filtroTerminalSelecionado)) {
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.terminal === filtroTerminalSelecionado);
+  }
+
+  ordenarPor(campo, false, dadosFiltrados);
+}
+
+
 // Dashboard
 const ctx = document.getElementById('graficoDesempenho').getContext('2d');
 
@@ -164,21 +263,47 @@ function atualizarGraficoDesempenho(maquinas) {
   maquinas.forEach(maq => {
     const terminal = maq.terminal;
     const desempenho = parseFloat(maq.desempenho ?? 0);
-    const peso = (maq.critico * 2) + (maq.alto * 1);
+    const critico = parseInt(maq.critico) || 0;
+    const alto = parseInt(maq.alto) || 0;
+    const peso = (critico * 2) + (alto * 1);
 
     if (!terminais[terminal]) {
-      terminais[terminal] = { somaPonderada: 0, somaPesos: 0 };
+      terminais[terminal] = {
+        somaPonderada: 0,
+        somaPesos: 0,
+        somatorioDesempenho: 0,
+        total: 0
+      };
     }
 
-    terminais[terminal].somaPonderada += desempenho * peso;
-    terminais[terminal].somaPesos += peso;
+    if (peso > 0) {
+      terminais[terminal].somaPonderada += desempenho * peso;
+      terminais[terminal].somaPesos += peso;
+    } 
+    else {
+      terminais[terminal].somatorioDesempenho += desempenho;
+      terminais[terminal].total += 1;
+    }
   });
 
   const desempenhoPorTerminal = [];
 
   for (const terminal in terminais) {
-    const { somaPonderada, somaPesos } = terminais[terminal];
-    const desempenhoFinal = somaPesos > 0 ? (somaPonderada / somaPesos) : 0;
+    const {
+      somaPonderada,
+      somaPesos,
+      somatorioDesempenho,
+      total
+    } = terminais[terminal];
+
+    let desempenhoFinal = 0;
+
+    if (somaPesos > 0) {
+      desempenhoFinal = somaPonderada / somaPesos;
+    } 
+    else if (total > 0) {
+      desempenhoFinal = somatorioDesempenho / total;
+    }
 
     desempenhoPorTerminal.push({
       terminal,
