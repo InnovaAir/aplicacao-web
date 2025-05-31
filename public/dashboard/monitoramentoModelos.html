@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Alertas por modelo</title>
-    <script src="https://cdn.jsdelivr.net/npxm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/estilo.css">
@@ -14,104 +13,135 @@
     <link rel="stylesheet" href="../styles/menuLateral.css" />
     <link rel="stylesheet" href="../styles/monitoramentoModelos.css" />
     <link rel="stylesheet" href="../styles/menu_mobile.css" />
+    <link rel="preload" href="../assets/fullscreen.png  " as="image">
+
 
     <title>Alertas por modelo</title>
 </head>
+<div style="display: none;" class="popUp">
 
-<body onload="tamanhoBarra()
-">
 
-    <div class="sidebar" id="sidebar">
-        <div class="d-flex justify-content-center align-items-center px-3 w-100">
-            <div class="logo">
-                <img src="../assets/InnovaairWhite.png" alt="Logo">
-            </div>
-            <button class="btn btn-light d-lg-none" type="button" onclick="toggleSidebar()" style="border-radius: 8px;">
-                ☰
-            </button>
+    <div class="shadow" onclick="abrirPopUp()"></div>
+
+    <div id="mainPopup" class="mainPopup">
+        <img onclick="abrirPopUp()" id="botaoFechar" class="fecharButton" src="../assets/marca-cruzada.png" alt=""
+            loading="eager">
+
+        <!-- SEÇÃO TITULO DO POPUP -->
+        <div style="min-height: 3em; max-height: 3em;" class="sectionH">
+            <div class="modeloTitulo">Modelo 10093-S</div>
+
         </div>
 
-        <nav class="flex-column">
-            <a href="visaoGeral.html">Visão geral</a>
-            <a href="tempoReal.html">Tempo real</a>
-            <a href="listaMaquinas.html">Lista de máquinas</a>
-            <a href="NovosCadastros.html">Cadastrar Máquina</a>
-            <a href="monitoramentoModelos.html"><strong>Alertas por modelo</strong></a>
-
-            <a href="suporte.html">Suporte</a>
-            <div class="logout mt-3">
-                <a href="NovosCadastros.html"><strong>Sair</strong></a>
+        <!-- SEÇÃO DO MEIO DO POPUP -->
+        <div style="height: 13em; " class="sectionH">
+            <div style="width: 100%;" class="sectionV">
+                <div style="height: 10%; min-height:30px" class="sectionH">
+                    <div class="modeloSubtitulo">Especificações:</div>
+                </div>
+                <div class="specsModelo"></div>
             </div>
-        </nav>
-    </div>
-    <div class="menu_mobile">
-        <button class="botao_menu_mobile" onclick="abrirMenuMobile()">☰</button>
-        <div class="logo_container">
-            <img src="../assets/InnovaairWhite.png" alt="" />
+
+            <div style="width: 70%;" class="sectionV">
+                <div style="height: 54%; display:flex; bottom:0" class="sectionH graficoTorta">
+                </div>
+                <div style="height: 45%;" class="sectionH"></div>
+            </div>
+
         </div>
+
+        <!-- SEÇÃO DE BAIXO DO POPUP -->
+        <div style="height: 13em;" class="sectionH">
+            <div style="width: 100%;" class="sectionV"></div>
+
+        </div>
+
     </div>
-    <div class="novo_menu">
-        <a href="visaoGeral.html" class="agora">Visão geral</a>
+
+
+</div>
+<!-- <body onload="tamanhoBarra()
+"> -->
+
+
+<div class="sidebar" id="sidebar">
+    <div class="d-flex justify-content-center align-items-center px-3 w-100">
+        <div class="logo">
+            <img src="../assets/InnovaairWhite.png" alt="Logo">
+        </div>
+        <button class="btn btn-light d-lg-none" type="button" onclick="toggleSidebar()" style="border-radius: 8px;"
+            loading="eager">
+            ☰
+        </button>
+    </div>
+
+    <nav class="flex-column">
+        <a href="visaoGeral.html">Visão geral</a>
         <a href="tempoReal.html">Tempo real</a>
         <a href="listaMaquinas.html">Lista de máquinas</a>
-        <a href="NovosCadastros.html">Cadastros</a>
+        <a href="NovosCadastros.html">Cadastrar Máquina</a>
+        <a href="monitoramentoModelos.html"><strong>Alertas por modelo</strong></a>
+
         <a href="suporte.html">Suporte</a>
-        <a href="suporte.html">Fale conosco!</a>
+        <div class="logout mt-3">
+            <a href="NovosCadastros.html"><strong>Sair</strong></a>
+        </div>
+    </nav>
+</div>
+<div class="menu_mobile">
+    <button class="botao_menu_mobile" onclick="abrirMenuMobile()">☰</button>
+    <div class="logo_container">
+        <img src="../assets/InnovaairWhite.png" alt="" />
     </div>
-    <div class="main d-flex justify-content-center align-items-center" style="padding: 10px;">
-        <div id="tela" style="background-color: red;" class="container">
-            <div class="child">
+</div>
+<div class="novo_menu">
+    <a href="visaoGeral.html" class="agora">Visão geral</a>
+    <a href="tempoReal.html">Tempo real</a>
+    <a href="listaMaquinas.html">Lista de máquinas</a>
+    <a href="NovosCadastros.html">Cadastros</a>
+    <a href="suporte.html">Suporte</a>
+    <a href="suporte.html">Fale conosco!</a>
+</div>
+<div class="main d-flex justify-content-center align-items-center" style="padding: 10px;">
+    <div id="tela" style="background-color: red;" class="container">
+        <div class="child">
 
 
-                <div class="tituloContainer">Alertas por modelo</div>
-                <div class="subtituloContainer">
-                    <select id="select_filial" class="selectBox">
-                        <option value="filial" disabled selected>Escolher filial</option>
-                        <option value="volvo">opção</option>
-                    </select>
-                    <select id="select_modelo" class="selectBox">
-                        <option value="periodo" disabled selected>Escolher período</option>
-                        <option value="volvo">opção</option>
-                    </select>
+            <div class="tituloContainer">Alertas por modelo</div>
+            <div class="subtituloContainer">
+                <select id="select_filial" class="selectBox">
+                    <option value="filial" disabled selected>Escolher filial</option>
+                    <option value="volvo">opção</option>
+                </select>
+                <select id="select_modelo" class="selectBox">
+                    <option value="periodo" disabled selected>Escolher período</option>
+                    <option value="volvo">opção</option>
+                </select>
 
-                </div>
+            </div>
 
-                <div class="section1">
-                    <div class="container listaModelos">
-                        <div>
-                            <section class="grid grid-template-columns-3" id="lista">
-                                <!-- Titulos -->
-                                <div class="item">Modelo</div>
-                                <div class="item">Alertas</div>
-                                <div class="item">Quantidade</div>
-
-                                <!-- Estatisticas -->
-                                <div class="item">1</div>
-
-                                <!-- modelo estático para testes -->
-                                <div class="item" style="display: flex; justify-content:flex-start">
-                                    <div class="barraAlertas">
-                                        <div class="aleCpu" style="background-color: red;height:100%; font-size:80%;align-items:center;
-                                        justify-content:center; display:flex">30</div>
-                                        <div class="aleRam" style="background-color: yellow;height:100%"></div>
-                                        <div class="aleDisco" style="background-color: cyan; height:100%">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- ------------------------- -->
-
-                                <div class="item">3</div>
+            <div class="section1">
+                <div class="container listaModelos">
+                    <div>
+                        <section class="grid grid-template-columns-3" id="lista">
+                            <!-- Titulos -->
+                            <div class="item">Modelo</div>
+                            <div class="item">Alertas</div>
+                            <div class="item">Quantidade</div>
+                            <div class="item"></div>
 
 
-                            </section>
 
-                        </div>
+
+                        </section>
 
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
+</div>
 </body>
 
 </html>
@@ -119,224 +149,368 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    fetch(`cadastros/metricas/listar/totens/2`, {
+
+
+
+    // fetch especificações dos totens (1 é o numero estático para testes apenas)
+
+    fetch(`/cadastros/metricas/listar/componentes/1`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json"
         }
-    }
-    ).then((res) => res.json())
+    })
+        .then((res) => res.json())
+        .then(specs => {
+            let componenteArray = [];
+            let contador = 0;
+            for (let s of specs) {
+                contador++;
+                componenteArray.push({ id: contador, tipo: s.componente, componente: s.especificacao, fk: s.fkMaquina })
+            }
+            console.log("Componentes:")
+            console.log(componenteArray)
+            specs.componenteArray = componenteArray;
+
+        })
+
+
+    // fetch alertas dos totens
+    fetch(`/cadastros/metricas/listar/alertas/1`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then((res) => res.json())
+        .then(alertas => {
+            let alertasArray = [];
+            let alertaAnterior = null;
+            let quantidade = 0;
+
+            for (let i = 0; i < alertas.length; i++) {
+                const item = alertas[i];
+                let nivelAtual = item.idCapturaAlerta;
+
+                if (nivelAtual !== alertaAnterior) {
+                    if (alertaAnterior !== null) {
+                        alertasArray.push({
+                            idCapturaAlerta: alertaAnterior,
+                            quantidade: quantidade
+                        });
+                    }
+                    quantidade = 1;
+                    alertaAnterior = nivelAtual;
+                } else {
+                    quantidade++;
+                }
+            }
+
+            if (alertaAnterior !== null) {
+                alertasArray.push({
+                    idCapturaAlerta: alertaAnterior,
+                    quantidade: quantidade
+                });
+            }
+
+            console.log("Alertas:");
+            return alertasArray;
+        })
+        .then(alerta => console.log(alerta));
+
+    let componenteArray = [];
+    fetch(`/models/infoModelos/1`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then((res) => res.json())
         .then(contador => {
+
+            let cpuCount = 0;
+            let discoCount = 0;
+            let ramCount = 0;
+
+            let baixoCount = 0;
+            let altoCount = 0;
+            let criticoCount = 0;
+
             let resultados = [];
             let modeloAnterior = null;
-            let contagemAtual = 0;
+            let quantidade = 0;
+            let ultimoItem = null;
 
-            for (let maquina of maquinas) {
-                let modeloAtual = maquina.nomeModelo;
+            // este for está passando modelo por modelo e pegando quantos alertas de cpu, ram e disco tem, ou seja, ele percorre cada objeto modelo do fetch. (independente de existir alerta ou não)
+            for (let i = 0; i < contador.length; i++) {
+                const item = contador[i];
+                let modeloAtual = item.nomeModelo;
 
+                // modelo mudou
                 if (modeloAtual !== modeloAnterior) {
-                    if (modeloAnterior !== null) {
-                        resultados.push({ modelo: modeloAnterior, quantidade: contagemAtual });
+                    if (modeloAnterior !== null && ultimoItem !== null) {
+
+                        ultimoItem.altoCount = altoCount;
+                        ultimoItem.baixoCount = baixoCount;
+                        ultimoItem.criticoCount = criticoCount;
+                        ultimoItem.cpuCount = cpuCount;
+                        ultimoItem.ramCount = ramCount;
+                        ultimoItem.discoCount = discoCount;
+                        ultimoItem.quantidade = quantidade;
+                        console.log(ultimoItem)
+                        resultados.push(ultimoItem);
                     }
-                    contagemAtual = 1;
+
+                    cpuCount = 0;
+                    ramCount = 0;
+                    discoCount = 0;
+                    quantidade = 0;
+
+                    baixoCount = 0;
+                    altoCount = 0;
+                    criticoCount = 0;
+
+
                     modeloAnterior = modeloAtual;
-                } else {
-                    contagemAtual++;
+                    ultimoItem = item;
+                }
+
+                if (
+                    item.gravidade == "Crítico") {
+                    criticoCount++
+                }
+                if (
+                    item.gravidade == "Alto") {
+                    altoCount++
+                }
+                if (
+                    item.gravidade == "Moderado") {
+                    baixoCount++
+                }
+
+
+                if (
+                    item.componente == "Processador") {
+                    cpuCount++
+                }
+                if (
+                    item.componente == "Memória RAM") {
+                    ramCount++
+                }
+                if (
+                    item.componente == "Disco Rígido") {
+                    discoCount++
+                }
+                quantidade++;
+                componenteArray.push({ tipo: item.componente, componente: item.especificacao, idMaquina: item.idMaquina }) // esse array existe fora deste for loop
+            }
+
+
+            console.log("Componentes:")
+            console.log(componenteArray)
+
+            if (ultimoItem !== null) {
+                ultimoItem.cpuCount = cpuCount;
+                ultimoItem.ramCount = ramCount;
+                ultimoItem.discoCount = discoCount;
+                ultimoItem.quantidade = quantidade;
+                ultimoItem.altoCount = altoCount;
+                ultimoItem.baixoCount = baixoCount;
+                ultimoItem.criticoCount = criticoCount;
+                resultados.push(ultimoItem);
+            }
+
+
+
+            console.log("Metricas FULL:");
+            console.log(resultados);
+            return resultados;
+        })
+        .then(resultados => {
+            //-----------------------------------
+
+            // criando novos modelos na lista grid
+            let contadorPopUp = 0;
+            let maiorAlerta = 0;
+
+            // for para pegar a maquina com mais alertas (para ser referência para o tamanho das outras barras)
+
+            for (let i = 0; i < resultados.length; i++) {
+                const item = resultados[i];
+                var tamanhototal = item.quantidade;
+                if (tamanhototal > maiorAlerta) {
+                    maiorAlerta = tamanhototal;
                 }
             }
+            for (let i = 0; i < resultados.length; i++) {
+                const item = resultados[i];
+                contadorPopUp++
+                // seção "Modelo"
+                const modeloDiv = document.createElement("div");
+                modeloDiv.className = "item modeloDiv";
+                modeloDiv.id = `${contadorPopUp}`;
+                modeloDiv.textContent = item.nomeModelo;
+                lista.appendChild(modeloDiv);
 
-            if (modeloAnterior !== null) {
-                resultados.push({ modelo: modeloAnterior, quantidade: contagemAtual });
+                // seção "Alertas"
+                console.log("resultados, quantidade")
+                console.log(item.quantidade)
+                var tamanhoCpu = (item.cpuCount / maiorAlerta) * 100;
+                var tamanhoRam = (item.ramCount / maiorAlerta) * 100;
+                var tamanhoDisco = (item.discoCount / maiorAlerta) * 100;
+
+                //-----------------------------------------
+                const alertaDiv = document.createElement("div");
+                alertaDiv.className = "item barraDiv ";
+                alertaDiv.id = `${contadorPopUp}`
+                alertaDiv.style.display = "flex ";
+                alertaDiv.style.justifyContent = "center; ";
+
+
+                const barraAlertas = document.createElement("div");
+                barraAlertas.style.width = ((item.quantidade / maiorAlerta) * 100) + "%";
+                barraAlertas.className = "barraAlertas";
+                barraAlertas.style.justifySelf = "flex-start"
+                barraAlertas.style.maxHeight = "20px"
+                barraAlertas.style.minHeight = "20px"
+                barraAlertas.style.justifyContent = "flex-start"
+                //-----------------------------------------
+
+
+                if (tamanhoRam) {
+                    const ram = document.createElement("div");
+                    ram.className = "aleRam hoverBarra";
+                    ram.style.backgroundColor = "yellow";
+                    ram.style.height = "100%";
+                    ram.style.width = tamanhoRam + "%";
+                    ram.style.display = "flex";
+                    ram.style.flexGrow = "1"
+                    barraAlertas.appendChild(ram);
+                    console.log("Adicionando ram (Barra de alerta)")
+                }
+                if (tamanhoCpu) {
+                    const cpu = document.createElement("div");
+                    cpu.className = "aleCpu hoverBarra";
+                    cpu.style.backgroundColor = "red";
+                    cpu.style.height = "100%";
+                    cpu.style.width = tamanhoCpu + "%";
+                    cpu.style.display = "flex";
+                    cpu.style.flexGrow = "1"
+                    barraAlertas.appendChild(cpu);
+                    console.log("Adicionando cpu (Barra de alerta)")
+                }
+
+                if (tamanhoDisco) {
+                    const disco = document.createElement("div");
+                    disco.className = "aleDisco hoverBarra";
+                    disco.style.backgroundColor = "cyan";
+                    disco.style.height = "100%";
+                    disco.style.width = tamanhoDisco + "%";
+                    disco.style.display = "flex";
+                    disco.style.flexGrow = "1"
+                    barraAlertas.appendChild(disco);
+                    console.log("Adicionando disco rígido (Barra de alerta)")
+                }
+
+                lista.appendChild(alertaDiv);
+                alertaDiv.appendChild(barraAlertas);
+
+                // seção "Quantidade"
+
+                const quantidade = document.createElement("div");
+                quantidade.className = "item quantidadeDiv ";
+                quantidade.textContent = item.quantidade;
+                lista.appendChild(quantidade)
+
+                // seção Botão
+
+                const botaoPop = document.createElement("div");
+                botaoPop.className = "item botaoDiv";
+                botaoPop.innerHTML = `<img id="${contadorPopUp}" onclick="abrirPopUp()" style="height: 1.5em; cursor:pointer;"
+                                    src="../assets/fullscreen.png" alt="" loading="eager">`;
+
+                let componentesMesmoID = [];
+                for (let i = 0; i < componenteArray.length; i++) {
+                    let componenteAtual = componenteArray[i];
+
+                    if (componenteAtual.idMaquina == contadorPopUp) {
+                        componentesMesmoID.push(componenteAtual)
+                    }
+                }
+
+                botaoPop.addEventListener("click", () => {
+                    abrirPopUpComModelo(item.nomeModelo, componentesMesmoID, item.criticoCount, item.altoCount, item.baixoCount);
+                });
+                lista.appendChild(botaoPop)
             }
+
+
         }
         )
-        .then(resultado => console.log(resultado))
-        .catch(error => console.error(error));
 
-    //-----------------------------------
 
-    // ISSO VAI SER EXCLUIDO APÓS IMPLEMENTAR OS ALERTAS DINAMICOS
-    function tamanhoBarra() {
-        var tamanhototal = 90;
-        var tamanhoCpu = tamanhototal / 4;
-        var tamanhoRam = tamanhototal / 6;
-        var tamanhoDisco = tamanhototal / 4;
-        document.querySelector(".barraAlertas").style.width = tamanhototal + "%";
-        document.querySelector(".aleCpu").style.width = tamanhoCpu + "%";
-        document.querySelector(".aleRam").style.width = tamanhoRam + "%";
-        document.querySelector(".aleDisco").style.width = tamanhoDisco + "%";
+    function abrirPopUp() {
+        if (document.querySelector(".popUp").style.display == "none") {
+            document.querySelector(".popUp").style.display = "block";
+        }
+        else { document.querySelector(".popUp").style.display = "none" }
+
+
+
 
     }
-    //-----------------------------------
 
-    var modelos = [
-        {
-            modelo: "1aaaa",
-            alertas: {
-                cpu: true,
-                ram: true,
-                disco: true
+    let chartPopUp = null; // variável global para o gráfico
+    function abrirPopUpComModelo(nomeModelo, especificacao, criticoCount, altoCount, baixoCount) {
+
+        if (chartPopUp !== null) {
+            chartPopUp.destroy();
+            chartPopUp = null;
+        }
+
+        const popup = document.querySelector(".popUp");
+        const titulo = popup.querySelector(".modeloTitulo");
+        const subtitulo = popup.querySelector(".modeloSubtitulo");
+        const specs = popup.querySelector(".specsModelo")
+        specs.innerHTML = "";
+        console.log("Componentes do pop up:")
+        console.log(especificacao) // tipo do especificação == object
+
+        // gráfico de torta da quantidade de alertas
+        var options = {
+            series: [criticoCount, altoCount, baixoCount],
+            chart: {
+                width: "70%",
+                type: 'pie',
             },
-            quantidade: "50"
-        }
-    ]
-
-    // criando novos modelos na lista grid
-
-    modelos.forEach((m) => {
-        // seção "Modelo"
-        const modeloDiv = document.createElement("div");
-        modeloDiv.className = "item";
-        modeloDiv.textContent = m.modelo;
-        lista.appendChild(modeloDiv);
-
-        // seção "Alertas"
-
-        var tamanhototal = m.quantidade;
-        var tamanhoCpu = tamanhototal / 1;
-        var tamanhoRam = tamanhototal / 2;
-        var tamanhoDisco = tamanhototal / 4;
-
-
-        const alertaDiv = document.createElement("div");
-        alertaDiv.className = "item ";
-        alertaDiv.style.display = "flex";
-        alertaDiv.style.justifyContent = "flex-start"
-
-        const barraAlertas = document.createElement("div");
-        barraAlertas.style.width = tamanhototal + "%";
-        barraAlertas.className = "barraAlertas";
-        barraAlertas.style.justifySelf = "flex-start"
-
-        if (m.alertas.cpu) {
-            const cpu = document.createElement("div");
-            cpu.className = "aleCpu hoverBarra";
-            cpu.style.backgroundColor = "red";
-            cpu.style.height = "100%";
-            cpu.style.width = tamanhoCpu + "%";
-            cpu.style.display = "flex";
-            barraAlertas.appendChild(cpu);
-        }
-        if (m.alertas.ram) {
-            const ram = document.createElement("div");
-            ram.className = "aleRam hoverBarra";
-            ram.style.backgroundColor = "yellow";
-            ram.style.height = "100%";
-            ram.style.width = tamanhoRam + "%";
-            barraAlertas.appendChild(ram);
-        }
-        if (m.alertas.disco) {
-            const disco = document.createElement("div");
-            disco.className = "aleDisco hoverBarra";
-            disco.style.backgroundColor = "cyan";
-            disco.style.height = "100%";
-            disco.style.width = tamanhoDisco + "%";
-            barraAlertas.appendChild(disco);
-        }
-
-        lista.appendChild(alertaDiv);
-        alertaDiv.appendChild(barraAlertas);
-
-        // seção "Quantidade"
-
-        const quantidade = document.createElement("div");
-        quantidade.className = "item ";
-        quantidade.textContent = m.quantidade;
-        lista.appendChild(quantidade)
-
-        // seção "Preco"
-
-        const preco = document.createElement("div")
-        preco.className = "item "
-        preco.textContent = m.preco;
-        lista.appendChild(preco)
-
-    }
-    )
-
-
-
-
-
-
-    // grafico bar
-    var options = {
-        series: [{
-            name: 'Marine Sprite',
-            data: [44, 55, 41, 37, 22, 43, 21]
-        }, {
-            name: 'Striking Calf',
-            data: [53, 32, 33, 52, 13, 43, 32]
-        }, {
-            name: 'Tank Picture',
-            data: [12, 17, 11, 9, 15, 11, 20]
-        }, {
-            name: 'Bucket Slope',
-            data: [9, 7, 5, 8, 6, 9, 4]
-        }, {
-            name: 'Reborn Kid',
-            data: [25, 12, 19, 32, 25, 24, 10]
-        }],
-        chart: {
-            type: 'bar',
-            height: "100%",
-            width: '100%',
-            stacked: true,
-        },
-        plotOptions: {
-            bar: {
-                horizontal: true,
-                dataLabels: {
-                    total: {
-                        enabled: true,
-                        offsetX: 0,
-                        style: {
-                            fontSize: '13px',
-                            fontWeight: 900
-                        }
+            labels: ['Crítico', 'Alto', 'Baixo'],
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 40,
+                        height: 40
+                    },
+                    legend: {
+                        position: 'bottom'
                     }
                 }
-            },
-        },
-        stroke: {
-            width: 1,
-            colors: ['#fff']
-        },
-        title: {
-            text: 'Fiction Books Sales'
-        },
-        xaxis: {
-            categories: [2008, 2009, 2010, 2011, 2012, 2013, 2014],
-            labels: {
-                formatter: function (val) {
-                    return val + "K"
-                }
-            }
-        },
-        yaxis: {
-            title: {
-                text: undefined
-            },
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + "K"
-                }
-            }
-        },
-        fill: {
-            opacity: 1
-        },
-        legend: {
-            position: 'top',
-            horizontalAlign: 'left',
-            offsetX: 40
-        }
-    };
+            }]
+        };
+        chartPopUp = new ApexCharts(document.querySelector(".graficoTorta"), options);
+        chartPopUp.render();
 
-    var chart = new ApexCharts(document.querySelector("."), options);
-    chart.render();
+        for (i = 0; i < especificacao.length; i++) {
+            specs.innerHTML += "<b>" + especificacao[i].tipo + "</b>" + ": " + especificacao[i].componente + "<br>";
+        }
+        subtitulo.textContent = "Especificações";
+        titulo.textContent = nomeModelo;
+        popup.style.display = "flex";
+    }
+
+
+
+
 
 
     function toggleSidebar() {
