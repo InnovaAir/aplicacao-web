@@ -1,7 +1,7 @@
 var dashDuduModel = require('../Models/dashDuduModel');
 
 var calcularDesempenho = (linha) => {
-  var perdas = (linha.critico * 2) + (linha.alto * 1);
+  var perdas = (linha.critico * 5) + (linha.alto * 2) + (linha.baixo * 1);
   return Math.max(0, 100 - perdas);
 };
 
@@ -67,18 +67,18 @@ function getIdUsuario(req, res){
 }
 
 
-function getTotalMaq(req, res) {
-  var idFilial = req.query.idFilial;
+// function getTotalMaq(req, res) {
+//   var idFilial = req.query.idFilial;
 
-  dashDuduModel.getTotalMaq(idFilial)
-    .then((resultado) => {
-      res.json(resultado);
-    })
-    .catch((erro) => {
-      console.log("Erro ao obter total de máquinas:", erro);
-      res.status(500).json({ erro: "Erro ao obter total de máquinas" });
-    });
-}
+//   dashDuduModel.getTotalMaq(idFilial)
+//     .then((resultado) => {
+//       res.json(resultado);
+//     })
+//     .catch((erro) => {
+//       console.log("Erro ao obter total de máquinas:", erro);
+//       res.status(500).json({ erro: "Erro ao obter total de máquinas" });
+//     });
+// }
 
 // async function listarEnderecos(req, res) {
 //   try {

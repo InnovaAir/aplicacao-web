@@ -1,13 +1,13 @@
 sessionStorage.idFilial = null;
 
-totensAlerta = 0;
-totensOciosos = 0;
-totensNormal = 0;
-idMaquina = 0;
-filiais = [];
-dados_json = [];
-
-// FILTROS DOS 3 BOTÕES COLORIDOS ACIMA DA LISTA
+let totensAlerta = 0;
+let totensOciosos = 0;
+let totensNormal = 0;
+let idMaquina = 0;
+let filiais = [];
+let dados_json = [];
+let filtroTerminalSelecionado = null;
+let filtroDesempenhoSelecionado = null;
 
 const filtros = document.querySelectorAll('.filtro');
 
@@ -19,59 +19,59 @@ filtros.forEach(filtro => {
 
     if (!selecionado) {
       filtro.classList.add('selecionado');
-      const tipoSelecionado = filtro.dataset.filtro;
-      filtrarPorDesempenho(tipoSelecionado);
+      filtroDesempenhoSelecionado = filtro.dataset.filtro;
     } else {
-      
-      filtrarPorDesempenho(null);
+      filtroDesempenhoSelecionado = null;
     }
+    aplicarFiltrosCombinados();
   });
 });
 
+function aplicarFiltro() {
+  const select = document.getElementById("slc_filial");
+  filtroTerminalSelecionado = select.value === "" ? null : select.value;
+  aplicarFiltrosCombinados();
+}
 
+function aplicarFiltrosCombinados() {
+  let dadosFiltrados = dados_json;
 
-// FILTRO DE ORDENAÇÃO DO HEADER DA LISTA
+  // Filtra por desempenho
+  if (filtroDesempenhoSelecionado === "verde") {
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 70);
+  } else if (filtroDesempenhoSelecionado === "amarelo") {
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 30 && maq.desempenho < 70);
+  } else if (filtroDesempenhoSelecionado === "vermelho") {
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho < 30);
+  }
 
-let ordemCres = true;
+  // Filtra por terminal
+  if (filtroTerminalSelecionado && filiais.includes(filtroTerminalSelecionado)) {
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.terminal === filtroTerminalSelecionado);
+  }
 
-function ordenar(item) {
-  ordemCres = !ordemCres;
-
-  listaMaquinas.sort((a, b) => {
-    if (ordemCres) {
-      return a[item] > b[item] ? 1 : -1;
-    } else {
-      return a[item] < b[item] ? 1 : -1;
-    }
-  });
-
-  carregarMaquinas();
+  carregarMaquinas(dadosFiltrados);
 }
 
 function carregarMaquinas(dados) {
-  console.log(dados)
-  console.log(dados[0].critico)
-  qtdMaquinas = dados.length;
-  qtdMaqMenorDsmp = dados.filter(dado => dado.desempenho < 35).length
-  total = 0;
-  for(i = 0; i < dados.length; i++){
-    total += parseInt(dados[i].critico)
-  }
+  let qtdMaquinas = dados.length;
+  let qtdMaqMenorDsmp = dados.filter(dado => dado.desempenho < 35).length;
+  let totalAlertas = dados.reduce((acc, curr) => acc + (parseInt(curr.critico) || 0), 0);
 
-  var lista = document.getElementById('lista_maquinas');
+  const lista = document.getElementById('lista_maquinas');
   lista.innerHTML = '';
 
   dados.forEach(maq => {
-    var desempenho = maq.desempenho != null ? maq.desempenho.toFixed(0) : 'N/A';
+    const desempenho = maq.desempenho != null ? maq.desempenho.toFixed(0) : 'N/A';
 
-    var classe = 'green';
+    let classe = 'green';
     if (desempenho !== 'N/A') {
-      var valor = parseInt(desempenho);
+      const valor = parseInt(desempenho);
       if (valor < 30) classe = 'red';
       else if (valor < 70) classe = 'yellow';
     }
 
-    var div = document.createElement('div');
+    const div = document.createElement('div');
     div.className = `totem ${classe}`;
     div.innerHTML = `
       <div class="coluna">${maq.totem || '-'}</div>
@@ -83,158 +83,134 @@ function carregarMaquinas(dados) {
       <div class="coluna">${maq.desempenho !== undefined ? maq.desempenho + '%' : 'N/A'}</div>
     `;
     lista.appendChild(div);
-
-    kpi_total.innerHTML = qtdMaquinas;
-    kpi_baixo.innerHTML = qtdMaqMenorDsmp;
-    kpi_alertas.innerHTML = total
-
   });
+
+  document.getElementById('kpi_total').innerText = qtdMaquinas;
+  document.getElementById('kpi_baixo').innerText = qtdMaqMenorDsmp;
+  document.getElementById('kpi_alertas').innerText = totalAlertas;
 }
 
-// Fetch 1
-console.log("Entrando no fetch");
+function atualizarKPIsTotais() {
+  let qtdMaquinas = dados_json.length;
+  let qtdMaqMenorDsmp = dados_json.filter(dado => dado.desempenho < 35).length;
+  let totalAlertas = dados_json.reduce((acc, curr) => acc + (parseInt(curr.critico) || 0), 0);
 
-async function dashDudu(){
-await fetch(`/dashDuduRoutes/dash-dudu/${sessionStorage.idUsuario}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-          })        
-  .then(res => res.json())
-  .then(data => {
-    dados_json = data
-    console.log("fetch 1");
-    console.log('Entrei no fetch e tenho esses dados:', data);  
-    carregarMaquinas(data);
-
-  })
-  .catch(err => console.error('Erro ao carregar os dados:', err));
+  document.getElementById('kpi_total').innerText = qtdMaquinas;
+  document.getElementById('kpi_baixo').innerText = qtdMaqMenorDsmp;
+  document.getElementById('kpi_alertas').innerText = totalAlertas;
 }
 
-// Fetch 3
-async function getIdUsuario(){
-await fetch(`/dashDuduRoutes/getIdUsuario/${sessionStorage.idUsuario}`)
-  .then(res => res.json())
-  .then(data => {
-    console.log('Entrei no fetch e tenho esses dados:', data);
-    carregarMaquinas(data);
-  })
-  .catch(err => console.error('Erro ao carregar os dados:', err));
-}
+async function dashDudu() {
+  try {
+    const res = await fetch(`/dashDuduRoutes/dash-dudu/${sessionStorage.idUsuario}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await res.json();
 
-// Listando endereços
-// fetch('/dashDuduRoutes/enderecos')
-//   .then(res => res.json())
-//   .then(data => {
-//     const enderecoSelect = document.getElementById('slc_endereco');
-//     data.forEach(endereco => {
-//       const label = `${endereco.cidade} - ${endereco.bairro} - ${endereco.logradouro}, ${endereco.numero}`;
-//       const option = document.createElement('option');
-//       option.value = endereco.idEndereco;
-//       option.textContent = label;
-//       enderecoSelect.appendChild(option);
-//     });
-//   })
-//   .catch(err => console.error('Erro ao carregar endereços:', err));
+    data.sort((a, b) => {
+      if (a.desempenho == null || isNaN(a.desempenho)) return 1;
+      if (b.desempenho == null || isNaN(b.desempenho)) return -1;
+      return a.desempenho - b.desempenho;
+    });
 
-
-// document.getElementById('slc_endereco').addEventListener('change', (e) => {
-//   const idEndereco = e.target.value;
-//   const filialSelect = document.getElementById('slc_filial');
-//   filialSelect.innerHTML = '<option value="">Filial</option>';
-
-//   if (!idEndereco) return;
-
-async function listarFiliais(){
-await fetch(`/cadastros/metricas/listar/filiais/${sessionStorage.idUsuario}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then((answer) => {
-                answer.json().then(json_select => {
-                    json_filiais = json_select;
-
-                    // var select_aeroporto = document.getElementById("slc_filial");
-
-                    slc_filial.innerHTML = `<option disabled value="null">Selecione um aeroporto</option>`
-                    slc_filial.innerHTML += `<option selected value="">Todos os meus aeroportos</option>`
-
-                    for (let i = 0; i < json_filiais.length; i++) {
-                        var filialAtual = json_filiais[i];
-
-                        slc_filial.innerHTML += `<option value="${filialAtual.terminal}">${filialAtual.terminal}</option>`
-                    }
-                    for(i = 0; i < json_filiais.length; i++){
-                      filiais.push(json_filiais[i].terminal)
-                    }
-                })
-            })
-            .catch(() => {
-                print("Erro ao realizar o Fetch")
-            });
-    }
-
-  async function aplicarFiltro(){
-    var aeroportos = document.getElementById("slc_filial")
-    var aeroporto = aeroportos.value;
-    dados_filtrados = dados_json;
-    const semanas = {
-      "1": 1,
-      "2": 2,
-      "4": 4
-    }
-  
-  console.log(filiais)
-  console.log(aeroporto)
-  // filtro endereco
-  if(filiais.indexOf(aeroporto) != -1){
-    var dados_filtrados2 = [];
-        indice = filiais.indexOf(aeroporto)
-      for (i = 0; i < dados_filtrados.length; i++){
-      if(dados_filtrados[i].terminal == filiais[indice]){
-        dados_filtrados2.push(dados_json[i])
-    }
-    }
-    dados_filtrados = dados_filtrados2
-    console.log(dados_filtrados)
+    dados_json = data;
+    aplicarFiltrosCombinados();
+    atualizarGraficoDesempenho(dados_json);
+    atualizarKPIsTotais();
+  } catch (err) {
+    console.error('Erro ao carregar os dados:', err);
   }
-  carregarMaquinas(dados_filtrados)
-    }
-// DASHBOARD
+}
 
+async function listarFiliais() {
+  try {
+    const res = await fetch(`/cadastros/metricas/listar/filiais/${sessionStorage.idUsuario}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+    const json_filiais = await res.json();
+
+    const slc_filial = document.getElementById("slc_filial");
+    slc_filial.innerHTML = `<option disabled value="null">Selecione um aeroporto</option>`;
+    slc_filial.innerHTML += `<option selected value="">Todos os meus aeroportos</option>`;
+
+    filiais = [];
+    for (const filialAtual of json_filiais) {
+      slc_filial.innerHTML += `<option value="${filialAtual.terminal}">${filialAtual.terminal}</option>`;
+      filiais.push(filialAtual.terminal);
+    }
+  } catch (error) {
+    console.error("Erro ao realizar o Fetch das filiais", error);
+  }
+}
+
+async function getIdUsuario(){
+  try {
+    const res = await fetch(`/dashDuduRoutes/getIdUsuario/${sessionStorage.idUsuario}`);
+    const data = await res.json();
+    console.log('Entrei no fetch e tenho esses dados:', data);
+  } catch(err) {
+    console.error('Erro ao carregar os dados:', err);
+  }
+}
+
+// Dashboard
 const ctx = document.getElementById('graficoDesempenho').getContext('2d');
 
-const dados = [
-  { filial: 'Filial 1', desempenho: 90 },
-  { filial: 'Filial 4', desempenho: 55 },
-  { filial: 'Filial 2', desempenho: 30 },
-  { filial: 'Filial 3', desempenho: 20 }
-]; // dados estaticos só p plotar algo 
+function atualizarGraficoDesempenho(maquinas) {
+  const terminais = {};
 
-// ordenação do pior pro melhor
-const dadosOrdenados = [...dados].sort((a, b) => a.desempenho - b.desempenho);
+  maquinas.forEach(maq => {
+    const terminal = maq.terminal;
+    const desempenho = parseFloat(maq.desempenho ?? 0);
+    const peso = (maq.critico * 2) + (maq.alto * 1);
 
-// gerar labels
-const labels = dadosOrdenados.map(item => item.filial);
-const data = dadosOrdenados.map(item => item.desempenho);
-const backgroundColor = dadosOrdenados.map(item => {
-  if (item.desempenho <= 35) return '#ff3333';   
-  if (item.desempenho <= 65) return '#ffff33';
-  return '#00cc00';
-});
+    if (!terminais[terminal]) {
+      terminais[terminal] = { somaPonderada: 0, somaPesos: 0 };
+    }
 
-// grafico
+    terminais[terminal].somaPonderada += desempenho * peso;
+    terminais[terminal].somaPesos += peso;
+  });
+
+  const desempenhoPorTerminal = [];
+
+  for (const terminal in terminais) {
+    const { somaPonderada, somaPesos } = terminais[terminal];
+    const desempenhoFinal = somaPesos > 0 ? (somaPonderada / somaPesos) : 0;
+
+    desempenhoPorTerminal.push({
+      terminal,
+      desempenho: parseFloat(desempenhoFinal.toFixed(1))
+    });
+  }
+
+  desempenhoPorTerminal.sort((a, b) => a.desempenho - b.desempenho);
+
+  grafico.data.labels = desempenhoPorTerminal.map(d => d.terminal);
+  grafico.data.datasets[0].data = desempenhoPorTerminal.map(d => d.desempenho);
+  grafico.data.datasets[0].backgroundColor = desempenhoPorTerminal.map(d => {
+    if (d.desempenho <= 35) return '#ff3333';
+    if (d.desempenho <= 65) return '#ffff33';
+    return '#00cc00';
+  });
+
+  grafico.update();
+}
+
 const grafico = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels,
+    labels: [],
     datasets: [{
+      barThickness: 50,
+      minBarLength: 2,
+      barPercentage: 0.5,
+      categoryPercentage: 0.2,
       label: 'Desempenho',
-      data,
-      backgroundColor,
+      data: [],
+      backgroundColor: [],
       borderWidth: 1
     }]
   },
@@ -251,9 +227,7 @@ const grafico = new Chart(ctx, {
           display: true,
           text: 'Desempenho',
           color: '#0000A5',
-          font: {
-            weight: 'bold'
-          }
+          font: { weight: 'bold' }
         }
       },
       y: {
@@ -261,9 +235,7 @@ const grafico = new Chart(ctx, {
           display: true,
           text: 'Filiais',
           color: '#0000A5',
-          font: {
-            weight: 'bold'
-          }
+          font: { weight: 'bold' }
         }
       }
     },
@@ -273,10 +245,10 @@ const grafico = new Chart(ctx, {
   }
 });
 
-async function executar(){
-await getIdUsuario()
-await listarFiliais()
-await dashDudu()
-aplicarFiltro()
+async function executar() {
+  await getIdUsuario();
+  await listarFiliais();
+  await dashDudu();
 }
-executar()
+
+executar();

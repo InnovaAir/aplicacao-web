@@ -33,6 +33,12 @@
                 </select>
             </div> -->
 
+                  <!-- <div class="custom-select-wrapper" class= "div_slcFil">
+                        <select class="custom-select" id="slc_filial" onchange="aplicarFiltro()">
+                            <option value="">Filial</option>
+                        </select>
+                    </div> -->
+
             <div class="div_slcFil">
               <select id="slc_filial" onchange="aplicarFiltro()">  
                   <option value="">Filial</option>
@@ -46,18 +52,18 @@
               </select>
             </div>
 
-            <div class="div_slcAlerta">
+            <!-- <div class="div_slcAlerta">
               <select id="div_alerta">
                 <option value="">Todos</option>
               </select>
-            </div>
+            </div> -->
 
 
           </div>
 
           <div class="div_kpis">
             
-              <div class="kpi_caixa">
+              <div class="kpi_caixa"> 
                 <p class="kpi_titulo">Máquinas com<br>Baixo Desempenho</p>
                 <hr class="kpi_linha">
                 <p class="kpi_valor"><span id="kpi_baixo"></span></p>
@@ -66,13 +72,13 @@
               <div class="kpi_caixa">
                 <p class="kpi_titulo">Total de máquinas</p>
                 <hr class="kpi_linha">
-                <p class="kpi_valor"><span id="kpi_total">0</span></p>
+                <p class="kpi_valor"><span id="kpi_total"></span></p>
               </div>
 
               <div class="kpi_caixa">
                 <p class="kpi_titulo">Alertas Nível<br>Crítico</p>
                 <hr class="kpi_linha">
-                <p class="kpi_valor"><span id="kpi_alertas">0</span></p>
+                <p class="kpi_valor"><span id="kpi_alertas"></span></p>
               </div>
 
           </div>
@@ -103,17 +109,17 @@
 
         <div class="div_legenda">
 
-          <div class="box_check filtro" data-filtro="suficiente">
+          <div class="box_check filtro" data-filtro="verde">
             <span class="check_box_suficiente"></span>
             <span class="checkbox-text">Desempenho Suficiente</span>
           </div>
 
-          <div class="box_check filtro" data-filtro="mediano">
+          <div class="box_check filtro" data-filtro="amarelo">
             <span class="check_box_mediano"></span>
             <span class="checkbox-text">Desempenho Mediano</span>
           </div>
 
-          <div class="box_check filtro" data-filtro="insuficiente">
+          <div class="box_check filtro" data-filtro="vermelho">
             <span class="check_box_insuficiente"></span>
             <span class="checkbox-text">Desempenho Insuficiente</span>
           </div>

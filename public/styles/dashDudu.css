@@ -32,7 +32,7 @@ body {
     display: flex;
     flex-direction: row;
     /* border: 2px solid violet; */
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .div_slcEnd,
@@ -240,7 +240,7 @@ body {
 
 .tabela_conteudo {
     max-height: 55vh;
-    overflow-y: auto;
+    /* overflow-y: auto; */
 }
 
 
@@ -283,7 +283,7 @@ body {
 
 .div_listaMaq {
   max-height: 500px;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 
 .tabela_cabecalho {
