@@ -214,6 +214,7 @@ let json_dados = {};
 let qtdMaquinas = {};
 let filiais = []
 let json_filtrado = []
+var periodo = 4
 var options = {
     series: [
       {
@@ -353,10 +354,14 @@ async function obterDadosGerenteQtd(){
     // })
     
     // qtdMaquinas = await resposta.json()
+    // console.log(qtdMaquinas)
+    // qtdMaquinas = []
+    // for(i = 0; i < qtdMaquinas.length; i++){
+
+    // }
   }
 
 function ordenarDados(json_dados){
-  console.log(json_dados)
   modelosOrdenados = []
   var modelos = []
   var baixo = 0;
@@ -364,6 +369,12 @@ function ordenarDados(json_dados){
   var critico = 0;
   var qtdAtual = 0;
   var modelo = []
+  var maquinas = []
+  var qtdMaquinas1 = 0
+  var qtdMaquinas2 = 0
+  var qtdMaquinas3 = 0
+  var qtdMaquinas4 = 0
+  var qtdMaquinas5 = 0
   for(i = 0; i < json_dados.length; i++){
     if(!modelos.includes(json_dados[i].especificacao)){
       modelos.push(json_dados[i].especificacao)
@@ -394,9 +405,8 @@ function ordenarDados(json_dados){
                   "terminal":modelo[0].terminal,
                   "alertas": [baixo, alto, critico]
                 }
-                                             modelosOrdenados.push(modelo)
+                modelosOrdenados.push(modelo)
               }
-                             console.log(modelosOrdenados)
                 for(i = 0; i < modelosOrdenados.length; i++){
                   indexMaior = i
                   for(j = i; j < modelosOrdenados.length; j++){
@@ -408,14 +418,30 @@ function ordenarDados(json_dados){
                   modelosOrdenados[i] = modelosOrdenados[indexMaior]
                   modelosOrdenados[indexMaior] = temp
                 }
-                qtdMaquinas1 = json_dados.filter(dado => dado.especificacao == modelosOrdenados[0].especificacao).length
-                qtdMaquinas2 = json_dados.filter(dado => dado.especificacao == modelosOrdenados[1].especificacao).length
-                qtdMaquinas3 = json_dados.filter(dado => dado.especificacao == modelosOrdenados[2].especificacao).length
-                qtdMaquinas4 = json_dados.filter(dado => dado.especificacao == modelosOrdenados[3].especificacao).length
-                qtdMaquinas5 = json_dados.filter(dado => dado.especificacao == modelosOrdenados[4].especificacao).length
+                for(i = 0; i < json_dados.length; i++){
+                  if(json_dados[i].especificacao == modelosOrdenados[0].especificacao && !maquinas.includes(json_dados[i].idMaquina)){
+                    maquinas.push(json_dados[i].idMaquina)
+                    qtdMaquinas1++
+                  }
+                  if(json_dados[i].especificacao == modelosOrdenados[1].especificacao && !maquinas.includes(json_dados[i].idMaquina)){
+                    maquinas.push(json_dados[i].idMaquina)
+                    qtdMaquinas2++
+                  }
+                  if(json_dados[i].especificacao == modelosOrdenados[2].especificacao && !maquinas.includes(json_dados[i].idMaquina)){
+                    maquinas.push(json_dados[i].idMaquina)
+                    qtdMaquinas3++
+                  }
+                  if(json_dados[i].especificacao == modelosOrdenados[3].especificacao && !maquinas.includes(json_dados[i].idMaquina)){
+                    maquinas.push(json_dados[i].idMaquina)
+                    qtdMaquinas4++
+                  }
+                    if(json_dados[i].especificacao == modelosOrdenados[4].especificacao && !maquinas.includes(json_dados[i].idMaquina)){
+                    maquinas.push(json_dados[i].idMaquina)
+                    qtdMaquinas5++
+                  }
+                }
                 qtdMaquinas = [qtdMaquinas1, qtdMaquinas2, qtdMaquinas3, qtdMaquinas4, qtdMaquinas5]
 }
-
 function plotarDados(json_dados, qtdMaquinas){
                  alertaBaixo = [modelosOrdenados[0].alertas[0], modelosOrdenados[1].alertas[0], modelosOrdenados[2].alertas[0], modelosOrdenados[3].alertas[0], modelosOrdenados[4].alertas[0]]
                  alertaAlto = [modelosOrdenados[0].alertas[1], modelosOrdenados[1].alertas[1], modelosOrdenados[2].alertas[1], modelosOrdenados[3].alertas[1], modelosOrdenados[4].alertas[1]]
@@ -462,11 +488,11 @@ function plotarDados(json_dados, qtdMaquinas){
                 tabela_qtd_3.innerHTML = qtdMaquinas[2];
                 tabela_qtd_4.innerHTML = qtdMaquinas[3];
                 tabela_qtd_5.innerHTML = qtdMaquinas[4];
-                tabela_perc_1.innerHTML = Math.round(modelosOrdenados[0].qtdAlertas*100/(qtdMaquinas[0] * 4 * 24 * 30)) + "%"
-                tabela_perc_2.innerHTML = Math.round(modelosOrdenados[1].qtdAlertas*100/(qtdMaquinas[1] * 4 * 24 * 30)) + "%"
-                tabela_perc_3.innerHTML = Math.round(modelosOrdenados[2].qtdAlertas*100/(qtdMaquinas[2] * 4 * 24 * 30)) + "%"
-                tabela_perc_4.innerHTML = Math.round(modelosOrdenados[3].qtdAlertas*100/(qtdMaquinas[3] * 4 * 24 * 30)) + "%"
-                tabela_perc_5.innerHTML = Math.round(modelosOrdenados[4].qtdAlertas*100/(qtdMaquinas[4] * 4 * 24 * 30)) + "%"
+                tabela_perc_1.innerHTML = Math.round(modelosOrdenados[0].qtdAlertas*100/(qtdMaquinas[0] * 4 * 24 * periodo * 7)) + "%"
+                tabela_perc_2.innerHTML = Math.round(modelosOrdenados[1].qtdAlertas*100/(qtdMaquinas[1] * 4 * 24 * periodo * 7)) + "%"
+                tabela_perc_3.innerHTML = Math.round(modelosOrdenados[2].qtdAlertas*100/(qtdMaquinas[2] * 4 * 24 * periodo * 7)) + "%"
+                tabela_perc_4.innerHTML = Math.round(modelosOrdenados[3].qtdAlertas*100/(qtdMaquinas[3] * 4 * 24 * periodo * 7)) + "%"
+                tabela_perc_5.innerHTML = Math.round(modelosOrdenados[4].qtdAlertas*100/(qtdMaquinas[4] * 4 * 24 * periodo * 7)) + "%"
 }
 
 async function aplicarFiltro(){
@@ -486,7 +512,9 @@ async function aplicarFiltro(){
     "2": 2,
     "4": 4
   }
-  if(componente == componentes[componente]){
+var hoje = new Date();
+var semanaAtual = obterDiaSemana(hoje);
+  if(componentes[componente]){
     dados_filtrados = dados_filtrados.filter(dado => dado.componente == componentes[componente])
   }
   
@@ -501,10 +529,25 @@ async function aplicarFiltro(){
     }
     dados_filtrados = dados_filtrados2
   }
+
+  if(semanas[intervalo]){
+    periodo = semanas[intervalo]
+    dados_filtrados = dados_filtrados.filter(dado => semanaAtual - dado.semanas <= semanas[intervalo])
+  }
   // filtro endereco
   ordenarDados(dados_filtrados)
   await obterDadosGerenteQtd()
   await plotarDados(dados_filtrados, qtdMaquinas)
 }
+
+function obterDiaSemana(d) {
+  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+  var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  var diaSemana = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+
+  return diaSemana;
+}
+
   abrirMenu();
 </script>
