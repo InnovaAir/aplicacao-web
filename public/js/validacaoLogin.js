@@ -187,7 +187,7 @@ function entrar(email, senha){
                       }
                     });
                     setTimeout(function () {
-                        window.location = "./dashboard/dashboard_analista.html";
+                        window.location = "./dashboard/dashLeticia.html";
                     }, 1350); // apenas para exibir o loading
                 }else if (json.fkCargo == 4){
                     let timerInterval;
