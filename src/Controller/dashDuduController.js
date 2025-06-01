@@ -1,7 +1,12 @@
 const dashDuduModel = require('../Models/dashDuduModel');
+const { getIntervaloPorPeriodo } = dashDuduModel;
 
 const calcularDesempenho = (linha) => {
-  const perdas = (linha.critico * 5) + (linha.alto * 2) + (linha.baixo * 1);
+  const critico = Number(linha.critico) || 0;
+  const alto = Number(linha.alto) || 0;
+  const baixo = Number(linha.baixo) || 0;
+
+  const perdas = (critico * 5) + (alto * 2) + (baixo * 1);
   return Math.max(0, 100 - perdas);
 };
 
@@ -61,8 +66,32 @@ async function getIdUsuario(req, res) {
   }
 }
 
+const listarDesempenhoPorPeriodo = async (req, res) => {
+  try {
+    const { idUsuario, periodo } = req.params;
+
+    const intervalo = getIntervaloPorPeriodo(periodo);
+
+    const dados = await dashDuduModel.listarDesempenhoPorPeriodo(idUsuario, intervalo);
+
+    const resultado = dados.map(linha => ({
+      ...linha,
+      desempenho: calcularDesempenho(linha)
+    }));
+
+    console.log('Resultado SQL:', resultado);
+    res.json(resultado);
+  } catch (erro) {
+    console.error('Erro ao buscar desempenho por período:', erro);
+    res.status(500).json({ erro: 'Erro ao buscar desempenho por período' });
+  }
+};
+
+
+
 module.exports = {
   obterDesempenho,
   qtdMaqMenorDsmp,
-  getIdUsuario
+  getIdUsuario,
+  listarDesempenhoPorPeriodo
 };
