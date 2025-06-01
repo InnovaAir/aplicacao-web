@@ -53,6 +53,34 @@ body {
     box-sizing: border-box;
 }
 
+.custom-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    padding: 1vw;
+    padding-right: 3vw;
+    /* espaço extra para a seta */
+    border: none;
+    border-bottom: 0.4vh solid #B0BEC5;
+
+    font-size: 1vw;
+    color: #555;
+    background-color: transparent;
+
+    background-image: url(../assets/arrow-sm-down-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    background-position: right 1vw center;
+    background-size: 1.2vw;
+
+    cursor: pointer;
+}
+
+.custom-select:focus {
+    outline: none;
+    border-bottom: 0.25vh solid #1976d2;
+}
+
 .div_kpis {
     display: flex;
     justify-content: center;
@@ -165,6 +193,10 @@ body {
 
 .check_box_insuficiente {
     background-color: #FE6B6B;
+}
+
+.checkbox-text {
+    text-align: center;
 }
 
 .filtro {

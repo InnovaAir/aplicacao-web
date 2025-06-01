@@ -364,6 +364,11 @@ const grafico = new Chart(ctx, {
     }]
   },
   options: {
+    layout:{
+      padding: {
+        right: 46
+      }
+    },
     indexAxis: 'y',
     scales: {
       x: {
@@ -389,10 +394,33 @@ const grafico = new Chart(ctx, {
       }
     },
     plugins: {
-      legend: { display: false }
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            const label = context.dataset.label || '';
+            const value = context.parsed.x;
+            return `${label}: ${value}%`;
+          }
+        }
+      },
+      datalabels: {
+        anchor: 'end',          // posiciona na ponta da barra
+        align: 'right',         // alinha o texto à direita da ponta
+        formatter: function(value) {
+          return value + '%';
+        },
+        color: '#000',
+        font: {
+          weight: 'bold',
+          size: 15
+        }
+      }
     }
-  }
+  },
+  plugins: [ChartDataLabels]
 });
+
 
 async function executar() {
   await getIdUsuario();
