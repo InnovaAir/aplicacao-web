@@ -20,8 +20,5 @@ router.get('/getIdUsuario/:idMaquina', (req, res) => {
     dashDuduController.getTotalMaq(req, res);
 });
 
-router.get('/desempenho-por-periodo/:idUsuario/:periodo', (req, res) => {
-  dashDuduController.listarDesempenhoPorPeriodo(req, res);
-});
 
 module.exports = router;

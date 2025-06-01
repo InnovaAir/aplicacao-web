@@ -278,186 +278,10 @@ function atualizarSetas() {
     }
 }
 
-async function aplicarFiltroPeriodo() {
-  const selectPeriodo = document.getElementById("slc_periodo");
-  const periodoSelecionado = selectPeriodo.value;
-  const usuarioId = sessionStorage.idUsuario;
 
-  const filial = filtroTerminalSelecionado || null;
-
-  if (!periodoSelecionado || periodoSelecionado === 'atual') {
-    mostrarGraficoPadrao();
-    atualizarGraficoDesempenho(dados_json);
-    return;
-  }
-
-  try {
-    const dadosPeriodo = await buscarDesempenhoComPeriodo(usuarioId, periodoSelecionado, filial, null);
-    const dadosAtuais = await buscarDesempenhoComPeriodo(usuarioId, 'atual', filial, null);
-
-    if (
-      Array.isArray(dadosPeriodo) && dadosPeriodo.length > 0 &&
-      Array.isArray(dadosAtuais) && dadosAtuais.length > 0
-    ) {
-      mostrarGraficoComparativo();
-      atualizarGraficoComparativo(dadosAtuais, dadosPeriodo);
-    } else {
-      console.warn('Dados para o período ou atual não encontrados ou vazios');
-      mostrarGraficoPadrao();
-      atualizarGraficoDesempenho(dados_json);
-    }
-  } catch (error) {
-    console.error('Erro ao buscar dados do período:', error);
-    mostrarGraficoPadrao();
-    atualizarGraficoDesempenho(dados_json);
-  }
-}
-
-async function buscarDesempenhoComPeriodo(usuarioId, periodoSelecionado, filial = null, desempenho = null) {
-  try {
-    let url = `/dashDuduRoutes/desempenho-por-periodo/${usuarioId}/${periodoSelecionado}`;
-    const params = new URLSearchParams();
-
-    if (filial) params.append('filial', filial);
-    if (desempenho) params.append('desempenho', desempenho);
-
-    if ([...params].length > 0) {
-      url += `?${params.toString()}`;
-    }
-
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      throw new Error(`Erro ao buscar dados: ${response.statusText}`);
-    }
-
-    const dados = await response.json();
-    console.log('dados retornados do fetch buscarDesempenhoComPeriodo:', dados);
-    return dados;
-  } catch (error) {
-    console.error("Erro no fetch buscarDesempenhoComPeriodo:", error);
-    return null;
-  }
-}
-
-function calcularIntervaloPeriodo(periodo) {
-  const hoje = new Date();
-  let dataInicio = null;
-  let dataFim = hoje;
-
-  switch(periodo) {
-    case "atual":
-      dataInicio = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
-      break;
-
-    case "ultimos_15_dias":
-      dataInicio = new Date();
-      dataInicio.setDate(hoje.getDate() - 15);
-      break;
-
-    case "um_mes_atras":
-      dataInicio = new Date(hoje.getFullYear(), hoje.getMonth() - 1, 1);
-      dataFim = new Date(hoje.getFullYear(), hoje.getMonth(), 0);
-      break;
-
-    case "tres_meses_atras":
-      dataInicio = new Date(hoje.getFullYear(), hoje.getMonth() - 3, 1);
-      dataFim = new Date(hoje.getFullYear(), hoje.getMonth(), 0);
-      break;
-
-    default:
-      dataInicio = null;
-      dataFim = null;
-  }
-
-  return { dataInicio, dataFim };
-}
-
-function atualizarGraficoComparativo(dadosAtuais, dadosPeriodo) {
-  const desempenhoAtualPorTerminal = calcularDesempenhoPorTerminal(dadosAtuais);
-  const desempenhoPeriodoPorTerminal = calcularDesempenhoPorTerminal(dadosPeriodo);
-
-  console.log('Atual:', desempenhoAtualPorTerminal);
-  console.log('Período:', desempenhoPeriodoPorTerminal);
-
-  const terminais = new Set([
-    ...Object.keys(desempenhoAtualPorTerminal),
-    ...Object.keys(desempenhoPeriodoPorTerminal)
-  ]);
-
-  const labels = [];
-  const desempenhoAtual = [];
-  const desempenhoPeriodo = [];
-
-  terminais.forEach(terminal => {
-    labels.push(terminal);
-    desempenhoAtual.push(desempenhoAtualPorTerminal[terminal] || 0);
-    desempenhoPeriodo.push(desempenhoPeriodoPorTerminal[terminal] || 0);
-  });
-
-  graficoComparativo.data.labels = labels;
-  graficoComparativo.data.datasets[0].data = desempenhoAtual;
-  graficoComparativo.data.datasets[1].data = desempenhoPeriodo;
-
-  graficoComparativo.update();
-}
-
-function calcularDesempenhoPorTerminal(dados) {
-  const terminais = {};
-
-  dados.forEach(maq => {
-    const terminal = maq.terminal;
-    const desempenho = parseFloat(maq.desempenho ?? 0);
-    const critico = parseInt(maq.critico) || 0;
-    const alto = parseInt(maq.alto) || 0;
-    const peso = (critico * 2) + (alto * 1);
-
-    if (!terminais[terminal]) {
-      terminais[terminal] = { somaPonderada: 0, somaPesos: 0, somatorioDesempenho: 0, total: 0 };
-    }
-
-    if (peso > 0) {
-      terminais[terminal].somaPonderada += desempenho * peso;
-      terminais[terminal].somaPesos += peso;
-    } else {
-      terminais[terminal].somatorioDesempenho += desempenho;
-      terminais[terminal].total += 1;
-    }
-  });
-
-  const resultado = {};
-
-  for (const terminal in terminais) {
-    const { somaPonderada, somaPesos, somatorioDesempenho, total } = terminais[terminal];
-    let desempenhoFinal = 0;
-
-    if (somaPesos > 0) {
-      desempenhoFinal = somaPonderada / somaPesos;
-    } else if (total > 0) {
-      desempenhoFinal = somatorioDesempenho / total;
-    }
-
-    resultado[terminal] = parseFloat(desempenhoFinal.toFixed(1));
-  }
-
-  return resultado;
-}
-
-// Dashboards
-function mostrarGraficoPadrao() {
-  document.getElementById('containerGraficoComparativo').style.display = 'none';
-  document.getElementById('containerGraficoPadrao').style.display = 'block';
-}
-
-function mostrarGraficoComparativo() {
-  document.getElementById('containerGraficoPadrao').style.display = 'none';
-  document.getElementById('containerGraficoComparativo').style.display = 'block';
-}
-
-const ctx = document.getElementById('graficoDesempenho').getContext('2d');
+//Dashboard
 
 function atualizarGraficoDesempenho(maquinas) {
-  
   const terminais = {};
 
   maquinas.forEach(maq => {
@@ -465,7 +289,8 @@ function atualizarGraficoDesempenho(maquinas) {
     const desempenho = parseFloat(maq.desempenho ?? 0);
     const critico = parseInt(maq.critico) || 0;
     const alto = parseInt(maq.alto) || 0;
-    const peso = (critico * 2) + (alto * 1);
+    const baixo = parseInt(maq.baixo) || 0;
+    const peso = (critico * 5) + (alto * 2) + (baixo * 1);
 
     if (!terminais[terminal]) {
       terminais[terminal] = {
@@ -479,8 +304,7 @@ function atualizarGraficoDesempenho(maquinas) {
     if (peso > 0) {
       terminais[terminal].somaPonderada += desempenho * peso;
       terminais[terminal].somaPesos += peso;
-    } 
-    else {
+    } else {
       terminais[terminal].somatorioDesempenho += desempenho;
       terminais[terminal].total += 1;
     }
@@ -489,19 +313,13 @@ function atualizarGraficoDesempenho(maquinas) {
   const desempenhoPorTerminal = [];
 
   for (const terminal in terminais) {
-    const {
-      somaPonderada,
-      somaPesos,
-      somatorioDesempenho,
-      total
-    } = terminais[terminal];
+    const { somaPonderada, somaPesos, somatorioDesempenho, total } = terminais[terminal];
 
     let desempenhoFinal = 0;
 
     if (somaPesos > 0) {
       desempenhoFinal = somaPonderada / somaPesos;
-    } 
-    else if (total > 0) {
+    } else if (total > 0) {
       desempenhoFinal = somatorioDesempenho / total;
     }
 
@@ -511,18 +329,29 @@ function atualizarGraficoDesempenho(maquinas) {
     });
   }
 
+  // Ordenando os terminais pelo desempenho
   desempenhoPorTerminal.sort((a, b) => a.desempenho - b.desempenho);
 
+  // Atualizando o gráfico com os dados
   grafico.data.labels = desempenhoPorTerminal.map(d => d.terminal);
   grafico.data.datasets[0].data = desempenhoPorTerminal.map(d => d.desempenho);
+
+  // Atualizando a cor de cada barra com base no desempenho
   grafico.data.datasets[0].backgroundColor = desempenhoPorTerminal.map(d => {
-    if (d.desempenho <= 35) return '#ff3333';
-    if (d.desempenho <= 65) return '#ffff33';
-    return '#00cc00';
+    if (d.desempenho <= 35) return '#ff3333';  // Vermelho para desempenho <= 35%
+    if (d.desempenho <= 65) return '#ffff33';  // Amarelo para desempenho <= 65%
+    return '#00cc00';  // Verde para desempenho > 65%
   });
 
-  grafico.update();
+  grafico.update();  // Atualizando o gráfico
 }
+
+
+
+
+Chart.register(ChartDataLabels);
+
+const ctx = document.getElementById('graficoDesempenho').getContext('2d');
 
 const grafico = new Chart(ctx, {
   type: 'bar',
@@ -597,85 +426,6 @@ const grafico = new Chart(ctx, {
   plugins: [ChartDataLabels]
 });
 
-Chart.register(ChartDataLabels);
-
-const ctxComparativo = document.getElementById('graficoComparativo').getContext('2d');
-
-const graficoComparativo = new Chart(ctxComparativo, {
-      type: 'bar',
-      data: {
-        labels: ['GRU', 'Galeão'],
-        datasets: [
-          {
-            label: 'Desempenho Atual',
-            data: [82.2, 86.9],
-            backgroundColor: '#00cc00'
-          },
-          {
-            label: 'Desempenho no Período',
-            data: [75, 80],
-            backgroundColor: '#3399ff'
-          }
-        ]
-      },
-      options: {
-        indexAxis: 'y',
-        scales: {
-          x: {
-            beginAtZero: true,
-            max: 100,
-            ticks: {
-              callback: (val) => `${val}%`
-            },
-            title: {
-              display: true,
-              text: 'Desempenho (%)',
-              color: '#000',
-              font: { weight: 'bold' }
-            }
-          },
-          y: {
-            title: {
-              display: true,
-              text: 'Terminais',
-              color: '#000',
-              font: { weight: 'bold' }
-            }
-          }
-        },
-        plugins: {
-          legend: {
-            position: 'bottom'
-          },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                const label = context.dataset.label || '';
-                const value = context.parsed.x;
-                return `${label}: ${value}%`;
-              }
-            }
-          },
-          datalabels: {
-            anchor: 'end',
-            align: 'right',
-            formatter: function(value) {
-              return value + '%';
-            },
-            color: '#000',
-            font: {
-              weight: 'bold',
-              size: 14
-            }
-          }
-        },
-        layout: {
-          padding: {
-            right: 30
-          }
-        }
-      }
-    });
 
 window.onload = async function () {
   await getIdUsuario();
