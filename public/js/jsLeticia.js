@@ -1,66 +1,69 @@
 async function atualizarGrafico() {
-    var data = []
-    var categoria = []
-    var categoriaNum = []
+    var data = [];
+    var categoria = [];
+    var categoriaNum = [];
 
-    fetch(`/dashLeticia/getAlertas/`, {
-        cache: 'no-store',
-        method: "GET",
-    }).then((answer) => {
-        answer.json().then((json) => {
-            json.map(info => {
-                categoria.push(info.mes)
-                categoriaNum.push(monthNameToNumber(info.mes))
-                data.push(info.total_alertas)
-            })
-        })
-    })
-
-    var x = categoriaNum;
-    var y = data; 
     const meses = [
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
 
-    const mes = categoria[categoria.length - 1]; // pega o último mês da lista
+    await fetch(`/dashLeticia/getAlertas/`, {
+        cache: 'no-store',
+        method: "GET",
+    }).then((resposta) => resposta.json())
+      .then((json) => {
+        json.forEach(info => {
+            categoria.push(info.mes);
+            categoriaNum.push(monthNameToNumber(info.mes));
+            data.push(info.total_alertas);
+        });
+    });
+
+    const mes = categoria[categoria.length - 1];
     const indexAtual = meses.indexOf(mes);
-    const mesPrevisto = meses[indexAtual + 1] || null; // pega o próximo mês ou null se for Dezembro
-    console.log(categoria);         // May
-    console.log("Último mês:", mes);         // May
-    console.log("Próximo mês:", mesPrevisto); // June
+    const mesPrevisto = meses[(indexAtual + 1) % 12];
 
-    // var valorPrevisto = meses.indexOf(mes) + 2; // A soma do valor 2 é necessária pois o index do mes no caso de dezembro é 11, porém quero prever o mês 13
+    // Cálculo correto de m (coeficiente angular)
+    var sumXY = somar(multiplicar(categoriaNum, data));
+    var sumX = somar(categoriaNum);
+    var sumY = somar(data);
+    var n = categoriaNum.length;
+    var sumX2 = somar(quadrado(categoriaNum));
 
-    var m = (somar(multiplicar(x, y)) - (somar(x) * somar(y)) / x.length) /
-        (somar(quadrado(x)) - (somar(x) * somar(x)) / x.length);
-    var b = media(y) - m * media(x);
+    var m = (sumXY - (sumX * sumY) / n) / (sumX2 - (sumX * sumX) / n);
+    var b = media(data) - m * media(categoriaNum);
 
-    var r2 = (calcularR2(x, y) * 100).toFixed()
+    var r2 = (calcularR2(categoriaNum, data) * 100).toFixed();
 
-    var total = somar(data)
-    console.log(data)
+    document.getElementById("taxaPrecisao").innerText = `${r2}%`;
 
-    if (r2 != "NaN") {
+    var valorPrevisto = categoriaNum[categoriaNum.length - 1] + 1;
+    var previsao = (m * valorPrevisto + b).toFixed();
 
-        if (meses.indexOf(mes) + 1 >= 12) {
-            mesPrevisto = meses[(meses.indexOf(mes) - 11)]
-            valorPrevisto = 13
-        }
-
-        // document.getElementById("mesPrevisto").innerHTML = `${mesPrevisto}`
-        // document.getElementById("previsao").innerHTML = `${(m * (valorPrevisto) + b).toFixed()}<span id="rquadrado"></span>`
-        // document.getElementById("rquadrado").innerHTML = ` / Precisão: ${r2}%`
-
-    } else {
-        // document.getElementById("previsao").innerHTML = `<span id="rquadrado">Dados insuficientes</span>`
+    if (isNaN(previsao)) {
+        console.log("Dados insuficientes para previsão");
+        previsao = null;
     }
 
+    var categoriasGrafico = [
+        categoria[0] || "",
+        categoria[1] || "",
+        categoria[2] || "",
+        mesPrevisto
+    ];
+
+    var dadosGrafico = [
+        data[0] || 0,
+        data[1] || 0,
+        data[2] || 0,
+        previsao ? Number(previsao) : 0
+    ];
 
     var options = {
         series: [{
-            name: 'RAM',
-            data: [4, 3, 10, 9]
+            name: 'Alertas',
+            data: dadosGrafico
         }],
         chart: {
             height: 350,
@@ -75,9 +78,7 @@ async function atualizarGrafico() {
         },
         xaxis: {
             type: 'category',
-            categories: [
-                categoria[0], categoria[1], categoria[2], categoria[3]
-            ]
+            categories: categoriasGrafico
         },
         title: {
             text: 'Forecast',
@@ -102,29 +103,35 @@ async function atualizarGrafico() {
 
     var chart = new ApexCharts(document.querySelector("#graficoLinha"), options);
     chart.render();
+
+    console.log("Último mês:", mes);
+    console.log("Próximo mês previsto:", mesPrevisto);
+    console.log("Previsão de alertas para o próximo mês:", previsao);
+    console.log("R² (precisão):", r2 + "%");
 }
 
-
-// Fórmulas
 function multiplicar(x, y) {
-    var ret = [];
-    for (var i = 0; i < x.length; i++)
-        ret.push(x[i] * y[i]);
-    return ret;
+    var resultado = [];
+    for (var i = 0; i < x.length; i++) {
+        resultado.push(x[i] * y[i]);
+    }
+    return resultado;
 }
 
 function quadrado(x) {
-    var ret = [];
-    for (var i = 0; i < x.length; i++)
-        ret.push(x[i] * x[i]);
-    return ret;
+    var resultado = [];
+    for (var i = 0; i < x.length; i++) {
+        resultado.push(x[i] * x[i]);
+    }
+    return resultado;
 }
 
 function somar(x) {
-    var ret = 0;
-    for (var i = 0; i < x.length; i++)
-        ret += x[i];
-    return ret;
+    var total = 0;
+    for (var i = 0; i < x.length; i++) {
+        total += x[i];
+    }
+    return total;
 }
 
 function media(x) {
@@ -132,41 +139,37 @@ function media(x) {
 }
 
 function calcularR2(x, y) {
-    const n = x.length;
-    const mediaX = media(x);
-    const mediaY = media(y);
+    var mediaX = media(x);
+    var mediaY = media(y);
 
-    let numerador = somar(multiplicar(
-        x.map(xi => xi - mediaX),
-        y.map(yi => yi - mediaY)
-    ));
+    var xSubMedia = [];
+    var ySubMedia = [];
+    for (var i = 0; i < x.length; i++) {
+        xSubMedia.push(x[i] - mediaX);
+        ySubMedia.push(y[i] - mediaY);
+    }
 
-    let somaQuadradoX = somar(quadrado(x.map(xi => xi - mediaX)));
-    let somaQuadradoY = somar(quadrado(y.map(yi => yi - mediaY)));
-    const denominador = Math.sqrt(somaQuadradoX * somaQuadradoY);
+    var numerador = 0;
+    var somaQuadradoX = 0;
+    var somaQuadradoY = 0;
+    for (var i = 0; i < xSubMedia.length; i++) {
+        numerador += xSubMedia[i] * ySubMedia[i];
+        somaQuadradoX += xSubMedia[i] * xSubMedia[i];
+        somaQuadradoY += ySubMedia[i] * ySubMedia[i];
+    }
 
-    const r = numerador / denominador;
+    var denominador = Math.sqrt(somaQuadradoX * somaQuadradoY);
 
-    const r2 = Math.pow(r, 2)
-    sessionStorage.r2 = r2;
-    return r2;
+    var r = numerador / denominador;
+
+    return r * r;
 }
 
 function monthNameToNumber(monthName) {
     const months = {
-        January: 1,
-        February: 2,
-        March: 3,
-        April: 4,
-        May: 5,
-        June: 6,
-        July: 7,
-        August: 8,
-        September: 9,
-        October: 10,
-        November: 11,
-        December: 12
+        January: 1, February: 2, March: 3, April: 4, May: 5,
+        June: 6, July: 7, August: 8, September: 9,
+        October: 10, November: 11, December: 12
     };
-
     return months[monthName] || null;
 }
