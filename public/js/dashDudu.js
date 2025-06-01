@@ -250,9 +250,33 @@ function ordenarColuna(campo) {
     dadosFiltrados = dadosFiltrados.filter(maq => maq.terminal === filtroTerminalSelecionado);
   }
 
+  atualizarSetas();
   ordenarPor(campo, false, dadosFiltrados);
 }
 
+function atualizarSetas() {
+    const colunas = document.querySelectorAll('.tabela_cabecalho .coluna');
+    colunas.forEach(div => {
+      div.classList.remove('ativa');
+      const span = div.querySelector('span.seta');
+      if (span) span.textContent = '⇅';
+    });
+
+    if (!campoSelecionado) return;
+
+    const colunaAtiva = [...colunas].find(div => {
+      return div.getAttribute('onclick').includes(`'${campoSelecionado}'`);
+    });
+
+    if (!colunaAtiva) return;
+
+    colunaAtiva.classList.add('ativa');
+
+    const setaSpan = colunaAtiva.querySelector('span.seta');
+    if (setaSpan) {
+      setaSpan.textContent = ordemCrescente ? '▲' : '▼';
+    }
+  }
 
 // Dashboard
 const ctx = document.getElementById('graficoDesempenho').getContext('2d');

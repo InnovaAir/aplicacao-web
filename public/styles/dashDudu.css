@@ -282,40 +282,40 @@ body {
 }
 
 .div_listaMaq {
-  max-height: 500px;
-  overflow-y: auto;
+    max-height: 500px;
+    overflow-y: auto;
 }
 
 .tabela_cabecalho {
-  display: flex;
-  font-weight: bold;
-  background-color: #f0f0f0;
+    display: flex;
+    font-weight: bold;
+    background-color: #f0f0f0;
 }
 
 .tabela_conteudo {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .totem {
-  display: flex;
-  padding: 8px;
-  border-bottom: 1px solid #ccc;
+    display: flex;
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
 }
 
 .coluna {
-  flex: 1;
-  text-align: center;
+    flex: 1;
+    text-align: center;
 }
 
 .totem.red {
-  background-color: rgba(255, 0, 0, 0.5);
+    background-color: rgba(255, 0, 0, 0.5);
 }
 
 .totem.yellow {
-  background-color: rgba(255, 255, 0, 0.5);
+    background-color: rgba(255, 255, 0, 0.5);
 }
 
 .totem.green {
-  background-color: rgba(0, 170, 0, 0.3);
+    background-color: rgba(0, 170, 0, 0.3);
 }
