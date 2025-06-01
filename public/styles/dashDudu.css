@@ -19,7 +19,7 @@ body {
     /* border: 1px solid green; */
     height: 99vh;
     width: 46vw;
-    margin-left: 1vh;
+    margin-left: 4vh;
 }
 
 .div_titulo1{
@@ -150,7 +150,7 @@ body {
 }
 
 .div_listaMaq{
-    border: 1px solid orange;
+    /* border: 1px solid #010176; */
     height: 60vh;
     margin-right: 1vw;
 }
@@ -318,6 +318,21 @@ body {
     overflow-y: auto;
 }
 
+.div_listaMaq::-webkit-scrollbar {
+    width: 15px;
+}
+
+.div_listaMaq::-webkit-scrollbar-track {
+    background: rgba(65, 65, 255, 0.5);
+}
+
+.div_listaMaq::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 123, 0.7);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 255, 1);
+}
+
+
 .tabela_cabecalho {
     display: flex;
     font-weight: bold;
@@ -327,6 +342,7 @@ body {
 .tabela_conteudo {
     display: flex;
     flex-direction: column;
+    gap: 1vh;
 }
 
 .totem {
@@ -342,12 +358,18 @@ body {
 
 .totem.red {
     background-color: rgba(255, 0, 0, 0.5);
+    border: 2px solid rgba(255, 0, 0, 1);
+    border-radius: 15px;
 }
 
 .totem.yellow {
-    background-color: rgba(255, 255, 0, 0.5);
+    background-color: rgb(251, 240, 156);
+    border: 2px solid rgba(241, 196, 15, 1);
+    border-radius: 15px;
 }
 
 .totem.green {
     background-color: rgba(0, 170, 0, 0.3);
+    border: 2px solid rgba(0, 170, 0, 1);
+    border-radius: 15px;
 }
