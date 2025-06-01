@@ -161,27 +161,6 @@ body {
             font-size: var(--text-kpi-size);
         }
     }
-
-    .legend {
-        padding: 1%;
-        border: 0.2vw solid #DDE1E6;
-
-        .container {
-            display: grid;
-            grid-template-columns: 40% 40%;
-            grid-gap: 15%;
-        }
-
-        .box {
-            display: flex;
-            width: fit-content;
-            flex-direction: row;
-            align-items: center;
-            gap: 5%;
-
-            font-style: italic;
-        }
-    }
 }
 
 .dashboard {
@@ -201,6 +180,29 @@ body {
 
             h1 {
                 color: var(--color-text-1);
+            }
+
+            .legend {
+                padding: 1%;
+                border: 0.2vw solid #DDE1E6;
+                width: 40%;
+
+                .container {
+                    display: grid;
+                    grid-template-columns: 20% 20% 20% 20%;
+                    grid-gap: 5%;
+                    width: 100%;
+                }
+
+                .box {
+                    display: flex;
+                    width: fit-content;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: 5%;
+
+                    font-style: italic;
+                }
             }
         }
 
@@ -310,7 +312,9 @@ body {
             width: 100%;
             gap: 20%;
 
-            p {color: var(--color-text-4);}
+            p {
+                color: var(--color-text-4);
+            }
         }
 
         .graph {

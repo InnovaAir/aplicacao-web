@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../styles/dashKatia.css" />
 
     <title>Análise em tempo Real</title>
+    <script src="../js/backendFeitosa.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -46,43 +47,22 @@
 
             <div class="kpi red">
                 <p>Totens em alerta</p>
-                <h2 id="indicator_alert">12</h2>
+                <h2 id="indicator_alert">0</h2>
             </div>
 
             <div class="kpi green">
                 <p>Totens em atividade</p>
-                <h2 id="indicator_activity">12</h2>
+                <h2 id="indicator_activity">0</h2>
             </div>
 
             <div class="kpi blue">
                 <p>Totens ociosos</p>
-                <h2 id="indicator_idle">12</h2>
+                <h2 id="indicator_idle">0</h2>
             </div>
 
-            <div class="legend">
-                <p>Legenda de alertas:</p>
-
-                <div class="container">
-                    <div class="box">
-                        <div class="ball-green ball"></div>
-                        <p>Normal</p>
-                    </div>
-
-                    <div class="box">
-                        <div class="ball-yellow ball"></div>
-                        <p>Baixo</p>
-                    </div>
-
-                    <div class="box">
-                        <div class="ball-orange ball"></div>
-                        <p>Alto</p>
-                    </div>
-
-                    <div class="box">
-                        <div class="ball-red ball"></div>
-                        <p>Crítico</p>
-                    </div>
-                </div>
+            <div class="kpi">
+                <p>Totens desligados</p>
+                <h2 id="indicator_off">0</h2>
             </div>
         </div>
 
@@ -91,12 +71,38 @@
                 <div class="box">
                     <h1>Lista de Totens</h1>
                     <div class="custom-select-wrapper">
-                        <select class="custom-select">
+                        <select id="select_endereco" onchange="plotarListaMaquinas(document.getElementById('select_endereco').value)" class="custom-select">
                             <option>Todos os aeroportos</option>
                             <option>GRU Airport</option>
                             <option>CGH Airport</option>
                             <option>SDU Airport</option>
                         </select>
+                    </div>
+
+                    <div class="legend">
+                        <p>Legenda de alertas:</p>
+
+                        <div class="container">
+                            <div class="box">
+                                <div class="ball-green ball"></div>
+                                <p>Normal</p>
+                            </div>
+
+                            <div class="box">
+                                <div class="ball-yellow ball"></div>
+                                <p>Baixo</p>
+                            </div>
+
+                            <div class="box">
+                                <div class="ball-orange ball"></div>
+                                <p>Alto</p>
+                            </div>
+
+                            <div class="box">
+                                <div class="ball-red ball"></div>
+                                <p>Crítico</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <p>*Selecione um endereço específico para ver melhor a situação dos totens</p>
@@ -108,13 +114,13 @@
                         <p>Uso RAM</p>
                         <p>Uso Disco</p>
                         <p>Rede</p>
-                        <p>Alertas</p>
-                        <p>Desempenho</p>
+                        <p>Analise</p>
                         <p>Log de Alertas</p>
+                        <p></p>
                     </div>
                     <div class="line"></div>
                     <div id="lines" class="lines">
-                        <div class="totem red"> 
+                        <div style="display: none;" class="totem red"> 
                             <p>desktop-csf912</p>
                             <div class="box">
                                 <div class="ball-orange ball"></div>
@@ -147,11 +153,11 @@
                 <div class="indicators">
                     <div class="kpi">
                         <p>Categoria com mais alerta</p>
-                        <h2>CPU</h2>
+                        <h2 id="indicator_category">CPU</h2>
                     </div>
                     <div class="kpi">
                         <p>Total de alertas</p>
-                        <h2>120</h2>
+                        <h2 id="indicator_totalalerts">120</h2>
                     </div>
                 </div>
                 <div id="alert-chart" class="graph"></div>
@@ -162,11 +168,15 @@
 </body>
 
 </html>
-<script src="../js/backendFeitosa.js"></script>
 <script>
-    plotarListaMaquinas()
+    getEnderecosUsuario(sessionStorage.idUsuario)
+
+    setTimeout(() => {
+        plotarListaMaquinas(document.getElementById("select_endereco").value)
+    }, 100);
 
     setInterval(() => {
-        plotarListaMaquinas()
-    }, 10000);
+        plotarListaMaquinas(document.getElementById("select_endereco").value)
+        console.log(document.getElementById("select_endereco").value)
+    }, 3000);
 </script>

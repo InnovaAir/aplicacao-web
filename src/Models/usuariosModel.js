@@ -1,5 +1,13 @@
 var database = require("../database/config");
 
+function identificarEnderecos(idUsuario) {
+    var sql = `
+        SELECT idEndereco, complemento, estado FROM identificar_enderecos WHERE idUsuario = ${idUsuario};
+    `
+
+    return database.executar(sql);
+}
+
 function cadastrar(razaoSocial, cnpj, email, telefone, responsavel, senha) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", razaoSocial, email, telefone, responsavel, cnpj, senha);
 
@@ -101,6 +109,7 @@ function listarFiliais(){
   }
 
 module.exports = {
+    identificarEnderecos,
     cadastrar,
     cadastrarFuncionario,
     entrar,

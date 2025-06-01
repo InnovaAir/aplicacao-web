@@ -3,6 +3,10 @@ var router = express.Router();
 
 var usuarioController = require("../Controller/usuariosController");
 
+router.get("/enderecos/:idUsuario", (req, res) => {
+    usuarioController.identificarEnderecos(req, res);
+})
+
 router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res);
 })

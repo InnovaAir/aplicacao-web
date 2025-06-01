@@ -1,5 +1,18 @@
 var usuarioModel = require("../Models/usuariosModel");
 
+function identificarEnderecos(req, res) {
+    var idUsuario = req.params.idUsuario;
+
+    usuarioModel.identificarEnderecos(idUsuario)
+    .then((querry) => {
+        if (querry.length == 0) {
+            res.status(400).send("Não há endereços cadastrados a este usuário");
+        } else {
+            res.status(200).send(querry);
+        }
+    })
+}
+
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var razaoSocial = req.body.razaoSocialServer;
@@ -160,6 +173,7 @@ function listarFiliais(req,res){
 }
 
 module.exports = {
+    identificarEnderecos,
     cadastrar,
     cadastrarFuncionario,
     entrar,

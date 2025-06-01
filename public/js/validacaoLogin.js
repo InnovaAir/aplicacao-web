@@ -114,14 +114,14 @@ function entrar(email, senha){
                       icon: "success",
                       title: "Login efetuado com sucesso!",
                       html: "Redirecionando... <b></b>",
-                      timer: 1350,
+                      timer: 1000,
                       timerProgressBar: true,
                       didOpen: () => {
                         Swal.showLoading();
                         const timer = Swal.getPopup().querySelector("b");
                         timerInterval = setInterval(() => {
                           timer.textContent = `${Swal.getTimerLeft()}`;
-                        }, 100);
+                        }, 1000);
                       },
                       willClose: () => {
                         clearInterval(timerInterval);
@@ -141,14 +141,14 @@ function entrar(email, senha){
                       icon: "success",
                       title: "Login efetuado com sucesso!",
                       html: "Redirecionando... <b></b>",
-                      timer: 1350,
+                      timer: 1000,
                       timerProgressBar: true,
                       didOpen: () => {
                         Swal.showLoading();
                         const timer = Swal.getPopup().querySelector("b");
                         timerInterval = setInterval(() => {
                           timer.textContent = `${Swal.getTimerLeft()}`;
-                        }, 100);
+                        }, 1000);
                       },
                       willClose: () => {
                         clearInterval(timerInterval);
@@ -168,14 +168,14 @@ function entrar(email, senha){
                       icon: "success",
                       title: "Login efetuado com sucesso!",
                       html: "Redirecionando... <b></b>",
-                      timer: 1350,
+                      timer: 1000,
                       timerProgressBar: true,
                       didOpen: () => {
                         Swal.showLoading();
                         const timer = Swal.getPopup().querySelector("b");
                         timerInterval = setInterval(() => {
                           timer.textContent = `${Swal.getTimerLeft()}`;
-                        }, 100);
+                        }, 1000);
                       },
                       willClose: () => {
                         clearInterval(timerInterval);
@@ -195,14 +195,14 @@ function entrar(email, senha){
                       icon: "success",
                       title: "Login efetuado com sucesso!",
                       html: "Redirecionando... <b></b>",
-                      timer: 1350,
+                      timer: 1000,
                       timerProgressBar: true,
                       didOpen: () => {
                         Swal.showLoading();
                         const timer = Swal.getPopup().querySelector("b");
                         timerInterval = setInterval(() => {
                           timer.textContent = `${Swal.getTimerLeft()}`;
-                        }, 100);
+                        }, 1000);
                       },
                       willClose: () => {
                         clearInterval(timerInterval);
@@ -214,7 +214,7 @@ function entrar(email, senha){
                       }
                     });
                     setTimeout(function () {
-                        window.location = "./dashboard/visaoGeral.html";
+                        window.location = "./dashboard/dashKatia.html";
                     }, 1350); // apenas para exibir o loading
                 }
             })
