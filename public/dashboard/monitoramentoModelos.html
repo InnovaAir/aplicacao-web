@@ -322,13 +322,22 @@
 
         .then(resultados => {
             //-----------------------------------
+            console.log("resultados")
+            console.log(resultados)
+
+            // ADICIONANDO IDs CRESCENTES AOS OBJETOS DE RESULTADOS
+            for (let i = 0; i < resultados.length; i++) {
+                resultados[i].popupId = i + 1; // ID começando em 1
+            }
+
+            console.log("resultados com IDs:");
+            console.log(resultados);
 
             // criando novos modelos na lista grid
             let contadorPopUp = 0;
             let maiorAlerta = 0;
 
             // for para pegar a maquina com mais alertas (para ser referência para o tamanho das outras barras)
-
             for (let i = 0; i < resultados.length; i++) {
                 const item = resultados[i];
                 var tamanhototal = item.quantidade;
@@ -336,9 +345,11 @@
                     maiorAlerta = tamanhototal;
                 }
             }
+
             for (let i = 0; i < resultados.length; i++) {
                 const item = resultados[i];
                 contadorPopUp++
+
                 // seção "Modelo"
                 const modeloDiv = document.createElement("div");
                 modeloDiv.className = "item modeloDiv";
@@ -360,7 +371,6 @@
                 alertaDiv.style.display = "flex ";
                 alertaDiv.style.justifyContent = "center; ";
 
-
                 const barraAlertas = document.createElement("div");
                 barraAlertas.style.width = ((item.quantidade / maiorAlerta) * 100) + "%";
                 barraAlertas.className = "barraAlertas";
@@ -369,7 +379,6 @@
                 barraAlertas.style.minHeight = "20px"
                 barraAlertas.style.justifyContent = "flex-start"
                 //-----------------------------------------
-
 
                 if (tamanhoRam) {
                     const ram = document.createElement("div");
@@ -410,132 +419,174 @@
                 alertaDiv.appendChild(barraAlertas);
 
                 // seção "Quantidade"
-
                 const quantidade = document.createElement("div");
                 quantidade.className = "item quantidadeDiv ";
                 quantidade.textContent = item.quantidade;
                 lista.appendChild(quantidade)
 
                 // seção Botão
-
                 const botaoPop = document.createElement("div");
                 botaoPop.className = "item botaoDiv";
                 botaoPop.innerHTML = `<img id="${contadorPopUp}" onclick="abrirPopUp()" style="height: 1.5em; cursor:pointer;"
-                                    src="../assets/fullscreen.png" alt="" loading="eager">`;
+                            src="../assets/fullscreen.png" alt="" loading="eager">`;
 
                 let componentesPorMaquina = {};
 
-                for (let i = 0; i < componenteArray.length; i++) {
-                    let componenteAtual = componenteArray[i];
+                for (let j = 0; j < componenteArray.length; j++) {
+                    let componenteAtual = componenteArray[j];
                     let idMaquina = componenteAtual.idMaquina;
 
                     // Inicializa a máquina se não existir
                     if (!componentesPorMaquina[idMaquina]) {
                         componentesPorMaquina[idMaquina] = {
-                            componentes: {},
                             contador: item.quantidade,
-                            nomeModelo: item.nomeModelo,      // 'item' está disponível no escopo
-                            criticoCount: item.criticoCount,  // Usando 'item' ao invés de variáveis locais
+                            nomeModelo: item.nomeModelo,
+                            criticoCount: item.criticoCount,
                             altoCount: item.altoCount,
                             baixoCount: item.baixoCount
                         };
                     }
-                    if (!componentesPorMaquina[idMaquina].componentes[componenteAtual.tipo]) {
-                        componentesPorMaquina[idMaquina].componentes[componenteAtual.tipo] = componenteAtual;
-
+                    if (!componentesPorMaquina[idMaquina][componenteAtual.tipo]) {
+                        componentesPorMaquina[idMaquina][componenteAtual.tipo] = componenteAtual;
                     }
                 }
-                console.log("Componentes do pop up1:")
-                console.log(componentesPorMaquina) // tipo do especificação == object
 
+                console.log("Componentes do pop up1:")
+                console.log(componentesPorMaquina)
+
+                // USANDO O ID DO OBJETO PARA O EVENT LISTENER
                 botaoPop.addEventListener("click", () => {
-                    abrirPopUpComModelo(item.nomeModelo, componentesPorMaquina, item.criticoCount, item.altoCount, item.baixoCount, item.quantidade);
+                    // Agora você pode usar item.popupId para identificar qual objeto corresponde ao botão
+                    console.log("Botão clicado - ID do objeto:", item.popupId);
+                    console.log("Objeto completo:", item);
+
+                    abrirPopUpComModelo(
+                        item.nomeModelo,
+                        componentesPorMaquina,
+                        item.criticoCount,
+                        item.altoCount,
+                        item.baixoCount,
+                        item.popupId // Usando o ID do objeto
+                    );
                 });
+
                 lista.appendChild(botaoPop)
             }
-
-
         }
+
+
+
         )
 
 
-    function abrirPopUp() {
-        if (document.querySelector(".popUp").style.display == "none") {
-            document.querySelector(".popUp").style.display = "block";
-        }
-        else { document.querySelector(".popUp").style.display = "none" }
+   let chartPopUp = null; // variável global para o gráfico
 
+function abrirPopUpComModelo(nomeModelo, componentesPorMaquina, criticoCount, altoCount, baixoCount, popupId) {
+    console.log("nomeModelo:", nomeModelo);
+    console.log("componentesPorMaquina:", componentesPorMaquina);
+    console.log("criticoCount:", criticoCount);
+    console.log("altoCount:", altoCount);
+    console.log("baixoCount:", baixoCount);
+    console.log("popupId:", popupId);
 
-
-
+    if (chartPopUp !== null) {
+        chartPopUp.destroy();
+        chartPopUp = null;
     }
 
-    let chartPopUp = null; // variável global para o gráfico
-    function abrirPopUpComModelo(nomeModelo, componentesPorMaquina, criticoCount, altoCount, baixoCount, quantidade) {
-        console.log("nomeModelo")
-        console.log(nomeModelo)
-        console.log("componentesPorMaquina")
-        console.log(componentesPorMaquina)
-        console.log("criticoCount")
-        console.log(criticoCount)
-        console.log("altoCount")
-        console.log(altoCount)
-        console.log("baixoCount")
-        console.log(baixoCount)
-        console.log("quantidade")
-        console.log(quantidade)
+    const popup = document.querySelector(".popUp");
+    const titulo = popup.querySelector(".modeloTitulo");
+    const subtitulo = popup.querySelector(".modeloSubtitulo");
+    const specs = popup.querySelector(".specsModelo");
+    specs.innerHTML = "";
 
-        if (chartPopUp !== null) {
-            chartPopUp.destroy();
-            chartPopUp = null;
-        }
-
-        const popup = document.querySelector(".popUp");
-        const titulo = popup.querySelector(".modeloTitulo");
-        const subtitulo = popup.querySelector(".modeloSubtitulo");
-        const specs = popup.querySelector(".specsModelo")
-        specs.innerHTML = "";
-
-
-        // gráfico de torta da quantidade de alertas
-        var options = {
-            series: [criticoCount, altoCount, baixoCount],
-            chart: {
-                width: "70%",
-                type: 'pie',
-            },
-            labels: ['Crítico', 'Alto', 'Baixo'],
-            responsive: [{
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        width: 40,
-                        height: 40
-                    },
-                    legend: {
-                        position: 'bottom'
-                    }
+    // gráfico de torta da quantidade de alertas
+    var options = {
+        series: [criticoCount, altoCount, baixoCount],
+        chart: {
+            width: "70%",
+            type: 'pie',
+        },
+        labels: ['Crítico', 'Alto', 'Baixo'],
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 40,
+                    height: 40
+                },
+                legend: {
+                    position: 'bottom'
                 }
-            }]
-        };
-        chartPopUp = new ApexCharts(document.querySelector(".graficoTorta"), options);
-        chartPopUp.render();
+            }
+        }]
+    };
+    chartPopUp = new ApexCharts(document.querySelector(".graficoTorta"), options);
+    chartPopUp.render();
 
+    console.log("Estrutura completa de componentesPorMaquina:");
+    console.log(componentesPorMaquina);
 
-        const maquina = componentesPorMaquina[quantidade];
-        debugger
-        // Componentes desta máquina
-        for (let tipoComponente in maquina.componentes) {
-            const componente = maquina.componentes[tipoComponente];
-            specs.innerHTML += "<b>" + componente.tipo + "</b>" + ": " + componente.componente + "<br>";
-        }
-        specs.innerHTML += "<br>"; // Espaço entre máquinas
+    
+    let chavesMaquinas = Object.keys(componentesPorMaquina);
+    console.log("Chaves disponíveis:", chavesMaquinas);
+    console.log("PopupId recebido:", popupId);
+    
+    
+    let indiceMaquina = (popupId) % chavesMaquinas.length;
+    let chaveMaquinaEscolhida = chavesMaquinas[indiceMaquina];
+    let maquinaEscolhida = componentesPorMaquina[chaveMaquinaEscolhida];
+    
+    console.log("Índice da máquina escolhida:", indiceMaquina);
+    console.log("Chave da máquina escolhida:", chaveMaquinaEscolhida);
+    console.log("Máquina escolhida:", maquinaEscolhida);
 
-        subtitulo.textContent = "Especificações";
-        titulo.textContent = nomeModelo;
-        popup.style.display = "flex";
+    if (!maquinaEscolhida) {
+        specs.innerHTML = "Erro: Máquina não encontrada nos componentes";
+        console.error("Máquina não encontrada para o popupId:", popupId);
+        return;
     }
 
+    
+    const propriedadesControle = ['contador', 'nomeModelo', 'criticoCount', 'altoCount', 'baixoCount'];
+    
+    let componentesEncontrados = false;
+    
+        
+    
+    for (let propriedade in maquinaEscolhida) {
+        
+        if (propriedadesControle.includes(propriedade)) {
+            continue;
+        }
+        
+        const componente = maquinaEscolhida[propriedade];
+        
+        
+        if (componente && typeof componente === 'object' && componente.tipo && componente.componente) {
+            specs.innerHTML += "<b>" + componente.tipo + "</b>" + ": " + componente.componente + "<br>";
+            componentesEncontrados = true;
+        }
+    }
+    
+    if (!componentesEncontrados) {
+        specs.innerHTML += "Nenhum componente encontrado para esta máquina";
+        console.warn("Nenhum componente encontrado para a máquina:", chaveMaquinaEscolhida);
+    }
+
+    subtitulo.textContent = "Especificações";
+    titulo.textContent = `${nomeModelo}`;
+    popup.style.display = "flex";
+}
+
+function abrirPopUp() {
+    if (document.querySelector(".popUp").style.display == "none") {
+        document.querySelector(".popUp").style.display = "block";
+    }
+    else { 
+        document.querySelector(".popUp").style.display = "none";
+    }
+}
 
 
 
@@ -547,14 +598,14 @@
     }
 
 
-    // Fechei as chaves da função 04-05-25
+    
     function modalAdicionar(idMaquina) {
 
-        // Plotar as opções do Select
+        
         document.body.onload = () => {
             var json_filiais = null;
 
-            // Insere no Select as opções de Filiais
+            
             fetch(`/cadastros/metricas/listar/filiais/${sessionStorage.idUsuario}`, {
                 method: "GET",
                 headers: {
@@ -573,7 +624,7 @@
                         for (let i = 0; i < json_filiais.length; i++) {
                             const filialAtual = json_filiais[i];
 
-                            // Insere cada opção 
+                            
                             select_filial.innerHTML += `<option value="${filialAtual.idFilial}">${filialAtual.logradouro}(${filialAtual.complemento}) - ${filialAtual.terminal}/${filialAtual.setor} - ${filialAtual.estado} </option>`
                         }
                     })
@@ -583,7 +634,7 @@
                 });
         };
     }
-    // Ao selecionar, listar as máquinas
+    
     document.getElementById('select_filial').onchange = () => {
 
         var selectFilial = document.getElementById("select_filial");
