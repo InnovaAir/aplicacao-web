@@ -5,6 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../styles/dashKatia.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/sidebar_marcolino.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
 
     <title>Análise em tempo Real</title>
     <script src="../js/backendFeitosa.js"></script>
@@ -29,138 +34,253 @@
 </head>
 
 <body>
-    <nav class="navigation-bar">
-        ada
-    </nav>
-
-    <div class="main">
-        <div class="title">
-            <h1>Análise em Tempo Real</h1>
-            <p>* Exibindo os aeroportos a qual você possui acesso</p>
-        </div>
-
-        <div class="indicators">
-            <div class="kpi">
-                <p>Endereço com mais alertas</p>
-                <h2 id="indicator_address">GRU Airport</h2>
-            </div>
-
-            <div class="kpi red">
-                <p>Totens em alerta</p>
-                <h2 id="indicator_alert">0</h2>
-            </div>
-
-            <div class="kpi green">
-                <p>Totens em atividade</p>
-                <h2 id="indicator_activity">0</h2>
-            </div>
-
-            <div class="kpi blue">
-                <p>Totens ociosos</p>
-                <h2 id="indicator_idle">0</h2>
-            </div>
-
-            <div class="kpi">
-                <p>Totens desligados</p>
-                <h2 id="indicator_off">0</h2>
-            </div>
-        </div>
-
-        <div class="dashboard">
-            <div class="totem-list">
-                <div class="box">
-                    <h1>Lista de Totens</h1>
-                    <div class="custom-select-wrapper">
-                        <select id="select_endereco" onchange="plotarListaMaquinas(document.getElementById('select_endereco').value)" class="custom-select">
-                            <option>Todos os aeroportos</option>
-                            <option>GRU Airport</option>
-                            <option>CGH Airport</option>
-                            <option>SDU Airport</option>
-                        </select>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1 sidebar d-flex flex-column align-items-center">
+                <div id="sidebar">
+                    <div class="logo d-flex justify-content-between align-items-center w-100 px-2">
+                        <img src="../assets/InnovaairWhite.png" alt="Logo" class="img-fluid" />
+                        <button id="closeSidebar" class="btn btn-sm btn-outline-primary">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
                     </div>
 
-                    <div class="legend">
-                        <p>Legenda de alertas:</p>
+                    <a href="./dashKatia.html"><i class="fas fa-home"></i> <span>Tempo Real</span></a>
+                    <a onclick="limparSessao()" href="../index.html"><strong>Sair</strong></a>
+                </div>
+            </div>
 
-                        <div class="container">
-                            <div class="box">
-                                <div class="ball-green ball"></div>
-                                <p>Normal</p>
-                            </div>
+            <div class="col-md-11 p-2">
+                <div id="main_frame" class="main">
+                    <div class="title">
+                        <h1>Análise em Tempo Real</h1>
+                        <p>* Exibindo os aeroportos a qual você possui acesso</p>
+                    </div>
 
-                            <div class="box">
-                                <div class="ball-yellow ball"></div>
-                                <p>Baixo</p>
-                            </div>
+                    <div class="indicators">
+                        <div class="kpi">
+                            <p>Endereço com mais alertas</p>
+                            <h2 id="indicator_address">GRU Airport</h2>
+                        </div>
 
-                            <div class="box">
-                                <div class="ball-orange ball"></div>
-                                <p>Alto</p>
-                            </div>
+                        <div class="kpi red">
+                            <p>Totens em alerta</p>
+                            <h2 id="indicator_alert">0</h2>
+                        </div>
 
+                        <div class="kpi green">
+                            <p>Totens em atividade</p>
+                            <h2 id="indicator_activity">0</h2>
+                        </div>
+
+                        <div class="kpi blue">
+                            <p>Totens ociosos</p>
+                            <h2 id="indicator_idle">0</h2>
+                        </div>
+
+                        <div class="kpi">
+                            <p>Totens desligados</p>
+                            <h2 id="indicator_off">0</h2>
+                        </div>
+                    </div>
+
+                    <div class="dashboard">
+                        <div class="totem-list">
                             <div class="box">
-                                <div class="ball-red ball"></div>
-                                <p>Crítico</p>
+                                <h1>Lista de Totens</h1>
+                                <div class="custom-select-wrapper">
+                                    <select id="select_endereco"
+                                        onchange="plotarListaMaquinas(document.getElementById('select_endereco').value)"
+                                        class="custom-select">
+                                        <option>Todos os aeroportos</option>
+                                        <option>GRU Airport</option>
+                                        <option>CGH Airport</option>
+                                        <option>SDU Airport</option>
+                                    </select>
+                                </div>
+
+                                <div class="legend">
+                                    <p>Legenda de alertas:</p>
+
+                                    <div class="container">
+                                        <div class="box">
+                                            <div class="ball-green ball"></div>
+                                            <p>Normal</p>
+                                        </div>
+
+                                        <div class="box">
+                                            <div class="ball-yellow ball"></div>
+                                            <p>Baixo</p>
+                                        </div>
+
+                                        <div class="box">
+                                            <div class="ball-orange ball"></div>
+                                            <p>Alto</p>
+                                        </div>
+
+                                        <div class="box">
+                                            <div class="ball-red ball"></div>
+                                            <p>Crítico</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <p>*Selecione um endereço específico para ver melhor a situação dos totens</p>
+
+                            <div class="list">
+                                <div class="header">
+                                    <p>Nome do Totem</p>
+                                    <p>Uso CPU</p>
+                                    <p>Uso RAM</p>
+                                    <p>Uso Disco</p>
+                                    <p>Rede</p>
+                                    <p>Analise</p>
+                                    <p>Log de Alertas</p>
+                                    <p></p>
+                                </div>
+                                <div class="line"></div>
+                                <div id="lines" class="lines">
+                                    <div style="display: none;" class="totem red">
+                                        <p>desktop-csf912</p>
+                                        <div class="box">
+                                            <div class="ball-orange ball"></div>
+                                            <span>77%</span>
+                                        </div>
+                                        <div class="box">
+                                            <div class="ball-yellow ball"></div>
+                                            <span>88%</span>
+                                        </div>
+                                        <div class="box">
+                                            <div class="ball-green ball"></div>
+                                            <span>12%</span>
+                                        </div>
+                                        <div class="box">
+                                            <div class="ball-green ball"></div>
+                                            <span>12%</span>
+                                        </div>
+                                        <p>10</p>
+                                        <button>Analisar</button>
+                                        <button>Abrir</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert-chart">
+                            <h1>Alertas por Categoria</h1>
+                            <p>*Exibindos os alertas do momento e não solucionados</p>
+                            <div class="indicators">
+                                <div class="kpi">
+                                    <p>Categoria com mais alerta</p>
+                                    <h2 id="indicator_category">CPU</h2>
+                                </div>
+                                <div class="kpi">
+                                    <p>Total de alertas</p>
+                                    <h2 id="indicator_totalalerts">120</h2>
+                                </div>
+                            </div>
+                            <div id="alert-chart" class="graph"></div>
                         </div>
                     </div>
                 </div>
-                <p>*Selecione um endereço específico para ver melhor a situação dos totens</p>
 
-                <div class="list">
-                    <div class="header">
-                        <p>Nome do Totem</p>
-                        <p>Uso CPU</p>
-                        <p>Uso RAM</p>
-                        <p>Uso Disco</p>
-                        <p>Rede</p>
-                        <p>Analise</p>
-                        <p>Log de Alertas</p>
-                        <p></p>
-                    </div>
-                    <div class="line"></div>
-                    <div id="lines" class="lines">
-                        <div style="display: none;" class="totem red"> 
-                            <p>desktop-csf912</p>
-                            <div class="box">
-                                <div class="ball-orange ball"></div>
-                                <span>77%</span>
-                            </div>
-                            <div class="box">
-                                <div class="ball-yellow ball"></div>
-                                <span>88%</span>
-                            </div>
-                            <div class="box">
-                                <div class="ball-green ball"></div>
-                                <span>12%</span>
-                            </div>
-                            <div class="box">
-                                <div class="ball-green ball"></div>
-                                <span>12%</span>
-                            </div>
-                            <p>10</p>
-                            <button>Analisar</button>
-                            <button>Abrir</button>
+                <div id="analise_frame" style="display: none;" class="main">
+                    <div class="titleFrame">
+                        <div class="left">
+                            <h1>Análise de Desempenho: <span><i id="nome_totem">Nome do Totem</i></span></h1>
+                            <p>* Exibindo análises referente as últimas capturas</p>
+                            <p id="ultima_captura_totem">* Última captura realizada há: 30 Minutos</p>
                         </div>
+                        <div class="rigth">
+                            <button onclick="closeDashboardDisplay()" class="button">
+                                <span class="X"></span>
+                                <span class="Y"></span>
+                                <div class="close">Close</div>
+                            </button>
+                        </div>
+                    </div>
 
+                    <div class="block">
+                        <div class="child">
+                            <div class="list1">
+                                <div class="kpi">
+                                    <p>USO CPU</p>
+                                    <h2 id="cpu_totem">1</h2>
+                                </div>
+                                <div class="kpi">
+                                    <p>USO RAM</p>
+                                    <h2 id="ram_totem">1</h2>
+                                </div>
+                                <div class="kpi">
+                                    <p>USO DISCO</p>
+                                    <h2 id="disco_totem">1</h2>
+                                </div>
+                                <div class="kpi">
+                                    <p>USO REDE</p>
+                                    <h2 id="rede_totem">1</h2>
+                                </div>
+                                <div class="kpi">
+                                    <p>TEMPO DE ATIVIDADE</p>
+                                    <h2 id="tempo_atividade_totem">1</h2>
+                                </div>
+                            </div>
+                            <div class="list2">
+                                <div class="kpi">
+                                    <p>Modelo</p>
+                                    <h2 id="modelo_totem">1</h2>
+                                </div>
+                                <div class="kpi">
+                                    <p>IP</p>
+                                    <h2 id="ip_totem">1</h2>
+                                </div>
+                                <div class="kpi">
+                                    <p>Endereço MAC</p>
+                                    <h2 id="mac_totem">1</h2>
+                                </div>
+                            </div>
+                            <div class="list">
+                                <div class="header">
+                                    <p>Nome do Processo</p>
+                                    <p>Tempo de CPU</p>
+                                    <p>Uso de RAM (Mb)</p>
+                                    <p>Tempo Ativo</p>
+                                    <p>ID</p>
+                                </div>
+                                <div class="line"></div>
+                                <div id="linesProcesso">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child overflow-y">
+                            <div class="box-chart">
+                                <h2>Processador</h2>
+                                <p>Porcentagem de Uso</p>
+                                <div class="chart" id="chart-cpu">
+                                </div>
+                            </div>
+                            <div class="box-chart">
+                                <h2>Memória RAM</h2>
+                                <p>Porcentagem de Uso</p>
+                                <div class="chart" id="chart-ram">
+                                </div>
+                            </div>
+                            <div class="box-chart">
+                                <h2>Disco de Armazenamento</h2>
+                                <p>Porcentagem de Uso</p>
+                                <div class="chart" id="chart-disco">
+                                </div>
+                            </div>
+                            <div class="box-chart">
+                                <h2>Placa de Rede</h2>
+                                <p>Megabytes de Download</p>
+                                <div class="chart" id="chart-rede">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="alert-chart">
-                <h1>Alertas por Categoria</h1>
-                <p>*Exibindos os alertas do momento e não solucionados</p>
-                <div class="indicators">
-                    <div class="kpi">
-                        <p>Categoria com mais alerta</p>
-                        <h2 id="indicator_category">CPU</h2>
-                    </div>
-                    <div class="kpi">
-                        <p>Total de alertas</p>
-                        <h2 id="indicator_totalalerts">120</h2>
-                    </div>
                 </div>
-                <div id="alert-chart" class="graph"></div>
             </div>
         </div>
     </div>
@@ -177,6 +297,26 @@
 
     setInterval(() => {
         plotarListaMaquinas(document.getElementById("select_endereco").value)
-        console.log(document.getElementById("select_endereco").value)
     }, 3000);
+</script>
+<!-- JQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap Bundle JS (popper + bootstrap) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    let expanded = false;
+
+    $('#sidebar').on('click', function () {
+        if (!expanded) {
+            $(this).addClass('expanded');
+            expanded = true;
+        }
+    });
+
+    $('#closeSidebar').on('click', function (e) {
+        e.stopPropagation(); // Evita reabrir imediatamente
+        $('#sidebar').removeClass('expanded');
+        expanded = false;
+    });
 </script>

@@ -22,6 +22,7 @@ function plotarEnderecos() {
 
             totensBanco.forEach(totem => {
                 totem.totem.dados = { cpu: [], ram: [], disco: [], rede: [] }
+                totem.totem.momento = []
 
                 if (totem.idEndereco == idEnderecoExistente) {
                     endereco.totens.push(totem.totem)
@@ -60,11 +61,20 @@ function inserirMaquina(req, res) {
                         if (totemAtual.numeroSerial == totemEnviado.placa_mae) {
 
                             var dados = totemAtual.dados;
+                            var momento = totemAtual.momento;
 
                             console.log(dados.length)
 
                             totemAtual.ip = totemEnviado.ip;
-                            totemAtual.momento = totemEnviado.momento.split(".")[0];
+                            totemAtual.tempoAtivo = totemEnviado.tempoAtivo
+                            totemAtual.processos = totemEnviado.processos
+                            
+                            if (momento.length < 8) {
+                                momento.push(totemEnviado.momento.split(".")[0])
+                            } else {
+                                momento.splice(0, 1)
+                                momento.push(totemEnviado.momento.split(".")[0])
+                            }
 
                             if (dados.cpu.length < 8) {
                                 // Inserir dados

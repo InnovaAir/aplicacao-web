@@ -131,6 +131,7 @@ body {
 }
 
 .title {
+    margin-top: 3vh;
     display: flex;
     flex-direction: column;
 
@@ -320,5 +321,245 @@ body {
         .graph {
             width: 95%;
         }
+    }
+}
+
+/* CSS DO MODAL/FRAME DE ANALISE DO TOTEM */
+.overflow-y {
+    overflow: auto;
+}
+
+.main .titleFrame {
+    display: grid;
+    margin-top: 3vh;
+    width: 100%;
+    grid-template-columns: 90% 10%;
+}
+
+.main .titleFrame .rigth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main .block {
+    display: grid;
+    width: 100%;
+    overflow: hidden;
+
+    grid-template-columns: 60% 35%;
+
+
+    .child {
+        display: flex;
+        flex-direction: column;
+        height: 85vh;
+        gap: 2.5vh;
+
+        .box-chart {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            .chart {
+                width: 100%;
+            }
+
+        }
+
+        .list {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 1vh;
+
+            p {
+                color: black;
+            }
+
+            .header {
+                display: grid;
+                width: 100%;
+                grid-template-columns: 26% 18% 18% 18% 8%;
+                justify-content: center;
+                gap: 1.25% 1.25%;
+                padding: 0vw 0.5vw;
+                font-weight: bold;
+            }
+
+            .line {
+                width: 100%;
+                height: 0.15vh;
+                background-color: var(--color-text-1);
+            }
+
+            .lines {
+                display: flex;
+                width: 98.5%;
+                flex-direction: column;
+                gap: 1vh;
+
+                .totem {
+                    display: grid;
+                    width: 100%;
+                    grid-template-columns: 10% 12% 12% 12% 12% 10% 12% 10%;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 1.25% 1.25%;
+                    padding: 0.5vw 0.5vw;
+                    border-radius: 1vw;
+                    font-weight: bold;
+
+                    .box {
+                        display: flex;
+                        flex-direction: row;
+                        width: 100%;
+                        gap: 15%;
+                    }
+
+                    p {
+                        word-break: break-all;
+                    }
+
+                    button {
+                        appearance: none;
+                        border: 0.1vw solid black;
+                        height: 100%;
+                        font-weight: bold;
+                        font-size: var(--p-size);
+                        border-radius: 10%;
+                        background: none;
+                    }
+
+                    span {
+                        font-size: var(--p-size);
+                    }
+
+                }
+
+                .red {
+                    background-color: #ff000050;
+                }
+
+                .green {
+                    background-color: #00A10050;
+                }
+
+                .blue {
+                    background-color: #5271FF50;
+                }
+            }
+        }
+
+        .list1 {
+            display: grid;
+            grid-template-columns: 15% 15% 15% 15% 30%;
+            grid-gap: 2%;
+            grid-row-gap: 10%;
+        }
+
+        .list2 {
+            display: grid;
+            grid-template-columns: 30% 31% 33%;
+            grid-gap: 2%;
+        }
+    }
+
+    .kpi {
+        width: 100;
+        display: flex;
+        padding: 2vh 0vh;
+        flex-direction: column;
+        border: 0.2vw solid #DDE1E6;
+        justify-content: center;
+        align-items: center;
+
+        p {
+            color: var(--color-text-4);
+            font-size: var(--title-kpi-size);
+        }
+
+        h2 {
+            font-size: 1.5vw;
+        }
+    }
+}
+
+
+/* CLOSE BUTTON */
+
+.button {
+    position: relative;
+    width: 4em;
+    height: 4em;
+    border: none;
+    background: rgba(0, 0, 0, 0.11);
+    border-radius: 5px;
+    transition: background 0.5s;
+    cursor: pointer;
+
+}
+
+.X {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2em;
+    height: 1.5px;
+    background-color: rgb(255, 255, 255);
+    transform: translateX(-50%) rotate(45deg);
+    cursor: pointer;
+
+}
+
+.Y {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2em;
+    height: 1.5px;
+    background-color: #fff;
+    transform: translateX(-50%) rotate(-45deg);
+    cursor: pointer;
+}
+
+.close {
+    position: absolute;
+    display: flex;
+    padding: 0.8rem 1.5rem;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-50%);
+    top: -70%;
+    left: 50%;
+    width: 3em;
+    height: 1.7em;
+    font-size: 12px;
+    background-color: rgb(19, 22, 24);
+    color: rgb(187, 229, 236);
+    border: none;
+    border-radius: 3px;
+    pointer-events: none;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: rgb(211, 21, 21);
+}
+
+.button:active {
+    background-color: rgb(130, 0, 0);
+}
+
+.button:hover>.close {
+    animation: close 0.2s forwards 0.25s;
+}
+
+@keyframes close {
+    100% {
+        opacity: 0;
     }
 }

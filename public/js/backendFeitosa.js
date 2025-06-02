@@ -10,6 +10,7 @@ var alertasREDE = 0;
 
 var firstTime = true;
 
+
 var enderecos_usuario = []
 
 function getEnderecosUsuario(idUsuario) {
@@ -102,12 +103,13 @@ async function plotarListaMaquinas(selection) {
 
                 totem.turnedOFF = false;
 
-                if (totem.momento != undefined) {
-                    const datetimeData = new Date(totem.momento);
+                var momento = totem.momento[totem.momento.length - 1];
+
+                if (momento != undefined) {
+                    const datetimeData = new Date(momento);
                     const datetimeNow = new Date(); // ou new Date(nowDatetime) se você tiver a variável
                     const diferencaMinutos = Math.floor((datetimeNow.getTime() - datetimeData.getTime()) / (1000 * 60));
 
-                    console.log(`Diferença: ${diferencaMinutos} minutos`);
                     if (diferencaMinutos >= 15) {
                         // Está desligado
                         totem.turnedOFF = true;
@@ -138,9 +140,9 @@ async function plotarListaMaquinas(selection) {
                         var cpu_color, ram_color, disco_color, rede_color;
 
                         // Definição das pontuação de crítico, alto, baixo e estado (alerta, normal ou ociosa)
-                        if (cpu > limiteMaxCPU) { cpu_color = "ball-red"; pontuacao += 99; isOnAlert = true }
+                        if (cpu > limiteMaxCPU) { cpu_color = "ball-red"; pontuacao += 99; isOnAlert = true; totalAlertas++; alertasCPU++ }
                         else if (cpu > MedianaCPU && cpu <= limiteMaxCPU) { pontuacao += 50; isOnAlert = true; cpu_color = "ball-orange"; totalAlertas++; alertasCPU++ }
-                        else if (cpu > limiteMinCPU && cpu <= MedianaCPU) { pontuacao += 20; cpu_color = "ball-yellow"; totalAlertas++; alertasCPU++ }
+                        else if (cpu > limiteMinCPU && cpu <= MedianaCPU) { pontuacao += 20; cpu_color = "ball-yellow" }
                         else if (cpu <= 10) { pontuacao += -10; isIdle = true }
                         else { cpu_color = "ball-green" }
 
@@ -238,29 +240,28 @@ async function plotarListaMaquinas(selection) {
                     const totalAlertas = 1;
 
                     listTotensHtml += `
-                                    <div class="totem ${idle} ${alert}">
-                                        <p>${hostname}</p>
-                                        <div class="box">
-                                            <div class="${color_cpu} ball"></div>
-                                            <span>${percent_cpu}%</span>
-                                        </div>
-                                        <div class="box">
-                                            <div class="${color_ram} ball"></div>
-                                            <span>${percent_ram}%</span>
-                                        </div>
-                                        <div class="box">
-                                            <div class="${color_disco} ball"></div>
-                                            <span>${percent_disco}%</span>
-                                        </div>
-                                        <div class="box">
-                                            <div class="${color_rede} ball"></div>
-                                            <span>${download_rede}Mb</span>
-                                        </div>
-                                        <button style="cursor: pointer;" onclick=openDashboardDisplay()>Analisar</button>
-                                        <button style="cursor: pointer;">Abrir</button>
-                                    </div>
-                                `
-
+                        <div class="totem ${idle} ${alert}">
+                            <p>${hostname}</p>
+                            <div class="box">
+                                <div class="${color_cpu} ball"></div>
+                                <span>${percent_cpu}%</span>
+                            </div>
+                            <div class="box">
+                                <div class="${color_ram} ball"></div>
+                                <span>${percent_ram}%</span>
+                            </div>
+                            <div class="box">
+                                <div class="${color_disco} ball"></div>
+                                <span>${percent_disco}%</span>
+                            </div>
+                            <div class="box">
+                                <div class="${color_rede} ball"></div>
+                                <span>${download_rede}Mb</span>
+                            </div>
+                            <button style="cursor: pointer;" data-totem='${JSON.stringify(totem)}' onclick="openDashboardDisplay(this.dataset.totem)">Analisar</button>
+                            <button style="cursor: pointer;">Abrir</button>
+                        </div>
+                    `;
                 }
             });
 
@@ -340,7 +341,7 @@ function getEnderecoMaisAlerta() {
 
     for (let i = 0; i < enderecos_usuario[1].length; i++) {
         const enderecoAtual = enderecos_usuario[1][i];
-        
+
         if (enderecoAtual.totalAlertas > maiorValor) {
             maiorValor = enderecoAtual.totalAlertas;
             indexMaior = i;
@@ -409,8 +410,314 @@ async function getDatetime() {
 }
 
 
-function openDashboardDisplay() {
+function openDashboardDisplay(totemData) {
+    document.getElementById("analise_frame").style.display = 'flex';
+    document.getElementById("main_frame").style.display = 'none';
 
+    const totem = JSON.parse(totemData);
+    console.log(totem); //
+
+    arrayRede = []
+
+    totem.dados.rede.forEach(dado => {
+        dado = Math.floor(dado / 1024 / 1024)
+
+        arrayRede.push(dado)
+    });
+
+    totem.dados.rede = arrayRede
+
+    var optionsCPU = {
+        series: [{
+            data: totem.dados.cpu
+        }],
+        chart: {
+            id: 'realtime',
+            type: 'line',
+            width: '100%',
+            animations: {
+                enabled: true,
+                easing: 'linear',
+                dynamicAnimation: {
+                    speed: 250
+                }
+            },
+            toolbar: {
+                show: false
+            },
+            zoom: {
+                enabled: false
+            }
+        },
+        stroke: {
+            curve: 'smooth',
+            width: 5
+        },
+        dataLabels: {
+            enabled: false
+        },
+        markers: {
+            size: 4,
+            hover: {
+                sizeOffset: 4
+            }
+        },
+        xaxis: {
+            type: 'datetime',
+            categories: totem.momento,
+            labels: {
+                format: 'HH:mm:ss'
+            }
+        },
+        yaxis: {
+            min: 0,
+            max: 100
+        },
+        legend: {
+            show: false
+        }
+    };
+
+    var optionsRAM = {
+        series: [{
+            data: totem.dados.ram
+        }],
+        chart: {
+            id: 'realtime',
+            type: 'line',
+            width: '100%',
+            animations: {
+                enabled: true,
+                easing: 'linear',
+                dynamicAnimation: {
+                    speed: 250
+                }
+            },
+            toolbar: {
+                show: false
+            },
+            zoom: {
+                enabled: false
+            }
+        },
+        stroke: {
+            curve: 'smooth',
+            width: 5
+        },
+        dataLabels: {
+            enabled: false
+        },
+        markers: {
+            size: 4,
+            hover: {
+                sizeOffset: 4
+            }
+        },
+        xaxis: {
+            type: 'datetime',
+            categories: totem.momento,
+            labels: {
+                format: 'HH:mm:ss'
+            }
+        },
+        yaxis: {
+            min: 0,
+            max: 100
+        },
+        legend: {
+            show: false
+        }
+    };
+
+    var optionsDISCO = {
+        series: [{
+            data: totem.dados.disco
+        }],
+        chart: {
+            id: 'realtime',
+            type: 'line',
+            width: '100%',
+            animations: {
+                enabled: true,
+                easing: 'linear',
+                dynamicAnimation: {
+                    speed: 250
+                }
+            },
+            toolbar: {
+                show: false
+            },
+            zoom: {
+                enabled: false
+            }
+        },
+        stroke: {
+            curve: 'smooth',
+            width: 5
+        },
+        dataLabels: {
+            enabled: false
+        },
+        markers: {
+            size: 4,
+            hover: {
+                sizeOffset: 4
+            }
+        },
+        xaxis: {
+            type: 'datetime',
+            categories: totem.momento,
+            labels: {
+                format: 'HH:mm:ss'
+            }
+        },
+        yaxis: {
+            min: 0,
+            max: 100
+        },
+        legend: {
+            show: false
+        }
+    };
+
+    var optionsREDE = {
+        series: [{
+            data: totem.dados.rede
+        }],
+        chart: {
+            id: 'realtime',
+            type: 'line',
+            width: '100%',
+            animations: {
+                enabled: true,
+                easing: 'linear',
+                dynamicAnimation: {
+                    speed: 250
+                }
+            },
+            toolbar: {
+                show: false
+            },
+            zoom: {
+                enabled: false
+            }
+        },
+        stroke: {
+            curve: 'smooth',
+            width: 5
+        },
+        dataLabels: {
+            enabled: false
+        },
+        markers: {
+            size: 4,
+            hover: {
+                sizeOffset: 4
+            }
+        },
+        xaxis: {
+            type: 'datetime',
+            categories: totem.momento,
+            labels: {
+                format: 'HH:mm:ss'
+            }
+        },
+        yaxis: {
+            min: 0,
+            max: 200
+        },
+        legend: {
+            show: false
+        }
+    };
+
+    var chartCPU = new ApexCharts(document.getElementById("chart-cpu"), optionsCPU);
+    var chartRAM = new ApexCharts(document.getElementById("chart-ram"), optionsRAM);
+    var chartDISCO = new ApexCharts(document.getElementById("chart-disco"), optionsDISCO);
+    var chartREDE = new ApexCharts(document.getElementById("chart-rede"), optionsREDE);
+    chartCPU.render();
+    chartRAM.render();
+    chartDISCO.render();
+    chartREDE.render();
+
+    var segundos = Math.floor(Math.round(totem.tempoAtivo, 0));
+    var minutos = Math.floor(segundos / 60);
+    var horas = Math.floor(minutos / 60);
+    var dias = Math.floor(horas / 24);
+
+    var tempo = '';
+
+    if (segundos < 60) {
+        tempo = "Menos de 1 minuto"
+    } else {
+        if (minutos < 60) {
+            tempo = `${minutos} minutos`
+        } else {
+            if (horas > 24) {
+                tempo = `${dias} dias e ${horas % 24} horas`
+            } else {
+                tempo = `${horas} horas e ${minutos % 60} minutos`
+            }
+        }
+    }
+
+    var ultima_captura = totem.momento[totem.momento.length - 1]
+
+    document.getElementById("nome_totem").innerHTML = totem.hostname;
+    document.getElementById("ultima_captura_totem").innerHTML = `Última captura realizada em: ${ultima_captura}`;
+    document.getElementById("cpu_totem").innerHTML = totem.dados.cpu[totem.dados.cpu.length - 1];
+    document.getElementById("ram_totem").innerHTML = totem.dados.ram[totem.dados.ram.length - 1];
+    document.getElementById("disco_totem").innerHTML = totem.dados.disco[totem.dados.disco.length - 1];
+    document.getElementById("rede_totem").innerHTML = totem.dados.rede[totem.dados.rede.length - 1];
+    document.getElementById("tempo_atividade_totem").innerHTML = `${tempo}`;
+    document.getElementById("modelo_totem").innerHTML = "dde";
+    document.getElementById("ip_totem").innerHTML = totem.ip;
+    document.getElementById("mac_totem").innerHTML = totem.enderecoMac;
+
+    var processHTML = ``;
+
+    totem.processos.forEach(processo => {
+        var nome = processo[0].ProcessName;
+        var cpu = processo[1]["CPU(s)"];
+        var ram = processo[2]["Memory(MB)"];
+        var tempo = processo[3]["Uptime"].split(".")[0];
+        var id = processo[4]["Id"];
+
+        processHTML += `
+        <div class="header">
+            <p>${nome}</p>
+            <p>${Math.floor(Number(cpu.split(",")[0]) / 60)} Minutos</p>
+            <p>${ram}Mb</p>
+            <p>${tempo}</p>
+            <p>${id}</p> 
+        </div>
+        `
+    });
+
+    document.getElementById("linesProcesso").innerHTML = processHTML;
+    // Atualiza o gráfico a cada segundo
+    /*  var intervalRuns = 0;
+     var interval = window.setInterval(function () {
+         intervalRuns++;
+ 
+         // Gera novos dados
+         getNewData();
+ 
+         // Atualiza o gráfico
+         chart.updateSeries([{
+             data: data
+         }]);
+ 
+         // Para o teste automatizado (se necessário)
+         if (intervalRuns === 60 && window.isATest === true) {
+             clearInterval(interval);
+         }
+     }, 2000); */
+}
+
+function closeDashboardDisplay() {
+    document.getElementById("analise_frame").style.display = 'none';
+    document.getElementById("main_frame").style.display = 'flex';
 }
 
 /* salvar lógica veia */
