@@ -219,7 +219,11 @@
         .then(alerta => console.log(alerta));
 
     let componenteArray = [];
-    fetch(`/models/infoModelos/1`, {
+    let ultimoComponente = null;
+    let ultimoID = null;
+
+
+    fetch(`/models/infoModelos/2`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json"
@@ -241,15 +245,16 @@
             let quantidade = 0;
             let ultimoItem = null;
 
-            // este for está passando modelo por modelo e pegando quantos alertas de cpu, ram e disco tem, ou seja, ele percorre cada objeto modelo do fetch. (independente de existir alerta ou não)
+            let maquinasContadas = new Set();
+            componenteArray = [];
+
             for (let i = 0; i < contador.length; i++) {
                 const item = contador[i];
                 let modeloAtual = item.nomeModelo;
+                let idAtual = item.idMaquina;
 
-                // modelo mudou
                 if (modeloAtual !== modeloAnterior) {
                     if (modeloAnterior !== null && ultimoItem !== null) {
-
                         ultimoItem.altoCount = altoCount;
                         ultimoItem.baixoCount = baixoCount;
                         ultimoItem.criticoCount = criticoCount;
@@ -257,10 +262,11 @@
                         ultimoItem.ramCount = ramCount;
                         ultimoItem.discoCount = discoCount;
                         ultimoItem.quantidade = quantidade;
-                        console.log(ultimoItem)
+                        maquinasContadas.clear;
                         resultados.push(ultimoItem);
                     }
 
+                    // Reiniciar contagens
                     cpuCount = 0;
                     ramCount = 0;
                     discoCount = 0;
@@ -269,63 +275,51 @@
                     baixoCount = 0;
                     altoCount = 0;
                     criticoCount = 0;
-
-
                     modeloAnterior = modeloAtual;
                     ultimoItem = item;
                 }
 
-                if (
-                    item.gravidade == "Crítico") {
-                    criticoCount++
+                if (!maquinasContadas.has(idAtual)) {
+                    maquinasContadas.add(idAtual);
+                    quantidade++;
                 }
-                if (
-                    item.gravidade == "Alto") {
-                    altoCount++
-                }
-                if (
-                    item.gravidade == "Moderado") {
-                    baixoCount++
-                }
+                if (item.gravidade == "critico") criticoCount++;
+                if (item.gravidade == "alta") altoCount++;
+                if (item.gravidade == "baixa") baixoCount++;
+
+                if (item.componente == "Processador") cpuCount++;
+                if (item.componente == "RAM") ramCount++;
+                if (item.componente == "Armazenamento") discoCount++;
 
 
-                if (
-                    item.componente == "Processador") {
-                    cpuCount++
-                }
-                if (
-                    item.componente == "Memória RAM") {
-                    ramCount++
-                }
-                if (
-                    item.componente == "Disco Rígido") {
-                    discoCount++
-                }
-                quantidade++;
-                componenteArray.push({ tipo: item.componente, componente: item.especificacao, idMaquina: item.idMaquina }) // esse array existe fora deste for loop
+
+
+                // Este push deve SEMPRE acontecer, pode haver múltiplos componentes para a mesma máquina
+                componenteArray.push({
+                    tipo: item.componente,
+                    componente: item.especificacao,
+                    idMaquina: item.idMaquina,
+                    fkFilial: item.fkFilial
+                });
             }
 
-
-            console.log("Componentes:")
-            console.log(componenteArray)
-
+            // Finaliza último modelo
             if (ultimoItem !== null) {
+                ultimoItem.altoCount = altoCount;
+                ultimoItem.baixoCount = baixoCount;
+                ultimoItem.criticoCount = criticoCount;
                 ultimoItem.cpuCount = cpuCount;
                 ultimoItem.ramCount = ramCount;
                 ultimoItem.discoCount = discoCount;
                 ultimoItem.quantidade = quantidade;
-                ultimoItem.altoCount = altoCount;
-                ultimoItem.baixoCount = baixoCount;
-                ultimoItem.criticoCount = criticoCount;
                 resultados.push(ultimoItem);
             }
 
-
-
-            console.log("Metricas FULL:");
-            console.log(resultados);
+            console.log("Componentes:", componenteArray);
+            console.log("Alarmes FULL:", resultados);
             return resultados;
         })
+
         .then(resultados => {
             //-----------------------------------
 
@@ -429,17 +423,33 @@
                 botaoPop.innerHTML = `<img id="${contadorPopUp}" onclick="abrirPopUp()" style="height: 1.5em; cursor:pointer;"
                                     src="../assets/fullscreen.png" alt="" loading="eager">`;
 
-                let componentesMesmoID = [];
+                let componentesPorMaquina = {};
+
                 for (let i = 0; i < componenteArray.length; i++) {
                     let componenteAtual = componenteArray[i];
+                    let idMaquina = componenteAtual.idMaquina;
 
-                    if (componenteAtual.idMaquina == contadorPopUp) {
-                        componentesMesmoID.push(componenteAtual)
+                    // Inicializa a máquina se não existir
+                    if (!componentesPorMaquina[idMaquina]) {
+                        componentesPorMaquina[idMaquina] = {
+                            componentes: {},
+                            contador: item.quantidade,
+                            nomeModelo: item.nomeModelo,      // 'item' está disponível no escopo
+                            criticoCount: item.criticoCount,  // Usando 'item' ao invés de variáveis locais
+                            altoCount: item.altoCount,
+                            baixoCount: item.baixoCount
+                        };
+                    }
+                    if (!componentesPorMaquina[idMaquina].componentes[componenteAtual.tipo]) {
+                        componentesPorMaquina[idMaquina].componentes[componenteAtual.tipo] = componenteAtual;
+
                     }
                 }
+                console.log("Componentes do pop up1:")
+                console.log(componentesPorMaquina) // tipo do especificação == object
 
                 botaoPop.addEventListener("click", () => {
-                    abrirPopUpComModelo(item.nomeModelo, componentesMesmoID, item.criticoCount, item.altoCount, item.baixoCount);
+                    abrirPopUpComModelo(item.nomeModelo, componentesPorMaquina, item.criticoCount, item.altoCount, item.baixoCount, item.quantidade);
                 });
                 lista.appendChild(botaoPop)
             }
@@ -461,7 +471,19 @@
     }
 
     let chartPopUp = null; // variável global para o gráfico
-    function abrirPopUpComModelo(nomeModelo, especificacao, criticoCount, altoCount, baixoCount) {
+    function abrirPopUpComModelo(nomeModelo, componentesPorMaquina, criticoCount, altoCount, baixoCount, quantidade) {
+        console.log("nomeModelo")
+        console.log(nomeModelo)
+        console.log("componentesPorMaquina")
+        console.log(componentesPorMaquina)
+        console.log("criticoCount")
+        console.log(criticoCount)
+        console.log("altoCount")
+        console.log(altoCount)
+        console.log("baixoCount")
+        console.log(baixoCount)
+        console.log("quantidade")
+        console.log(quantidade)
 
         if (chartPopUp !== null) {
             chartPopUp.destroy();
@@ -473,8 +495,7 @@
         const subtitulo = popup.querySelector(".modeloSubtitulo");
         const specs = popup.querySelector(".specsModelo")
         specs.innerHTML = "";
-        console.log("Componentes do pop up:")
-        console.log(especificacao) // tipo do especificação == object
+
 
         // gráfico de torta da quantidade de alertas
         var options = {
@@ -500,9 +521,16 @@
         chartPopUp = new ApexCharts(document.querySelector(".graficoTorta"), options);
         chartPopUp.render();
 
-        for (i = 0; i < especificacao.length; i++) {
-            specs.innerHTML += "<b>" + especificacao[i].tipo + "</b>" + ": " + especificacao[i].componente + "<br>";
+
+        const maquina = componentesPorMaquina[quantidade];
+        debugger
+        // Componentes desta máquina
+        for (let tipoComponente in maquina.componentes) {
+            const componente = maquina.componentes[tipoComponente];
+            specs.innerHTML += "<b>" + componente.tipo + "</b>" + ": " + componente.componente + "<br>";
         }
+        specs.innerHTML += "<br>"; // Espaço entre máquinas
+
         subtitulo.textContent = "Especificações";
         titulo.textContent = nomeModelo;
         popup.style.display = "flex";
