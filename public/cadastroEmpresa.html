@@ -11,6 +11,32 @@
     <link rel="icon" href="./public/assets/favicon.ico" type="favicon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
+        .box_voltar {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        }
+
+        .voltar .box {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background-color: #e0e0e0; /* Ajuste conforme seu tema */
+        color: #333;
+        padding: 10px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        }
+
+        .voltar .box:hover {
+        background-color: #d0d0d0;
+        }
+
+        .voltar img {
+        width: 20px;
+        height: 20px;
+        }
         .input-erro {
             border: 1px solid red !important;
         }
@@ -38,10 +64,9 @@
 </head>
 
 <body>
-    <button class="botao_abrir" onclick="abrirMenu()">☰</button>
 
     <div class="barra_lateral" id="menu">
-        <div class="fechar_barrinha">
+        <!-- <div class="fechar_barrinha">
             <button class="botao_fechar" onclick="fecharMenu()">✖</button>
         </div>
         <div class="logo_container">
@@ -55,25 +80,12 @@
                     <li><a href="cadastroEmpresa.html">Cadastrar Empresa</a></li>
                 </u>
             </div>
-        </div>
-    </div>
-    <div class="menu_mobile">
-        <button class="botao_menu_mobile" onclick="abrirMenuMobile()">☰</button>
-        <div class="logo_container">
-            <img src="./assets/InnovaairWhite.png" alt="" />
-        </div>
-
-    </div>
-    <div class="novo_menu">
-        <a href="visaoGeral.html" >Visão geral</a>
-        <a href="tempoReal.html">Tempo real</a>
-        <a href="listaMaquinas.html">Lista de máquinas</a>
-        <a href="cadastrarMaquina.html" class="agora">Cadastrar Máquina</a>
+        </div> -->
     </div>
 
     <div class="tela" id="tela">
         <div class="logo_container">
-          <span class="CommumText" id="Mensagem_Usuario">Olá, Usuário!</span>
+          <span class="CommumText" id="Mensagem_Usuario"></span>
         </div>
 
         <div class="box_cadastros">
@@ -110,6 +122,11 @@
                             <button class="botao" onclick="validarFormulario()">Cadastrar</button>
                         </div>
                     </div>
+                    <div class="botoes">
+                        <div id="cD" class="cadastrarDisp">
+                            <button class="botao" onclick="voltar()">Voltar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -119,6 +136,9 @@
 
 </html>
 <script>
+    function voltar(){
+        window.location.href = "./index.html";
+    }
     function abrirMenu() {
         document.getElementById("menu").classList.add("menu-aberto");
         document.getElementById("tela").classList.add("tela-movida");
