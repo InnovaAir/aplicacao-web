@@ -1,7 +1,7 @@
 var database = require("../database/config");
 
 function dashGerenteDados(idUsuario){
-        var instrucaoSql = `select * from dashRobertoModelos where idUsuario is null or idUsuario = ${idUsuario}`;
+        var instrucaoSql = `select * from dashRobertoModelos where idUsuario = ${idUsuario}`;
     console.log("Executando instrução:", instrucaoSql)
     return database.executar(instrucaoSql);
 }
