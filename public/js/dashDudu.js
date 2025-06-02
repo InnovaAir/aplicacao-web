@@ -10,7 +10,6 @@ let filtroTerminalSelecionado = null;
 let filtroDesempenhoSelecionado = null;
 let campoSelecionado = null;
 let ordemCrescente = true;
-let periodos = 90;
 
 const filtros = document.querySelectorAll('.filtro');
 filtros.forEach(filtro => {
@@ -97,7 +96,7 @@ function carregarMaquinas(dados) {
 
 function atualizarKPIsTotais() {
   let qtdMaquinas = dados_json.length;
-  let qtdMaqMenorDsmp = dados_json.filter(dado => dado.desempenho < 30).length;
+  let qtdMaqMenorDsmp = dados_json.filter(dado => dado.desempenho < 35).length;
   let totalAlertas = dados_json.reduce((acc, curr) => acc + (parseInt(curr.critico) || 0), 0);
 
   document.getElementById('kpi_total').innerText = qtdMaquinas;
@@ -106,10 +105,8 @@ function atualizarKPIsTotais() {
 }
 
 async function dashDudu() {
-  periodos = slc_periodo.value;
-  console.log("Periodos :", periodos)
   try {
-    const res = await fetch(`/dashDuduRoutes/dash-dudu/${sessionStorage.idUsuario}?Periodo=${periodos}`, {
+    const res = await fetch(`/dashDuduRoutes/dash-dudu/${sessionStorage.idUsuario}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });

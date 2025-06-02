@@ -20,7 +20,7 @@
         <div class="box_esquerdaCima"> <!-- Inicio Box esquerda cima-->
           
           <div class="div_titulo1">
-            <h1>Gráfico de Desempenho por Filial</h1>
+            <h1>Gráfico de Desempenho por Aeroporto</h1>
 
           </div>
 
@@ -40,22 +40,24 @@
 
                 <div class="custom-select-wrapper">
                   <div class="div_slcFil">
-                    <select id="slc_filial" onchange="aplicarFiltro(document.getElementById('slc_filial').value)" class="custom-select">  
-                        <option value="">Filial</option>
-                            <option>Todos os aeroportos</option>
-                            <option>GRU Airport</option>
-                            <option>Galeão Airport</option>
+                    <select id="slc_filial" onchange="aplicarFiltro(document.getElementById('slc_filial').value)"class="custom-select">  
+                      <option value="">Filial</option>
+                      <option selected>Todos os Aeroportos</option>
+                      <option>GRU Airport</option>
+                      <option>Galeão Airport</option>
                     </select>
+                    <p>*Selecione um Aeroporto</p>
                   </div>
                 </div>
 
-           <select id="slc_periodo" onchange="dashDudu()">
+
+           <!-- <select id="slc_periodo" onchange="dashDudu()">
               <option value="1" selected>Últimas 24h</option>
               <option value="7">Última semana</option>
               <option value="15">Últimos 15 dias</option>
               <option value="30">Último mês</option>
               <option value="90">Últimos 3 meses</option>
-            </select>
+            </select> -->
 
 
             <!-- <div class="div_slcAlerta">
@@ -70,13 +72,13 @@
           <div class="div_kpis">
             
               <div class="kpi_caixa"> 
-                <p class="kpi_titulo">Máquinas com<br>Baixo Desempenho</p>
+                <p class="kpi_titulo">Totens com<br>Baixo Desempenho</p>
                 <hr class="kpi_linha">
                 <p class="kpi_valor"><span id="kpi_baixo"></span></p>
               </div>
 
               <div class="kpi_caixa">
-                <p class="kpi_titulo">Total de máquinas</p>
+                <p class="kpi_titulo">Total de Totens</p>
                 <hr class="kpi_linha">
                 <p class="kpi_valor"><span id="kpi_total"></span></p>
               </div>
@@ -95,7 +97,7 @@
         <div class="box_esquerdaBaixo"> <!-- Inicio Box esquerda baixo-->
 
           <div class="div_titulo2">
-              <span><b>Desempenho total das máquinas das Filiais (%)</b></span>
+              <span><b>Desempenho Total dos Totens dos Aeroportos (%)</b></span>
             </div>
             <div class="div_dashboard">
               <canvas id="graficoDesempenho" width="600" height="400"></canvas>
@@ -108,7 +110,7 @@
 
       <div class="box_direita"> <!-- Inicio Box direita-->
         <div class="div_titulo3">
-            <span><b>Lista  das máquinas por filial</b></span>
+            <span><b>Lista dos Totens por Aeroportos</b></span>
         </div>
 
         <div class="div_legenda">
@@ -134,7 +136,7 @@
 
           <div class="tabela_cabecalho">
             <div class="coluna" onclick="ordenarColuna('totem')">Nome do Tótem <span class="seta">⇅</span></div>
-            <div class="coluna" onclick="ordenarColuna('terminal')">Terminal <span class="seta">⇅</span></div>
+            <div class="coluna" onclick="ordenarColuna('terminal')">Aeroporto <span class="seta">⇅</span></div>
             <div class="coluna" onclick="ordenarColuna('critico')">Alertas Crítico <span class="seta">⇅</span></div>
             <div class="coluna" onclick="ordenarColuna('alto')">Alertas <br> Alto <span class="seta">⇅</span></div>
             <div class="coluna" onclick="ordenarColuna('baixo')">Alertas <br> Baixo <span class="seta">⇅</span></div>
@@ -151,7 +153,7 @@
 
         <div class="div_botaoCSV">
 
-          <button>Baixar Relatório CSV</button>
+          <button>Baixar Relatório</button>
 
         </div>
 

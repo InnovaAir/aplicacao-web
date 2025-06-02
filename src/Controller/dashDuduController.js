@@ -15,8 +15,7 @@ const calcularDesempenho = (linha) => {
 const obterDesempenho = async (req, res) => {
   try {
     const idUsuario = req.params.idUsuario;
-    const periodos = req.query.Periodo;
-    const dados = await dashDuduModel.listarDesempenhoPorFilial(idUsuario, periodos);
+    const dados = await dashDuduModel.listarDesempenhoPorFilial(idUsuario);
 
     console.log("Dados model:", dados);
 

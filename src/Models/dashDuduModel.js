@@ -1,6 +1,6 @@
 var database = require("../database/config");
 
-function listarDesempenhoPorFilial(idUsuario, periodos) {
+function listarDesempenhoPorFilial(idUsuario) {
   var sql = `
     select * from dashRobertoDesempenho WHERE usuario = ${idUsuario};
   `;
