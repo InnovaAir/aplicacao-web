@@ -1,15 +1,18 @@
 var database = require("../database/config");
 
 function plotarFilial(fkCliente){
-    var instrucaoSql = `select f.idFilial, f.terminal, COUNT(a.idCapturaAlerta) AS total_alertas
+    var instrucaoSql = `
+                        select en.complemento, f.idFilial, f.terminal, COUNT(a.idCapturaAlerta) AS total_alertas
                         from captura_alerta a
                         join metrica me on a.fkMetrica = me.idMetrica
                         join componente c on me.fkComponente = c.idComponente
                         join maquina m on c.fkMaquina = m.idMaquina
                         join filial f on m.fkFilial = f.idFilial
+                        join endereco en on f.fkEndereco = en.idEndereco
                         where f.fkcliente = ${fkCliente}
-                        group by f.terminal, f.idFilial
-                        order by total_alertas desc;`;
+                        group by f.terminal, f.idFilial, en.bairro
+                        order by total_alertas desc;
+                        `;
     console.log("Executando instrução:", instrucaoSql);
     return database.executar(instrucaoSql);
 }

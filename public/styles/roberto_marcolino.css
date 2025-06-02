@@ -11,7 +11,7 @@ body {
     color: white;
     text-align: center;
     padding: 1rem;
-    border-right: 2px solid #ffffff;
+    border: 2px solid #ffffff;
     background-color: #00126f;
 }
 .no-gap-row {

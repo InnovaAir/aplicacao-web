@@ -1,6 +1,11 @@
 let chartMensal;
 let chartFiliais;
 
+let garficoFilial = false;
+let atualizar = null;
+
+sessionStorage.setItem("filial", 0);
+
 function gerarGraficos(){
 Chart.register(ChartDataLabels);
 
@@ -83,7 +88,7 @@ chartMensal = new Chart(ctxMensal, {
                     weight: 'bold', // negrito (opcional)
                 }
             },
-            suggestedMax: 100
+            suggestedMax: 120
         }
     }
     },
@@ -168,8 +173,10 @@ function trocarMensal(evt, elements) {
         const firstElement = elements[0];
         const label = chartFiliais.data.labels[firstElement.index];
         const ids = chartFiliais.data.ids[firstElement.index];
+        sessionStorage.setItem("filial", ids);
 
         var clientefk = sessionStorage.fkCliente;
+        garficoFilial = true;
 
         fetch("/marcolino/trocarGraficoMensal", {   
             method: "POST",
@@ -234,7 +241,22 @@ function trocarMensal(evt, elements) {
             console.log(alertas);
 
             chartMensal.data.labels = mes;
+            chartMensal.update('none');
+
+            for(var i = 0; i < chartFiliais.data.labels.length; i++){
+                if (chartFiliais.data.ids[i] == ids) {    
+                    div_mensal.innerHTML = `Alertas Mensais <b> ${chartFiliais.data.labels[i]} </b> (Últimos 6 meses)`;
+                    break;
+                }
+            }
+
+            for (var i = 0; i < chartMensal.data.datasets.length; i++) {
+                if(!chartMensal.data.datasets[i].label){
+                    chartMensal.data.datasets[i].label = "sem dados";
+                }
+            }
             chartMensal.update();
+
         }).catch((erro) => {
                 console.error("Erro no retorno do mensal:", erro);
         });
@@ -298,7 +320,10 @@ function plotarkpi(){
 }
 
 function plotarMensal(){
+
     var clientefk = sessionStorage.fkCliente;
+    garficoFilial = false;
+
     fetch("/marcolino/plotarMensal", {
         method: "POST",
         headers: {
@@ -354,7 +379,14 @@ function plotarMensal(){
 
     chartMensal.data.labels = mes;
     chartMensal.update();
-
+    
+    for (var i = 0; i < chartMensal.data.datasets.length; i++) {
+        if(!chartMensal.data.datasets[i].label){
+            chartMensal.data.datasets[i].label = "sem dados"
+        }
+    }
+    chartMensal.update();
+    div_mensal.innerHTML = `Alertas Mensais (Últimos 6 meses)`;
     console.log(ano);
     console.log(mes);
     console.log(componente);
@@ -384,11 +416,22 @@ function plotarFilial(){
         var alertas = [];
         var cores = [];
         var ids = [];
-
+        
         for(var i = 0; i < dados.length; i++){
             var filial = dados[i];
+            var filialMin = filial.terminal;
+            var complementoMin = filial.complemento;
+
+            filialMin = filialMin.toLowerCase();
+            complementoMin = complementoMin.toLowerCase();
+
+            if(filialMin == complementoMin){
+                filiais.push(filial.terminal);
+            }else{
+                filiais.push(filial.terminal+" - "+filial.complemento);
+            }
+
             ids.push(filial.idFilial)
-            filiais.push(filial.terminal);
             alertas.push(filial.total_alertas);
             if(filial.total_alertas >=0 && filial.total_alertas <= 20){
                 cores.push("green");
@@ -403,8 +446,92 @@ function plotarFilial(){
         chartFiliais.data.labels = filiais; 
         chartFiliais.data.datasets[0].data = alertas;
         chartFiliais.data.datasets[0].backgroundColor = cores;
-        chartFiliais.update(); 
+        chartFiliais.update();
     }).catch((erro) => {
             console.error("Erro no retorno das filiais:", erro);
     });
+}
+
+
+
+
+
+
+
+
+
+
+function iniciarAtualizacaoAutomatica() {
+    if (atualizar !== null) return;
+
+    atualizar = setInterval(() => {
+        console.log("Atualizando os gráficos automaticamente...");
+        if (typeof plotarkpi === 'function') plotarkpi();
+
+        if (!garficoFilial) { // Se garficoFilial for false, chama plotarMensal
+            if (typeof plotarMensal === 'function') plotarMensal();
+        } else {
+            // Se garficoFilial for true, tenta chamar trocarMensal para a filial da sessão
+            const idFilialDaSessao = sessionStorage.filial;
+
+            if (idFilialDaSessao && idFilialDaSessao !== '0') { // Verifica se temos um ID de filial válido na sessão
+                // Pré-requisito: chartFiliais e seus dados devem estar disponíveis e populados neste momento.
+                if (typeof chartFiliais !== 'undefined' && chartFiliais.data && Array.isArray(chartFiliais.data.ids) && Array.isArray(chartFiliais.data.labels)) {
+                    
+                    // Encontra o índice do idFilialDaSessao em chartFiliais.data.ids
+                    // Importante: sessionStorage armazena strings. Ajuste a comparação se os IDs em chartFiliais.data.ids forem números.
+                    const targetIdString = String(idFilialDaSessao);
+                    let foundIndex = -1;
+
+                    for (let i = 0; i < chartFiliais.data.ids.length; i++) {
+                        if (String(chartFiliais.data.ids[i]) === targetIdString) {
+                            foundIndex = i;
+                            break;
+                        }
+                    }
+
+                    if (foundIndex !== -1) {
+                        // Cria a estrutura 'elements' simulada
+                        const mockedElements = [{
+                            index: foundIndex
+                            // A função trocarMensal também acessa chartFiliais.data.labels[firstElement.index]
+                            // Se essa label for importante, certifique-se que chartFiliais.data.labels[foundIndex] existe.
+                        }];
+
+                        console.log(`Chamando trocarMensal para atualização automática com ID: ${idFilialDaSessao} (índice encontrado: ${foundIndex})`);
+                        trocarMensal(null, mockedElements); // Chama a função original com os 'elements' simulados
+                    } else {
+                        console.warn(`ID da filial '${idFilialDaSessao}' (da sessionStorage) não encontrado em chartFiliais.data.ids. Não foi possível chamar trocarMensal automaticamente.`);
+                        // Fallback: talvez chamar plotarMensal() ou outra lógica
+                        if (typeof plotarMensal === 'function') plotarMensal();
+                    }
+                } else {
+                    console.warn("Não foi possível preparar a chamada para trocarMensal: 'chartFiliais' ou seus dados (ids, labels) não estão disponíveis ou no formato esperado.");
+                    // Fallback
+                    if (typeof plotarMensal === 'function') plotarMensal();
+                }
+            } else {
+                console.log("Atualização automática: Nenhuma filial específica na sessão (sessionStorage.filial não é um ID válido). Chamando plotarMensal geral.");
+                if (typeof plotarMensal === 'function') plotarMensal();
+            }
+        }
+
+        if (typeof plotarFilial === 'function') plotarFilial();
+
+        const agora = new Date();
+        const horas = agora.getHours().toString().padStart(2, '0');
+        const minutos = agora.getMinutes().toString().padStart(2, '0');
+        const segundos = agora.getSeconds().toString().padStart(2, '0');
+
+        div_attFilial.innerHTML = `<b>Atualizado as: ${horas}:${minutos}:${segundos}</b>`;
+        div_attMensal.innerHTML = `<b>Atualizado as: ${horas}:${minutos}:${segundos}</b>`;
+    }, 4000);
+}
+
+function pararAtualizacaoAutomatica() {
+    if (atualizar !== null) {
+        clearInterval(atualizar);
+        atualizar = null;
+        console.log("Atualização automática interrompida.");
+    }
 }

@@ -5,13 +5,13 @@ function plotarFilial(req, res){
     
     marcolinoModel.plotarFilial(fkCliente)
     .then((resultado) => {
-            res.json(resultado);
-        })
-        .catch((erro) => {
-            console.log("Erro ao obter dados das filiais:", erro);
-            res.status(500).json({ error: "Erro ao obter dados das filiais" });
-        });
-    }
+        res.json(resultado);
+    })
+    .catch((erro) => {
+        console.log("Erro ao obter dados das filiais:", erro);
+        res.status(500).json({ error: "Erro ao obter dados das filiais" });
+    });
+}
     
 function plotarMensal(req, res){
     fkCliente = req.body.fkClienteServer;

@@ -13,24 +13,22 @@
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0"></script>
 </head>
-<body onload="gerarGraficos(),mostrar()">
+<body onload="gerarGraficos(); mostrar(); iniciarAtualizacaoAutomatica();" onbeforeunload="pararAtualizacaoAutomatica();">
   <div class="container-fluid">
   <div class="row">
   <div class="col-md-1 sidebar d-flex flex-column align-items-center">  
     <div id="sidebar">
       <div class="logo d-flex justify-content-between align-items-center w-100 px-2">
-        <img src="../assets/InnovaairWhite.png" alt="Logo" class="img-fluid" />
+        <img src="../assets/InnovaairWhite.png" alt="Logo" class="img-fluid mx-auto d-block" />
         <button id="closeSidebar" class="btn btn-sm btn-outline-primary">
           <i class="fas fa-arrow-left"></i>
         </button>
       </div>
 
-      <a href="#"><i class="fas fa-home"></i> <span>Início</span></a>
-      <a href="#"><i class="fas fa-play"></i> <span>Vídeos</span></a>
-      <a href="#"><i class="fas fa-puzzle-piece"></i> <span>Componentes</span></a>
-      <a href="#"><i class="fas fa-font"></i> <span>Texto</span></a>
-      <a href="#"><i class="fas fa-info-circle"></i> <span>Sobre</span></a>
-      <a href="#"><i class="fas fa-comments"></i> <span>Contato</span></a>
+      <a href="roberto_Lucas.html"><i class="fas fa-triangle-exclamation"></i> <span>Alertas</span></a>
+      <a href="dashDudu.html"><i class="fas fa-chart-line"></i> <span>Desempenho</span></a>
+      <a href="dashRoberto.html"><i class="fas fa-microchip"></i> <span>Modelo de Componentes</span></a>
+      <a href="monitoramentoModelos.html"><i class="fas fa-desktop"></i> <span>Modelo de Maquinas</span></a>
       <a onclick="limparSessao()" href="../index.html"><strong>Sair</strong></a>
     </div>
   </div>
@@ -75,15 +73,26 @@
 
         <div class="row">
           <div class="col-md-7">
-            <h3 class="text-center fw-bold">Alertas Mensais (Últimos 6 meses)</h3>
-            <h5 class="text-center fw-bold">Clique na legenda para selecionar o tipo de componente</h5>
+            <h2 class="text-center fw-bold" id="div_mensal">Alertas Mensais (Últimos 6 meses)</h2>
+            <h4 class="text-center fw-bold">Clique na legenda para selecionar o tipo de componente</h4>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="text-start" id="div_attMensal">
+              </span>
+              <button type="button" class="btn btn-secondary" onclick="plotarMensal()">
+                Voltar para gráfico geral
+              </button>
+            </div>
             <div class="border rounded p-2" style="height: 59vh;">
               <canvas id="chartMensal" class="w-100 h-100"></canvas>
             </div>
           </div>
           <div class="col-md-5">
-            <h3 class="text-center fw-bold">Alertas por filiais (últimos 6 meses)</h3>
+            <h2 class="text-center fw-bold">Alertas por filiais (últimos 6 meses)</h2>
             <h5 class="text-center fw-bold">Clique na barra para selecionar os componentes de uma filial</h5>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="text-start" id="div_attFilial">
+              </span>
+            </div>
             <div class="border rounded p-2" style="height: 59vh;">
               <canvas id="chartFiliais" class="w-100 h-100"></canvas>
             </div>
