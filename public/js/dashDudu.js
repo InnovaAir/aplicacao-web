@@ -12,7 +12,6 @@ let campoSelecionado = null;
 let ordemCrescente = true;
 
 const filtros = document.querySelectorAll('.filtro');
-
 filtros.forEach(filtro => {
   filtro.addEventListener('click', () => {
     const selecionado = filtro.classList.contains('selecionado');
@@ -41,9 +40,9 @@ function aplicarFiltrosCombinados() {
   if (filtroDesempenhoSelecionado === "verde") {
     dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 70);
   } else if (filtroDesempenhoSelecionado === "amarelo") {
-    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 30 && maq.desempenho < 70);
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 35 && maq.desempenho < 70);
   } else if (filtroDesempenhoSelecionado === "vermelho") {
-    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho < 30);
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho < 35);
   }
 
   if (filtroTerminalSelecionado && filiais.includes(filtroTerminalSelecionado)) {
@@ -72,7 +71,7 @@ function carregarMaquinas(dados) {
     let classe = 'green';
     if (desempenho !== 'N/A') {
       const valor = parseInt(desempenho);
-      if (valor < 30) classe = 'red';
+      if (valor < 35) classe = 'red';
       else if (valor < 70) classe = 'yellow';
     }
 
@@ -112,6 +111,7 @@ async function dashDudu() {
       headers: { "Content-Type": "application/json" },
     });
     const data = await res.json();
+    console.log(data)
 
     data.sort((a, b) => {
       if (a.desempenho == null || isNaN(a.desempenho)) return 1;
@@ -243,7 +243,7 @@ function ordenarColuna(campo) {
     dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 30 && maq.desempenho < 70);
   } 
   else if (filtroDesempenhoSelecionado === "vermelho") {
-    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho < 30);
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho < 35);
   }
 
   if (filtroTerminalSelecionado && filiais.includes(filtroTerminalSelecionado)) {
@@ -278,9 +278,7 @@ function atualizarSetas() {
     }
 }
 
-
 //Dashboard
-
 function atualizarGraficoDesempenho(maquinas) {
   const terminais = {};
 
@@ -329,25 +327,19 @@ function atualizarGraficoDesempenho(maquinas) {
     });
   }
 
-  // Ordenando os terminais pelo desempenho
   desempenhoPorTerminal.sort((a, b) => a.desempenho - b.desempenho);
 
-  // Atualizando o gráfico com os dados
   grafico.data.labels = desempenhoPorTerminal.map(d => d.terminal);
   grafico.data.datasets[0].data = desempenhoPorTerminal.map(d => d.desempenho);
 
-  // Atualizando a cor de cada barra com base no desempenho
   grafico.data.datasets[0].backgroundColor = desempenhoPorTerminal.map(d => {
-    if (d.desempenho <= 35) return '#ff3333';  // Vermelho para desempenho <= 35%
-    if (d.desempenho <= 65) return '#ffff33';  // Amarelo para desempenho <= 65%
-    return '#00cc00';  // Verde para desempenho > 65%
+    if (d.desempenho <= 35) return '#ff3333';
+    if (d.desempenho <= 65) return '#ffff33';
+    return '#00cc00';
   });
 
-  grafico.update();  // Atualizando o gráfico
+  grafico.update();
 }
-
-
-
 
 Chart.register(ChartDataLabels);
 
@@ -426,10 +418,8 @@ const grafico = new Chart(ctx, {
   plugins: [ChartDataLabels]
 });
 
-
 window.onload = async function () {
   await getIdUsuario();
   await listarFiliais();
   await dashDudu();
 };
-

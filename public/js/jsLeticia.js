@@ -9,6 +9,9 @@ async function atualizarGrafico() {
         "July", "August", "September", "October", "November", "December"
     ];
 
+    const componenteSelecionado = document.getElementById("select_componente").value;
+    const enderecoSelecionado = document.getElementById("select_endereco").value;
+
     await fetch(`/dashLeticia/getAlertas`, {
         cache: 'no-store',
         method: "GET",
@@ -26,7 +29,7 @@ async function atualizarGrafico() {
     const indexAtual = meses.indexOf(mes);
     const mesPrevisto = meses[(indexAtual + 1) % 12];
 
-    // Calcula coeficiente angular (m) e linear (b) para regressão linear
+    // RAM
     var sumXY_ram = somar(multiplicar(categoriaNum, data_ram));
     var sumX_ram = somar(categoriaNum);
     var sumY_ram = somar(data_ram);
@@ -35,27 +38,17 @@ async function atualizarGrafico() {
 
     var m_ram = (sumXY_ram - (sumX_ram * sumY_ram) / n) / (sumX2_ram - (sumX_ram * sumX_ram) / n);
     var b_ram = media(data_ram) - m_ram * media(categoriaNum);
-
     var r2_ram = (calcularR2(categoriaNum, data_ram) * 100).toFixed(1);
-
     var valorPrevisto = categoriaNum[categoriaNum.length - 1] + 1;
     var previsao_ram = (m_ram * valorPrevisto + b_ram).toFixed();
+    if (isNaN(previsao_ram)) previsao_ram = null;
 
-    if (isNaN(previsao_ram)) {
-        console.log("Dados insuficientes para previsão");
-        previsao_ram = null;
-    }
-
-    // Somar alertas últimos 3 meses
     var somaUltimos3Meses_ram = 0;
     for (var i = data_ram.length - 3; i < data_ram.length; i++) {
-        if (i >= 0) {
-            somaUltimos3Meses_ram += data_ram[i];
-        }
+        if (i >= 0) somaUltimos3Meses_ram += data_ram[i];
     }
-    console.log("Soma alertas últimos 3 meses:", somaUltimos3Meses_ram);
 
-    var categoriasGrafico_ram = [
+    var categoriasGrafico = [
         categoria[0] || "",
         categoria[1] || "",
         categoria[2] || "",
@@ -70,41 +63,21 @@ async function atualizarGrafico() {
     ];
 
     // CPU
-
     var sumXY_cpu = somar(multiplicar(categoriaNum, data_cpu));
     var sumX_cpu = somar(categoriaNum);
     var sumY_cpu = somar(data_cpu);
-    var n = categoriaNum.length;
     var sumX2_cpu = somar(quadrado(categoriaNum));
 
     var m_cpu = (sumXY_cpu - (sumX_cpu * sumY_cpu) / n) / (sumX2_cpu - (sumX_cpu * sumX_cpu) / n);
     var b_cpu = media(data_cpu) - m_cpu * media(categoriaNum);
-
     var r2_cpu = (calcularR2(categoriaNum, data_cpu) * 100).toFixed(1);
-
-    var valorPrevisto = categoriaNum[categoriaNum.length - 1] + 1;
     var previsao_cpu = (m_cpu * valorPrevisto + b_cpu).toFixed();
+    if (isNaN(previsao_cpu)) previsao_cpu = null;
 
-    if (isNaN(previsao_cpu)) {
-        console.log("Dados insuficientes para previsão");
-        previsao_cpu = null;
-    }
-
-    // Somar alertas últimos 3 meses
     var somaUltimos3Meses_cpu = 0;
     for (var i = data_cpu.length - 3; i < data_cpu.length; i++) {
-        if (i >= 0) {
-            somaUltimos3Meses_cpu += data_cpu[i];
-        }
+        if (i >= 0) somaUltimos3Meses_cpu += data_cpu[i];
     }
-    console.log("Soma alertas últimos 3 meses:", somaUltimos3Meses_cpu);
-
-    var categoriasGrafico_cpu = [
-        categoria[0] || "",
-        categoria[1] || "",
-        categoria[2] || "",
-        mesPrevisto
-    ];
 
     var dadosGrafico_cpu = [
         data_cpu[0] || 0,
@@ -113,16 +86,27 @@ async function atualizarGrafico() {
         previsao_cpu ? Number(previsao_cpu) : 0
     ];
 
+    // Limpa gráfico anterior, se houver
+    document.querySelector("#graficoLinha").innerHTML = "";
+
+    let seriesSelecionadas = [];
+
+    if (componenteSelecionado === "ram" || componenteSelecionado === "todos") {
+        seriesSelecionadas.push({
+            name: 'RAM',
+            data: dadosGrafico_ram
+        });
+    }
+
+    if (componenteSelecionado === "cpu" || componenteSelecionado === "todos") {
+        seriesSelecionadas.push({
+            name: 'CPU',
+            data: dadosGrafico_cpu
+        });
+    }
+
     var options = {
-        series: [
-            {
-                name: 'RAM',
-                data: dadosGrafico_ram
-            },
-            {
-                name: 'CPU',
-                data: dadosGrafico_cpu
-            }],
+        series: seriesSelecionadas,
         chart: {
             height: 350,
             type: 'line',
@@ -136,7 +120,7 @@ async function atualizarGrafico() {
         },
         xaxis: {
             type: 'category',
-            categories: categoriasGrafico_ram
+            categories: categoriasGrafico
         },
         title: {
             text: 'Forecast',
@@ -164,10 +148,18 @@ async function atualizarGrafico() {
 
     const ram = Number(previsao_ram);
     const cpu = Number(previsao_cpu);
+    let total = 0;
 
-    if (!isNaN(ram) && !isNaN(cpu)) {
-        const total = ram + cpu;
-
+    if (componenteSelecionado === "ram") {
+        total = ram;
+        document.getElementById("componente").innerText = "RAM";
+        document.getElementById("percentual").innerText = "100%";
+    } else if (componenteSelecionado === "cpu") {
+        total = cpu;
+        document.getElementById("componente").innerText = "CPU";
+        document.getElementById("percentual").innerText = "100%";
+    } else {
+        total = ram + cpu;
         if (total > 0) {
             let maiorComponente = "";
             let percentual = 0;
@@ -186,24 +178,33 @@ async function atualizarGrafico() {
             document.getElementById("componente").innerText = `${maiorComponente}`;
             document.getElementById("percentual").innerText = `${percentual.toFixed(1)}%`;
         } else {
-            document.getElementById("ram_percent").innerText = `Sem dados`;
+            document.getElementById("percentual").innerText = `Sem dados`;
         }
-
-    } else {
-        document.getElementById("ram_percent").innerText = `Sem dados suficientes`;
     }
 
-
-    console.log("Último mês:", mes);
-    console.log("Próximo mês previsto:", mesPrevisto);
-    console.log("Previsão de alertas para o próximo mês:", previsao_ram);
-    console.log("R² (precisão):", r2_ram + "%");
-
-    document.getElementById("taxaPrecisao").innerText = `${r2_ram}%`;
-    document.getElementById("kpi_total").innerText = somaUltimos3Meses_ram + somaUltimos3Meses_cpu;
+    if (componenteSelecionado === "ram") {
+        document.getElementById("taxaPrecisao").innerText = `${r2_ram}%`;
+        document.getElementById("kpi_total").innerText = somaUltimos3Meses_ram;
+    } else if (componenteSelecionado === "cpu") {
+        document.getElementById("taxaPrecisao").innerText = `${r2_cpu}%`;
+        document.getElementById("kpi_total").innerText = somaUltimos3Meses_cpu;
+    } else {
+        document.getElementById("taxaPrecisao").innerText = `${r2_ram}%`;
+        document.getElementById("kpi_total").innerText = somaUltimos3Meses_ram + somaUltimos3Meses_cpu;
+    }
 
     atualizarKPI();
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const selectComponente = document.getElementById("select_componente");
+    const selectEndereco = document.getElementById("select_ano");
+
+    selectComponente.addEventListener("change", atualizarGrafico);
+    selectEndereco.addEventListener("change", atualizarGrafico);
+
+    atualizarGrafico();
+});
 
 function atualizarKPI() {
     var baixo_ram = 0;
@@ -217,42 +218,42 @@ function atualizarKPI() {
         cache: 'no-store',
         method: "GET",
     })
-    .then((resposta) => resposta.json())
-    .then((json) => {
-        console.log("Dados recebidos:", json);
+        .then((resposta) => resposta.json())
+        .then((json) => {
+            console.log("Dados recebidos:", json);
 
-        json.forEach(info => {
-            console.log(info.gravidade, info.componente, info.quantidade_alertas);
+            json.forEach(info => {
+                console.log(info.gravidade, info.componente, info.quantidade_alertas);
 
-            if (info.gravidade.toLowerCase() == "baixa" && info.componente.toLowerCase() == "ram") {
-                baixo_ram += info.quantidade_alertas;
-            }
+                if (info.gravidade.toLowerCase() == "baixa" && info.componente.toLowerCase() == "ram") {
+                    baixo_ram += info.quantidade_alertas;
+                }
 
-            if (info.gravidade.toLowerCase() == "alta" && info.componente.toLowerCase() == "ram") {
-                alto_ram += info.quantidade_alertas;
-            }
+                if (info.gravidade.toLowerCase() == "alta" && info.componente.toLowerCase() == "ram") {
+                    alto_ram += info.quantidade_alertas;
+                }
 
-            if (info.gravidade.toLowerCase() == "critico" && info.componente.toLowerCase() == "ram") {
-                critico_ram += info.quantidade_alertas;
-            }
+                if (info.gravidade.toLowerCase() == "critico" && info.componente.toLowerCase() == "ram") {
+                    critico_ram += info.quantidade_alertas;
+                }
 
-            if (info.gravidade.toLowerCase() == "baixa" && info.componente.toLowerCase() == "processador") {
-                baixo_cpu += info.quantidade_alertas;
-            }
+                if (info.gravidade.toLowerCase() == "baixa" && info.componente.toLowerCase() == "processador") {
+                    baixo_cpu += info.quantidade_alertas;
+                }
 
-            if (info.gravidade.toLowerCase() == "alta" && info.componente.toLowerCase() == "processador") {
-                alto_cpu += info.quantidade_alertas;
-            }
+                if (info.gravidade.toLowerCase() == "alta" && info.componente.toLowerCase() == "processador") {
+                    alto_cpu += info.quantidade_alertas;
+                }
 
-            if (info.gravidade.toLowerCase() == "critico" && info.componente.toLowerCase() == "processador") {
-                critico_cpu += info.quantidade_alertas;
-            }
+                if (info.gravidade.toLowerCase() == "critico" && info.componente.toLowerCase() == "processador") {
+                    critico_cpu += info.quantidade_alertas;
+                }
+            });
+
+            document.getElementById("nivel_baixo").innerText = `${baixo_ram + baixo_cpu}`;
+            document.getElementById("nivel_alto").innerText = `${alto_ram + alto_cpu}`;
+            document.getElementById("nivel_critico").innerText = `${critico_ram + critico_cpu}`;
         });
-
-        document.getElementById("nivel_baixo").innerText = `${baixo_ram + baixo_cpu}`;
-        document.getElementById("nivel_alto").innerText = `${alto_ram + alto_cpu}`;
-        document.getElementById("nivel_critico").innerText = `${critico_ram + critico_cpu}`;
-    });
 }
 
 function multiplicar(x, y) {
