@@ -71,14 +71,13 @@
                                         <option value="todos" selected>TODOS</option>
                                         <option value="cpu">CPU</option>
                                         <option value="ram">RAM</option>
-                                        <option value="disco">DISCO</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="titulo_alinhado">
-                                <span id="alertas_kpi_titulo"><b>Quantidade de alertas prováveis (pelo nível)</b></span>
-                                <span><i>*De acordo com a previsão do gráfico</i></span>
+                                <span id="alertas_kpi_titulo"><b>Quantidade de alertas capturados até o momento</b></span>
+                                <span><i>*De acordo com seus respectivos níveis</i></span>
                             </div>
 
                             <div class="lateral">
@@ -86,17 +85,17 @@
                                     <div class="box_kpi">
                                         <div class="box_kpi_nivel" style="background-color: #DEC828;">
                                             <span>Nível: Baixo</span>
-                                            <span id="numero_kpi"><b>10</b></span>
+                                            <span id="numero_kpi"><b id="nivel_baixo"></b></span>
                                         </div>
 
                                         <div class="box_kpi_nivel" style="background-color: #DE2828;">
                                             <span>Nível: Alto</span>
-                                            <span id="numero_kpi"><b>7</b></span>
+                                            <span id="numero_kpi"><b id="nivel_alto"></b></span>
                                         </div>
 
                                         <div class="box_kpi_nivel" style="background-color: #8258A6;">
                                             <span>Nível: Crítico</span>
-                                            <span id="numero_kpi"><b>2</b></span>
+                                            <span id="numero_kpi"><b id="nivel_critico"></b></span>
                                         </div>
                                     </div>
 
@@ -107,14 +106,14 @@
                                                 <span><i>*Análise trimestral</i></span>
                                             </div>
 
-                                            <div class="taxa_kpi">
+                                            <!-- <div class="taxa_kpi">
                                                 <div class="texto_taxa">
                                                     <span style="font-size: 20px;">Taxa de precisão:</span>
                                                 </div>
                                                 <div class="texto_taxa">
-                                                    <span id="taxaPrecisao" style="font-size: 25px;"><b>98.9%</b></span>
+                                                    <span id="taxaPrecisao" style="font-size: 25px;"><b></b></span>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="grafico">
                                             <div id="graficoLinha"></div>
@@ -124,23 +123,23 @@
 
                                 <div class="box_alinhada2">
                                     <div class="box_kpi_lateral kpi1">
-                                        <span>Total de alertas previstos</span>
-                                        <span id="numero_kpi"><b>19</b></span>
-                                        <span><i>*Aumento de 2.5% em relação ao ano passado </i></span>
+                                        <span>Total de alertas</span>
+                                        <span id="numero_kpi"><b id="kpi_total"></b></span>
+                                        <span><i>*Últimos 3 mêses</i></span>
                                     </div>
 
                                     <div class="subtitulo">
                                         <div class="box_kpi_lateral kpi2">
                                             <span>Componente com maior risco de alertas</span>
-                                            <span id="numero_kpi" class="borda_inferior"><b>CPU</b></span>
-                                            <span id="numero_kpi"><b>51%</b></span>
-                                            <span><i>*Predominância em (%)</i></span>
+                                            <span id="numero_kpi" class="borda_inferior"><b  id="componente"></b></span>
+                                            <span id="numero_kpi"><b id="percentual"></b></span>
+                                            <span><i>*Predominância (%) em relação ao total</i></span>
                                         </div>
                                     </div>
 
                                     <div class="box_kpi_lateral kpi3">
-                                        <span>Mês de maior pico</span>
-                                        <span id="numero_kpi"><b>Novembro/2025</b></span>
+                                        <span>Taxa de precisão da previsão</span>
+                                        <span style="font-size: 25px;"><b id="taxaPrecisao"></b></span>
                                     </div>
                                 </div>
                             </div>
