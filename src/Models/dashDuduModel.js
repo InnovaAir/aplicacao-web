@@ -1,8 +1,8 @@
 var database = require("../database/config");
 
-function listarDesempenhoPorFilial(idUsuario) {
+function listarDesempenhoPorFilial(idUsuario, periodos) {
   var sql = `
-    select * from dashRobertoDesempenho WHERE usuario = ${idUsuario};
+    select * from dashRobertoDesempenho WHERE usuario = ${idUsuario} AND momento >= NOW() - INTERVAL ${periodos} DAY;
   `;
 
   const params = [];

@@ -38,18 +38,23 @@
                         </select>
                     </div> -->
 
-            <div class="div_slcFil">
-              <select id="slc_filial" onchange="aplicarFiltro()">  
-                  <option value="">Filial</option>
-              </select>
+                <div class="custom-select-wrapper">
+                  <div class="div_slcFil">
+                    <select id="slc_filial" onchange="aplicarFiltro(document.getElementById('slc_filial').value)" class="custom-select">  
+                        <option value="">Filial</option>
+                            <option>Todos os aeroportos</option>
+                            <option>GRU Airport</option>
+                            <option>Galeão Airport</option>
+                    </select>
+                  </div>
+                </div>
 
-            </div>
-
-           <select id="slc_periodo" onchange="aplicarFiltroPeriodo()">
-              <option value="atual" selected>Últimas 24h</option>
-              <option value="ultimos_15_dias">Últimos 15 dias</option>
-              <option value="um_mes_atras">Último mês</option>
-              <option value="tres_meses_atras">Últimos 3 meses</option>
+           <select id="slc_periodo" onchange="dashDudu()">
+              <option value="1" selected>Últimas 24h</option>
+              <option value="7">Última semana</option>
+              <option value="15">Últimos 15 dias</option>
+              <option value="30">Último mês</option>
+              <option value="90">Últimos 3 meses</option>
             </select>
 
 

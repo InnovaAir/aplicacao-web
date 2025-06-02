@@ -481,6 +481,9 @@ function plotarDados(json_dados, qtdMaquinas){
                 tabela_perc_3.innerHTML = Math.round(modelosOrdenados[2].qtdAlertas*100/(qtdMaquinas[2] * 4 * 24 * periodo * 7)) + "%"
                 tabela_perc_4.innerHTML = Math.round(modelosOrdenados[3].qtdAlertas*100/(qtdMaquinas[3] * 4 * 24 * periodo * 7)) + "%"
                 tabela_perc_5.innerHTML = Math.round(modelosOrdenados[4].qtdAlertas*100/(qtdMaquinas[4] * 4 * 24 * periodo * 7)) + "%"
+                valor_kpi1.innerHTML = modelosOrdenados[0].especificacao
+                valor_kpi2.innerHTML = qtdMaquinas[0]
+                valor_kpi3.innerHTML = Math.round(modelosOrdenados[0].qtdAlertas*100/(qtdMaquinas[0] * 4 * 24 * periodo * 7)) + "%"
 }
 
 async function aplicarFiltro(){

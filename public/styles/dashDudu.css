@@ -150,9 +150,10 @@ body {
 }
 
 .div_listaMaq{
-    /* border: 1px solid #010176; */
     height: 60vh;
     margin-right: 1vw;
+    outline: 3px solid #010176; /* fica fora da borda */
+    outline-offset: 4px;
 }
 
 .div_legenda {
@@ -343,6 +344,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1vh;
+    margin-top: 1vh;
 }
 
 .totem {
@@ -373,3 +375,37 @@ body {
     border: 2px solid rgba(0, 170, 0, 1);
     border-radius: 15px;
 }
+
+.custom-select-wrapper {
+    position: relative;
+    width: fit-content;
+}
+
+.custom-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    padding: 1vw;
+    padding-right: 3vw;
+    /* espaço extra para a seta */
+    border: none;
+    border-bottom: 0.4vh solid #B0BEC5;
+
+    font-size: 1vw;
+    color: #555;
+    background-color: transparent;
+
+    background-image: url(../assets/arrow-sm-down-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    background-position: right 1vw center;
+    background-size: 1.2vw;
+    color: black;
+    cursor: pointer;
+}
+
+.custom-select:focus {
+    outline: none;
+    border-bottom: 0.25vh solid #1976d2;
+}
+
