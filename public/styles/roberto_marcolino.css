@@ -11,20 +11,7 @@ body {
     color: white;
     text-align: center;
     padding: 1rem;
-}
-.alert-cpu {
-    background-color: red;
     border-right: 2px solid #ffffff;
-}
-.alert-ram {
-    background-color: #00126f;
-    border-right: 2px solid #ffffff;
-}
-.alert-disco {
-    background-color: #00126f;
-    border-right: 2px solid #ffffff;
-}
-.alert-rede {
     background-color: #00126f;
 }
 .no-gap-row {

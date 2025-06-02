@@ -1,33 +1,58 @@
-var dashboardsModel = require("../Models/dashboardsModel");
+var marcolinoModel = require("../Models/marcolinoModel");
 
-function dashGerenteDados(req, res){
-    idUsuario = req.body.idUsuarioServer;
-
-    dashboardsModel.dashGerenteDados(idUsuario)
-            .then((resultado) => {
-                res.json(resultado);
-            })
-            .catch((erro) => {
-                console.log("Erro ao obter dados do gerente:", erro);
-                res.status(500).json({ error: "Erro ao obter dados do gerente" });
-            });
+function plotarFilial(req, res){
+    fkCliente = req.body.fkClienteServer;
+    
+    marcolinoModel.plotarFilial(fkCliente)
+    .then((resultado) => {
+            res.json(resultado);
+        })
+        .catch((erro) => {
+            console.log("Erro ao obter dados das filiais:", erro);
+            res.status(500).json({ error: "Erro ao obter dados das filiais" });
+        });
+    }
+    
+function plotarMensal(req, res){
+    fkCliente = req.body.fkClienteServer;
+    marcolinoModel.plotarMensal(fkCliente)
+    .then((resultado) => {
+        res.json(resultado);
+    })
+    .catch((erro) => {
+        console.log("Erro ao obter dados de alertas:", erro);
+        res.status(500).json({ error: "Erro ao obter dados de alertas" });
+    });
 }
-
-function dashGerenteDadosQtd(req, res){
-    modelo1 = req.body.modelo1Server;
-    modelo5 = req.body.modelo5Server;
-    idUsuario = req.body.idUsuarioServer;
-    dashboardsModel.dashGerenteDadosQtd(modelo1, modelo2, modelo3, modelo4, modelo5, idUsuario)
-            .then((resultado) => {
-                res.json(resultado);
-            })
-            .catch((erro) => {
-                console.log("Erro ao obter dados do gerente:", erro);
-                res.status(500).json({ error: "Erro ao obter dados do gerente" });
-            });
+    
+function plotarKpi(req, res){
+    fkCliente = req.body.fkClienteServer;
+    marcolinoModel.plotarKpi(fkCliente)
+    .then((resultado) => {
+        res.json(resultado);
+    })
+    .catch((erro) => {
+        console.log("Erro ao obter dados de alertas:", erro);
+        res.status(500).json({ error: "Erro ao obter dados de alertas" });
+    });
+}
+    
+function trocarGraficoMensal(req, res){
+    fkCliente = req.body.fkClienteServer;
+    fkFilial = req.body.fkFilialServer;
+    marcolinoModel.trocarGraficoMensal(fkCliente, fkFilial)
+    .then((resultado) => {
+        res.json(resultado);
+    })
+    .catch((erro) => {
+        console.log("Erro ao obter dados de alertas:", erro);
+        res.status(500).json({ error: "Erro ao obter dados de alertas" });
+    });
 }
 
 module.exports = {
-dashGerenteDados,
-dashGerenteDadosQtd
+    plotarFilial,
+    plotarMensal,
+    plotarKpi,
+    trocarGraficoMensal
 }

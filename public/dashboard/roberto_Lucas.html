@@ -13,7 +13,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0"></script>
 </head>
-<body>
+<body onload="gerarGraficos(),mostrar()">
   <div class="container-fluid">
   <div class="row">
   <div class="col-md-1 sidebar d-flex flex-column align-items-center">  
@@ -44,46 +44,46 @@
 
         <div class="row justify-content-center">
           <div class="col-12 col-lg-11">
-            <div class="row text-center my-2 no-gap-row">
-              <div class="col-sm-6 col-md-3">
-                <div class="card-alert alert-cpu">
+            <div class="row text-center my-2 no-gap-row" id="div_kpis">
+              <!-- <div class="col-sm-6 col-md-3">
+                <div class="card-alert">
                   <h5>Alertas de CPU</h5>
                   <h2>270</h2>
                 </div>
               </div>
               <div class="col-sm-6 col-md-3">
-                <div class="card-alert alert-ram">
+                <div class="card-alert">
                   <h5>Alertas de RAM</h5>
                   <h2>217</h2>
                 </div>
               </div>
               <div class="col-sm-6 col-md-3">
-                <div class="card-alert alert-disco">
+                <div class="card-alert">
                   <h5>Alertas de DISCO</h5>
                   <h2>38</h2>
                 </div>
               </div>
               <div class="col-sm-6 col-md-3">
-                <div class="card-alert alert-rede">
+                <div class="card-alert">
                   <h5>Alertas de REDE</h5>
                   <h2>19</h2>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-6">
-            <h4 class="text-center fw-bold">Alertas Mensais (Últimos 6 meses)</h4>
-            <h6 class="text-center fw-bold">Clique na legenda para selecionar o tipo de componente</h6>
+          <div class="col-md-7">
+            <h3 class="text-center fw-bold">Alertas Mensais (Últimos 6 meses)</h3>
+            <h5 class="text-center fw-bold">Clique na legenda para selecionar o tipo de componente</h5>
             <div class="border rounded p-2" style="height: 59vh;">
               <canvas id="chartMensal" class="w-100 h-100"></canvas>
             </div>
           </div>
-          <div class="col-md-6">
-            <h5 class="text-center fw-bold">Alertas por filiais (últimos 6 meses)</h5>
-            <h6 class="text-center fw-bold">Clique na barra para selecionar os componentes de uma filial</h6>
+          <div class="col-md-5">
+            <h3 class="text-center fw-bold">Alertas por filiais (últimos 6 meses)</h3>
+            <h5 class="text-center fw-bold">Clique na barra para selecionar os componentes de uma filial</h5>
             <div class="border rounded p-2" style="height: 59vh;">
               <canvas id="chartFiliais" class="w-100 h-100"></canvas>
             </div>
