@@ -10,22 +10,15 @@ function getAlertas() {
 
 function getAlertasNivel() {
     var instrucaoSql = `
-        SELECT 
-            c.componente AS componente, 
-            ca.gravidade, 
-            COUNT(*) AS quantidade_alertas
-        FROM 
-            captura_alerta ca
-        JOIN 
-            metrica m ON ca.fkMetrica = m.idMetrica
-        JOIN 
-            componente c ON m.fkComponente = c.idComponente
-        WHERE 
-            c.componente IN ('Processador', 'RAM')
-        GROUP BY 
-            c.componente, ca.gravidade
-        ORDER BY 
-            c.componente, ca.gravidade;
+        SELECT * FROM view_gravidade;
+    `;
+
+    return database.executar(instrucaoSql);
+}
+
+function getEndereco() {
+    var instrucaoSql = `
+        SELECT usuario, aeroporto FROM view_endereco;
     `;
 
     return database.executar(instrucaoSql);
@@ -33,5 +26,6 @@ function getAlertasNivel() {
 
 module.exports = {
     getAlertas,
-    getAlertasNivel
+    getAlertasNivel,
+    getEndereco
 }

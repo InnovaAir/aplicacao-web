@@ -10,7 +10,6 @@ async function atualizarGrafico() {
     ];
 
     const componenteSelecionado = document.getElementById("select_componente").value;
-    const enderecoSelecionado = document.getElementById("select_endereco").value;
 
     await fetch(`/dashLeticia/getAlertas`, {
         cache: 'no-store',
@@ -189,20 +188,19 @@ async function atualizarGrafico() {
         document.getElementById("taxaPrecisao").innerText = `${r2_cpu}%`;
         document.getElementById("kpi_total").innerText = somaUltimos3Meses_cpu;
     } else {
-        document.getElementById("taxaPrecisao").innerText = `${r2_ram}%`;
+        const media_r2 = ((parseFloat(r2_ram) + parseFloat(r2_cpu)) / 2).toFixed(1);
+        document.getElementById("taxaPrecisao").innerText = `${media_r2}%`;
+
         document.getElementById("kpi_total").innerText = somaUltimos3Meses_ram + somaUltimos3Meses_cpu;
     }
 
     atualizarKPI();
+    buscarEndereco();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
     const selectComponente = document.getElementById("select_componente");
-    const selectEndereco = document.getElementById("select_ano");
-
     selectComponente.addEventListener("change", atualizarGrafico);
-    selectEndereco.addEventListener("change", atualizarGrafico);
-
     atualizarGrafico();
 });
 
@@ -228,31 +226,13 @@ function atualizarKPI() {
                 const qtd = info.quantidade_alertas;
 
                 if (componente === "ram") {
-                    if (gravidade === "baixa") {
-                        baixo_ram += qtd;
-                    } 
-                    else if (gravidade === "alta"){
-                        alto_ram += qtd;
-
-                    }
-                        
-                    else if (gravidade === "critico") {
-                        critico_ram += qtd;
-
-                    }
+                    if (gravidade === "baixa") baixo_ram += qtd;
+                    else if (gravidade === "alta") alto_ram += qtd;
+                    else if (gravidade === "critico") critico_ram += qtd;
                 } else if (componente === "processador") {
-                    if (gravidade === "baixa") {
-                        baixo_cpu += qtd;
-
-                    } 
-                    else if (gravidade === "alta"){
-                        alto_cpu += qtd;
-
-                    } 
-                    else if (gravidade === "critico"){
-                        critico_cpu += qtd;
-
-                    } 
+                    if (gravidade === "baixa") baixo_cpu += qtd;
+                    else if (gravidade === "alta") alto_cpu += qtd;
+                    else if (gravidade === "critico") critico_cpu += qtd;
                 }
             });
 
@@ -334,4 +314,26 @@ function monthNameToNumber(monthName) {
         October: 10, November: 11, December: 12
     };
     return months[monthName] || null;
+}
+
+function buscarEndereco() {
+    fetch(`/dashLeticia/getEndereco`, {
+        cache: 'no-store',
+        method: "GET"
+    }).then(res => res.json())
+      .then(dados => {
+          if (dados.length > 0) {
+              const aeroporto = dados[0].aeroporto;
+              const usuario_dash = dados[0].usuario;              
+
+              if (aeroporto == "GRU") {
+                  document.getElementById("aeroporto_endereco").textContent = `Aeroporto de Guarulhos`;
+              }
+
+              if (usuario_dash == "Estela") {
+                  document.getElementById("boas_vindas").textContent = `Boas vindas, ${usuario_dash}!`;
+              }
+          }
+      })
+      .catch(err => console.error("Erro ao buscar endereço:", err));
 }

@@ -93,8 +93,6 @@ CREATE TABLE IF NOT EXISTS captura_alerta (
   CONSTRAINT fk_alerta_metrica FOREIGN KEY (fkMetrica) REFERENCES metrica (idMetrica)
 );
 
-
-
 -- select com informações do modelo + alertas dos modelos
 SELECT 
     maquina.idMaquina,

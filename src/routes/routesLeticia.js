@@ -11,4 +11,8 @@ router.get("/getAlertasNivel", function (req, res) {
     avisoController.getAlertasNivel(req, res);
 });
 
+router.get("/getEndereco", function (req, res) {
+    avisoController.getEndereco(req, res);
+});
+
 module.exports = router;
