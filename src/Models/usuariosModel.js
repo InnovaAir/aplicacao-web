@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function identificarEnderecos(idUsuario) {
     var sql = `
-        SELECT idEndereco, aeroporto as complemento, estado FROM identificar_enderecos WHERE idUsuario = ${idUsuario};
+        SELECT idEndereco, complemento, estado FROM identificar_enderecos WHERE idUsuario = ${idUsuario};
     `
 
     return database.executar(sql);
