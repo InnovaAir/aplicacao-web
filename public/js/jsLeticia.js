@@ -123,7 +123,7 @@ async function atualizarGrafico() {
             categories: categoriasGrafico
         },
         title: {
-            text: 'Forecast',
+            text: 'Porcentagem (%)',
             align: 'left',
             style: {
                 fontSize: "16px",
@@ -207,6 +207,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function atualizarKPI() {
+    const componenteSelecionado = document.getElementById("select_componente").value;
+
     var baixo_ram = 0;
     var alto_ram = 0;
     var critico_ram = 0;
@@ -220,39 +222,53 @@ function atualizarKPI() {
     })
         .then((resposta) => resposta.json())
         .then((json) => {
-            console.log("Dados recebidos:", json);
-
             json.forEach(info => {
-                console.log(info.gravidade, info.componente, info.quantidade_alertas);
+                const gravidade = info.gravidade.toLowerCase();
+                const componente = info.componente.toLowerCase();
+                const qtd = info.quantidade_alertas;
 
-                if (info.gravidade.toLowerCase() == "baixa" && info.componente.toLowerCase() == "ram") {
-                    baixo_ram += info.quantidade_alertas;
-                }
+                if (componente === "ram") {
+                    if (gravidade === "baixa") {
+                        baixo_ram += qtd;
+                    } 
+                    else if (gravidade === "alta"){
+                        alto_ram += qtd;
 
-                if (info.gravidade.toLowerCase() == "alta" && info.componente.toLowerCase() == "ram") {
-                    alto_ram += info.quantidade_alertas;
-                }
+                    }
+                        
+                    else if (gravidade === "critico") {
+                        critico_ram += qtd;
 
-                if (info.gravidade.toLowerCase() == "critico" && info.componente.toLowerCase() == "ram") {
-                    critico_ram += info.quantidade_alertas;
-                }
+                    }
+                } else if (componente === "processador") {
+                    if (gravidade === "baixa") {
+                        baixo_cpu += qtd;
 
-                if (info.gravidade.toLowerCase() == "baixa" && info.componente.toLowerCase() == "processador") {
-                    baixo_cpu += info.quantidade_alertas;
-                }
+                    } 
+                    else if (gravidade === "alta"){
+                        alto_cpu += qtd;
 
-                if (info.gravidade.toLowerCase() == "alta" && info.componente.toLowerCase() == "processador") {
-                    alto_cpu += info.quantidade_alertas;
-                }
+                    } 
+                    else if (gravidade === "critico"){
+                        critico_cpu += qtd;
 
-                if (info.gravidade.toLowerCase() == "critico" && info.componente.toLowerCase() == "processador") {
-                    critico_cpu += info.quantidade_alertas;
+                    } 
                 }
             });
 
-            document.getElementById("nivel_baixo").innerText = `${baixo_ram + baixo_cpu}`;
-            document.getElementById("nivel_alto").innerText = `${alto_ram + alto_cpu}`;
-            document.getElementById("nivel_critico").innerText = `${critico_ram + critico_cpu}`;
+            if (componenteSelecionado === "ram") {
+                document.getElementById("nivel_baixo").innerText = `${baixo_ram}`;
+                document.getElementById("nivel_alto").innerText = `${alto_ram}`;
+                document.getElementById("nivel_critico").innerText = `${critico_ram}`;
+            } else if (componenteSelecionado === "cpu") {
+                document.getElementById("nivel_baixo").innerText = `${baixo_cpu}`;
+                document.getElementById("nivel_alto").innerText = `${alto_cpu}`;
+                document.getElementById("nivel_critico").innerText = `${critico_cpu}`;
+            } else {
+                document.getElementById("nivel_baixo").innerText = `${baixo_ram + baixo_cpu}`;
+                document.getElementById("nivel_alto").innerText = `${alto_ram + alto_cpu}`;
+                document.getElementById("nivel_critico").innerText = `${critico_ram + critico_cpu}`;
+            }
         });
 }
 

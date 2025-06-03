@@ -53,7 +53,7 @@
 
                             <div class="select_alinhado">
                                 <div class="div_select custom-select-wrapper">
-                                    <span><b>Selecione o endereço monitorado</b></span>
+                                    <span><b id="titulo_select">Selecione o endereço monitorado</b></span>
                                     <select id="select_endereco" class="custom-select">
                                         <option value="guarulhos" selected>Guarulhos</option>
                                         <option value="congonhas">Congonhas</option>
@@ -61,7 +61,7 @@
                                 </div>
 
                                 <div class="div_select custom-select-wrapper">
-                                    <span><b>Selecione o componente</b></span>
+                                    <span><b id="titulo_select">Selecione o componente</b></span>
                                     <select id="select_componente" class="custom-select">
                                         <option value="todos" selected>TODOS</option>
                                         <option value="cpu">CPU</option>
@@ -71,7 +71,8 @@
                             </div>
 
                             <div class="titulo_alinhado">
-                                <span id="alertas_kpi_titulo"><b>Quantidade de alertas capturados até o momento</b></span>
+                                <span id="alertas_kpi_titulo"><b>Quantidade de alertas capturados até o
+                                        momento</b></span>
                                 <span><i>*De acordo com seus respectivos níveis</i></span>
                             </div>
 
@@ -97,18 +98,10 @@
                                     <div class="grafico_geral">
                                         <div class="head_grafico">
                                             <div class="titulo_alinhado">
-                                                <span id="alertas_kpi_titulo"><b>Previsão da quantidade de alertas por componete</b></span>
+                                                <span id="alertas_kpi_titulo"><b>Previsão da quantidade de alertas por
+                                                        componete</b></span>
                                                 <span><i>*Análise trimestral</i></span>
                                             </div>
-
-                                            <!-- <div class="taxa_kpi">
-                                                <div class="texto_taxa">
-                                                    <span style="font-size: 20px;">Taxa de precisão:</span>
-                                                </div>
-                                                <div class="texto_taxa">
-                                                    <span id="taxaPrecisao" style="font-size: 25px;"><b></b></span>
-                                                </div>
-                                            </div> -->
                                         </div>
                                         <div class="grafico">
                                             <div id="graficoLinha"></div>
@@ -126,7 +119,7 @@
                                     <div class="subtitulo">
                                         <div class="box_kpi_lateral kpi2">
                                             <span>Componente com maior risco de alertas</span>
-                                            <span id="numero_kpi" class="borda_inferior"><b  id="componente"></b></span>
+                                            <span id="numero_kpi" class="borda_inferior"><b id="componente"></b></span>
                                             <span id="numero_kpi"><b id="percentual"></b></span>
                                             <span><i>*Predominância (%) em relação ao total</i></span>
                                         </div>
