@@ -6,11 +6,11 @@
     --color-neutral-50: #7a90f3;
 
     --color-text-1: #5271FF;
-    --color-text-2: #8BA0FF;
+    --color-text-2: #404040;
     --color-text-3: #404040;
     --color-text-4: #21272A;
 
-    --p-size: 1vw;
+    --p-size: 1.25vw;
     --h1-size: 2vw;
     --h2-size: 1.5vw;
 
@@ -66,9 +66,10 @@ body {
     gap: 2.5%;
 
     font-family: Arial, sans-serif;
+    overflow: hidden;
 
     p {
-        font-size: 1vw;
+        font-size: 1.5vw;
         margin: 0px;
     }
 
@@ -191,9 +192,14 @@ body {
                 border: 0.2vw solid #DDE1E6;
                 width: 40%;
 
+                p {
+                    font-size: 1vw;
+                    color: #000;
+                }
+
                 .container {
                     display: grid;
-                    grid-template-columns: 20% 20% 20% 20%;
+                    grid-template-columns: 25% 20% 20% 20%;
                     grid-gap: 5%;
                     width: 100%;
                 }
@@ -307,6 +313,7 @@ body {
 
         p {
             color: var(--color-text-2);
+            font-size: 1.25vw;
         }
 
         .indicators {
