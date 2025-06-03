@@ -2,6 +2,11 @@ body {
     z-index: 2;
 }
 
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
 .container {
     width: 100vw;
     height: 100vh;
@@ -26,22 +31,29 @@ body {
 
 }
 
-.kpiLegendas{
+.kpiLegendas {
     display: flex;
-background-color: rgb(241, 241, 241);
-width: fit-content;
-padding-inline: 20px;
-justify-content: center;
-align-items: center;
+    margin-bottom: 3px;
+    border: #555 0.5px solid;
+    background-color: #dadada;
+    width: fit-content;
+    padding-inline: 20px;
+    justify-content: center;
+    font-weight: 600;
+    align-items: center;
+    padding: 1%;
+    gap: 3em;
+    border: 0.2vw solid #7a92ff;
+    width: 100%;
 
 }
 
-.bolinhaKPI{
+.bolinhaKPI {
     margin-inline: 5px;
     width: 20px;
     height: 20px;
     border-radius: 20px;
-    border: solid 0.3px black;
+    border: solid 3px black;
 }
 
 .grid {
@@ -49,7 +61,7 @@ align-items: center;
     grid-template-columns: 1fr 3fr 1fr 0.5fr;
     justify-content: center;
     margin: 5px;
-    background: tomato;
+    background: rgb(255, 255, 255);
     text-align: center;
     font-size: 1em;
 
@@ -61,7 +73,6 @@ align-items: center;
 .child {
     width: 100%;
     height: 100vh;
-    background-color: rgb(197, 255, 231);
     flex-direction: column;
     display: flex;
     gap: 2rem;
@@ -167,8 +178,10 @@ align-items: center;
 }
 
 .section1 {
-
-    border: solid tan;
+box-shadow: 10px 7px 10px #7A92FF;
+    border: 1px solid #0026D6;
+    border-radius: 5px;
+    border: solid rgb(0, 0, 0) 1px;
     height: 100%;
     flex-direction: column;
     width: 90%;
@@ -179,7 +192,7 @@ align-items: center;
 }
 
 .listaModelos {
-    background-color: #5573ff;
+    background-color: #ffffff;
     align-self: center;
     width: 100%;
     height: 100%;
@@ -206,17 +219,22 @@ align-items: center;
 .tituloContainer {
     display: flex;
     flex-direction: row;
-    font-family: Arial, Helvetica, sans-serif;
     margin-top: 20px;
     font-weight: 700;
     font-size: xx-large;
-    color: #5573ff;
+    color: #0026D6;
+
+}
+#alertas_kpi_titulo {
+    font-size: 30px;
+        color: #0026D6;
 
 }
 
 .subtituloContainer {
     display: flex;
     gap: 1%;
+    flex-direction: column;
 }
 
 
@@ -275,9 +293,27 @@ align-items: center;
 }
 
 .selectBox {
-    color: gray;
-    height: 40px;
-    width: 20%;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    padding: 0.7vw;
+    padding-right: 10em;
+    max-width: 300px;
+    min-width: none;
+    border: none;
+    border-bottom: 0.4vh solid #B0BEC5;
+
+    font-size: 15px;
+    color: #555;
+    background-color: transparent;
+
+    background-image: url(../assets/arrow-sm-down-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    background-position: right 1vw center;
+    background-size: 1.2vw;
+
+    cursor: pointer;
 
 
 
@@ -344,6 +380,14 @@ align-items: center;
             margin: 0;
         }
     }
+}
+
+#titulo_select{       
+    font-size: 20px;
+       display: flex;
+    flex-direction: column;
+    color: #0026D6;
+
 }
 
 /* Grid maquinas */
