@@ -14,164 +14,158 @@
     <script src="../js/navbarHover.js"></script>
     <title>Alertas por modelo</title>
 </head>
+
 <body>
-  <div class="container-fluid">
-  <div class="row">
-  <div class="col-md-1 sidebar d-flex flex-column align-items-center">  
-    <div id="sidebar">
-      <div class="logo d-flex justify-content-between align-items-center w-100 px-2">
-        <img src="../assets/InnovaairWhite.png" alt="Logo" class="img-fluid" />
-        <button id="closeSidebar" class="btn btn-sm btn-outline-primary">
-          <i class="fas fa-arrow-left"></i>
-        </button>
-      </div>
-      <a href="roberto_Lucas.html"><i class="fas fa-triangle-exclamation"></i> <span>Alertas</span></a>
-      <a href="dashDudu.html"><i class="fas fa-chart-line"></i> <span>Desempenho</span></a>
-      <a href="dashRoberto.html"><i class="fas fa-microchip"></i> <span>Modelo de Componentes</span></a>
-      <a href="monitoramentoModelos.html"><i class="fas fa-desktop"></i> <span>Modelo de Maquinas</span></a>
-      <a onclick="limparSessao()" href="../index.html"><strong>Sair</strong></a>
-    </div>
-  </div>
-
-<div class="col-md-11 p-2">
-<div style="display: none;" class="popUp">
-
-
-    <div class="shadow" onclick="abrirPopUp()"></div>
-
-    <div id="mainPopup" class="mainPopup">
-        <img onclick="abrirPopUp()" id="botaoFechar" class="fecharButton" src="../assets/marca-cruzada.png" alt=""
-            loading="eager">
-
-        <!-- SEÇÃO TITULO DO POPUP -->
-        <div style="min-height: 3em; max-height: 3em;" class="sectionH">
-            <div class="modeloTitulo">Modelo 10093-S</div>
-
-        </div>
-
-        <!-- SEÇÃO DO MEIO DO POPUP -->
-        <div style="height: 13em; " class="sectionH">
-            <div style="width: 100%;" class="sectionV">
-                <div style="height: 10%; min-height:30px" class="sectionH">
-                    <div class="modeloSubtitulo">Especificações:</div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1 sidebar d-flex flex-column align-items-center">
+                <div id="sidebar">
+                    <div class="logo d-flex justify-content-between align-items-center w-100 px-2">
+                        <img src="../assets/InnovaairWhite.png" alt="Logo" class="img-fluid" />
+                        <button id="closeSidebar" class="btn btn-sm btn-outline-primary">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                    <a href="roberto_Lucas.html"><i class="fas fa-triangle-exclamation"></i> <span>Alertas</span></a>
+                    <a href="dashDudu.html"><i class="fas fa-chart-line"></i> <span>Desempenho</span></a>
+                    <a href="dashRoberto.html"><i class="fas fa-microchip"></i> <span>Modelo de Componentes</span></a>
+                    <a href="monitoramentoModelos.html"><i class="fas fa-desktop"></i> <span>Modelo de
+                            Maquinas</span></a>
+                    <a onclick="limparSessao()" href="../index.html"><strong>Sair</strong></a>
                 </div>
-                <div class="specsModelo"></div>
             </div>
 
-            <div style="width: 70%;" class="sectionV">
-                <div style="height: 54%; display:flex; bottom:0; background-color:white" class="sectionH graficoTorta">
-                </div>
-                <div style="height: 45%;" class="sectionH"></div>
-            </div>
-
-        </div>
-
-        <!-- SEÇÃO DE BAIXO DO POPUP -->
-        <div style="height: 13em;" class="sectionH">
-            <div style="width: 100%;" class="sectionV"></div>
-
-        </div>
-
-    </div>
+            <div class="col-md-11 p-2">
+                <div style="display: none;" class="popUp">
 
 
-</div>
-<!-- <body onload="tamanhoBarra()
-"> -->
-<div class="main d-flex justify-content-center align-items-center" style="padding: 10px;">
-    <div id="tela" style="background-color: rgb(255, 255, 255);filter:drop-shadow(2px 2px 2px rgb(240, 240, 240))"
-        class="container">
-        <div class="child">
+                    <div class="shadow" onclick="abrirPopUp()"></div>
 
+                    <div id="mainPopup" class="mainPopup">
+                        <img onclick="abrirPopUp()" id="botaoFechar" class="fecharButton"
+                            src="../assets/marca-cruzada.png" alt="" loading="eager">
 
-            <div class="tituloContainer">Alertas por modelo</div>
-            <div class="subtituloContainer">
-                <div id="titulo_select"><b>Selecione a filial</b></div>
-                <select id="select_filial" class="selectBox">
-                    <option value="1" selected>Filial 1</option>
-                    <option value="2">Filial 2</option>
-                </select>
+                        <!-- SEÇÃO TITULO DO POPUP -->
+                        <div style="min-height: 3em; max-height: 3em;" class="sectionH">
+                            <div class="modeloTitulo">Modelo 10093-S</div>
 
+                        </div>
 
-            </div>
-            <div id="alertas_kpi_titulo"><b>Quantidade de alertas por modelo</b></div>
-            <div class="section1">
+                        <!-- SEÇÃO DO MEIO DO POPUP -->
+                         <div style="width: 100%;" class="sectionV">
+                                <div style="height: 10%; min-height:30px" class="sectionH">
+                                    <div class="modeloSubtitulo">Especificações:</div>
+                                </div>
+                                <div class="specsModelo"></div>
+                            </div>
+                       
 
-                <div class="kpiLegendas">
-                  
-                
-                <div style="display: flex;">
-                    <span>CPU = </span>
-                    <div class="bolinhaKPI" style="background-color:red ;"></div>
-                </div>
-                
-                <div style="display: flex;">
-                    <span> RAM = </span>
-                    <div class="bolinhaKPI" style="background-color: yellow;"></div>
-                    
-
-                </div>
-                <div style="display: flex;">
-                                    <span> DISCO = </span>
-
-                    <div class="bolinhaKPI" style="background-color: cyan ;"></div>
-                </div>
-                </div>
-                <div class="container listaModelos">
-                    <div>
-                        <section class="grid grid-template-columns-3" id="grids">
-                            <!-- Titulos -->
-                            <div class="item">Modelo</div>
-                            <div class="item">Alertas</div>
-                            <div class="item">Quantidade</div>
-                            <div class="item"></div>
-
-                        </section>
-                        <section class="grid grid-template-columns-3" id="lista">
-
-
-                        </section>
+                       
 
                     </div>
 
+
+                </div>
+                <!-- <body onload="tamanhoBarra()
+"> -->
+                <div class="main d-flex justify-content-center align-items-center" style="padding: 10px;">
+                    <div id="tela"
+                        style="background-color: rgb(255, 255, 255);filter:drop-shadow(2px 2px 2px rgb(240, 240, 240))"
+                        class="container">
+                        <div class="child">
+
+
+                            <div class="tituloContainer">Alertas por modelo</div>
+                            <div class="subtituloContainer">
+                                <div id="titulo_select"><b>Selecione a filial</b></div>
+                                <select id="select_filial" class="selectBox">
+                                    <option value="1" selected>Filial 1</option>
+                                    <option value="2">Filial 2</option>
+                                </select>
+
+
+                            </div>
+                            <div id="alertas_kpi_titulo"><b>Quantidade de alertas por modelo</b></div>
+                            <div class="section1">
+
+                                <div class="kpiLegendas">
+
+
+                                    <div style="display: flex;">
+                                        <span>CPU = </span>
+                                        <div class="bolinhaKPI" style="background-color:red ;"></div>
+                                    </div>
+
+                                    <div style="display: flex;">
+                                        <span> RAM = </span>
+                                        <div class="bolinhaKPI" style="background-color: yellow;"></div>
+
+
+                                    </div>
+                                    <div style="display: flex;">
+                                        <span> DISCO = </span>
+
+                                        <div class="bolinhaKPI" style="background-color: cyan ;"></div>
+                                    </div>
+                                </div>
+                                <div class="container listaModelos">
+                                    <div>
+                                        <section class="grid grid-template-columns-3" id="grids">
+                                            <!-- Titulos -->
+                                            <div class="item">Modelo</div>
+                                            <div class="item">Alertas</div>
+                                            <div class="item">Quantidade</div>
+                                            <div class="item"></div>
+
+                                        </section>
+                                        <section class="grid grid-template-columns-3" id="lista">
+
+
+                                        </section>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-</div>
-</div>
 </body>
 
 </html>
 
-  <!-- JQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- Bootstrap Bundle JS (popper + bootstrap) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- JQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap Bundle JS (popper + bootstrap) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-  let expanded = false;
+    let expanded = false;
 
-  $('#sidebar').on('click', function () {
-    if (!expanded) {
-      $(this).addClass('expanded');
-      expanded = true;
-    }
-  });
+    $('#sidebar').on('click', function () {
+        if (!expanded) {
+            $(this).addClass('expanded');
+            expanded = true;
+        }
+    });
 
-  $('#closeSidebar').on('click', function (e) {
-    e.stopPropagation(); // Evita reabrir imediatamente
-    $('#sidebar').removeClass('expanded');
-    expanded = false;
-  });
+    $('#closeSidebar').on('click', function (e) {
+        e.stopPropagation(); // Evita reabrir imediatamente
+        $('#sidebar').removeClass('expanded');
+        expanded = false;
+    });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+
+
+
     // fetch especificações dos totens (1 é o numero estático para testes apenas)
 
     fetch(`/cadastros/metricas/listar/componentes/1`, {
@@ -258,6 +252,8 @@
             .then((res) => res.json())
             .then(contador => {
 
+                let valorItem = 0
+
                 let cpuCount = 0;
                 let discoCount = 0;
                 let ramCount = 0;
@@ -288,6 +284,8 @@
                             ultimoItem.ramCount = ramCount;
                             ultimoItem.discoCount = discoCount;
                             ultimoItem.quantidade = quantidade;
+                            ultimoItem.quantidade = quantidade;
+                            
                             maquinasContadas.clear;
                             resultados.push(ultimoItem);
                         }
@@ -308,12 +306,12 @@
                     if (!maquinasContadas.has(idAtual)) {
                         maquinasContadas.add(idAtual);
                         quantidade++;
-                    }
+                    } 
                     if (item.gravidade == "critico") criticoCount++;
                     if (item.gravidade == "alta") altoCount++;
                     if (item.gravidade == "baixa") baixoCount++;
 
-                    if (item.componente == "Processador") cpuCount++;
+                    if ( item.componente == "Processador") cpuCount++;
                     if (item.componente == "RAM") ramCount++;
                     if (item.componente == "Armazenamento") discoCount++;
 
@@ -351,6 +349,7 @@
                 console.log("resultados")
                 console.log(resultados)
 
+
                 // ADICIONANDO IDs CRESCENTES AOS OBJETOS DE RESULTADOS
                 for (let i = 0; i < resultados.length; i++) {
                     resultados[i].popupId = i + 1; // ID começando em 1
@@ -358,6 +357,7 @@
 
                 console.log("resultados com IDs:");
                 console.log(resultados);
+
 
 
                 // criando novos modelos na lista grid
@@ -372,6 +372,9 @@
                         maiorAlerta = tamanhototal;
                     }
                 }
+
+                // ORDENANDO DO MAIOR PARA O MENOR
+                resultados.sort((a, b) => b.quantidade - a.quantidade);
 
                 for (let i = 0; i < resultados.length; i++) {
                     const item = resultados[i];
@@ -519,7 +522,6 @@
             )
     }
 
-    let chartPopUp = null; // variável global para o gráfico
 
     function abrirPopUpComModelo(nomeModelo, componentesPorMaquina, criticoCount, altoCount, baixoCount, popupId) {
         console.log("nomeModelo:", nomeModelo);
@@ -529,44 +531,44 @@
         console.log("baixoCount:", baixoCount);
         console.log("popupId:", popupId);
 
-        if (chartPopUp !== null) {
-            chartPopUp.destroy();
-            chartPopUp = null;
-        }
-
+        
         const popup = document.querySelector(".popUp");
         const titulo = popup.querySelector(".modeloTitulo");
         const subtitulo = popup.querySelector(".modeloSubtitulo");
         const specs = popup.querySelector(".specsModelo");
         specs.innerHTML = "";
 
-        // gráfico de torta da quantidade de alertas
-        var options = {
-            series: [criticoCount, altoCount, baixoCount],
-            chart: {
-                width: "70%",
-                type: 'pie',
-            },
-            labels: ['Crítico', 'Alto', 'Baixo'],
-            responsive: [{
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        width: 40,
-                        height: 40
-                    },
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }]
-        };
-        chartPopUp = new ApexCharts(document.querySelector(".graficoTorta"), options);
-        chartPopUp.render();
-
-        console.log("Estrutura completa de componentesPorMaquina:");
-        console.log(componentesPorMaquina);
-
+     //   // gráfico de torta da quantidade de alertas
+     //   var options = {
+     //       series: [criticoCount, altoCount, baixoCount],
+     //       chart: {
+     //           height: "50%",
+     //           type: 'pie',
+     //       },
+     //       labels: ['Alertas Críticos', 'Alertas Altos', 'Alertas Baixos'],
+     //       legend: {
+     //           fontSize: '19px',
+//
+     //       },
+     //       responsive: [{
+     //           breakpoint: 480,
+     //           options: {
+     //               chart: {
+     //                   width: 40,
+     //                   height: 40
+     //               },
+     //               legend: {
+     //                   position: 'bottom'
+     //               }
+     //           }
+     //       }]
+     //   };
+     //   chartPopUp = new ApexCharts(document.querySelector(".graficoTorta"), options);
+     //   chartPopUp.render();
+//
+     //   console.log("Estrutura completa de componentesPorMaquina:");
+     //   console.log(componentesPorMaquina);
+//
 
         let chavesMaquinas = Object.keys(componentesPorMaquina);
         console.log("Chaves disponíveis:", chavesMaquinas);
@@ -627,3 +629,17 @@
             document.querySelector(".popUp").style.display = "none";
         }
     }
+
+
+
+
+
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('show');
+    }
+
+
+
+
+</script>

@@ -98,7 +98,7 @@ body {
     position: fixed;
     z-index: 2;
     width: 100vw;
-    height: 100vh;
+    height: 120vh;
     background-color: black;
     opacity: 40%;
 }
@@ -106,8 +106,8 @@ body {
 .mainPopup {
 
     z-index: 2;
-    width: 70%;
-    height: 80%;
+    width: 30%;
+    height: 40%;
     display: flex;
     right: 0;
     left: 0;
@@ -138,7 +138,6 @@ body {
         margin-top: auto;
         margin-bottom: auto;
         position: absolute;
-        filter: brightness(60%);
     }
 }
 
@@ -156,12 +155,13 @@ body {
 
 .sectionV {
     margin: 2px;
-    background-color: #dadada;
+    background-color: white;
     height: 99%;
 }
 
 .specsModelo {
     margin-left: 10px;
+    font-size: larger;
 }
 
 .modeloTitulo {
