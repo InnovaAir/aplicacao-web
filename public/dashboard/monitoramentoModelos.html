@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+<!DOCTYPE html>More actions
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/estilo.css">
@@ -13,37 +14,74 @@
     <link rel="stylesheet" href="../styles/monitoramentoModelos.css" />
     <link rel="stylesheet" href="../styles/menu_mobile.css" />
     <link rel="preload" href="../assets/fullscreen.png  " as="image">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../styles/sidebar_marcolino.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="../js/navbarHover.js"></script>
+
+
     <title>Alertas por modelo</title>
 </head>
-<body>
+<div style="display: none;" class="popUp">
 
-<div class="container-fluid">
-  <div class="row">
-  <div class="col-md-1 sidebar d-flex flex-column align-items-center">  
-    <div id="sidebar">
-      <div class="logo d-flex justify-content-between align-items-center w-100 px-2">
-        <img src="../assets/InnovaairWhite.png" alt="Logo" class="img-fluid" />
-        <button id="closeSidebar" class="btn btn-sm btn-outline-primary">
-          <i class="fas fa-arrow-left"></i>
-        </button>
-      </div>
 
-      <a href="roberto_Lucas.html"><i class="fas fa-triangle-exclamation"></i> <span>Alertas</span></a>
-      <a href="dashDudu.html"><i class="fas fa-chart-line"></i> <span>Desempenho</span></a>
-      <a href="dashRoberto.html"><i class="fas fa-microchip"></i> <span>Modelo de <br>Componentes</span></a>
-      <a href="monitoramentoModelos.html"><i class="fas fa-desktop"></i> <span>Modelo de Maquinas</span></a>
-      <a onclick="limparSessao()" href="../index.html"><strong>Sair</strong></a>
+    <div class="shadow" onclick="abrirPopUp()"></div>
+
+    <div id="mainPopup" class="mainPopup">
+        <img onclick="abrirPopUp()" id="botaoFechar" class="fecharButton" src="../assets/marca-cruzada.png" alt=""
+            loading="eager">
+
+        <!-- SEÇÃO TITULO DO POPUP -->
+        <div style="min-height: 3em; max-height: 3em;" class="sectionH">
+            <div class="modeloTitulo">Modelo 10093-S</div>
+
+        </div>
+
+        <!-- SEÇÃO DO MEIO DO POPUP -->
+        <div style="height: 13em; " class="sectionH">
+            <div style="width: 100%;" class="sectionV">
+                <div style="height: 10%; min-height:30px" class="sectionH">
+                    <div class="modeloSubtitulo">Especificações:</div>
+                </div>
+                <div class="specsModelo"></div>
+            </div>
+
+            <div style="width: 70%;" class="sectionV">
+                <div style="height: 54%; display:flex; bottom:0" class="sectionH graficoTorta">
+                </div>
+                <div style="height: 45%;" class="sectionH"></div>
+            </div>
+
+        </div>
+
+        <!-- SEÇÃO DE BAIXO DO POPUP -->
+        <div style="height: 13em;" class="sectionH">
+            <div style="width: 100%;" class="sectionV"></div>
+
+        </div>
+
     </div>
-  </div>
 
-      <div class="col-md-11 p-2">
 
-<<<<<<< Updated upstream
+</div>
+<!-- <body onload="tamanhoBarra()
+"> -->
+
+
+<div class="sidebar" id="sidebar">
+    <div class="d-flex justify-content-center align-items-center px-3 w-100">
+        <div class="logo">
+            <img src="../assets/InnovaairWhite.png" alt="Logo">
+        </div>
+        <button class="btn btn-light d-lg-none" type="button" onclick="toggleSidebar()" style="border-radius: 8px;"
+            loading="eager">
+            ☰
+        </button>
+    </div>
+
+    <nav class="flex-column">
+        <a href="visaoGeral.html">Visão geral</a>
+        <a href="tempoReal.html">Tempo real</a>
+        <a href="listaMaquinas.html">Lista de máquinas</a>
+        <a href="NovosCadastros.html">Cadastrar Máquina</a>
+        <a href="monitoramentoModelos.html"><strong>Alertas por modelo</strong></a>
+
         <a href="suporte.html">Suporte</a>
         <div class="logout mt-3">
             <a href="NovosCadastros.html"><strong>Sair</strong></a>
@@ -77,18 +115,8 @@
                     <option value="1" selected>Filial 1</option>
                     <option value="2">Filial 2</option>
                 </select>
-=======
-        <div style="display: none;" class="popUp">
 
 
-            <div class="shadow" onclick="abrirPopUp()"></div>
->>>>>>> Stashed changes
-
-            <div id="mainPopup" class="mainPopup">
-                <img onclick="abrirPopUp()" id="botaoFechar" class="fecharButton" src="../assets/marca-cruzada.png" alt=""
-                    loading="eager">
-
-<<<<<<< Updated upstream
             </div>
             <div id="alertas_kpi_titulo"><b>Quantidade de alertas por modelo</b></div>
             <div class="section1">
@@ -121,112 +149,25 @@
                             <div class="item">Alertas</div>
                             <div class="item">Quantidade</div>
                             <div class="item"></div>
-=======
-                <!-- SEÇÃO TITULO DO POPUP -->
-                <div style="min-height: 3em; max-height: 3em;" class="sectionH">
-                    <div class="modeloTitulo">Modelo 10093-S</div>
 
-                </div>
->>>>>>> Stashed changes
-
-                <!-- SEÇÃO DO MEIO DO POPUP -->
-                <div style="height: 13em; " class="sectionH">
-                    <div style="width: 100%;" class="sectionV">
-                        <div style="height: 10%; min-height:30px" class="sectionH">
-                            <div class="modeloSubtitulo">Especificações:</div>
-                        </div>
-                        <div class="specsModelo"></div>
-                    </div>
-
-                    <div style="width: 70%;" class="sectionV">
-                        <div style="height: 54%; display:flex; bottom:0" class="sectionH graficoTorta">
-                        </div>
-                        <div style="height: 45%;" class="sectionH"></div>
-                    </div>
-
-                </div>
-
-                <!-- SEÇÃO DE BAIXO DO POPUP -->
-                <div style="height: 13em;" class="sectionH">
-                    <div style="width: 100%;" class="sectionV"></div>
-
-                </div>
-
-            </div>
+                        </section>
+                        <section class="grid grid-template-columns-3" id="lista">
 
 
-        </div>
-        <!-- <body onload="tamanhoBarra()
-        "> -->
-
-
-        <div class="main d-flex justify-content-center align-items-center" style="padding: 10px;">
-            <div id="tela" style="background-color: red;" class="container">
-                <div class="child">
-
-
-                    <div class="tituloContainer">Alertas por modelo</div>
-                    <div class="subtituloContainer">
-                        <select id="select_filial" class="selectBox">
-                            <option value="1" selected>Filial 1</option>
-                            <option value="2">Filial 2</option>
-                        </select>
-
+                        </section>
 
                     </div>
 
-                    <div class="section1">
-                        <div class="kpiLegendas"><span>CPU = </span> <div class="bolinhaKPI" style="background-color:red ;"></div> <span>| RAM =  </span> <div class="bolinhaKPI" style="background-color: yellow;"></div> <span>| DISCO = </span> <div class="bolinhaKPI" style="background-color: cyan ;"></div></div>
-                        <div class="container listaModelos">
-                            <div>
-                                <section class="grid grid-template-columns-3" id="grids">
-                                    <!-- Titulos -->
-                                    <div class="item">Modelo</div>
-                                    <div class="item">Alertas</div>
-                                    <div class="item">Quantidade</div>
-                                    <div class="item"></div>
-
-                                </section>
-                                <section class="grid grid-template-columns-3" id="lista">
-
-
-                                </section>
-
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-  </div>
 </div>
 </body>
 
 </html>
-</html>
-  <!-- JQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- Bootstrap Bundle JS (popper + bootstrap) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-  let expanded = false;
-
-  $('#sidebar').on('click', function () {
-    if (!expanded) {
-      $(this).addClass('expanded');
-      expanded = true;
-    }
-  });
-
-  $('#closeSidebar').on('click', function (e) {
-    e.stopPropagation(); // Evita reabrir imediatamente
-    $('#sidebar').removeClass('expanded');
-    expanded = false;
-  });
-</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
 
@@ -696,8 +637,3 @@
         const sidebar = document.getElementById('sidebar');
         sidebar.classList.toggle('show');
     }
-
-
-
-
-</script>
