@@ -28,7 +28,7 @@ body {
 
 .kpiLegendas{
     display: flex;
-background-color: white;
+background-color: rgb(241, 241, 241);
 width: fit-content;
 padding-inline: 20px;
 justify-content: center;
