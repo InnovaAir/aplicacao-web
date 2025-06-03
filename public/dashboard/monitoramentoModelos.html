@@ -118,6 +118,7 @@
             </div>
 
             <div class="section1">
+                <div class="kpiLegendas"><span>CPU = </span> <div class="bolinhaKPI" style="background-color:red ;"></div> <span>| RAM =  </span> <div class="bolinhaKPI" style="background-color: yellow;"></div> <span>| DISCO = </span> <div class="bolinhaKPI" style="background-color: cyan ;"></div></div>
                 <div class="container listaModelos">
                     <div>
                         <section class="grid grid-template-columns-3" id="grids">
@@ -225,7 +226,7 @@
         lista.innerHTML = '';
         listarFilial(this.value);
     });
-
+listarFilial(1)
     function listarFilial(filialAtual) {
         fetch(`/models/infoModelos/${filialAtual}`, {
             method: 'GET',
