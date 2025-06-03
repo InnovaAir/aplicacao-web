@@ -72,7 +72,8 @@ body {
     color: white;
     padding: 1vh 2vw;
     width: calc((100% - 2vw) / 3);
-    height: 10vh;
+    height: 14vh;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
