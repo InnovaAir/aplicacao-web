@@ -32,8 +32,8 @@ function getAlertas(idMaquina) {
             ON comp.fkMaquina = maq.idMaquina
             WHERE DAY(momento) = DAY(CURRENT_TIMESTAMP()) AND maq.idMaquina = ${idMaquina};
         `
-        console.log(sql)
-        return database.executar(sql)
+    console.log(sql)
+    return database.executar(sql)
 }
 
 function getTodosEnderecos() {
@@ -103,6 +103,32 @@ async function getIDComponente(idMaquina) {
     return [idCPU, idRAM, idDISCO, idREDE];
 }
 
+function log_alerta_hoje(idMaquina) {
+    var sql = `
+    SELECT gravidade,
+	momento,	
+	CASE 
+		WHEN hour(momento) BETWEEN 0 AND 5 THEN "Madrugada"
+		WHEN hour(momento) BETWEEN 6 AND 11 THEN "Manhã"
+		WHEN hour(momento) BETWEEN 12 AND 17 THEN "Tarde"
+		WHEN hour(momento) BETWEEN 18 AND 23 THEN "Noite"
+	END as periodo,
+    c.componente
+	FROM maquina as maq
+    JOIN componente as c
+    ON c.fkMaquina = maq.idMaquina
+    JOIN metrica as m
+    ON m.fkComponente = c.idComponente
+    JOIN captura_alerta cap
+    ON cap.fkMetrica = m.idMetrica
+    WHERE idMaquina = ${idMaquina}
+    ORDER BY momento desc
+    LIMIT 10;
+    `
+
+    return database.executar(sql)
+}
+
 module.exports = {
     listarTotens,
     getMaquina,
@@ -110,4 +136,5 @@ module.exports = {
     getTodosEnderecos,
     getEnderecos,
     getIDComponente,
+    log_alerta_hoje,
 }

@@ -18,7 +18,7 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarios = require("./src/routes/usuarios");
 var cadastros = require("./src/routes/cadastros");
-// var feitosaR = require("./src/routes/feitosa");
+var feitosaR = require("./src/routes/feitosa");
 var marcolino = require("./src/routes/marcolino");
 var modeloRoute = require("./src/routes/modelo")
 var dashboards = require("./src/routes/dashboards");
@@ -37,7 +37,7 @@ app.use("/cadastros", cadastros);
 app.use("/dashboards", dashboards);
 app.use("/dashDuduRoutes", dashDudu);
 app.use("/dashLeticia", dashLeticia);
-// app.use("/dados", feitosaR);
+app.use("/dados", feitosaR);
 app.use("/marcolino", marcolino);
 app.use("/models", modeloRoute);
 

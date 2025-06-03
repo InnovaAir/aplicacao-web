@@ -68,6 +68,7 @@ function inserirMaquina(req, res) {
                             totemAtual.ip = totemEnviado.ip;
                             totemAtual.tempoAtivo = totemEnviado.tempoAtivo
                             totemAtual.processos = totemEnviado.processos
+                            totemAtual.prioridade = 0;
                             
                             if (momento.length < 8) {
                                 momento.push(totemEnviado.momento.split(".")[0])

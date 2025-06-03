@@ -70,6 +70,7 @@ async function plotarListaMaquinas(selection) {
                         // Verificar se os endereços do usuário é o atual do for
                         /* Por que? -> Para pegar os totens e inseri-los na lista de exibição */
                         endereco.totens.forEach(totem => {
+                            totem.prioridade = -10;
                             totem.idEndereco = endereco.idEndereco
                             // Adiciona todos totens do endereço que possui acesso na lista de exibição
                             arrayExibicaoTotens.push(totem);
@@ -81,6 +82,7 @@ async function plotarListaMaquinas(selection) {
                     if (endereco.idEndereco == selection) {
                         // Adiciona os totens do endereço especifico na lista de exibição
                         endereco.totens.forEach(totem => {
+                            totem.prioridade = -10;
                             totem.idEndereco = endereco.idEndereco
                             arrayExibicaoTotens.push(totem);
                         })
@@ -94,7 +96,6 @@ async function plotarListaMaquinas(selection) {
             // 10 -> BAIXO
             // 0 -> NORMAL
             // -10 -> OCIOSO
-
 
             // Define a pontuação de Priorização
             arrayExibicaoTotens.forEach(totem => {
@@ -144,23 +145,23 @@ async function plotarListaMaquinas(selection) {
                         else if (cpu > MedianaCPU && cpu <= limiteMaxCPU) { pontuacao += 50; isOnAlert = true; cpu_color = "ball-orange"; totalAlertas++; alertasCPU++ }
                         else if (cpu > limiteMinCPU && cpu <= MedianaCPU) { pontuacao += 20; cpu_color = "ball-yellow" }
                         else if (cpu <= 10) { pontuacao += -10; isIdle = true }
-                        else { cpu_color = "ball-green" }
+                        else { cpu_color = "ball-green"; pontuacao += 1; }
 
                         if (ram > limiteMaxRAM) { pontuacao += 99; isOnAlert = true; ram_color = "ball-red"; totalAlertas++; alertasRAM++ }
                         else if (ram > MedianaRAM && ram <= limiteMaxRAM) { pontuacao += 50; isOnAlert = true; ram_color = "ball-orange"; totalAlertas++; alertasRAM++ }
                         else if (ram > limiteMinRAM && ram <= MedianaRAM) { pontuacao += 20; ram_color = "ball-yellow" }
-                        else { ram_color = "ball-green" }
+                        else { ram_color = "ball-green"; pontuacao += 1; }
 
                         if (disco > limiteMaxDISCO) { pontuacao += 99; isOnAlert = true; disco_color = "ball-red"; totalAlertas++; alertasDISCO++ }
                         else if (disco > MedianaDISCO && disco <= limiteMaxDISCO) { pontuacao += 50; isOnAlert = true; disco_color = "ball-orange"; totalAlertas++; alertasDISCO++ }
                         else if (disco > limiteMinDISCO && disco <= MedianaDISCO) { pontuacao += 20; disco_color = "ball-yellow" }
-                        else { disco_color = "ball-green" }
+                        else { disco_color = "ball-green"; pontuacao += 1; }
 
                         // A lógica de rede estar pior é o reverso, sendo assim, necessário outra lógica
                         if (rede < limiteMaxREDE) { pontuacao += 99; isOnAlert = true; rede_color = "ball-red"; totalAlertas++; alertasREDE++ }
                         else if (rede >= limiteMaxREDE && rede < MedianaREDE) { pontuacao += 50; isOnAlert = true; rede_color = "ball-orange"; totalAlertas++; alertasREDE++ }
                         else if (rede >= MedianaREDE && rede <= limiteMinREDE) { pontuacao += 20; rede_color = "ball-yellow" }
-                        else { rede_color = "ball-green" }
+                        else { rede_color = "ball-green"; pontuacao += 1; }
 
                         // Totem está ocioso e não está em alerta
                         if (isIdle && !isOnAlert) { isIdle = 'blue'; totensOciosos++ }
@@ -177,11 +178,17 @@ async function plotarListaMaquinas(selection) {
                             }
                         });
 
+                        if (pontuacao != 0) {
+                            totem.prioridade = pontuacao;
+                        }
+
                         totem.status = { "idle": isIdle, "alert": isOnAlert, colors: { "cpu": cpu_color, "ram": ram_color, "disco": disco_color, "rede": rede_color } }
-                        totem.prioridade = pontuacao;
                     }
                 }
             });
+
+
+            arrayExibicaoTotens.sort((a, b) => b.prioridade - a.prioridade);
 
 
             var listTotensHtml = "";
@@ -259,7 +266,6 @@ async function plotarListaMaquinas(selection) {
                                 <span>${download_rede}Mb</span>
                             </div>
                             <button style="cursor: pointer;" data-totem='${JSON.stringify(totem)}' onclick="openDashboardDisplay(this.dataset.totem)">Analisar</button>
-                            <button style="cursor: pointer;">Abrir</button>
                         </div>
                     `;
                 }
@@ -631,6 +637,32 @@ function openDashboardDisplay(totemData) {
         }
     };
 
+    fetch(`/dados/log_alertas/${totem.idMaquina}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then((answer) => {
+            answer.json().then((json) => {
+                var html_log = ``;
+
+                json.forEach(log => {
+                    html_log += `
+                      <div class="header">
+                        <p>${log.gravidade}</p>
+                        <p>${log.componente}</p>
+                        <p>${log.momento.split("T")[0]}</p>
+                        <p>${log.momento.split("T")[1].split(".")[0]}</p>
+                        <p>${log.periodo}</p>
+                    </div>
+                `
+                });
+
+                document.getElementById("linesAlerta").innerHTML = html_log;
+            })
+        })
+
     var chartCPU = new ApexCharts(document.getElementById("chart-cpu"), optionsCPU);
     var chartRAM = new ApexCharts(document.getElementById("chart-ram"), optionsRAM);
     var chartDISCO = new ApexCharts(document.getElementById("chart-disco"), optionsDISCO);
@@ -665,12 +697,11 @@ function openDashboardDisplay(totemData) {
 
     document.getElementById("nome_totem").innerHTML = totem.hostname;
     document.getElementById("ultima_captura_totem").innerHTML = `Última captura realizada em: ${ultima_captura}`;
-    document.getElementById("cpu_totem").innerHTML = totem.dados.cpu[totem.dados.cpu.length - 1];
-    document.getElementById("ram_totem").innerHTML = totem.dados.ram[totem.dados.ram.length - 1];
-    document.getElementById("disco_totem").innerHTML = totem.dados.disco[totem.dados.disco.length - 1];
-    document.getElementById("rede_totem").innerHTML = totem.dados.rede[totem.dados.rede.length - 1];
+    document.getElementById("cpu_totem").innerHTML = `<i>${totem.dados.cpu[totem.dados.cpu.length - 1]}%</i>`;
+    document.getElementById("ram_totem").innerHTML = `<i>${totem.dados.ram[totem.dados.ram.length - 1]}%</i>`;
+    document.getElementById("disco_totem").innerHTML = `<i>${totem.dados.disco[totem.dados.disco.length - 1]}%</i>`;
+    document.getElementById("rede_totem").innerHTML = `<i>${totem.dados.rede[totem.dados.rede.length - 1]}Mb</i>`;
     document.getElementById("tempo_atividade_totem").innerHTML = `${tempo}`;
-    document.getElementById("modelo_totem").innerHTML = "dde";
     document.getElementById("ip_totem").innerHTML = totem.ip;
     document.getElementById("mac_totem").innerHTML = totem.enderecoMac;
 
@@ -720,89 +751,5 @@ function closeDashboardDisplay() {
     document.getElementById("main_frame").style.display = 'flex';
 }
 
-/* salvar lógica veia */
-
-// var cpu = totemAtual.dados.cpu[totemAtual.dados.cpu.length - 1];
-// var ram = totemAtual.dados.ram[totemAtual.dados.ram.length - 1];
-// var disco = totemAtual.dados.disco[totemAtual.dados.disco.length - 1];
-// var rede = Math.round((totemAtual.dados.rede[totemAtual.dados.rede.length - 1]) / 1024 / 1024, 1);
-
-// var isOnAlert = false;
-// var isIdle = false;
-// var cpu_col, ram_col, disco_col, rede_col;
-
-// var limiteMinCPU = totemAtual.CPU.limiteMinimo
-// var MedianaMinCPU = Math.round((totemAtual.CPU.limiteMaximo + totemAtual.CPU.limiteMinimo) / 2, 1)
-// var limiteMaxCPU = totemAtual.CPU.limiteMaximo
-
-// var limiteMinRAM = totemAtual.RAM.limiteMinimo
-// var MedianaMinRAM = Math.round((totemAtual.RAM.limiteMaximo + totemAtual.RAM.limiteMinimo) / 2, 1)
-// var limiteMaxRAM = totemAtual.RAM.limiteMaximo
-
-// var limiteMinDISCO = totemAtual.DISCO.limiteMinimo
-// var MedianaMinDISCO = Math.round((totemAtual.DISCO.limiteMaximo + totemAtual.DISCO.limiteMinimo) / 2, 1)
-// var limiteMaxDISCO = totemAtual.DISCO.limiteMaximo
-
-// var limiteMinREDE = totemAtual.REDE.limiteMinimo
-// var MedianaMinREDE = Math.round((totemAtual.REDE.limiteMaximo + totemAtual.REDE.limiteMinimo) / 2, 1)
-// var limiteMaxREDE = totemAtual.REDE.limiteMaximo
-
-
-// var prioridade = 0;
-// /* TABELA DE PRIORIDADE DA LISTA:*/
-// // 100 -> CRITICO
-// // 50 -> ALTO
-// // 10 -> BAIXO
-// // 0 -> NORMAL
-// // -10 -> OCIOSO
-
-// if (cpu <= 10) { isIdle = true; cpu_col = 'ball-green'; }
-// else if (cpu > 70 && cpu < 80) { cpu_col = "ball-yellow"; prioridade += 10; }
-// else if (cpu >= 80 && cpu < 90) { cpu_col = "ball-orange"; alertasCPU++; isOnAlert = true; prioridade += 50; }
-// else if (cpu >= 90) { cpu_col = "ball-red"; alertasCPU++; isOnAlert = true; prioridade += 100; }
-// else { cpu_col = 'ball-green'; }
-
-// if (ram > 70 && ram < 80) { ram_col = "ball-yellow"; prioridade += 10; }
-// else if (ram >= 80 && ram < 90) { ram_col = "ball-orange"; alertasRAM++; isOnAlert = true; prioridade += 50; }
-// else if (ram >= 90) { ram_col = "ball-red"; alertasRAM++; isOnAlert = true; prioridade += 100; }
-// else { ram_col = 'ball-green'; }
-
-// if (disco > 70 && disco < 80) { disco_col = "ball-yellow"; prioridade += 10; }
-// else if (disco >= 80 && disco < 90) { disco_col = "ball-orange"; alertasDISCO++; isOnAlert = true; prioridade += 50; }
-// else if (disco >= 90) { disco_col = "ball-red"; alertasDISCO++; isOnAlert = true; prioridade += 100; }
-// else { disco_col = 'ball-green'; }
-
-// if (rede > 15 && rede < 20) { rede_col = "ball-yellow"; prioridade += 10; }
-// else if (rede >= 5 && rede < 10) { rede_col = "ball-orange"; alertasREDE++; isOnAlert = true; prioridade += 50; }
-// else if (rede < 5) { rede_col = "ball-red"; alertasREDE++; isOnAlert = true; prioridade += 100; }
-// else { rede_col = 'ball-green'; }
-
-// if (isIdle && !isOnAlert) { isIdle = 'blue'; totensOciosos++ }
-// else if (isIdle && isOnAlert) { isOnAlert = 'red'; isIdle = ''; totensAlerta++ }
-// else if (isOnAlert && isIdle == false) { isOnAlert = 'red'; totensAlerta++; }
-// else { isOnAlert = 'green', isIdle = '' }
-
-// listTotensHtml += `
-//                     <div class="totem ${isIdle} ${isOnAlert}">
-//                         <p>${totemAtual.hostname}</p>
-//                         <div class="box">
-//                             <div class="${cpu_col} ball"></div>
-//                             <span>${cpu}%</span>
-//                         </div>
-//                         <div class="box">
-//                             <div class="${ram_col} ball"></div>
-//                             <span>${ram}%</span>
-//                         </div>
-//                         <div class="box">
-//                             <div class="${disco_col} ball"></div>
-//                             <span>${disco}%</span>
-//                         </div>
-//                         <div class="box">
-//                             <div class="${rede_col} ball"></div>
-//                             <span>${rede}Mb</span>
-//                         </div>
-//                         <p>${totalAlertasHoje}</p>
-//                         <button>Analisar</button>
-//                         <button>Abrir</button>
-//                     </div>
-//                 `
+function openLog(idMaquina) {
+}
