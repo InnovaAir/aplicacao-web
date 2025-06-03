@@ -30,7 +30,20 @@ function dashGerenteDadosQtd(req, res){
             });
 }
 
+function obterDadosGerenteMenor(req, res){
+    var idUsuario = req.params.idUsuario;
+    dashboardsModel.obterDadosGerenteMenor(idUsuario)
+            .then((resultado) => {
+                res.json(resultado);
+            })
+            .catch((erro) => {
+                console.log("Erro ao obter dados do gerente:", erro);
+                res.status(500).json({ error: "Erro ao obter dados do gerente" });
+            });
+}
+
 module.exports = {
 dashGerenteDados,
-dashGerenteDadosQtd
+dashGerenteDadosQtd,
+obterDadosGerenteMenor
 }

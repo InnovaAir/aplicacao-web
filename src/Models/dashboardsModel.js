@@ -12,7 +12,14 @@ function dashGerenteDadosQtd(modelo1, modelo2, modelo3, modelo4, modelo5, idUsua
     return database.executar(instrucaoSql);
 }
 
+function obterDadosGerenteMenor(idUsuario){
+    var instrucaoSql = `select * from dashRobertoModelosMenor where idUsuario = ${idUsuario}`
+        console.log("Executando instrução:", instrucaoSql)
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
 dashGerenteDados,
-dashGerenteDadosQtd
+dashGerenteDadosQtd,
+obterDadosGerenteMenor
 }

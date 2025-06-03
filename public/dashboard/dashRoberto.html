@@ -203,6 +203,7 @@ let qtdMaquinas = {};
 let filiais = []
 let json_filtrado = []
 var periodo = 4
+var menores = []
 var options = {
     series: [
       {
@@ -274,7 +275,7 @@ obterFiliaisGerente()
 async function executar() {
 await obterDadosGerente()
 await ordenarDados(json_dados)
-await obterDadosGerenteQtd()
+await obterDadosGerenteMenor()
 plotarDados(json_dados, qtdMaquinas)
 }
 executar()
@@ -325,28 +326,16 @@ async function obterDadosGerente(){
     json_dados = await resposta.json()
   }
 
-async function obterDadosGerenteQtd(){
-    // resposta = await fetch("/dashboards/dashGerenteDadosQtd", {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       modelo1Server: modelosOrdenados[0].especificacao,
-    //       modelo2Server: modelosOrdenados[1].especificacao,
-    //       modelo3Server: modelosOrdenados[2].especificacao,
-    //       modelo4Server: modelosOrdenados[3].especificacao,
-    //       modelo5Server: modelosOrdenados[4].especificacao,
-    //       idUsuarioServer: sessionStorage.idUsuario
-    //     }),
-    // })
+async function obterDadosGerenteMenor(){
+    resposta = await fetch(`/dashboards/obterDadosGerenteMenor/${sessionStorage.idUsuario}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
     
-    // qtdMaquinas = await resposta.json()
-    // console.log(qtdMaquinas)
-    // qtdMaquinas = []
-    // for(i = 0; i < qtdMaquinas.length; i++){
-
-    // }
+    menores = await resposta.json()
+    console.log(menores)
   }
 
 function ordenarDados(json_dados){
@@ -363,6 +352,7 @@ function ordenarDados(json_dados){
   var qtdMaquinas3 = 0
   var qtdMaquinas4 = 0
   var qtdMaquinas5 = 0
+  console.log(json_dados)
   for(i = 0; i < json_dados.length; i++){
     if(!modelos.includes(json_dados[i].especificacao)){
       modelos.push(json_dados[i].especificacao)
@@ -453,7 +443,8 @@ function plotarDados(json_dados, qtdMaquinas){
                 chart.updateOptions({
                   xaxis: {
                     categories: nomesModelos,
-                    max: max
+                    max: max,
+                    forceNiceScale: false
                   }
                 });
                 tabela_comp_1.innerHTML = modelosOrdenados[0].componente
@@ -484,6 +475,11 @@ function plotarDados(json_dados, qtdMaquinas){
                 valor_kpi1.innerHTML = modelosOrdenados[0].especificacao
                 valor_kpi2.innerHTML = qtdMaquinas[0]
                 valor_kpi3.innerHTML = Math.round(modelosOrdenados[0].qtdAlertas*100/(qtdMaquinas[0] * 4 * 24 * periodo * 7)) + "%"
+                for(i = 0; i < menores.length; i++){
+                  if(modelosOrdenados[0].componente == menores[i].componente){
+                    valor_kpi4.innerHTML = menores[i].especificacao
+                  }
+                }
 }
 
 async function aplicarFiltro(){
@@ -527,7 +523,6 @@ var semanaAtual = obterDiaSemana(hoje);
   }
   // filtro endereco
   ordenarDados(dados_filtrados)
-  await obterDadosGerenteQtd()
   await plotarDados(dados_filtrados, qtdMaquinas)
 }
 

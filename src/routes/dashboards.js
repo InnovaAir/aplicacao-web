@@ -11,4 +11,8 @@ router.post("/dashGerenteDadosQtd", function(req, res) {
     dashboardsController.dashGerenteDadosQtd(req, res)
 })
 
+router.get("/obterDadosGerenteMenor/:idUsuario", function(req, res) {
+    dashboardsController.obterDadosGerenteMenor(req, res)
+})
+
 module.exports = router;
