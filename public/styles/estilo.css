@@ -9,7 +9,7 @@ body {
   
   .sidebar {
     width: 250px;
-    background: linear-gradient(45deg, rgba(152, 170, 255, 1) 25%, rgba(82, 113, 255, 1) 57%);
+    background: white;
     color: white;
     display: flex;
     flex-direction: column;
