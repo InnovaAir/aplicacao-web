@@ -28,19 +28,26 @@ body {
 #titulo_01 {
     font-size: 20px;
     color: #5271FF;
+    font-weight: bold;
+
 }
 
 #titulo_02 {
     color: #8BA0FF;
+    font-size: 19px;
+
 }
 
 #titulo_kpi {
-    font-size: 30px;
+    font-size: 22px;
     color: #555;
+      font-weight: bold;
+
 }
 
 .valor_kpi {
     font-size: 25px;
+      font-weight: bold;
 }
 
 .select-wrapper {

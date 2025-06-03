@@ -211,8 +211,8 @@ var options = {
       enabled: true,
       offsetX: -6,
       style: {
-        fontSize: '12px',
-        colors: ['#fff']
+        fontSize: '15px',
+        colors: ['#00000']
       },
       formatter: function (val) {
         return val;
@@ -230,6 +230,13 @@ var options = {
     xaxis: {
       categories: ["i3 7200u", "i4 2322u", "ryzen 4", "pentium 5"],
       max: 30
+    },
+    yaxis: {
+      labels: {
+        style: {
+          fontSize: '16px' // aumenta a fonte do eixo Y
+        }
+      }      
     }
   };
 
