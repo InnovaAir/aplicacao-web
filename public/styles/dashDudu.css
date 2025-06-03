@@ -22,6 +22,16 @@ body {
     margin-left: 4vh;
 }
 
+.grafico_pix{
+    margin-top: 50px;
+    justify-items: center;
+}
+
+.grafico_pix img{
+    height: 70%;
+    width: auto;
+}
+
 .div_titulo1{
     /* border: 1px solid red; */
     color: #0000A5;
@@ -119,7 +129,7 @@ body {
 }
 
 .div_listaMaq{
-    height: 60vh;
+    height: 45vh;
     margin-right: 1vw;
     outline: 3px solid #010176; /* fica fora da borda */
     outline-offset: 4px;
@@ -370,4 +380,79 @@ body {
 .custom-select:focus {
     outline: none;
     border-bottom: 0.25vh solid #1976d2;
+}
+.button {
+    position: relative;
+    width: 4em;
+    height: 4em;
+    border: none;
+    background: rgba(0, 0, 0, 0.11);
+    border-radius: 5px;
+    transition: background 0.5s;
+    cursor: pointer;
+
+}
+
+.X {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2em;
+    height: 1.5px;
+    background-color: rgb(255, 255, 255);
+    transform: translateX(-50%) rotate(45deg);
+    cursor: pointer;
+
+}
+
+.Y {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2em;
+    height: 1.5px;
+    background-color: #fff;
+    transform: translateX(-50%) rotate(-45deg);
+    cursor: pointer;
+}
+
+.close {
+    position: absolute;
+    display: flex;
+    padding: 0.8rem 1.5rem;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-50%);
+    top: -70%;
+    left: 50%;
+    width: 3em;
+    height: 1.7em;
+    font-size: 12px;
+    background-color: rgb(19, 22, 24);
+    color: rgb(187, 229, 236);
+    border: none;
+    border-radius: 3px;
+    pointer-events: none;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: rgb(211, 21, 21);
+}
+
+.button:active {
+    background-color: rgb(130, 0, 0);
+}
+
+.button:hover>.close {
+    animation: close 0.2s forwards 0.25s;
+}
+
+@keyframes close {
+    100% {
+        opacity: 0;
+    }
 }

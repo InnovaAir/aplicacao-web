@@ -17,46 +17,48 @@
     <title>Desempenho</title>
   </head>
   <body>
+    <div id="box_geral1" class="box_geral">
+      <!-- Inicio Box geral-->
+      <div class="box_esquerda">
+        <!-- Inicio Box esquerda-->
 
-    
-    <div class="box_geral"> <!-- Inicio Box geral-->
-      <div class="box_esquerda"> <!-- Inicio Box esquerda-->
-        
-        <div class="box_esquerdaCima"> <!-- Inicio Box esquerda cima-->
-          
+        <div class="box_esquerdaCima">
+          <!-- Inicio Box esquerda cima-->
+
           <div class="div_titulo1">
             <h1>Gráfico de Desempenho por Aeroporto</h1>
-
           </div>
 
           <div class="div_selects">
-
             <!-- <div class="div_slcEnd">
                 <select id="slc_endereco">
                   <option value="">Endereço</option>
                 </select>
             </div> -->
 
-                  <!-- <div class="custom-select-wrapper" class= "div_slcFil">
+            <!-- <div class="custom-select-wrapper" class= "div_slcFil">
                         <select class="custom-select" id="slc_filial" onchange="aplicarFiltro()">
                             <option value="">Filial</option>
                         </select>
                     </div> -->
 
-                <div class="custom-select-wrapper">
-                  <div class="div_slcFil">
-                    <select id="slc_filial" onchange="aplicarFiltro(document.getElementById('slc_filial').value)"class="custom-select">  
-                      <option value="">Filial</option>
-                      <option selected>Todos os Aeroportos</option>
-                      <option>GRU Airport</option>
-                      <option>Galeão Airport</option>
-                    </select>
-                    <p>*Selecione um Aeroporto</p>
-                  </div>
-                </div>
+            <div class="custom-select-wrapper">
+              <div class="div_slcFil">
+                <select
+                  id="slc_filial"
+                  onchange="aplicarFiltro(document.getElementById('slc_filial').value)"
+                  class="custom-select"
+                >
+                  <option value="">Filial</option>
+                  <option selected>Todos os Aeroportos</option>
+                  <option>GRU Airport</option>
+                  <option>Galeão Airport</option>
+                </select>
+                <p>*Selecione um Aeroporto</p>
+              </div>
+            </div>
 
-
-           <!-- <select id="slc_periodo" onchange="dashDudu()">
+            <!-- <select id="slc_periodo" onchange="dashDudu()">
               <option value="1" selected>Últimas 24h</option>
               <option value="7">Última semana</option>
               <option value="15">Últimos 15 dias</option>
@@ -64,111 +66,156 @@
               <option value="90">Últimos 3 meses</option>
             </select> -->
 
-
             <!-- <div class="div_slcAlerta">
               <select id="div_alerta">
                 <option value="">Todos</option>
               </select>
             </div> -->
-
-
           </div>
 
           <div class="div_kpis">
-            
-              <div class="kpi_caixa"> 
-                <p class="kpi_titulo">Totens com<br>Baixo Desempenho</p>
-                <hr class="kpi_linha">
-                <p class="kpi_valor"><span id="kpi_baixo"></span></p>
-              </div>
+            <div class="kpi_caixa">
+              <p class="kpi_titulo">Totens com<br />Baixo Desempenho</p>
+              <hr class="kpi_linha" />
+              <p class="kpi_valor"><span id="kpi_baixo"></span></p>
+            </div>
 
-              <div class="kpi_caixa">
-                <p class="kpi_titulo">Total de Totens</p>
-                <hr class="kpi_linha">
-                <p class="kpi_valor"><span id="kpi_total"></span></p>
-              </div>
+            <div class="kpi_caixa">
+              <p class="kpi_titulo">Total de Totens</p>
+              <hr class="kpi_linha" />
+              <p class="kpi_valor"><span id="kpi_total"></span></p>
+            </div>
 
-              <div class="kpi_caixa">
-                <p class="kpi_titulo">Alertas Nível<br>Crítico</p>
-                <hr class="kpi_linha">
-                <p class="kpi_valor"><span id="kpi_alertas"></span></p>
-              </div>
-
+            <div class="kpi_caixa">
+              <p class="kpi_titulo">Alertas Nível<br />Crítico</p>
+              <hr class="kpi_linha" />
+              <p class="kpi_valor"><span id="kpi_alertas"></span></p>
+            </div>
           </div>
+        </div>
+        <!-- Fim Box esquerda cima -->
 
-        </div> <!-- Fim Box esquerda cima -->
-
-
-        <div class="box_esquerdaBaixo"> <!-- Inicio Box esquerda baixo-->
+        <div class="box_esquerdaBaixo">
+          <!-- Inicio Box esquerda baixo-->
 
           <div class="div_titulo2">
-              <span><b>Desempenho Total dos Totens dos Aeroportos (%)</b></span>
-            </div>
-            <div class="div_dashboard">
-              <canvas id="graficoDesempenho" width="600" height="400"></canvas>
-            </div>
+            <span><b>Desempenho Total dos Totens dos Aeroportos (%)</b></span>
+          </div>
+          <div class="div_dashboard">
+            <canvas id="graficoDesempenho" width="600" height="400"></canvas>
+          </div>
+        </div>
+        <!-- Fim Box esquerda baixo-->
+      </div>
+      <!-- Fim Box esquerda-->
 
-        </div> <!-- Fim Box esquerda baixo-->
-
-
-      </div> <!-- Fim Box esquerda-->
-
-      <div class="box_direita"> <!-- Inicio Box direita-->
+      <div class="box_direita">
+        <!-- Inicio Box direita-->
         <div class="div_titulo3">
-            <span><b>Lista dos Totens por Aeroportos</b></span>
+          <span><b>Lista dos Totens por Aeroportos</b></span>
         </div>
 
         <div class="div_legenda">
-
           <div class="box_check filtro" data-filtro="verde">
             <span class="check_box_suficiente"></span>
-            <span class="checkbox-text">Desempenho Suficiente <br> &gt; 70%</span>
+            <span class="checkbox-text"
+              >Desempenho Suficiente <br />
+              &gt; 70%</span
+            >
           </div>
 
           <div class="box_check filtro" data-filtro="amarelo">
             <span class="check_box_mediano"></span>
-            <span class="checkbox-text">Desempenho Mediano <br> &gt; 35%</span>
+            <span class="checkbox-text"
+              >Desempenho Mediano <br />
+              &gt; 35%</span
+            >
           </div>
 
           <div class="box_check filtro" data-filtro="vermelho">
             <span class="check_box_insuficiente"></span>
-            <span class="checkbox-text">Desempenho Insuficiente <br> &lt; 35%</span>
+            <span class="checkbox-text"
+              >Desempenho Insuficiente <br />
+              &lt; 35%</span
+            >
           </div>
-          
         </div>
 
         <div class="div_listaMaq">
-
           <div class="tabela_cabecalho">
-            <div class="coluna" onclick="ordenarColuna('totem')">Nome do Tótem <span class="seta">⇅</span></div>
-            <div class="coluna" onclick="ordenarColuna('terminal')">Aeroporto <span class="seta">⇅</span></div>
-            <div class="coluna" onclick="ordenarColuna('critico')">Alertas Crítico <span class="seta">⇅</span></div>
-            <div class="coluna" onclick="ordenarColuna('alto')">Alertas <br> Alto <span class="seta">⇅</span></div>
-            <div class="coluna" onclick="ordenarColuna('baixo')">Alertas <br> Baixo <span class="seta">⇅</span></div>
-            <div class="coluna" onclick="ordenarColuna('total_alertas')">Total de Alertas <span class="seta">⇅</span></div>
-            <div class="coluna" onclick="ordenarColuna('desempenho')">Desempenho (%) <span class="seta">⇅</span></div>
+            <div class="coluna" onclick="ordenarColuna('totem')">
+              Nome do Tótem <span class="seta">⇅</span>
+            </div>
+            <div class="coluna" onclick="ordenarColuna('terminal')">
+              Aeroporto <span class="seta">⇅</span>
+            </div>
+            <div class="coluna" onclick="ordenarColuna('critico')">
+              Alertas Crítico <span class="seta">⇅</span>
+            </div>
+            <div class="coluna" onclick="ordenarColuna('alto')">
+              Alertas <br />
+              Alto <span class="seta">⇅</span>
+            </div>
+            <div class="coluna" onclick="ordenarColuna('baixo')">
+              Alertas <br />
+              Baixo <span class="seta">⇅</span>
+            </div>
+            <div class="coluna" onclick="ordenarColuna('total_alertas')">
+              Total de Alertas <span class="seta">⇅</span>
+            </div>
+            <div class="coluna" onclick="ordenarColuna('desempenho')">
+              Desempenho (%) <span class="seta">⇅</span>
+            </div>
           </div>
 
-
-          <div class="tabela_conteudo" id="lista_maquinas">
-            
-          </div>
-
+          <div class="tabela_conteudo" id="lista_maquinas"></div>
         </div>
 
         <div class="div_botaoCSV">
 
-          <button>Baixar Relatório</button>
+          <button onclick="openChartDisplay()">Abrir Gráfico do pix</button>
 
         </div>
+      </div>
+      <!-- Fim Box direita-->
+    </div>
+    <!-- Fim Box geral-->
 
-      </div> <!-- Fim Box direita-->
+    <div id="frame_grafico" style="display: none; flex-direction: column; width: 100vw; align-items: center; height: 100%;">
+      <div class="titleFrame" style="display: grid; grid-template-columns: 90% 10%; align-items: center;">
+        <div class="left">
+          <h1>
+            Quantidade de Transações por Faixa de Valor
+          </h1>
+          <p>* Gráfico atualizado todo primeiro dia do mês</p>
+        </div>
+        <div class="rigth">
+          <button class="button" onclick="closeChartDisplay()">
+            <span class="X"></span>
+            <span class="Y"></span>
+            <div class="close">Close</div>
+          </button>
+        </div>
+      </div>
 
-    </div> <!-- Fim Box geral-->
-
-    
+      <div class="grafico_pix">
+        <img src="../assets/GraficoPix.jpg" alt="graficoPix" />
+      </div>
+    </div>
   </body>
 </html>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 <script src="../js/dashDudu.js"></script>
+<script>
+  function closeChartDisplay() {
+    document.getElementById("box_geral1").style.display = 'flex';
+    document.getElementById("frame_grafico").style.display = 'none';
+}
+function openChartDisplay(){
+document.getElementById("box_geral1").style.display = 'none';
+    document.getElementById("frame_grafico").style.display = 'flex';
+
+  }
+
+</script>
