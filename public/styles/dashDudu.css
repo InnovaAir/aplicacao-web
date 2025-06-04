@@ -22,6 +22,14 @@ body {
     margin-left: 4vh;
 }
 
+.box_geral_direita{
+    outline: 1px solid #a8a8a8; 
+    outline-offset: 4px;
+    border-radius: 10px;
+    height: 80vh;
+    margin-right: 1vw;
+}
+
 .grafico_pix{
     margin-top: 50px;
     justify-items: center;
@@ -34,8 +42,15 @@ body {
 
 .div_titulo1{
     /* border: 1px solid red; */
-    color: #0000A5;
-    font-size: 18px;
+    color: #0026D6;
+}
+
+.div_titulo1 h1{
+    font-size: 2vw;
+}
+
+.div_titulo2 h1{
+    font-size: 2vw;
 }
 
 .div_selects {
@@ -54,12 +69,6 @@ body {
     
 }
 
-.div_slcFil p{
-    font-size: 20px;
-    margin-top: 2px;
-    color: #0000A5;
-}
-
 .div_kpis {
     display: flex;
     justify-content: center;
@@ -68,7 +77,7 @@ body {
 }
 
 .kpi_caixa {
-    background-color: #010176;
+    background-color: #5271FF;
     color: white;
     padding: 1vh 2vw;
     width: calc((100% - 2vw) / 3);
@@ -79,6 +88,7 @@ body {
     align-items: center;
     justify-content: center;
     border: 1px solid #fff;
+    border-radius: 10px;
 }
 
 .kpi_titulo {
@@ -94,13 +104,13 @@ body {
 }
 
 .kpi_valor {
-    font-size: 2vw;
     font-weight: bold;
     margin: 0;
 }
 
-.kpi_valor span {
+.kpi_valor h1 {
     display: inline-block;
+    font-size: 2vw;
 }
 
 .box_esquerdaBaixo{
@@ -111,8 +121,7 @@ body {
 
 .div_titulo2 {
     /* border: 1px solid black; */
-    font-size: 2.5vh;
-    color: #5271FF;
+    color: #0026D6;
 }
 
 .div_dashboard{
@@ -121,19 +130,21 @@ body {
     height: 59vh;
 }
 
+.div_titulo3 h1{
+    font-size: 2vw;
+}
+
 .div_titulo3 {
     /* border: 1px solid black; */
     font-size: 2.5vh;
-    color: #5271FF;
+    color: #0026D6;
     text-align: center;
     margin-top: 15vh;
 }
 
 .div_listaMaq{
-    height: 45vh;
-    margin-right: 1vw;
-    outline: 3px solid #010176; /* fica fora da borda */
-    outline-offset: 4px;
+    height: 70vh;
+    /* margin-right: 1vw; */
 }
 
 .div_legenda {
@@ -295,7 +306,7 @@ body {
 }
 
 .div_listaMaq {
-    max-height: 500px;
+    max-height: 50vh;
     overflow-y: auto;
 }
 
@@ -457,3 +468,4 @@ body {
         opacity: 0;
     }
 }
+

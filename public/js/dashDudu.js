@@ -39,9 +39,11 @@ function aplicarFiltrosCombinados() {
 
   if (filtroDesempenhoSelecionado === "verde") {
     dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 70);
-  } else if (filtroDesempenhoSelecionado === "amarelo") {
+  } 
+  else if (filtroDesempenhoSelecionado === "amarelo") {
     dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 35 && maq.desempenho < 70);
-  } else if (filtroDesempenhoSelecionado === "vermelho") {
+  } 
+  else if (filtroDesempenhoSelecionado === "vermelho") {
     dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho < 35);
   }
 
@@ -402,8 +404,8 @@ const grafico = new Chart(ctx, {
         }
       },
       datalabels: {
-        anchor: 'end',          // posiciona na ponta da barra
-        align: 'right',         // alinha o texto à direita da ponta
+        anchor: 'end',
+        align: 'right',
         formatter: function(value) {
           return value + '%';
         },
