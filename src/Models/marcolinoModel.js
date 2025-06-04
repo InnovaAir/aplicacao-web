@@ -2,7 +2,6 @@ var database = require("../database/config");
 
 function plotarFilial(fkCliente){
     var instrucaoSql = `
-<<<<<<< Updated upstream
                         select en.aeroporto as complemento, f.idFilial, f.terminal, COUNT(a.idCapturaAlerta) AS total_alertas
                         from captura_alerta a
                         join metrica me on a.fkMetrica = me.idMetrica
@@ -13,18 +12,6 @@ function plotarFilial(fkCliente){
                         where f.fkcliente = ${fkCliente}
                         group by f.terminal, f.idFilial, en.bairro
                         order by total_alertas desc;
-=======
-                            select en.aeroporto, f.idFilial, f.terminal, COUNT(a.idCapturaAlerta) AS total_alertas
-                            from captura_alerta a
-                            join metrica me on a.fkMetrica = me.idMetrica
-                            join componente c on me.fkComponente = c.idComponente
-                            join maquina m on c.fkMaquina = m.idMaquina
-                            join filial f on m.fkFilial = f.idFilial
-                            join endereco en on f.fkEndereco = en.idEndereco
-                            where f.fkcliente = 2
-                            group by f.terminal, f.idFilial, en.bairro
-                            order by total_alertas desc;
->>>>>>> Stashed changes
                         `;
     console.log("Executando instrução:", instrucaoSql);
     return database.executar(instrucaoSql);
