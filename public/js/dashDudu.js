@@ -39,16 +39,16 @@ function aplicarFiltrosCombinados() {
   let dadosFiltrados = dados_json;
 
   if (filtroDesempenhoSelecionado === "verde") {
-    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 75);
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 65);
   } 
   else if (filtroDesempenhoSelecionado === "amarelo") {
-    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 50 && maq.desempenho < 75);
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 35 && maq.desempenho < 65);
   } 
   else if (filtroDesempenhoSelecionado === "vermelho") {
-    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 25 && maq.desempenho < 50);
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 10 && maq.desempenho < 35);
   }
   else if (filtroDesempenhoSelecionado === "roxo") {
-    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho < 25);
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho < 10);
   }
 
   if (filtroTerminalSelecionado && filiais.includes(filtroTerminalSelecionado)) {
@@ -65,8 +65,9 @@ function aplicarFiltrosCombinados() {
 
 function carregarMaquinas(dados) {
   let qtdMaquinas = dados.length;
-  let qtdMaqMenorDsmp = dados.filter(dado => dado.desempenho < 35).length;
-  let totalAlertas = dados.reduce((acc, curr) => acc + (parseInt(curr.critico) || 0), 0);
+  let qtdMaqMenorDsmp = dados_json.filter(dado => dado.desempenho < 35).length;
+  let qtdMaqCrit = dados_json.filter(dado => dado.desempenho < 10).length;
+  // let totalAlertas = dados.reduce((acc, curr) => acc + (parseInt(curr.critico) || 0), 0);
 
   const lista = document.getElementById('lista_maquinas');
   lista.innerHTML = '';
@@ -77,9 +78,9 @@ function carregarMaquinas(dados) {
     let classe = 'green';
     if (desempenho !== 'N/A') {
       const valor = parseInt(desempenho);
-      if (valor < 25) classe = 'purple';
-      else if (valor < 50) classe = 'red';
-      else if (valor < 75) classe = 'yellow'
+      if (valor < 10) classe = 'purple';
+      else if (valor < 35) classe = 'red';
+      else if (valor < 65) classe = 'yellow'
     }
 
     const div = document.createElement('div');
@@ -98,17 +99,18 @@ function carregarMaquinas(dados) {
 
   document.getElementById('kpi_total').innerText = qtdMaquinas;
   document.getElementById('kpi_baixo').innerText = qtdMaqMenorDsmp;
-  document.getElementById('kpi_alertas').innerText = totalAlertas;
+  document.getElementById('kpi_alertas').innerText = qtdMaqCrit;
 }
 
 function atualizarKPIsTotais() {
   let qtdMaquinas = dados_json.length;
   let qtdMaqMenorDsmp = dados_json.filter(dado => dado.desempenho < 35).length;
-  let totalAlertas = dados_json.reduce((acc, curr) => acc + (parseInt(curr.critico) || 0), 0);
+  let qtdMaqCrit = dados_json.filter(dado => dado.desempenho < 10).length;
+  // let totalAlertas = dados_json.reduce((acc, curr) => acc + (parseInt(curr.critico) || 0), 0);
 
   document.getElementById('kpi_total').innerText = qtdMaquinas;
   document.getElementById('kpi_baixo').innerText = qtdMaqMenorDsmp;
-  document.getElementById('kpi_alertas').innerText = totalAlertas;
+  document.getElementById('kpi_alertas').innerText = qtdMaqCrit;
 }
 
 async function dashDudu() {
@@ -244,16 +246,16 @@ function ordenarColuna(campo) {
   let dadosFiltrados = dados_json;
 
   if (filtroDesempenhoSelecionado === "verde") {
-    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 75);
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 65);
   } 
   else if (filtroDesempenhoSelecionado === "amarelo") {
-    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 50 && maq.desempenho < 75);
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 35 && maq.desempenho < 65);
   } 
   else if (filtroDesempenhoSelecionado === "vermelho") {
-    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 25 && maq.desempenho < 50);
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 10 && maq.desempenho < 35);
   }
   else if (filtroDesempenhoSelecionado === "roxo") {
-    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho < 25);
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho < 10);
   }
 
   if (filtroTerminalSelecionado && filiais.includes(filtroTerminalSelecionado)) {
@@ -342,7 +344,8 @@ function atualizarGraficoDesempenho(maquinas) {
   const labels = desempenhoPorTerminal.map(d => d.terminal);
   const valores = desempenhoPorTerminal.map(d => d.desempenho);
   const cores = desempenhoPorTerminal.map(d => {
-    if (d.desempenho <= 35) return '#8537C8';
+    if (d.desempenho <= 10) return '#8537C8';
+    if (d.desempenho <= 35) return '#DE2828';
     if (d.desempenho <= 65) return '#DEC828';
     return '#00A100';
   });

@@ -18,7 +18,7 @@
 <body>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-1 sidebar d-flex flex-column align-items-center">
+      <div style="width: 5vw;" class="sidebar d-flex flex-column align-items-center">
         <div id="sidebar">
           <div class="logo d-flex justify-content-between align-items-center w-100 px-2">
             <img src="../assets/InnovaairWhite.png" alt="Logo" class="img-fluid mx-auto d-block" />
@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <div id="box_geral1" class="box_geral">
+      <div id="box_geral1" style="width: 95vw;" class="box_geral">
         <!-- Inicio Box geral-->
         <div class="box_esquerda">
           <!-- Inicio Box esquerda-->
@@ -88,11 +88,20 @@
             </div>
 
             <div class="div_kpis">
+
+              <div class="kpi_caixa">
+                <h2 class="kpi_titulo">Totens em Estado<br />Crítico</h2>
+                <hr class="kpi_linha" />
+                <h1 class="kpi_valor">
+                  <h1 id="kpi_alertas"></h1>
+                </h1>
+              </div>
+
               <div class="kpi_caixa">
                 <h2 class="kpi_titulo">Totens com<br />Baixo Desempenho</h2>
                 <hr class="kpi_linha" />
                 <h1 class="kpi_valor">
-                  <h1 id="kpi_baixo">1</h1>
+                  <h1 id="kpi_baixo"></h1>
                 </h1>
               </div>
 
@@ -100,17 +109,11 @@
                 <h2 class="kpi_titulo">Total de Totens</h2>
                 <hr class="kpi_linha" />
                 <h1 class="kpi_valor">
-                  <h1 id="kpi_total">2</h1>
+                  <h1 id="kpi_total"></h1>
                 </h1>
               </div>
 
-              <div class="kpi_caixa">
-                <h2 class="kpi_titulo">Alertas Nível<br />Crítico</h2>
-                <hr class="kpi_linha" />
-                <h1 class="kpi_valor">
-                  <h1 id="kpi_alertas">3</h1>
-                </h1>
-              </div>
+              
             </div>
           </div>
           <!-- Fim Box esquerda cima -->
@@ -214,7 +217,6 @@
 </body>
 
 </html>
- <script src="../js/dashDudu.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 <!-- JQuery -->
@@ -238,3 +240,4 @@
     expanded = false;
   });
 </script>
+ <script src="../js/dashDudu.js"></script>

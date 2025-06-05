@@ -4,7 +4,7 @@ body {
 }
 
 .box_geral {
-    margin-left: 7vw;
+    margin-left: 5vw;
     display: flex;
     flex-direction: row;
 }
@@ -27,7 +27,7 @@ body {
     border-radius: 10px;
     height: auto;
     width: 43vw;
-    margin-right: 1vw;
+    /* margin-right: 1vw; */
     margin-top: 15vh;
     padding: 10px 10px 10px 10px;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
@@ -60,7 +60,7 @@ body {
     display: flex;
     flex-direction: row;
     /* border: 2px solid violet; */
-    justify-content: center;
+    justify-content: start;
 }
 
 .div_slcFil{
@@ -362,19 +362,19 @@ body {
 }
 
 .totem.purple {
-    background-color: #8537C85B;
+    background-color: #7625bcac;
     /* border: 2px solid rgba(255, 0, 0, 1); */
     border-radius: 15px;
 }
 
 .totem.red {
-    background-color: #DE28285B;
+    background-color: #fd3b3bbd;
     /* border: 2px solid rgba(255, 0, 0, 1); */
     border-radius: 15px;
 }
 
 .totem.yellow {
-    background-color: #DEC8285B;
+    background-color: #f9e01f;
     /* border: 2px solid rgba(241, 196, 15, 1); */
     border-radius: 15px;
 }
