@@ -22,7 +22,7 @@
 <body>
   <div class="container-fluid">
   <div class="row">
-  <div class="col-md-1 sidebar d-flex flex-column align-items-center">  
+  <div style="width: 5vw;" class="sidebar d-flex flex-column align-items-center">  
     <div id="sidebar">
       <div class="logo d-flex justify-content-between align-items-center w-100 px-2">
         <img src="../assets/InnovaairWhite.png" alt="Logo" class="img-fluid" />
@@ -39,7 +39,6 @@
     </div>
   </div>
       
-      <div class="col-md-11 p-2">
   <div id="tela" class="tamanho_dash">
     <div class="container_componente">
       <div class="titulo">
@@ -82,20 +81,24 @@
 
             <div class="box_kpi">
         <div class="kpi_tabela">
-          <h3 id="titulo_kpi">Modelo com mais alertas:</h3>
+          <h3 class="titulo_kpi">Modelo com mais alertas:</h3>
           <h1 id="valor_kpi1" class="valor_kpi"><b>i3 7200 u</b></h1>
+          
         </div>
         <div class="kpi_tabela">
-          <h3 id="titulo_kpi">Quantidade de máquinas com esse modelo:</h3>
+          <h3 class="titulo_kpi">Quantidade de máquinas com esse modelo:</h3>
           <h1 id="valor_kpi2"class="valor_kpi"><b>200</b></h1>
+          
         </div>
         <div class="kpi_tabela">
-          <h3 id="titulo_kpi">Capturas com alerta (%) desse modelo:</h3>
+          <h3 class="titulo_kpi">Capturas com alerta (%) desse modelo:</h3>
           <h1 id="valor_kpi3"class="valor_kpi"><b>95%</b></h1>
+          
         </div>
         <div class="kpi_tabela">
-          <h3 id="titulo_kpi">Modelo do mesmo componente com menos alertas:</h3>
+          <h3 class="titulo_kpi">Modelo do mesmo componente com menos alertas:</h3>
           <h1 id="valor_kpi4"class="valor_kpi"><b>Ryzen 3 3200 GE</b></h1>
+          
         </div>
       </div>
 
@@ -113,77 +116,76 @@
             <div id="chart_barras"></div>
           </div>
         </div>
-      </div>
-
-      <div>
-        <div class="container_tabela">
-          <div class="titulo_grafico3">
-            <div class="titulo_alinhado">
-              <span id="titulo_01">
-                Lista de Modelos
-              </span>
-              <span id="titulo_02">
-                <i>*Por nível de gravidade do alerta</i>
-              </span>
+        <div class="tabela">
+          <div class="container_tabela">
+            <div class="titulo_grafico3">
+              <div class="titulo_alinhado">
+                <span id="titulo_01">
+                  Lista de Modelos
+                </span>
+                <span id="titulo_02">
+                  <i>*Por nível de gravidade do alerta</i>
+                </span>
+              </div>
             </div>
           </div>
+            <div class="box_tabela">
+            <div class="tabela-scroll">
+              <table class="tabela-alertas">
+                <thead>
+                  <tr>
+                    <th>Componente</th>
+                    <th>Total Alertas</th>
+                    <th>Qtd. máquinas c/ componente</th>
+                    <th>Porcentagem de alertas</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <span id="tabela_comp_1">Processador</span><br><small><span id="tabela_modelo_1">Ryzen 3 3200g</span></small>
+                    </td>
+                    <td id="tabela_total_1">7</td>
+                    <td id="tabela_qtd_1">21</td>
+                    <td id="tabela_perc_1">5%</td>
+                  </tr>
+                  <td>
+                    <span id="tabela_comp_2">Processador</span><br><small><span id="tabela_modelo_2">Ryzen 3 3200g</span></small>
+                  </td>
+                  <td id="tabela_total_2">576</td>
+                  <td id="tabela_qtd_2">12</td>
+                  <td id="tabela_perc_2">86%</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span id="tabela_comp_3">Processador</span><br><small><span id="tabela_modelo_3">Ryzen 3 3200g</span></small>
+                    </td>
+                    <td id="tabela_total_3">1023</td>
+                    <td id="tabela_qtd_3">43</td>
+                    <td id="tabela_perc_3">43%</td>
+                  </tr>
+                                  <tr>
+                    <td>
+                      <span id="tabela_comp_4">Processador</span><br><small><span id="tabela_modelo_4">Ryzen 3 3200g</span></small>
+                    </td>
+                    <td id="tabela_total_4">1023</td>
+                    <td id="tabela_qtd_4">43</td>
+                    <td id="tabela_perc_4">43%</td>
+                  </tr>
+                                  <tr>
+                    <td>
+                      <span id="tabela_comp_5">Processador</span><br><small><span id="tabela_modelo_5">Ryzen 3 3200g</span></small>
+                    </td>
+                    <td id="tabela_total_5">1023</td>
+                    <td id="tabela_qtd_5">43</td>
+                    <td id="tabela_perc_5">43%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
         </div>
-                     <div class="box_tabela">
-          <div class="tabela-scroll">
-            <table class="tabela-alertas">
-              <thead>
-                <tr>
-                  <th>Componente</th>
-                  <th>Total Alertas</th>
-                  <th>Qtd. máquinas c/ componente</th>
-                  <th>Porcentagem de alertas</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <span id="tabela_comp_1">Processador</span><br><small><span id="tabela_modelo_1">Ryzen 3 3200g</span></small>
-                  </td>
-                  <td id="tabela_total_1">7</td>
-                  <td id="tabela_qtd_1">21</td>
-                  <td id="tabela_perc_1">5%</td>
-                </tr>
-                <td>
-                  <span id="tabela_comp_2">Processador</span><br><small><span id="tabela_modelo_2">Ryzen 3 3200g</span></small>
-                </td>
-                <td id="tabela_total_2">576</td>
-                <td id="tabela_qtd_2">12</td>
-                <td id="tabela_perc_2">86%</td>
-                </tr>
-                <tr>
-                  <td>
-                    <span id="tabela_comp_3">Processador</span><br><small><span id="tabela_modelo_3">Ryzen 3 3200g</span></small>
-                  </td>
-                  <td id="tabela_total_3">1023</td>
-                  <td id="tabela_qtd_3">43</td>
-                  <td id="tabela_perc_3">43%</td>
-                </tr>
-                                <tr>
-                  <td>
-                    <span id="tabela_comp_4">Processador</span><br><small><span id="tabela_modelo_4">Ryzen 3 3200g</span></small>
-                  </td>
-                  <td id="tabela_total_4">1023</td>
-                  <td id="tabela_qtd_4">43</td>
-                  <td id="tabela_perc_4">43%</td>
-                </tr>
-                                <tr>
-                  <td>
-                    <span id="tabela_comp_5">Processador</span><br><small><span id="tabela_modelo_5">Ryzen 3 3200g</span></small>
-                  </td>
-                  <td id="tabela_total_5">1023</td>
-                  <td id="tabela_qtd_5">43</td>
-                  <td id="tabela_perc_5">43%</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
       </div>
-    </div>
+      </div>
   </div>
 </body>
 
@@ -225,20 +227,20 @@ var options = {
     series: [
       {
         name: 'Baixo',
-        data: [10, 10, 10, 10]
+        data: [10, 10, 10, 10, 10]
       },
       {
         name: 'Alto',
-        data: [14, 21, 23, 12]
+        data: [14, 21, 23, 12, 12]
       },
       {
         name: 'Crítico',
-        data: [2, 3, 5, 10]
+        data: [2, 3, 5, 10, 10]
       }
     ],
     chart: {
       type: 'bar',
-      height: 440
+      height: 300
     },
     colors: ['#ff9900', '#ff0000', '#8400ff'],
     plotOptions: {
@@ -270,7 +272,7 @@ var options = {
       intersect: false
     },
     xaxis: {
-      categories: ["i3 7200u", "i4 2322u", "ryzen 4", "pentium 5"],
+      categories: ["i3 7200u", "i4 2322u", "ryzen 4", "pentium 5", "GEFORCE RTX"],
       max: 30
     },
     yaxis: {
