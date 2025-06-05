@@ -55,10 +55,17 @@ body {
 } */
 
 span {
-    font-size: 1.4vw;
+    font-size: max(1vw 2px);
+    word-wrap: break-word;
+    text-wrap: 1;
+    overflow-wrap: anywhere;
 }
 
 .itemLista {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-weight: 700;
 
 }
@@ -67,7 +74,7 @@ span {
     display: grid;
     grid-gap: 2%;
     border-radius: 5px;
-    min-height:40px;
+    min-height: 40px;
     align-items: center;
     margin-top: 1%;
     grid-row-gap: 10%;
@@ -76,34 +83,24 @@ span {
     border: solid #5271ff;
 }
 
-.gridTitulo{
+.gridTitulo {
     display: grid;
     font-weight: bold;
     grid-gap: 2%;
-    width:95%;
+    width: 95%;
     grid-row-gap: 10%;
     grid-template-columns: 6fr 10fr 2fr 3fr;
     border-bottom: solid 3px #7a90f3;
 }
 
 
-.kpiLegendas {
-    display: flex;
-    margin-bottom: 3px;
-    border: #555 0.5px solid;
-    background-color: #dadada;
-    width: fit-content;
-    padding-inline: 20px;
-    justify-content: center;
-    font-weight: 600;
-    align-items: center;
-    font-size: 1em;
-
-    padding: 1%;
-    gap: 3em;
-    border: 0.2vw solid #7a92ff;
-    width: 100%;
-
+.kpiModelos {
+    background-color: firebrick;
+    height: 5vh;
+    min-width: 150px;
+    width: 20vw;
+    align-self: flex-end;
+    right: 0;
 }
 
 .bolinhaKPI {
@@ -136,8 +133,6 @@ span {
     display: flex;
     gap: 2rem;
     padding-inline: 2%;
-
-
 
 }
 
@@ -237,7 +232,7 @@ span {
 }
 
 .section1 {
-    
+
     border: 1px solid #0026D6;
     border-radius: 5px;
     border: solid rgb(0, 0, 0) 1px;
@@ -280,16 +275,21 @@ span {
     flex-direction: row;
     margin-top: 20px;
     font-weight: 700;
-    font-size: xx-large;
+    font-size: max(2vw, 20px);
     color: #0026D6;
 
 }
 
 #alertas_kpi_titulo {
-    font-size: 30px;
+    font-size: max(2vw, 20px);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     color: #0026D6;
 
 }
+
+
 
 .subtituloContainer {
     display: flex;
@@ -300,7 +300,7 @@ span {
 
 
 .section1 select {
-    width: 100%;
+    width: 10vw;
 }
 
 .subSection2 {
@@ -349,7 +349,7 @@ span {
     top: 40%;
     justify-content: space-evenly;
     display: flex;
-    width: 60%;
+    width: 20vw;
 }
 
 .selectBox {
@@ -359,7 +359,7 @@ span {
 
     padding: 0.7vw;
     padding-right: 10em;
-    max-width: 300px;
+    max-width: 10vw;
     min-width: none;
     border: none;
     border-bottom: 0.4vh solid #B0BEC5;
@@ -388,59 +388,35 @@ span {
     }
 
 
-
-
-    @media (max-width: 768px) {
-        .container {
-            margin-left: 0;
-        }
-
-        .barra_lateral {
-            display: none;
-
-        }
-
-        .child {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            padding: 0.5rem;
-            overflow-y: scroll;
-        }
-
-        .section1,
-        .section2 {
-            width: 100%;
-            gap: 3rem;
-            font-size: 1.2rem;
-        }
-
-        .section1 p,
-        .section2 p {
-            margin: 0;
-        }
-
-        .section1 select {
-            width: 100%;
-        }
-
-
-
-        .InformacaoTotens {
-            display: flex;
-            justify-content: flex-start;
-        }
-
-        .tabela table {
-            width: 100%;
-
-        }
-
-        .titulo {
-            margin: 0;
-        }
-    }
 }
+
+@media (max-width: 768px) {
+    .barraAlertas{
+        max-height:4vh ;
+    }
+
+    .tituloContainer{
+        font-size: 4.5vh;
+    }
+
+    .section1{
+        width: 75vw;
+    }
+
+    span{
+        font-size:3vw ;
+    }
+    .child {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-left: 8vw;
+        padding: 0.5rem;
+        overflow-y: hidden;
+    }
+
+}
+
 
 #titulo_select {
     font-size: 20px;

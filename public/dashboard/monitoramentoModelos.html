@@ -71,7 +71,6 @@
 "> -->
                 <div class="main d-flex justify-content-center align-items-center" style="padding: 10px;">
                     <div id="tela"
-                        style="background-color: rgb(255, 255, 255);filter:drop-shadow(2px 2px 2px rgb(240, 240, 240))"
                         class="container">
                         <div class="child">
 
@@ -86,26 +85,28 @@
 
 
                             </div>
-                            <div id="alertas_kpi_titulo"><b>Quantidade de alertas por modelo</b></div>
-                            <div>dada</div>
+                            <div id="alertas_kpi_titulo"><b>Quantidade de alertas por modelo</b>
+                                <div class="kpiModelos">dada</div>
+                            </div>
+
                             <div class="section1">
                                 <div class="gridTitulo">
                                     <span>Modelo</span>
                                     <span>Alertas</span>
-                                    <span>Quantidade</span>
+                                    <span>Qtd.</span>
                                     <span></span>
                                 </div>
 
                                 <div class="containerLista">
-                                
 
-                                        <div class="linha">
-                                            <span><b>a</b></span>
-                                            <span class="barraAlertas"></span>
-                                            <span><b>c</b></span>
-                                            <span><b><u>Expandir</u></b></span>
-                                        </div>
-                                    
+
+                                    <div class="linha">
+                                        <span><b>a</b></span>
+                                        <span class="barraAlertas"></span>
+                                        <span><b>c</b></span>
+                                        <span><b><u>Expandir</u></b></span>
+                                    </div>
+
 
                                 </div>
                             </div>
@@ -218,8 +219,8 @@
     let ultimoComponente = null;
     let ultimoID = null;
 
-const linha = document.querySelector(".linha")
-const containerLista = document.querySelector(".containerLista")
+    const linha = document.querySelector(".linha")
+    const containerLista = document.querySelector(".containerLista")
     document.getElementById('select_filial').addEventListener('change', function () {
         linha.innerHTML = '';
         listarFilial(this.value);
@@ -332,7 +333,7 @@ const containerLista = document.querySelector(".containerLista")
                 console.log("resultados")
                 console.log(resultados)
 
-                
+
 
                 // ADICIONANDO IDs CRESCENTES AOS OBJETOS DE RESULTADOS
                 for (let i = 0; i < resultados.length; i++) {
@@ -365,10 +366,10 @@ const containerLista = document.querySelector(".containerLista")
                     contadorPopUp++
 
                     const linha = document.createElement("div");
-                    linha.className="linha";
-                    linha.id=`${contadorPopUp}`;
+                    linha.className = "linha";
+                    linha.id = `${contadorPopUp}`;
                     containerLista.appendChild(linha)
-                    
+
                     // seção "Modelo"
                     const modeloSpan = document.createElement("span");
                     modeloSpan.className = "itemLista";
@@ -389,12 +390,12 @@ const containerLista = document.querySelector(".containerLista")
                     alertaSpan.id = `${contadorPopUp}`
                     alertaSpan.className = "itemLista";
                     alertaSpan.style.display = "flex";
-                
+
 
                     const barraAlertas = document.createElement("span");
                     barraAlertas.style.width = ((item.quantidade / maiorAlerta) * 100) + "%";
                     barraAlertas.className = "barraAlertas";
-                
+
 
                     const qtdAlertas = document.createElement("span");
                     qtdAlertas.textContent = totalAlertas;
@@ -402,6 +403,7 @@ const containerLista = document.querySelector(".containerLista")
                     qtdAlertas.style.alignSelf = "center";
                     qtdAlertas.style.maxHeight = "20px";
                     qtdAlertas.style.minHeight = "20px";
+                    qtdAlertas.className = "itemLista";
                     qtdAlertas.style.marginLeft = "auto";
                     qtdAlertas.style.textAlign = "right";
                     //-----------------------------------------
@@ -464,7 +466,7 @@ const containerLista = document.querySelector(".containerLista")
                     // seção "Quantidade"
                     const quantidade = document.createElement("span");
                     quantidade.className = "itemLista";
-
+                    
                     quantidade.textContent = item.quantidade;
                     linha.appendChild(quantidade)
 
