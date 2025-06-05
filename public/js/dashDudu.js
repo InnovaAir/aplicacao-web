@@ -297,8 +297,7 @@ function atualizarGraficoDesempenho(maquinas) {
     const desempenho = parseFloat(maq.desempenho ?? 0);
     const critico = parseInt(maq.critico) || 0;
     const alto = parseInt(maq.alto) || 0;
-    const baixo = parseInt(maq.baixo) || 0;
-    const peso = (critico * 5) + (alto * 2) + (baixo * 1);
+    const peso = (critico * 3) + (alto * 1.5);
 
     if (!terminais[terminal]) {
       terminais[terminal] = {

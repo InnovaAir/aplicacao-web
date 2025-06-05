@@ -5,7 +5,7 @@ const calcularDesempenho = (linha) => {
   const alto = Number(linha.alto) || 0;
   const baixo = Number(linha.baixo) || 0;
 
-  const perdas = (critico * 5) + (alto * 2) + (baixo * 1);
+  const perdas = (critico * 3) + (alto * 1.5);
   
   const desempenho = Math.max(0, 100 - perdas);
   
