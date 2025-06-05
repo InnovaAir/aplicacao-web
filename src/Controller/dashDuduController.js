@@ -3,9 +3,9 @@ const dashDuduModel = require('../Models/dashDuduModel');
 const calcularDesempenho = (linha) => {
   const critico = Number(linha.critico) || 0;
   const alto = Number(linha.alto) || 0;
-  const baixo = Number(linha.baixo) || 0;
+  // const baixo = Number(linha.baixo) || 0;
 
-  const perdas = (critico * 3) + (alto * 1.5);
+  const perdas = (critico * 2) + (alto * 1);
   
   const desempenho = Math.max(0, 100 - perdas);
   
