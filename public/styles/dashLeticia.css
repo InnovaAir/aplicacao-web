@@ -89,10 +89,11 @@ i {
     width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .box_kpi_nivel {
-    width: 35%;
+    width: 24%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -101,6 +102,7 @@ i {
     font-size: 24px;
     border-radius: 5px;
     color: #fff;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
 }
 
 #numero_kpi {
@@ -113,7 +115,7 @@ i {
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: #568359;
+    background-color: #00A100;
     color: #fff;
     border-radius: 5px;
 }
@@ -135,7 +137,7 @@ i {
 }
 
 .box_alinhada2 {
-    width: 25%;
+    width: 28%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -169,8 +171,8 @@ i {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    border: 1px solid #5271FF;
     border-radius: 5px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
 }
 
 /* KPI's 2 */
@@ -199,7 +201,7 @@ i {
 }
 
 .subtitulo {
-    height: 50%;
+    height: 40%;
 }
 
 .kpi2 {
@@ -207,17 +209,22 @@ i {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
 }
 
 .kpi3 {
-    height: 20%;
+    height: 57%;
+    min-height: 250px;
+    background-color: #fff;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
 }
 
+/* 
 .borda_inferior {
     width: 80%;
     height: 18%;
     border-bottom: 1px solid #fff;
-}
+} */
 
 /* Select */
 .custom-select-wrapper {
@@ -250,4 +257,23 @@ i {
 .custom-select:focus {
     outline: none;
     border-bottom: 0.25vh solid #5271FF;
+}
+
+.linha-sólida {
+    height: 0.15vh;
+    width: 80%;
+    background-color: #fff;
+    margin: 12px 10% 12px 10%;
+    border-radius: 2px;
+}
+
+.apexcharts-tooltip {
+  background-color: #fff !important; /* fundo branco */
+  color: #000 !important;            /* texto preto */
+  border: 1px solid #ccc !important;
+}
+
+.apexcharts-tooltip-text,
+.apexcharts-tooltip-series-group {
+  color: #000 !important; /* texto preto */
 }

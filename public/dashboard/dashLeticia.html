@@ -93,6 +93,12 @@
                                             <span>Nível: Crítico</span>
                                             <span id="numero_kpi"><b id="nivel_critico"></b></span>
                                         </div>
+
+                                        <div class="box_kpi_nivel" style="background-color: #5271FF;">
+                                            <span>Total de alertas</span>
+                                            <span id="numero_kpi"><b id="kpi_total"></b></span>
+                                            <span><i><span style="color: #42f042;">▼</span>Queda de 2.5%</i></span>
+                                        </div>
                                     </div>
 
                                     <div class="grafico_geral">
@@ -115,24 +121,24 @@
                                 </div>
 
                                 <div class="box_alinhada2">
-                                    <div class="box_kpi_lateral kpi1">
+                                    <!-- <div class="box_kpi_lateral kpi1">
                                         <span>Total de alertas</span>
                                         <span id="numero_kpi"><b id="kpi_total"></b></span>
                                         <span><i>*Últimos 3 mêses</i></span>
-                                    </div>
+                                    </div> -->
 
                                     <div class="subtitulo">
                                         <div class="box_kpi_lateral kpi2">
                                             <span>Componente com maior risco de alertas</span>
                                             <span id="numero_kpi" class="borda_inferior"><b id="componente"></b></span>
+                                            <div class="linha-sólida"></div>
                                             <span id="numero_kpi"><b id="percentual"></b></span>
                                             <span><i>*Predominância (%) em relação ao total</i></span>
                                         </div>
                                     </div>
 
                                     <div class="box_kpi_lateral kpi3">
-                                        <span>Taxa de precisão da previsão</span>
-                                        <span style="font-size: 25px;"><b id="taxaPrecisao"></b></span>
+                                        <div id="graficoBarras"></div>
                                     </div>
                                 </div>
                             </div>

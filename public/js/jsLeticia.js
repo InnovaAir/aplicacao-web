@@ -196,6 +196,7 @@ async function atualizarGrafico() {
 
     atualizarKPI();
     buscarEndereco();
+    atualizarBarras();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -203,6 +204,104 @@ document.addEventListener("DOMContentLoaded", function () {
     selectComponente.addEventListener("change", atualizarGrafico);
     atualizarGrafico();
 });
+
+let chartBarra = null;
+
+function atualizarBarras() {
+    if (chartBarra) {
+        chartBarra.destroy();
+        chartBarra = null;
+    }
+    const graficoDiv = document.querySelector("#graficoBarras");
+    graficoDiv.innerHTML = '';
+
+    var options = {
+        series: [{
+            name: 'Inflation',
+            data: [2.3, 3.1, 10.1, 4.0, 4.0]
+        }],
+        chart: {
+            height: '100%',
+            type: 'bar',
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 10,
+                dataLabels: {
+                    position: 'top',
+                },
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+                return val + "%";
+            },
+            offsetY: -20,
+            style: {
+                fontSize: '12px',
+                colors: ["#304758"]
+            }
+        },
+
+        xaxis: {
+            categories: ["Temp. Média", "Temp. Min", "Temp. Max", "Chuva (mm)", "Vel. Vento"],
+            position: 'top',
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false
+            },
+            crosshairs: {
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        colorFrom: '#D8E3F0',
+                        colorTo: '#BED1E6',
+                        stops: [0, 100],
+                        opacityFrom: 0.4,
+                        opacityTo: 0.5,
+                    }
+                }
+            },
+            tooltip: {
+                style: {
+                    fontSize: '14px',
+                    color: '#000'
+                },
+                theme: 'light'
+            }
+        },
+        yaxis: {
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false,
+            },
+            labels: {
+                show: false,
+                formatter: function (val) {
+                    return val + "%";
+                }
+            }
+
+        },
+        title: {
+            text: 'Dados de clima tempo do ultimo trimestre',
+            floating: true,
+            offsetY: 350,
+            align: 'center',
+            style: {
+                color: '#444'
+            }
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#graficoBarras"), options);
+    chart.render();
+};
 
 function atualizarKPI() {
     const componenteSelecionado = document.getElementById("select_componente").value;
@@ -321,19 +420,19 @@ function buscarEndereco() {
         cache: 'no-store',
         method: "GET"
     }).then(res => res.json())
-      .then(dados => {
-          if (dados.length > 0) {
-              const aeroporto = dados[0].aeroporto;
-              const usuario_dash = dados[0].usuario;              
+        .then(dados => {
+            if (dados.length > 0) {
+                const aeroporto = dados[0].aeroporto;
+                const usuario_dash = dados[0].usuario;
 
-              if (aeroporto == "GRU") {
-                  document.getElementById("aeroporto_endereco").textContent = `Aeroporto Internacional de Guarulhos`;
-              }
+                if (aeroporto == "GRU") {
+                    document.getElementById("aeroporto_endereco").textContent = `Aeroporto Internacional de Guarulhos`;
+                }
 
-              if (usuario_dash == "Estela") {
-                  document.getElementById("boas_vindas").textContent = `Boas-vindas, ${usuario_dash}!`;
-              }
-          }
-      })
-      .catch(err => console.error("Erro ao buscar endereço:", err));
+                if (usuario_dash == "Estela") {
+                    document.getElementById("boas_vindas").textContent = `Boas-vindas, ${usuario_dash}!`;
+                }
+            }
+        })
+        .catch(err => console.error("Erro ao buscar endereço:", err));
 }
