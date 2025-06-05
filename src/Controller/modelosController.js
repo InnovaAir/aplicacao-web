@@ -17,6 +17,6 @@ function listarMetricasEComponente(req, res) {
             res.status(500).json({ error: "Erro ao cadastrar no banco de dados!" });
         });
 }
- module.exports = {
+module.exports = {
     listarMetricasEComponente
 };
