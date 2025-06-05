@@ -51,7 +51,7 @@
             </div>
 
             <div style="width: 95vw;">
-                <div id="main_frame" style="display: none;" class="main">
+                <div id="main_frame" style="display: flex;" class="main">
                     <div class="title">
                         <h1>Análise em Tempo Real</h1>
                         <h2>* Exibindo os aeroportos a qual você possui acesso</h2>
@@ -105,9 +105,6 @@
                                 </div>
 
                                 <div class="legend">
-                                    <!--                                     <span>Legenda de alertas:</span>
-
- -->
                                     <div class="container">
                                         <div class="box">
                                             <div class="ball-green ball"></div>
@@ -172,7 +169,7 @@
 
                         <div class="alert-chart">
                             <h1>Alertas por Categoria</h1>
-                            <p>*Exibindos os alertas do momento e não solucionados</p>
+                            <p>*Exibindos os alertas do momento</p>
                             <div class="indicators">
                                 <div class="kpi">
                                     <p>Categoria com mais alerta</p>
@@ -188,7 +185,7 @@
                     </div>
                 </div>
 
-                <div id="analise_frame" style="display: flex;" class="main">
+                <div id="analise_frame" style="display: none;" class="main">
                     <div class="titleFrame">
                         <div class="left">
                             <h1>Análise de Desempenho: <span><i id="nome_totem">Nome do Totem</i></span></h1>
@@ -204,46 +201,30 @@
 
                     <div class="block">
                         <div class="child">
-                            <div class="chart-container">
-                                <div class="chart-title">CPU</div>
-                                <div id="chart-cpu-status" style="width: 200px; height: 200px;"></div>
-                            </div>
-                            <div class="chart-container">
-                                <div class="chart-title">RAM</div>
-                                <div id="chart-ram-status" style="width: 200px; height: 200px;"></div>
-                            </div>
-                            <div class="chart-container">
-                                <div class="chart-title">DISCO</div>
-                                <div id="chart-disco-status" style="width: 200px; height: 200px;"></div>
-                            </div>
-                            <div class="chart-container">
-                                <div class="chart-title">REDE</div>
-                                <div id="chart-rede-status" style="width: 200px; height: 200px;"></div>
+                            <div class="list1">
+                                <div class="chart-container">
+                                    <h3>CPU</h3>
+                                    <div id="chart-cpu-status" style="width: 200px; height: 200px;"></div>
+                                </div>
+                                <div class="chart-container">
+                                    <h3>RAM</h3>
+                                    <div id="chart-ram-status" style="width: 200px; height: 200px;"></div>
+                                </div>
+                                <div class="chart-container">
+                                    <h3>DISCO</h3>
+                                    <div id="chart-disco-status" style="width: 200px; height: 200px;"></div>
+                                </div>
+                                <div class="chart-container">
+                                    <h3>REDE</h3>
+                                    <div id="chart-rede-status" style="width: 200px; height: 200px;"></div>
+                                </div>
                             </div>
 
-                            <div class="list1">
-                                <div class="kpi">
-                                    <p>USO CPU</p>
-                                    <h2 id="cpu_totem">1</h2>
-                                </div>
-                                <div class="kpi">
-                                    <p>USO RAM</p>
-                                    <h2 id="ram_totem">1</h2>
-                                </div>
-                                <div class="kpi">
-                                    <p>USO DISCO</p>
-                                    <h2 id="disco_totem">1</h2>
-                                </div>
-                                <div class="kpi">
-                                    <p>USO REDE</p>
-                                    <h2 id="rede_totem">1</h2>
-                                </div>
+                            <div class="list2">
                                 <div class="kpi">
                                     <p>ENDEREÇO MAC</p>
                                     <h2 id="mac_totem">1</h2>
                                 </div>
-                            </div>
-                            <div class="list2">
                                 <div class="kpi">
                                     <p>IP</p>
                                     <h2 id="ip_totem">1</h2>
@@ -253,35 +234,44 @@
                                     <h2 id="tempo_atividade_totem">1</h2>
                                 </div>
                             </div>
-                            <div class="list">
-                                <h2>Log de Processos</h2>
+                            <div id="listaLog" data-opened="true" onclick="expandList('listaLog')" class="listExpand box-shadow">
                                 <div class="header">
-                                    <p>Nome do Processo</p>
-                                    <p>Tempo de CPU</p>
-                                    <p>Uso de RAM (Mb)</p>
-                                    <p>Tempo Ativo</p>
-                                    <p>ID</p>
+                                    <h2>Log de Processos</h2>
+                                    <img  class="seta-expandir"
+                                        src="../assets/arrow-expand.svg" alt="">
                                 </div>
                                 <div class="line"></div>
-                                <div id="linesProcesso">
+                                <div class="headerContent">
+                                    <span>Processo</span>
+                                    <span>Tempo de CPU</span>
+                                    <span>Tempo de RAM</span>
+                                    <span>Tempo Ativo</span>
+                                    <span>ID</span>
                                 </div>
-                            </div>
-                            <div class="list">
-                                <h2>Log de Alertas</h2>
-                                <div class="header">
-                                    <p>Nível</p>
-                                    <p>Componente</p>
-                                    <p>Dia</p>
-                                    <p>Horário</p>
-                                    <p>Momento do Dia</p>
-                                </div>
-                                <div class="line"></div>
-                                <div id="linesAlerta">
+                                <div id="processos_maquina" class="content">
 
+                                </div>
+
+                            </div>
+                            <div id="listaAlerta" onclick="expandList('listaAlerta')" class="listExpand box-shadow">
+                                <div class="header">
+                                    <h2>Log de Alertas</h2>
+                                    <img class="seta-expandir"
+                                        src="../assets/arrow-expand.svg" alt="">
+                                </div>
+                                <div class="line"></div>
+                                <div class="headerContent">
+                                    <span>Nível</span>
+                                    <span>Componente</span>
+                                    <span>Dia</span>
+                                    <span>Horário</span>
+                                    <span>Período</span>
+                                </div>
+                                <div class="content" id="linesAlerta">
                                 </div>
                             </div>
                         </div>
-                        <div class="child">
+                        <div class="child2 box-shadow">
                             <div class="box-chart">
                                 <h2>Processador</h2>
                                 <p>Porcentagem de Uso</p>
@@ -320,15 +310,55 @@
 <script>
     async function executar() {
         var getConcluido = false;
-        
+
         await getEnderecosUsuario(sessionStorage.idUsuario);
-        
+
         setInterval(() => {
             plotarListaMaquinas(document.getElementById("select_endereco").value);
-        }, 100);
+        }, 5000);
     }
 
-    executar(); 
+    executar();
+
+    var inicialCPU_status = criarOptionStatus("cpu");
+    var inicialRAM_status = criarOptionStatus("ram");
+    var inicialDISCO_status = criarOptionStatus("disco");
+    var inicialREDE_status = criarOptionStatus("rede");
+
+    var chartCPU = new ApexCharts(document.getElementById("chart-cpu-status"), inicialCPU_status);
+    var chartRAM = new ApexCharts(document.getElementById("chart-ram-status"), inicialRAM_status);
+    var chartDISCO = new ApexCharts(document.getElementById("chart-disco-status"), inicialDISCO_status);
+    var chartREDE = new ApexCharts(document.getElementById("chart-rede-status"), inicialREDE_status);
+
+    chartCPU.render()
+    chartRAM.render()
+    chartDISCO.render()
+    chartREDE.render()
+
+    var optionChartAlertas = {
+        series: [0, 0, 0, 0],
+        chart: {
+            id: "chartTempoReal",
+            type: 'pie',
+            height: '100%', // O gráfico ocupa toda a altura da div
+        },
+        labels: ['CPU', 'DISCO', 'RAM', 'REDE'],
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    height: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+
+    var chart = new ApexCharts(document.querySelector("#alert-chart"), optionChartAlertas);
+
+    chart.render()
 </script>
 
 <!-- JQuery -->

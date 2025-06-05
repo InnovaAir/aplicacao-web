@@ -7,9 +7,9 @@
     --color-red: #DE2828;
     --color-grey: #626262;
 
-    --color-azul-lista: #5271FFe8;
-    --color-red-lista: #DE2828e8;
-    --color-grey-lista: #626262e8;
+    --color-azul-lista: #5272ff;
+    --color-red-lista: #DE2828d1;
+    --color-grey-lista: #6262625b;
 
     --color-text-1: #5271FF;
     --color-text-2: #404040;
@@ -58,6 +58,10 @@ body h5 {
     font-size: var(--kpi-conteudo-menor) !important;
 }
 
+.box-shadow {
+    box-shadow: var(--box-shadow);
+}
+
 /* Variaveis para JS */
 /* Cores dos fundos da lista */
 .kpi {
@@ -66,6 +70,10 @@ body h5 {
     height: fit-content;
     color: white;
     box-shadow: var(--box-shadow);
+
+    h5 {
+        text-overflow: ellipsis;
+    }
 }
 
 .border-kpi {
@@ -73,7 +81,13 @@ body h5 {
 }
 
 .red {
-    background-color: #DE2828;
+    background-color: var(--color-red-lista);
+    color: #fff;
+
+    button {
+        color: #fff;
+        border: 1px solid white;
+    }
 }
 
 .green {
@@ -398,21 +412,44 @@ body {
 .main .block {
     display: grid;
     width: 100%;
+    height: 95%;
+    overflow: hidden;
 
-    grid-template-columns: 60% 35%;
+    grid-template-columns: 55% 38.5%;
+    grid-gap: 1.5%;
 
+    .child2 {
+        padding: 2.5%;
+        border-radius: 10px;
+
+    }
 
     .child {
+        padding: 1% 1.5%;
+    }
+
+    .child,
+    .child2 {
         display: flex;
         flex-direction: column;
-        height: 85vh;
         gap: 2.5vh;
+        height: 95%;
+        overflow-y: auto;
+
+        ::-webkit-scrollbar {
+            display: none;
+            /* Oculta a barra de rolagem */
+        }
+
+        scrollbar-width: none;
+        /* Oculta a barra de rolagem */
 
         .kpi {
             padding: 1.25vw;
             border-radius: 10px;
             height: fit-content;
             color: black;
+            width: fit-content;
             box-shadow: var(--box-shadow);
         }
 
@@ -420,6 +457,10 @@ body {
             display: flex;
             flex-direction: column;
             width: 100%;
+
+            h2 {
+                color: var(--color-azul);
+            }
 
             .chart {
                 width: 100%;
@@ -507,16 +548,67 @@ body {
         }
 
         .list1 {
-            display: grid;
+            /*             display: grid;
             grid-template-columns: 15% 15% 15% 15% 30%;
             grid-gap: 2%;
-            grid-row-gap: 10%;
+            grid-row-gap: 10%; */
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
         }
 
         .list2 {
-            display: grid;
-            grid-template-columns: 48% 48%;
-            grid-gap: 2%;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .listExpand {
+            display: flex;
+            flex-direction: column;
+            padding: 0.75vw;
+            border-radius: 10px;
+            gap: .5vh;
+
+            .header {
+                display: flex;
+                gap: 0.5vw;
+
+                .seta-expandir {
+                    width: 1vw;
+                    transform: rotate(-90deg);
+                }
+            }
+
+            .headerContent {
+                span {
+                    font-weight: bold;
+                }
+
+                display: none;
+                grid-template-columns: 30% 20% 20% 20% 10%;
+            }
+
+            .line {
+                display: none;
+                width: 100%;
+                height: 0.15vh;
+                background-color: var(--color-text-1);
+            }
+
+            .dataLine {
+                display: grid;
+                grid-template-columns: 30% 20% 20% 20% 10%;
+            }
+
+            .content {
+                display: none;
+                flex-direction: column;
+
+
+            }
         }
     }
 }
@@ -607,12 +699,4 @@ body {
     padding: 0.5vw;
     box-shadow: var(--box-shadow);
     text-align: center;
-}
-
-.chart-title {
-    margin-bottom: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }

@@ -277,61 +277,9 @@ async function plotarListaMaquinas(selection) {
 
     list_totem.innerHTML = listTotensHtml;
 
-    var options = {
-        series: [alertasCPU, alertasDISCO, alertasRAM, alertasREDE],
-        chart: {
-            id: "chartTempoReal",
-            type: 'pie',
-            height: '100%', // O gráfico ocupa toda a altura da div
-        },
-        labels: ['CPU', 'DISCO', 'RAM', 'REDE'],
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                chart: {
-                    height: 200
-                },
-                legend: {
-                    position: 'bottom'
-                }
-            }
-        }]
-    };
-
-    var chart = new ApexCharts(document.querySelector("#alert-chart"), options);
-
-    if (firstTime == true) {
-        chart.render();
-        firstTime = false;
-    } else {
-        ApexCharts.exec('chartTempoReal', 'updateSeries', [
-            alertasCPU,
-            alertasDISCO,
-            alertasRAM,
-            alertasREDE
-        ]);
-    }
-
-    var alertasComponentes = [alertasCPU, alertasDISCO, alertasRAM, alertasREDE]
-
-    var maiorValor = 0;
-    var maiorIndice = -1;
-
-    for (let i = 0; i < alertasComponentes.length; i++) {
-        const alertaAtual = alertasComponentes[i];
-
-        if (alertaAtual > maiorValor) {
-            maiorValor = alertaAtual
-            maiorIndice = i
-        }
-    }
+    atualizarGraficoTempoReal();
 
     getEnderecoMaisAlerta()
-
-    if (maiorIndice == -1) { maiorIndice = "Todos estáveis" } else if (maiorIndice == 0) { maiorIndice = "CPU" } else if (maiorIndice == 1) { maiorIndice = "DISCO" } else if (maiorIndice == 2) { maiorIndice = "RAM" } else { maiorIndice = "REDE" }
-
-    document.getElementById("indicator_category").innerHTML = maiorIndice;
-    document.getElementById("indicator_totalalerts").innerHTML = alertasCPU + alertasDISCO + alertasRAM + alertasREDE;
 
     alertasCPU = 0;
     alertasRAM = 0;
@@ -402,6 +350,7 @@ async function getAlertas(idMaquina) {
         return null; // ou throw error
     }
 }
+
 async function getDatetime() {
     const dataHoraAtual = new Date();
     const ano = dataHoraAtual.getFullYear();
@@ -416,10 +365,6 @@ async function getDatetime() {
 }
 
 function openDashboardDisplay(totemData) {
-    /* Abre a tela */
-    document.getElementById("analise_frame").style.display = 'flex';
-    document.getElementById("main_frame").style.display = 'none';
-
     /* Define em json o parametro dos dados do totem */
     const totem = JSON.parse(totemData);
 
@@ -451,20 +396,14 @@ function openDashboardDisplay(totemData) {
     var ultimo_dado_rede = totem.dados.rede[totem.dados.rede.length - 1]
 
     /* Grafico de Status */
-    var optionsCPU_status = criarOptionStatus(ultimo_dado_cpu, totem.metricas.cpu, "CPU");
-    var optionsRAM_status = criarOptionStatus(ultimo_dado_ram, totem.metricas.ram, "RAM");
-    var optionsDISCO_status = criarOptionStatus(ultimo_dado_disco, totem.metricas.disco, "DISCO");
-    var optionsREDE_status = criarOptionStatus(ultimo_dado_rede, totem.metricas.rede, "REDE");
+    var optionsCPU_status = atualizarOptionStatus(ultimo_dado_cpu, totem.metricas.cpu, "cpu");
+    var optionsRAM_status = atualizarOptionStatus(ultimo_dado_ram, totem.metricas.ram, "ram");
+    var optionsDISCO_status = atualizarOptionStatus(ultimo_dado_disco, totem.metricas.disco, "disco");
+    var optionsREDE_status = atualizarOptionStatus(ultimo_dado_rede, totem.metricas.rede, "rede");
 
-    var chartCPU_status = new ApexCharts(document.getElementById("chart-cpu-status"), optionsCPU_status);
-    var chartRAM_status = new ApexCharts(document.getElementById("chart-ram-status"), optionsRAM_status);
-    var chartDISCO_status = new ApexCharts(document.getElementById("chart-disco-status"), optionsDISCO_status);
-    var chartREDE_status = new ApexCharts(document.getElementById("chart-rede-status"), optionsREDE_status);
-
-    chartCPU_status.render();
-    chartRAM_status.render();
-    chartDISCO_status.render();
-    chartREDE_status.render();
+    /* Abre a tela */
+    document.getElementById("analise_frame").style.display = 'flex';
+    document.getElementById("main_frame").style.display = 'none';
 
     plotarLogsAlertas(totem.idMaquina);
 
@@ -472,10 +411,6 @@ function openDashboardDisplay(totemData) {
 
     /* Exibindo as informações nas KPI's */
     document.getElementById("nome_totem").innerHTML = totem.hostname;
-    document.getElementById("cpu_totem").innerHTML = `<i>${totem.dados.cpu[totem.dados.cpu.length - 1]}%</i>`;
-    document.getElementById("ram_totem").innerHTML = `<i>${totem.dados.ram[totem.dados.ram.length - 1]}%</i>`;
-    document.getElementById("disco_totem").innerHTML = `<i>${totem.dados.disco[totem.dados.disco.length - 1]}%</i>`;
-    document.getElementById("rede_totem").innerHTML = `<i>${totem.dados.rede[totem.dados.rede.length - 1]}Mb</i>`;
     document.getElementById("tempo_atividade_totem").innerHTML = `${tempo}`;
     document.getElementById("ip_totem").innerHTML = totem.ip;
     document.getElementById("mac_totem").innerHTML = totem.enderecoMac;
@@ -491,24 +426,26 @@ function openDashboardDisplay(totemData) {
         var id = processo[4]["Id"];
 
         processHTML += `
-        <div class="header">
-            <p>${nome}</p>
-            <p>${Math.floor(Number(cpu.split(",")[0]) / 60)} Minutos</p>
-            <p>${ram}Mb</p>
-            <p>${tempo}</p>
-            <p>${id}</p> 
+        <div class="dataLine">
+            <span>${nome}</span>
+            <span>${Math.floor(Number(cpu.split(",")[0]) / 60)} Minutos</span>
+            <span>${ram}Mb</span>
+            <span>${tempo}</span>
+            <span>${id}</span> 
         </div>`;
     })
+
+    document.getElementById("processos_maquina").innerHTML = processHTML;
 };
 
-function criarOptionStatus(data, metricas, componente) {
+function atualizarOptionStatus(data, metricas, componente) {
+    var componenteNome = componente.toUpperCase();
+
     var simbol = '%'
 
-    if (componente == "REDE") {
+    if (componente == "rede") {
         simbol = 'Mb'
     }
-
-    console.log(`${data}, ${metricas.maximo}, ${metricas.minimo}`)
 
     var color = "#33A100"
 
@@ -525,9 +462,30 @@ function criarOptionStatus(data, metricas, componente) {
         }
     }
 
-    return {
+    console.log(componente)
+
+    console.log(data)
+
+    ApexCharts.exec(`chart-${componente}-status`, 'updateOptions', {
         series: [data],
+        fill: {
+            colors: [color]
+        },
+        labels: [componenteNome]
+    });
+}
+
+function criarOptionStatus(componente) {
+    var simbol = '%'
+
+    if (componente == "rede") {
+        simbol = 'Mb'
+    }
+
+    return {
+        series: [0],
         chart: {
+            id: `chart-${componente}-status`,
             height: 200,
             type: 'radialBar',
             background: 'transparent'
@@ -563,7 +521,7 @@ function criarOptionStatus(data, metricas, componente) {
             }
         },
         fill: {
-            colors: [color]
+            colors: ['#000000']
         },
         stroke: {
             lineCap: 'round'
@@ -638,12 +596,12 @@ function plotarLogsAlertas(idMaquina) {
 
                 json.forEach(log => {
                     html_log += `
-                      <div class="header">
-                        <p>${log.gravidade}</p>
-                        <p>${log.componente}</p>
-                        <p>${log.momento.split("T")[0]}</p>
-                        <p>${log.momento.split("T")[1].split(".")[0]}</p>
-                        <p>${log.periodo}</p>
+                      <div class="dataLine">
+                        <span>${log.gravidade}</span>
+                        <span>${log.componente}</span>
+                        <span>${log.momento.split("T")[0]}</span>
+                        <span>${log.momento.split("T")[1].split(".")[0]}</span>
+                        <span>${log.periodo}</span>
                     </div>
                 `
                 });
@@ -677,10 +635,58 @@ function getTempoAtividade(tempoAtivo) {
     return tempo;
 }
 
+function atualizarGraficoTempoReal() {
+    ApexCharts.exec('chartTempoReal', 'updateSeries', [
+        alertasCPU,
+        alertasDISCO,
+        alertasRAM,
+        alertasREDE
+    ]);
+    console.log("atualizei o grafico de alertas")
+
+    var alertasComponentes = [alertasCPU, alertasDISCO, alertasRAM, alertasREDE]
+
+    var maiorValor = 0;
+    var maiorIndice = -1;
+
+    for (let i = 0; i < alertasComponentes.length; i++) {
+        const alertaAtual = alertasComponentes[i];
+
+        if (alertaAtual > maiorValor) {
+            maiorValor = alertaAtual
+            maiorIndice = i
+        }
+    }
+
+
+    if (maiorIndice == -1) { maiorIndice = "Todos estáveis" } else if (maiorIndice == 0) { maiorIndice = "CPU" } else if (maiorIndice == 1) { maiorIndice = "DISCO" } else if (maiorIndice == 2) { maiorIndice = "RAM" } else { maiorIndice = "REDE" }
+
+    document.getElementById("indicator_category").innerHTML = maiorIndice;
+    document.getElementById("indicator_totalalerts").innerHTML = alertasCPU + alertasDISCO + alertasRAM + alertasREDE;
+}
+
 function closeDashboardDisplay() {
     document.getElementById("analise_frame").style.display = 'none';
     document.getElementById("main_frame").style.display = 'flex';
+    document.body.style.overflow = 'hidden';
 }
 
-function openLog(idMaquina) {
+function expandList(div_ID) {
+
+    var elemento = document.getElementById(div_ID);
+    if (elemento.dataset.opened) {
+        // Fechar
+        elemento.querySelector(".line").style.display = 'none';
+        elemento.querySelector(".headerContent").style.display = 'none';
+        elemento.querySelector(".content").style.display = 'none';
+        delete elemento.dataset.opened; // Remove o atributo
+    } else {
+        // Abrir
+        elemento.querySelector(".line").style.display = 'flex';
+        elemento.querySelector(".headerContent").style.display = 'grid';
+        elemento.querySelector(".content").style.display = 'flex';
+        elemento.dataset.opened = 'true'; // Adiciona o atributo
+    }
+
+
 }
