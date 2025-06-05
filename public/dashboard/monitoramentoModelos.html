@@ -28,7 +28,8 @@
                     </div>
                     <a href="roberto_Lucas.html"><i class="fas fa-triangle-exclamation"></i> <span>Alertas</span></a>
                     <a href="dashDudu.html"><i class="fas fa-chart-line"></i> <span>Desempenho</span></a>
-                    <a href="dashRoberto.html"><i class="fas fa-microchip"></i> <span>Modelo de Componentes</span></a>
+                    <a href="dashRoberto.html"><i class="fas fa-microchip"></i> <span>Modelo de<br>
+                            Componentes</span></a>
                     <a href="monitoramentoModelos.html"><i class="fas fa-desktop"></i> <span>Modelo de
                             Maquinas</span></a>
                     <a onclick="limparSessao()" href="../index.html"><strong>Sair</strong></a>
@@ -52,15 +53,15 @@
                         </div>
 
                         <!-- SEÇÃO DO MEIO DO POPUP -->
-                         <div style="width: 100%;" class="sectionV">
-                                <div style="height: 10%; min-height:30px" class="sectionH">
-                                    <div class="modeloSubtitulo">Especificações:</div>
-                                </div>
-                                <div class="specsModelo"></div>
+                        <div style="width: 100%;" class="sectionV">
+                            <div style="height: 10%; min-height:30px" class="sectionH">
+                                <div class="modeloSubtitulo">Especificações:</div>
                             </div>
-                       
+                            <div class="specsModelo"></div>
+                        </div>
 
-                       
+
+
 
                     </div>
 
@@ -86,44 +87,25 @@
 
                             </div>
                             <div id="alertas_kpi_titulo"><b>Quantidade de alertas por modelo</b></div>
+                            <div>dada</div>
                             <div class="section1">
-
-                                <div class="kpiLegendas">
-
-
-                                    <div style="display: flex;">
-                                        <span>CPU = </span>
-                                        <div class="bolinhaKPI" style="background-color:red ;"></div>
-                                    </div>
-
-                                    <div style="display: flex;">
-                                        <span> RAM = </span>
-                                        <div class="bolinhaKPI" style="background-color: yellow;"></div>
-
-
-                                    </div>
-                                    <div style="display: flex;">
-                                        <span> DISCO = </span>
-
-                                        <div class="bolinhaKPI" style="background-color: cyan ;"></div>
-                                    </div>
+                                <div class="gridTitulo">
+                                    <span>Modelo</span>
+                                    <span>Alertas</span>
+                                    <span>Quantidade</span>
+                                    <span></span>
                                 </div>
-                                <div class="container listaModelos">
-                                    <div>
-                                        <section class="grid grid-template-columns-3" id="grids">
-                                            <!-- Titulos -->
-                                            <div class="item">Modelo</div>
-                                            <div class="item">Alertas</div>
-                                            <div class="item">Quantidade</div>
-                                            <div class="item"></div>
 
-                                        </section>
-                                        <section class="grid grid-template-columns-3" id="lista">
+                                <div class="containerLista">
+                                
 
-
-                                        </section>
-
-                                    </div>
+                                        <div class="linha">
+                                            <span><b>a</b></span>
+                                            <span class="barraAlertas"></span>
+                                            <span><b>c</b></span>
+                                            <span><b><u>Expandir</u></b></span>
+                                        </div>
+                                    
 
                                 </div>
                             </div>
@@ -236,9 +218,10 @@
     let ultimoComponente = null;
     let ultimoID = null;
 
-
+const linha = document.querySelector(".linha")
+const containerLista = document.querySelector(".containerLista")
     document.getElementById('select_filial').addEventListener('change', function () {
-        lista.innerHTML = '';
+        linha.innerHTML = '';
         listarFilial(this.value);
     });
     listarFilial(1)
@@ -252,7 +235,7 @@
             .then((res) => res.json())
             .then(contador => {
 
-                let valorItem = 0
+                let valorItem = 0;
 
                 let cpuCount = 0;
                 let discoCount = 0;
@@ -285,7 +268,7 @@
                             ultimoItem.discoCount = discoCount;
                             ultimoItem.quantidade = quantidade;
                             ultimoItem.quantidade = quantidade;
-                            
+
                             maquinasContadas.clear;
                             resultados.push(ultimoItem);
                         }
@@ -306,12 +289,12 @@
                     if (!maquinasContadas.has(idAtual)) {
                         maquinasContadas.add(idAtual);
                         quantidade++;
-                    } 
+                    }
                     if (item.gravidade == "critico") criticoCount++;
                     if (item.gravidade == "alta") altoCount++;
                     if (item.gravidade == "baixa") baixoCount++;
 
-                    if ( item.componente == "Processador") cpuCount++;
+                    if (item.componente == "Processador") cpuCount++;
                     if (item.componente == "RAM") ramCount++;
                     if (item.componente == "Armazenamento") discoCount++;
 
@@ -349,6 +332,7 @@
                 console.log("resultados")
                 console.log(resultados)
 
+                
 
                 // ADICIONANDO IDs CRESCENTES AOS OBJETOS DE RESULTADOS
                 for (let i = 0; i < resultados.length; i++) {
@@ -380,12 +364,17 @@
                     const item = resultados[i];
                     contadorPopUp++
 
+                    const linha = document.createElement("div");
+                    linha.className="linha";
+                    linha.id=`${contadorPopUp}`;
+                    containerLista.appendChild(linha)
+                    
                     // seção "Modelo"
-                    const modeloDiv = document.createElement("div");
-                    modeloDiv.className = "item modeloDiv";
-                    modeloDiv.id = `${contadorPopUp}`;
-                    modeloDiv.textContent = item.nomeModelo;
-                    lista.appendChild(modeloDiv);
+                    const modeloSpan = document.createElement("span");
+                    modeloSpan.className = "itemLista";
+                    modeloSpan.id = `${contadorPopUp}`;
+                    modeloSpan.textContent = item.nomeModelo;
+                    linha.appendChild(modeloSpan);
 
                     // seção "Alertas"
                     console.log("resultados, quantidade")
@@ -396,51 +385,57 @@
                     var totalAlertas = (item.discoCount + item.ramCount + item.cpuCount)
 
                     //-----------------------------------------
-                    const alertaDiv = document.createElement("div");
-                    alertaDiv.className = "item barraDiv ";
-                    alertaDiv.id = `${contadorPopUp}`
-                    alertaDiv.style.display = "flex ";
-                    alertaDiv.style.justifyContent = "center; ";
+                    const alertaSpan = document.createElement("span");
+                    alertaSpan.id = `${contadorPopUp}`
+                    alertaSpan.className = "itemLista";
+                    alertaSpan.style.display = "flex";
+                
 
-                    const barraAlertas = document.createElement("div");
+                    const barraAlertas = document.createElement("span");
                     barraAlertas.style.width = ((item.quantidade / maiorAlerta) * 100) + "%";
                     barraAlertas.className = "barraAlertas";
-                    barraAlertas.style.justifySelf = "flex-start"
-                    barraAlertas.style.maxHeight = "20px"
-                    barraAlertas.style.minHeight = "20px"
-                    barraAlertas.style.justifyContent = "flex-start"
+                
 
-                    const qtdAlertas = document.createElement("div");
+                    const qtdAlertas = document.createElement("span");
                     qtdAlertas.textContent = totalAlertas;
                     qtdAlertas.style.width = 20 + "%";
-                    qtdAlertas.className = "qtdAlertas";
                     qtdAlertas.style.alignSelf = "center";
                     qtdAlertas.style.maxHeight = "20px";
                     qtdAlertas.style.minHeight = "20px";
                     qtdAlertas.style.marginLeft = "auto";
-                    qtdAlertas.style.marginRight = "7px";
                     qtdAlertas.style.textAlign = "right";
                     //-----------------------------------------
 
                     if (tamanhoRam) {
                         const ram = document.createElement("div");
                         ram.className = "aleRam hoverBarra";
-                        ram.style.backgroundColor = "yellow";
+                        ram.style.backgroundColor = "#ff8ca5";
+                        ram.textContent = item.ramCount;
                         ram.style.height = "100%";
                         ram.style.width = tamanhoRam + "%";
                         ram.style.display = "flex";
-                        ram.style.flexGrow = "1"
+                        ram.style.flexGrow = "1";
+                        ram.style.alignItems = "center";
+                        ram.style.fontWeight = "bolder";
+                        ram.style.color = "black";
+                        ram.style.justifyContent = "center";
+
                         barraAlertas.appendChild(ram);
                         console.log("Adicionando ram (Barra de alerta)")
                     }
                     if (tamanhoCpu) {
                         const cpu = document.createElement("div");
                         cpu.className = "aleCpu hoverBarra";
-                        cpu.style.backgroundColor = "red";
+                        cpu.style.backgroundColor = "#69d7ff";
+                        cpu.textContent = item.cpuCount;
                         cpu.style.height = "100%";
                         cpu.style.width = tamanhoCpu + "%";
                         cpu.style.display = "flex";
                         cpu.style.flexGrow = "1"
+                        cpu.style.alignItems = "center";
+                        cpu.style.fontWeight = "bolder";
+                        cpu.style.color = "black";
+                        cpu.style.justifyContent = "center";
                         barraAlertas.appendChild(cpu);
                         console.log("Adicionando cpu (Barra de alerta)")
                     }
@@ -448,30 +443,35 @@
                     if (tamanhoDisco) {
                         const disco = document.createElement("div");
                         disco.className = "aleDisco hoverBarra";
-                        disco.style.backgroundColor = "cyan";
+                        disco.style.backgroundColor = "#e9a276";
+                        disco.textContent = item.discoCount;
                         disco.style.height = "100%";
                         disco.style.width = tamanhoDisco + "%";
                         disco.style.display = "flex";
-                        disco.style.flexGrow = "1"
+                        disco.style.flexGrow = "1";
+                        disco.style.alignItems = "center";
+                        disco.style.fontWeight = "bolder";
+                        disco.style.color = "black";
+                        disco.style.justifyContent = "center";
                         barraAlertas.appendChild(disco);
                         console.log("Adicionando disco rígido (Barra de alerta)")
                     }
 
-                    lista.appendChild(alertaDiv);
-                    alertaDiv.appendChild(barraAlertas);
-                    alertaDiv.appendChild(qtdAlertas);
+                    linha.appendChild(alertaSpan);
+                    alertaSpan.appendChild(barraAlertas);
+                    alertaSpan.appendChild(qtdAlertas);
 
                     // seção "Quantidade"
-                    const quantidade = document.createElement("div");
-                    quantidade.className = "item quantidadeDiv ";
+                    const quantidade = document.createElement("span");
+                    quantidade.className = "itemLista";
+
                     quantidade.textContent = item.quantidade;
-                    lista.appendChild(quantidade)
+                    linha.appendChild(quantidade)
 
                     // seção Botão
-                    const botaoPop = document.createElement("div");
+                    const botaoPop = document.createElement("span");
                     botaoPop.className = "item botaoDiv";
-                    botaoPop.innerHTML = `<img id="${contadorPopUp}" onclick="abrirPopUp()" style="height: 1.5em; cursor:pointer;"
-                            src="../assets/fullscreen.png" alt="" loading="eager">`;
+                    botaoPop.innerHTML = `<u><b>Expandir</b></u>`;
 
                     let componentesPorMaquina = {};
 
@@ -513,7 +513,7 @@
                         );
                     });
 
-                    lista.appendChild(botaoPop)
+                    linha.appendChild(botaoPop)
                 }
             }
 
@@ -531,44 +531,44 @@
         console.log("baixoCount:", baixoCount);
         console.log("popupId:", popupId);
 
-        
+
         const popup = document.querySelector(".popUp");
         const titulo = popup.querySelector(".modeloTitulo");
         const subtitulo = popup.querySelector(".modeloSubtitulo");
         const specs = popup.querySelector(".specsModelo");
         specs.innerHTML = "";
 
-     //   // gráfico de torta da quantidade de alertas
-     //   var options = {
-     //       series: [criticoCount, altoCount, baixoCount],
-     //       chart: {
-     //           height: "50%",
-     //           type: 'pie',
-     //       },
-     //       labels: ['Alertas Críticos', 'Alertas Altos', 'Alertas Baixos'],
-     //       legend: {
-     //           fontSize: '19px',
-//
-     //       },
-     //       responsive: [{
-     //           breakpoint: 480,
-     //           options: {
-     //               chart: {
-     //                   width: 40,
-     //                   height: 40
-     //               },
-     //               legend: {
-     //                   position: 'bottom'
-     //               }
-     //           }
-     //       }]
-     //   };
-     //   chartPopUp = new ApexCharts(document.querySelector(".graficoTorta"), options);
-     //   chartPopUp.render();
-//
-     //   console.log("Estrutura completa de componentesPorMaquina:");
-     //   console.log(componentesPorMaquina);
-//
+        //   // gráfico de torta da quantidade de alertas
+        //   var options = {
+        //       series: [criticoCount, altoCount, baixoCount],
+        //       chart: {
+        //           height: "50%",
+        //           type: 'pie',
+        //       },
+        //       labels: ['Alertas Críticos', 'Alertas Altos', 'Alertas Baixos'],
+        //       legend: {
+        //           fontSize: '19px',
+        //
+        //       },
+        //       responsive: [{
+        //           breakpoint: 480,
+        //           options: {
+        //               chart: {
+        //                   width: 40,
+        //                   height: 40
+        //               },
+        //               legend: {
+        //                   position: 'bottom'
+        //               }
+        //           }
+        //       }]
+        //   };
+        //   chartPopUp = new ApexCharts(document.querySelector(".graficoTorta"), options);
+        //   chartPopUp.render();
+        //
+        //   console.log("Estrutura completa de componentesPorMaquina:");
+        //   console.log(componentesPorMaquina);
+        //
 
         let chavesMaquinas = Object.keys(componentesPorMaquina);
         console.log("Chaves disponíveis:", chavesMaquinas);
