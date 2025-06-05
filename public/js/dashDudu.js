@@ -205,7 +205,7 @@ function ordenarPor(campo, inverter = true, dadosParaOrdenar = null) {
     if (ehNumero) {
       valorA = Number(valorA);
       valorB = Number(valorB);
-    } 
+    }
     else {
       if (campo === 'totem') {
         const re = /^(\D*)(\d+)$/;
@@ -244,13 +244,16 @@ function ordenarColuna(campo) {
   let dadosFiltrados = dados_json;
 
   if (filtroDesempenhoSelecionado === "verde") {
-    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 70);
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 75);
   } 
   else if (filtroDesempenhoSelecionado === "amarelo") {
-    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 30 && maq.desempenho < 70);
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 50 && maq.desempenho < 75);
   } 
   else if (filtroDesempenhoSelecionado === "vermelho") {
-    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho < 35);
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 25 && maq.desempenho < 50);
+  }
+  else if (filtroDesempenhoSelecionado === "roxo") {
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho < 25);
   }
 
   if (filtroTerminalSelecionado && filiais.includes(filtroTerminalSelecionado)) {
