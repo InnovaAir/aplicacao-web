@@ -127,7 +127,9 @@ body {
 }
 
 .div_dashboard{
-    border: 1px solid green;
+    outline: 1px solid #a8a8a8; 
+    outline-offset: 4px;
+    border-radius: 10px;
     margin-top: 2vh;
     height: 59vh;
 }
@@ -142,11 +144,6 @@ body {
     color: #0026D6;
     text-align: center;
     /* margin-top: 15vh; */
-}
-
-.div_listaMaq{
-    height: 70vh;
-    padding: 0px 10px 0px 10px;
 }
 
 .div_legenda {
@@ -315,10 +312,10 @@ body {
     background-color: #FF0000;
 }
 
-.div_listaMaq {
-    max-height: 56vh;
+.div_listaMaq{
+    height: 65vh;
+    padding: 0px 10px 0px 10px;
     overflow-y: auto;
-    padding-right: 10px
 }
 
 .div_listaMaq::-webkit-scrollbar {

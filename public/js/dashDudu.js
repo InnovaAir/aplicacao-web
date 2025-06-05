@@ -10,7 +10,7 @@ let filtroTerminalSelecionado = null;
 let filtroDesempenhoSelecionado = null;
 let campoSelecionado = null;
 let ordemCrescente = true;
-
+let apexChart = null;
 
 const filtros = document.querySelectorAll('.filtro');
 filtros.forEach(filtro => {
@@ -336,94 +336,75 @@ function atualizarGraficoDesempenho(maquinas) {
 
   desempenhoPorTerminal.sort((a, b) => a.desempenho - b.desempenho);
 
-  grafico.data.labels = desempenhoPorTerminal.map(d => d.terminal);
-  grafico.data.datasets[0].data = desempenhoPorTerminal.map(d => d.desempenho);
-
-  grafico.data.datasets[0].backgroundColor = desempenhoPorTerminal.map(d => {
+  const labels = desempenhoPorTerminal.map(d => d.terminal);
+  const valores = desempenhoPorTerminal.map(d => d.desempenho);
+  const cores = desempenhoPorTerminal.map(d => {
     if (d.desempenho <= 35) return '#8537C8';
     if (d.desempenho <= 65) return '#DEC828';
     return '#00A100';
   });
 
-  grafico.update();
-}
-
-Chart.register(ChartDataLabels);
-
-const ctx = document.getElementById('graficoDesempenho').getContext('2d');
-
-const grafico = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: [],
-    datasets: [{
-      barThickness: 50,
-      minBarLength: 2,
-      barPercentage: 0.5,
-      categoryPercentage: 0.2,
-      label: 'Desempenho',
-      data: [],
-      backgroundColor: [],
-      borderWidth: 1
-    }]
-  },
-  options: {
-    layout:{
-      padding: {
-        right: 50
+  const options = {
+    chart: {
+      type: 'bar',
+      height: 500,
+      animations: {
+        enabled: true
       }
     },
-    indexAxis: 'y',
-    scales: {
-      x: {
-        beginAtZero: true,
-        max: 100,
-        ticks: {
-          callback: (val) => `${val}%`
-        },
-        title: {
-          display: true,
-          text: 'Desempenho',
-          color: '#0000A5',
-          font: { weight: 'bold' }
-        }
-      },
+    plotOptions: {
+      bar: {
+        horizontal: true,
+        barHeight: '30%'
+      }
+    },
+    dataLabels: {
+      enabled: true,
+      formatter: val => `${val}%`,
+      style: {
+        fontWeight: 'bold'
+      }
+    },
+    tooltip: {
       y: {
-        title: {
-          display: true,
-          text: 'Filiais',
-          color: '#0000A5',
-          font: { weight: 'bold' }
-        }
+        formatter: val => `${val}%`
       }
     },
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        callbacks: {
-          label: function(context) {
-            const label = context.dataset.label || '';
-            const value = context.parsed.x;
-            return `${label}: ${value}%`;
-          }
-        }
+    xaxis: {
+      categories: labels,
+      max: 100,
+      labels: {
+        formatter: val => `${val}%`
       },
-      datalabels: {
-        anchor: 'end',
-        align: 'right',
-        formatter: function(value) {
-          return value + '%';
-        },
-        color: '#000',
-        font: {
-          weight: 'bold',
-          size: 15
-        }
+      title: {
+        text: 'Desempenho'
       }
+    },
+    yaxis: {
+      title: {
+        text: 'Aeroportos'
+      },
+      labels: {
+    style: {
+      fontSize: '16px', 
+      fontWeight: 'bold'
     }
-  },
-  plugins: [ChartDataLabels]
-});
+  }
+    },
+    series: [{
+      name: 'Desempenho',
+      data: valores
+    }],
+    colors: cores
+  };
+
+  if (apexChart) {
+    apexChart.updateOptions(options);
+  } else {
+    apexChart = new ApexCharts(document.querySelector("#graficoDesempenho"), options);
+    apexChart.render();
+  }
+}
 
 window.onload = async function () {
   await getIdUsuario();
