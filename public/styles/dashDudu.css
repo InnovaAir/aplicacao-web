@@ -26,8 +26,10 @@ body {
     outline: 1px solid #a8a8a8; 
     outline-offset: 4px;
     border-radius: 10px;
-    height: 80vh;
+    height: 80vh0;
     margin-right: 1vw;
+    margin-top: 10vh;
+    padding: 10px 0px 0px 0px;
 }
 
 .grafico_pix{
@@ -130,8 +132,8 @@ body {
     height: 59vh;
 }
 
-.div_titulo3 h1{
-    font-size: 2vw;
+.div_titulo3 h2{
+    font-size: 1.6vw;
 }
 
 .div_titulo3 {
@@ -139,12 +141,12 @@ body {
     font-size: 2.5vh;
     color: #0026D6;
     text-align: center;
-    margin-top: 15vh;
+    /* margin-top: 15vh; */
 }
 
 .div_listaMaq{
     height: 70vh;
-    /* margin-right: 1vw; */
+    padding: 0px 10px 0px 10px;
 }
 
 .div_legenda {
@@ -168,7 +170,8 @@ body {
 
 .check_box_suficiente,
 .check_box_mediano,
-.check_box_insuficiente {
+.check_box_insuficiente,
+.check_box_critico {
     width: 15px;
     height: 15px;
     border-radius: 2px;
@@ -184,12 +187,19 @@ body {
 }
 
 .check_box_insuficiente {
-    background-color: #FE6B6B;
+    background-color: #DE2828;
+}
+
+.check_box_critico {
+    background-color: #8537C8;
 }
 
 .checkbox-text {
     text-align: center;
+    width: 125px;
+    font-size: 1vw; /* A padronização diz pra colcoar como 1.25, mas achei esse melhor*/
 }
+
 
 .filtro {
     padding: 0.5rem 1rem;
@@ -306,12 +316,14 @@ body {
 }
 
 .div_listaMaq {
-    max-height: 50vh;
+    max-height: 56vh;
     overflow-y: auto;
+    padding-right: 10px
 }
 
 .div_listaMaq::-webkit-scrollbar {
     width: 15px;
+    margin-left: 20vw;
 }
 
 .div_listaMaq::-webkit-scrollbar-track {
@@ -341,7 +353,7 @@ body {
 .totem {
     display: flex;
     padding: 8px;
-    border-bottom: 1px solid #ccc;
+    /* border-bottom: 1px solid #ccc; */
 }
 
 .coluna {
@@ -349,21 +361,27 @@ body {
     text-align: center;
 }
 
+.totem.purple {
+    background-color: #8537C8;
+    /* border: 2px solid rgba(255, 0, 0, 1); */
+    border-radius: 15px;
+}
+
 .totem.red {
-    background-color: rgba(255, 0, 0, 0.5);
-    border: 2px solid rgba(255, 0, 0, 1);
+    background-color: #DE2828;
+    /* border: 2px solid rgba(255, 0, 0, 1); */
     border-radius: 15px;
 }
 
 .totem.yellow {
-    background-color: rgb(251, 240, 156);
-    border: 2px solid rgba(241, 196, 15, 1);
+    background-color: #DEC8285B;
+    /* border: 2px solid rgba(241, 196, 15, 1); */
     border-radius: 15px;
 }
 
 .totem.green {
-    background-color: rgba(0, 170, 0, 0.3);
-    border: 2px solid rgba(0, 170, 0, 1);
+    background-color: #00A1005B;  /* os ultimos 2 digitos são opacidade*/
+    /* border: 2px solid rgba(0, 170, 0, 1); */
     border-radius: 15px;
 }
 
@@ -393,6 +411,7 @@ body {
     outline: none;
     border-bottom: 0.25vh solid #1976d2;
 }
+
 .button {
     position: relative;
     width: 4em;

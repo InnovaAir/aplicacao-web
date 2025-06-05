@@ -11,6 +11,7 @@ let filtroDesempenhoSelecionado = null;
 let campoSelecionado = null;
 let ordemCrescente = true;
 
+
 const filtros = document.querySelectorAll('.filtro');
 filtros.forEach(filtro => {
   filtro.addEventListener('click', () => {
@@ -38,13 +39,16 @@ function aplicarFiltrosCombinados() {
   let dadosFiltrados = dados_json;
 
   if (filtroDesempenhoSelecionado === "verde") {
-    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 70);
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 75);
   } 
   else if (filtroDesempenhoSelecionado === "amarelo") {
-    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 35 && maq.desempenho < 70);
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 50 && maq.desempenho < 75);
   } 
   else if (filtroDesempenhoSelecionado === "vermelho") {
-    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho < 35);
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho >= 25 && maq.desempenho < 50);
+  }
+  else if (filtroDesempenhoSelecionado === "roxo") {
+    dadosFiltrados = dadosFiltrados.filter(maq => maq.desempenho < 25);
   }
 
   if (filtroTerminalSelecionado && filiais.includes(filtroTerminalSelecionado)) {
@@ -73,8 +77,9 @@ function carregarMaquinas(dados) {
     let classe = 'green';
     if (desempenho !== 'N/A') {
       const valor = parseInt(desempenho);
-      if (valor < 35) classe = 'red';
-      else if (valor < 70) classe = 'yellow';
+      if (valor < 25) classe = 'purple';
+      else if (valor < 50) classe = 'red';
+      else if (valor < 75) classe = 'yellow'
     }
 
     const div = document.createElement('div');
@@ -335,9 +340,9 @@ function atualizarGraficoDesempenho(maquinas) {
   grafico.data.datasets[0].data = desempenhoPorTerminal.map(d => d.desempenho);
 
   grafico.data.datasets[0].backgroundColor = desempenhoPorTerminal.map(d => {
-    if (d.desempenho <= 35) return '#ff3333';
-    if (d.desempenho <= 65) return '#ffff33';
-    return '#00cc00';
+    if (d.desempenho <= 35) return '#8537C8';
+    if (d.desempenho <= 65) return '#DEC828';
+    return '#00A100';
   });
 
   grafico.update();
