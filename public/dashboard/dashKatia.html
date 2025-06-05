@@ -36,7 +36,7 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-1 sidebar d-flex flex-column align-items-center">
+            <div style="width: 5vw;" class="sidebar d-flex flex-column align-items-center">
                 <div id="sidebar">
                     <div class="logo d-flex justify-content-between align-items-center w-100 px-2">
                         <img src="../assets/InnovaairWhite.png" alt="Logo" class="img-fluid" />
@@ -50,41 +50,46 @@
                 </div>
             </div>
 
-            <div class="col-md-11 p-2">
-                <div id="main_frame" class="main">
+            <div style="width: 95vw;">
+                <div id="main_frame" style="display: none;" class="main">
                     <div class="title">
                         <h1>Análise em Tempo Real</h1>
-                        <p>* Exibindo os aeroportos a qual você possui acesso</p>
+                        <h2>* Exibindo os aeroportos a qual você possui acesso</h2>
                     </div>
 
                     <div class="indicators">
-                        <div class="kpi">
-                            <p>Endereço com mais alertas</p>
-                            <h2 id="indicator_address">GRU Airport</h2>
+                        <div class="border-kpi kpi">
+                            <h4>Endereço com mais alertas</h4>
+                            <h5 id="indicator_address">_</h5>
+                        </div>
+
+                        <div class="border-kpi kpi">
+                            <h4>Alertas em aberto</h4>
+                            <h5 id="">_</h5>
                         </div>
 
                         <div class="kpi red">
-                            <p>Totens em alerta</p>
-                            <h2 id="indicator_alert">0</h2>
+                            <h4>Totens em alerta</h4>
+                            <h5 id="indicator_alert">_</h5>
                         </div>
 
                         <div class="kpi green">
-                            <p>Totens em atividade</p>
-                            <h2 id="indicator_activity">0</h2>
+                            <h4>Totens em atividade</h4>
+                            <h5 id="indicator_activity">_</h5>
                         </div>
 
-                        <div class="kpi blue">
-                            <p>Totens ociosos</p>
-                            <h2 id="indicator_idle">0</h2>
+                        <div class="kpi grey">
+                            <h4>Totens ociosos</h4>
+                            <h5 id="indicator_idle">_</h5>
                         </div>
 
-                        <div class="kpi">
-                            <p>Totens desligados</p>
-                            <h2 id="indicator_off">0</h2>
+                        <div class="border-kpi kpi">
+                            <h4>Totens desligados</h4>
+                            <h5 id="indicator_off">_</h5>
                         </div>
                     </div>
 
-                    <div class="dashboard">
+                    <div class="dashboard border-black">
                         <div class="totem-list">
                             <div class="box">
                                 <h1>Lista de Totens</h1>
@@ -100,27 +105,28 @@
                                 </div>
 
                                 <div class="legend">
-                                    <p>Legenda de alertas:</p>
+                                    <!--                                     <span>Legenda de alertas:</span>
 
+ -->
                                     <div class="container">
                                         <div class="box">
                                             <div class="ball-green ball"></div>
-                                            <p>Normal</p>
+                                            <span>Normal</span>
                                         </div>
 
                                         <div class="box">
                                             <div class="ball-yellow ball"></div>
-                                            <p>Baixo</p>
-                                        </div>
-
-                                        <div class="box">
-                                            <div class="ball-orange ball"></div>
-                                            <p>Alto</p>
+                                            <span>Baixo</span>
                                         </div>
 
                                         <div class="box">
                                             <div class="ball-red ball"></div>
-                                            <p>Crítico</p>
+                                            <span>Alto</span>
+                                        </div>
+
+                                        <div class="box">
+                                            <div class="ball-purple ball"></div>
+                                            <span>Crítico</span>
                                         </div>
                                     </div>
                                 </div>
@@ -129,12 +135,12 @@
 
                             <div class="list">
                                 <div class="header">
-                                    <p>Nome do Totem</p>
-                                    <p>Uso CPU</p>
-                                    <p>Uso RAM</p>
-                                    <p>Uso Disco</p>
-                                    <p>Rede</p>
-                                    <p>Analise de Desempenho</p>
+                                    <span>Nome do Totem</span>
+                                    <span>Uso CPU</span>
+                                    <span>Uso RAM</span>
+                                    <span>Uso Disco</span>
+                                    <span>Rede</span>
+                                    <span>Analise de Desempenho</span>
                                 </div>
                                 <div class="line"></div>
                                 <div id="lines" class="lines">
@@ -170,11 +176,11 @@
                             <div class="indicators">
                                 <div class="kpi">
                                     <p>Categoria com mais alerta</p>
-                                    <h2 id="indicator_category">CPU</h2>
+                                    <h2 id="indicator_category">_</h2>
                                 </div>
                                 <div class="kpi">
                                     <p>Total de alertas</p>
-                                    <h2 id="indicator_totalalerts">120</h2>
+                                    <h2 id="indicator_totalalerts">_</h2>
                                 </div>
                             </div>
                             <div id="alert-chart" class="graph"></div>
@@ -182,12 +188,10 @@
                     </div>
                 </div>
 
-                <div id="analise_frame" style="display: none;" class="main">
+                <div id="analise_frame" style="display: flex;" class="main">
                     <div class="titleFrame">
                         <div class="left">
                             <h1>Análise de Desempenho: <span><i id="nome_totem">Nome do Totem</i></span></h1>
-                            <p>* Exibindo análises referente as últimas capturas</p>
-                            <p id="ultima_captura_totem">* Última captura realizada há: 30 Minutos</p>
                         </div>
                         <div class="rigth">
                             <button onclick="closeDashboardDisplay()" class="button">
@@ -200,6 +204,23 @@
 
                     <div class="block">
                         <div class="child">
+                            <div class="chart-container">
+                                <div class="chart-title">CPU</div>
+                                <div id="chart-cpu-status" style="width: 200px; height: 200px;"></div>
+                            </div>
+                            <div class="chart-container">
+                                <div class="chart-title">RAM</div>
+                                <div id="chart-ram-status" style="width: 200px; height: 200px;"></div>
+                            </div>
+                            <div class="chart-container">
+                                <div class="chart-title">DISCO</div>
+                                <div id="chart-disco-status" style="width: 200px; height: 200px;"></div>
+                            </div>
+                            <div class="chart-container">
+                                <div class="chart-title">REDE</div>
+                                <div id="chart-rede-status" style="width: 200px; height: 200px;"></div>
+                            </div>
+
                             <div class="list1">
                                 <div class="kpi">
                                     <p>USO CPU</p>
@@ -260,7 +281,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="child overflow-y">
+                        <div class="child">
                             <div class="box-chart">
                                 <h2>Processador</h2>
                                 <p>Porcentagem de Uso</p>
@@ -297,21 +318,24 @@
 
 </html>
 <script>
-    getEnderecosUsuario(sessionStorage.idUsuario)
+    async function executar() {
+        var getConcluido = false;
+        
+        await getEnderecosUsuario(sessionStorage.idUsuario);
+        
+        setInterval(() => {
+            plotarListaMaquinas(document.getElementById("select_endereco").value);
+        }, 100);
+    }
 
-    setTimeout(() => {
-        plotarListaMaquinas(document.getElementById("select_endereco").value)
-    }, 100);
-
-    setInterval(() => {
-        plotarListaMaquinas(document.getElementById("select_endereco").value)
-    }, 3000);
+    executar(); 
 </script>
+
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Bootstrap Bundle JS (popper + bootstrap) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+<!-- SCRIPT NAVBAR -->
 <script>
     let expanded = false;
 
