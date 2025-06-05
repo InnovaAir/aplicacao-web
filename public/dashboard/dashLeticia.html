@@ -21,7 +21,7 @@
 <body onload="atualizarGrafico()">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-1 sidebar d-flex flex-column align-items-center">
+            <div class="sidebar d-flex flex-column align-items-center">
                 <div id="sidebar">
                     <div class="logo d-flex justify-content-between align-items-center w-100 px-2">
                         <img src="../assets/InnovaairWhite.png" alt="Logo" class="img-fluid" />
@@ -30,12 +30,12 @@
                         </button>
                     </div>
 
-                    <a><i class="fas fa-chart-line"></i> <span>Analise de Desempenho</span></a> 
+                    <a><i class="fas fa-chart-line"></i> <span>Analise de Desempenho</span></a>
                     <a onclick="limparSessao()" href="../index.html"><strong>Sair</strong></a>
                 </div>
             </div>
 
-            <div class="col-md-11 p-2">
+            <div class="p-2">
                 <div class="tela_geral">
                     <div class="tela_geral_centralizada">
                         <div class="tela_dash">
@@ -52,13 +52,13 @@
                             </div>
 
                             <div class="select_alinhado">
-                                <!-- <div class="div_select custom-select-wrapper">
+                                <div class="div_select custom-select-wrapper">
                                     <span><b id="titulo_select">Selecione o endereço monitorado</b></span>
                                     <select id="select_endereco" class="custom-select">
                                         <option value="guarulhos" selected>Guarulhos</option>
                                         <option value="congonhas">Congonhas</option>
                                     </select>
-                                </div> -->
+                                </div>
 
                                 <div class="div_select custom-select-wrapper">
                                     <span><b id="titulo_select">Selecione o componente</b></span>
@@ -101,6 +101,11 @@
                                                 <span id="alertas_kpi_titulo"><b>Previsão da quantidade de alertas por
                                                         componete</b></span>
                                                 <span><i>*Análise trimestral</i></span>
+                                            </div>
+
+                                            <div class="taxa_kpi">
+                                                <span class="texto_taxa">Taxa de precisão:</span>
+                                                <span style="font-size: 25px;"><b id="taxaPrecisao"></b></span>
                                             </div>
                                         </div>
                                         <div class="grafico">

@@ -327,11 +327,11 @@ function buscarEndereco() {
               const usuario_dash = dados[0].usuario;              
 
               if (aeroporto == "GRU") {
-                  document.getElementById("aeroporto_endereco").textContent = `Aeroporto de Guarulhos`;
+                  document.getElementById("aeroporto_endereco").textContent = `Aeroporto Internacional de Guarulhos`;
               }
 
               if (usuario_dash == "Estela") {
-                  document.getElementById("boas_vindas").textContent = `Boas vindas, ${usuario_dash}!`;
+                  document.getElementById("boas_vindas").textContent = `Boas-vindas, ${usuario_dash}!`;
               }
           }
       })

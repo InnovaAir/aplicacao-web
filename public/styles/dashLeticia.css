@@ -4,6 +4,10 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+body {
+    overflow: hidden;
+}
+
 i {
     font-size: 22px;
 }
@@ -21,6 +25,7 @@ i {
 .tela_geral_centralizada {
     height: 95%;
     width: 100%;
+    margin-left: 5vw;
     align-self: center;
 }
 
@@ -44,7 +49,7 @@ i {
 .titulo_alinhado {
     display: flex;
     flex-direction: column;
-    color: #0026D6;
+    color: #5271FF;
 }
 
 .titulos_dash {
@@ -56,14 +61,14 @@ i {
 #titulo_aeroporto {
     display: flex;
     justify-content: flex-end;
-    border-right: 2px solid #7A92FF;
+    border-right: 2px solid #5271FF;
     padding-right: 10px;
 }
 
 .div_select {
     display: flex;
     flex-direction: column;
-    color: #0026D6;
+    color: #5271FF;
 }
 
 .select_alinhado {
@@ -84,7 +89,6 @@ i {
     width: 100%;
     display: flex;
     flex-direction: row;
-    box-shadow: 7px 5px 10px #7A92FF;
 }
 
 .box_kpi_nivel {
@@ -165,15 +169,14 @@ i {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    box-shadow: 10px 7px 10px #7A92FF;
-    border: 1px solid #0026D6;
+    border: 1px solid #5271FF;
     border-radius: 5px;
 }
 
 /* KPI's 2 */
 
 .box_kpi_lateral {
-    background-color: #7A92FF;
+    background-color: #5271FF;
     color: #fff;
     border-radius: 5px;
     display: flex;
@@ -193,7 +196,6 @@ i {
 
 .kpi1 {
     height: 20%;
-    box-shadow: 10px 7px 10px #615f5f;
 }
 
 .subtitulo {
@@ -205,12 +207,10 @@ i {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    box-shadow: 10px 7px 10px #615f5f;
 }
 
 .kpi3 {
     height: 20%;
-    box-shadow: 10px 7px 10px #615f5f;
 }
 
 .borda_inferior {
@@ -220,8 +220,6 @@ i {
 }
 
 /* Select */
-
-
 .custom-select-wrapper {
     position: relative;
     width: fit-content;
@@ -251,5 +249,5 @@ i {
 
 .custom-select:focus {
     outline: none;
-    border-bottom: 0.25vh solid #1976d2;
+    border-bottom: 0.25vh solid #5271FF;
 }
