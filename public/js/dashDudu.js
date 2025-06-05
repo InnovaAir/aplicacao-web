@@ -368,7 +368,8 @@ function atualizarGraficoDesempenho(maquinas) {
       enabled: true,
       formatter: val => `${val}%`,
       style: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: '22px'
       }
     },
     tooltip: {

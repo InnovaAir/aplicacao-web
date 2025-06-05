@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 body {
     height: 100vh;
     width: 93vw;
@@ -65,11 +67,12 @@ body {
 
 .div_slcFil{
     /* border: 1px solid black; */
-    width: 15vw;
+    width: 25vw;
     height: 4vh;
-    text-align: center;
-    
-    
+    text-align: start;
+    font-size: 1vw;
+    color: #5271FF;
+    font-weight: bolder;
 }
 
 .div_kpis {
@@ -127,13 +130,15 @@ body {
 .div_titulo2 {
     /* border: 1px solid black; */
     color: #0026D6;
+    /* text-align: center; */
+    margin-left: 0.5vw;
 }
 
 .div_dashboard{
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
     border-radius: 10px;
     margin-top: 2vh;
-    height: 54vh;
+    height: 61vh;
 }
 
 .div_titulo3 h2{
@@ -352,7 +357,7 @@ body {
 
 .totem {
     display: flex;
-    padding: 8px;
+    padding: 1px;
     /* border-bottom: 1px solid #ccc; */
 }
 
