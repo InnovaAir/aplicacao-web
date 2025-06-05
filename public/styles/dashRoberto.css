@@ -1,6 +1,7 @@
 body {
     height: 100vh;
     width: 100%;
+    overflow: hidden;
 }
 
 :root{
@@ -161,79 +162,45 @@ h3{
     margin-right: 80px;
 }
 
-.box_tabela {
+  .tabela-alertas-div {
     width: 100%;
-    font-size: 1rem;
-}
-
-.tabela-alertas {
-    border-collapse: separate;
-    border-spacing: 0;
-    border: 1px solid black;
-  }
-  
-  .tabela-alertas td, .tabela-alertas th {
-    border: 1px solid black;
-  }
-  
-  /* Canto superior esquerdo */
-  .tabela-alertas tr:first-child th:first-child {
-    border-top-left-radius: 12px;
-  }
-  
-  /* Canto superior direito */
-  .tabela-alertas tr:first-child th:last-child {
-    border-top-right-radius: 12px;
-  }
-  
-  /* Canto inferior esquerdo */
-  .tabela-alertas tr:last-child td:first-child {
-    border-bottom-left-radius: 12px;
-  }
-  
-  /* Canto inferior direito */
-  .tabela-alertas tr:last-child td:last-child {
-    border-bottom-right-radius: 12px;
-  }
-  
-
-.tabela-scroll {
-    max-height: 300px;
+    display: flex;
+    height: 58%;
+    flex-direction: column;
+    box-shadow: var(--box-shadow);
+    border-radius: 12px;
     overflow-y: auto;
-    border: 1px solid #ddd;
-    width: 100%;
-}
-
-.tabela-alertas {
-    width: 100%;
-    border-collapse: collapse;
     font-family: Arial, sans-serif;
-}
-
-.tabela-alertas thead {
+  }
+  
+  .tabela-header {
+    display: flex;
     background-color: #f9f9f9;
-    position: sticky;
-    top: 0;
-    z-index: 1;
+    font-weight: bold;
     border-bottom: 2px solid #5271FF;
-    
-}
-
-.tabela-alertas th, .tabela-alertas td {
-    text-align: left;
+  }
+  
+  .tabela-row {
+    display: flex;
+    border-top: 1px solid #ccc;
+  }
+  
+  .col {
+    flex: 1;
     padding: 12px;
-    border-bottom: 0;
-}
-
-.tabela-alertas tbody tr:nth-child(even) {
-    background-color: #ffffff;
-}
-
-.tabela-alertas tbody tr:nth-child(odd) {
-    background-color: #ffffff;
-}
-
-.tabela-alertas small {
-    color: #555;
-    font-size: 0.8em;
-}
+    border-right: 1px solid #ccc;
+  }
+  
+  .tabela-header .col:last-child,
+  .tabela-row .col:last-child {
+    border-right: none;
+  }
+  
+  .tabela-row:nth-child(even) {
+    background-color: #fff;
+  }
+  
+  .tabela-row:nth-child(odd) {
+    background-color: #fdfdfd;
+  }
+  
