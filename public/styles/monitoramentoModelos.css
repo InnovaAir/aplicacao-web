@@ -108,6 +108,19 @@ span {
     right: 0;
 }
 
+.KPI{
+    flex-direction: column;
+    font-family: Inter;
+    height: 100px;
+    width: 200px;
+    color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #5271FF;
+}
+
 .legendaKPI{
     display: flex;
     justify-content: center;
@@ -115,6 +128,11 @@ span {
     color: black;
     display: flex;
     font-size: max(1vw, 15px);
+}
+
+.resumoContainer{
+    color: #5271FF;
+    font-size: max(2vw, 20px);
 }
 
 .bolinhaKPI {
