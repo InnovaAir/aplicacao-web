@@ -76,6 +76,7 @@
 
 
                             <div class="tituloContainer">Alertas por modelo</div>
+                            <div class="resumoContainer">Visualize os modelos e a quantidade de alertas emitidos por um período de tempo.</div>
                             <div class="subtituloContainer">
                                 <div id="titulo_select"><b>Selecione a filial</b></div>
                                 <select id="select_filial" class="selectBox">
@@ -86,7 +87,17 @@
 
                             </div>
                             <div id="alertas_kpi_titulo"><b>Quantidade de alertas por modelo</b>
-                                <div class="kpiModelos">dada</div>
+                                <div class="kpiModelos">
+                                    <div class="legendaKPI">Legenda de alertas:</div>
+                                    <div class="legendaKPI">
+                                        <div class="bolinhaKPI"></div>
+                                        CPU
+                                        <div class="bolinhaKPI"></div>
+                                        RAM
+                                        <div class="bolinhaKPI"></div>
+                                        DISCO
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="section1">
@@ -534,7 +545,7 @@
         console.log("popupId:", popupId);
 
 
-        const popup = document.querySelector(".popUp");
+        const popup = document.querySelector(".popUp").style.backgroundColor;
         const titulo = popup.querySelector(".modeloTitulo");
         const subtitulo = popup.querySelector(".modeloSubtitulo");
         const specs = popup.querySelector(".specsModelo");

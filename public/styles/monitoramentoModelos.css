@@ -1,3 +1,6 @@
+/* Fonte */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 :root {
     --color-neutral-0: #3852c5;
     --color-neutral-10: #5271FF;
@@ -25,7 +28,7 @@ body {
 * {
     padding: 0;
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Inter";
 }
 
 .container {
@@ -55,7 +58,7 @@ body {
 } */
 
 span {
-    font-size: max(1vw 2px);
+    font-size: max(1vw, 22px);
     word-wrap: break-word;
     text-wrap: 1;
     overflow-wrap: anywhere;
@@ -95,20 +98,31 @@ span {
 
 
 .kpiModelos {
-    background-color: firebrick;
-    height: 5vh;
-    min-width: 150px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border: solid lightgray 2px;
+    min-width: 140px;
     width: 20vw;
     align-self: flex-end;
     right: 0;
 }
 
+.legendaKPI{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    display: flex;
+    font-size: max(1vw, 15px);
+}
+
 .bolinhaKPI {
-    margin-inline: 5px;
-    width: 2vw;
-    height: 2vw;
+    margin: 5px;
+    height: 12px;
+    width: 12px;
     border-radius: 20px;
-    border: solid 3px black;
+    border: solid 1px black;
 }
 
 .grid {
@@ -233,9 +247,8 @@ span {
 
 .section1 {
 
-    border: 1px solid #0026D6;
     border-radius: 5px;
-    border: solid rgb(0, 0, 0) 1px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
     height: 100%;
     flex-direction: column;
     width: 70vw;
@@ -275,13 +288,13 @@ span {
     flex-direction: row;
     margin-top: 20px;
     font-weight: 700;
-    font-size: max(2vw, 20px);
+    font-size: max(2vw, 30px);
     color: #0026D6;
 
 }
 
 #alertas_kpi_titulo {
-    font-size: max(2vw, 20px);
+    font-size: max(2vw, 30px);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -395,12 +408,34 @@ span {
         max-height:4vh ;
     }
 
+    .kpiModelos {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border: solid lightgray 2px;
+    min-width: 240px;
+    width: 20vw;
+    align-self: flex-end;
+    right: 0;
+}
+
+    .legendaKPI{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    color: black;
+    width: fit-;
+    font-size: max(2vw, 10px);
+}
+
     .tituloContainer{
         font-size: 4.5vh;
     }
 
     .section1{
-        width: 75vw;
+        width: 70vw;
+        
     }
 
     span{
