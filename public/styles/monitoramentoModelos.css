@@ -199,7 +199,7 @@ span {
 
 .popUp {
     display: flex;
-    position: relative;
+    position: absolute;
     width: 100vw;
     height: 100vh;
     align-items: center;
@@ -211,7 +211,7 @@ span {
     z-index: 2;
     width: 100vw;
     height: 120vh;
-    /* background-color: black; */
+    background-color: black;
     opacity: 40%;
 }
 
@@ -229,9 +229,11 @@ span {
     margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
+    position: fixed;
     background-color: rgb(255, 255, 255);
     justify-content: center;
     align-items: center;
+    filter: drop-shadow(2px 2px 6px);
     flex-direction: column;
 
     >.fecharButton {
@@ -271,6 +273,9 @@ span {
 
 .graficoHist{
     background-color: antiquewhite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .specsModelo {
@@ -507,7 +512,7 @@ span {
 
     b {
 
-        font-size: 3vw;
+        font-size: 5vw;
     }
 
     span {
