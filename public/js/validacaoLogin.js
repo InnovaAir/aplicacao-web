@@ -160,7 +160,7 @@ function entrar(email, senha){
                       }
                     });
                     setTimeout(function () {
-                        window.location = "./dashboard/roberto_Lucas.html";
+                        window.location = "./dashboard/dashDudu.html";
                     }, 1350); // apenas para exibir o loading
                 }else if (json.fkCargo == 3){
                     let timerInterval;
