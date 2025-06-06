@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 *{
     padding: 0;
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Inter", Arial;
 }
 
 body {
@@ -79,7 +81,6 @@ i {
 }
 
 /* KPI's */
-
 #alertas_kpi_titulo {
     font-size: 32px;
 }
@@ -115,7 +116,6 @@ i {
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: #00A100;
     color: #fff;
     border-radius: 5px;
 }
@@ -152,7 +152,6 @@ i {
 }
 
 /* GRÁFICO */
-
 .grafico {
     height: 90%;
     width: 100%;
@@ -201,7 +200,7 @@ i {
 }
 
 .subtitulo {
-    height: 40%;
+    height: 35%;
 }
 
 .kpi2 {
@@ -213,10 +212,15 @@ i {
 }
 
 .kpi3 {
-    height: 57%;
+    height: 63%;
     min-height: 250px;
     background-color: #fff;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
+}
+
+.titulo_barras {
+    height: 15%;
+    border: 2 px solid red;
 }
 
 /* 

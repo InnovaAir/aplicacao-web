@@ -85,7 +85,6 @@ async function atualizarGrafico() {
         previsao_cpu ? Number(previsao_cpu) : 0
     ];
 
-    // Limpa gráfico anterior, se houver
     document.querySelector("#graficoLinha").innerHTML = "";
 
     let seriesSelecionadas = [];
@@ -181,18 +180,81 @@ async function atualizarGrafico() {
         }
     }
 
+    var totalUltimos3Meses = somaUltimos3Meses_cpu + somaUltimos3Meses_ram;
+    var totalPrevisto = dadosGrafico_cpu[3] + dadosGrafico_ram[3];
+
+    var percentualQueda = ((totalUltimos3Meses - totalPrevisto) * 100) / totalUltimos3Meses;
+
+    if (isNaN(percentualQueda)) {
+        percentualQueda = 0;
+    } else {
+        percentualQueda = percentualQueda.toFixed(1);
+    }
+
+    var totalUltimos3Meses_ram = somaUltimos3Meses_ram;
+    var previsao_ram_num = dadosGrafico_ram[3];
+
+    var percentualQueda_ram = ((totalUltimos3Meses_ram - previsao_ram_num) * 100) / totalUltimos3Meses_ram;
+
+    if (isNaN(percentualQueda_ram)) {
+        percentualQueda_ram = 0;
+    } else {
+        percentualQueda_ram = percentualQueda_ram.toFixed(2);
+    }
+
+    var totalUltimos3Meses_cpu = somaUltimos3Meses_cpu;
+    var previsao_cpu_num = dadosGrafico_cpu[3];
+
+    var percentualQueda_cpu = ((totalUltimos3Meses_cpu - previsao_cpu_num) * 100) / totalUltimos3Meses_cpu;
+
+    if (isNaN(percentualQueda_cpu)) {
+        percentualQueda_cpu = 0;
+    } else {
+        percentualQueda_cpu = percentualQueda_cpu.toFixed(2);
+    }
+
     if (componenteSelecionado === "ram") {
         document.getElementById("taxaPrecisao").innerText = `${r2_ram}%`;
-        document.getElementById("kpi_total").innerText = somaUltimos3Meses_ram;
+        document.getElementById("kpi_total").innerText = dadosGrafico_ram[3];
+
+        document.getElementById("queda_percentual").innerHTML = `Queda de ${percentualQueda_ram}%`;
+
+        if (r2_ram <= 33.3) {
+            document.querySelector(".taxa_kpi").style.backgroundColor = "#DE2828";
+        } else if (r2_ram > 33.3 && r2_ram <= 66.6) {
+            document.querySelector(".taxa_kpi").style.backgroundColor = "#DEC828";
+        } else if (r2_ram > 66.6) {
+            document.querySelector(".taxa_kpi").style.backgroundColor = "#00A100";
+        }
     } else if (componenteSelecionado === "cpu") {
         document.getElementById("taxaPrecisao").innerText = `${r2_cpu}%`;
-        document.getElementById("kpi_total").innerText = somaUltimos3Meses_cpu;
+        document.getElementById("kpi_total").innerText = dadosGrafico_cpu[3];
+
+        document.getElementById("queda_percentual").innerHTML = `Queda de ${percentualQueda_cpu}%`;
+
+        if (r2_cpu <= 33.3) {
+            document.querySelector(".taxa_kpi").style.backgroundColor = "#DE2828";
+        } else if (r2_cpu > 33.3 && r2_cpu <= 66.6) {
+            document.querySelector(".taxa_kpi").style.backgroundColor = "#DEC828";
+        } else if (r2_cpu > 66.6) {
+            document.querySelector(".taxa_kpi").style.backgroundColor = "#00A100";
+        }
     } else {
         const media_r2 = ((parseFloat(r2_ram) + parseFloat(r2_cpu)) / 2).toFixed(1);
         document.getElementById("taxaPrecisao").innerText = `${media_r2}%`;
+        document.getElementById("queda_percentual").innerHTML = `Queda de ${percentualQueda}%`;
 
-        document.getElementById("kpi_total").innerText = somaUltimos3Meses_ram + somaUltimos3Meses_cpu;
+        if (media_r2 <= 33.3) {
+            document.querySelector(".taxa_kpi").style.backgroundColor = "#DE2828";
+        } else if (media_r2 > 33.3 && media_r2 <= 66.6) {
+            document.querySelector(".taxa_kpi").style.backgroundColor = "#DEC828";
+        } else if (media_r2 > 66.6) {
+            document.querySelector(".taxa_kpi").style.backgroundColor = "#00A100";
+        }
+
+        document.getElementById("kpi_total").innerText = dadosGrafico_ram[3] + dadosGrafico_cpu[3];
     }
+
 
     atualizarKPI();
     buscarEndereco();
@@ -221,7 +283,7 @@ function atualizarBarras() {
             data: [2.3, 3.1, 10.1, 4.0, 4.0]
         }],
         chart: {
-            height: '100%',
+            height: 320,
             type: 'bar',
         },
         plotOptions: {
@@ -289,9 +351,9 @@ function atualizarBarras() {
 
         },
         title: {
-            text: 'Dados de clima tempo do ultimo trimestre',
+            text: 'Gráfico atualizado todo primeiro dia do mês',
             floating: true,
-            offsetY: 350,
+            offsetY: 300,
             align: 'center',
             style: {
                 color: '#444'
@@ -425,7 +487,7 @@ function buscarEndereco() {
                 const aeroporto = dados[0].aeroporto;
                 const usuario_dash = dados[0].usuario;
 
-                if (aeroporto == "GRU") {
+                if (aeroporto == "Internacional de Guarulhos (GRU)") {
                     document.getElementById("aeroporto_endereco").textContent = `Aeroporto Internacional de Guarulhos`;
                 }
 
