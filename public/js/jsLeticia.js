@@ -88,19 +88,31 @@ async function atualizarGrafico() {
     document.querySelector("#graficoLinha").innerHTML = "";
 
     let seriesSelecionadas = [];
+    let coresSelecionadas = [];
 
-    if (componenteSelecionado === "ram" || componenteSelecionado === "todos") {
+    if (componenteSelecionado === "ram") {
         seriesSelecionadas.push({
             name: 'RAM',
             data: dadosGrafico_ram
         });
-    }
-
-    if (componenteSelecionado === "cpu" || componenteSelecionado === "todos") {
+        coresSelecionadas.push('#FF8CA5'); // rosa
+    } else if (componenteSelecionado === "cpu") {
         seriesSelecionadas.push({
             name: 'CPU',
             data: dadosGrafico_cpu
         });
+        coresSelecionadas.push('#69D7FF'); // azul
+    } else if (componenteSelecionado === "todos") {
+        seriesSelecionadas.push({
+            name: 'RAM',
+            data: dadosGrafico_ram
+        });
+        seriesSelecionadas.push({
+            name: 'CPU',
+            data: dadosGrafico_cpu
+        });
+        coresSelecionadas.push('#FF8CA5'); // RAM = rosa
+        coresSelecionadas.push('#69D7FF'); // CPU = azul
     }
 
     var options = {
@@ -109,6 +121,7 @@ async function atualizarGrafico() {
             height: 350,
             type: 'line',
         },
+        colors: coresSelecionadas,
         forecastDataPoints: {
             count: 1
         },

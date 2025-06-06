@@ -108,6 +108,7 @@ i {
 
 #numero_kpi {
     font-size: 40px;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.45);
 }
 
 .taxa_kpi {
@@ -256,6 +257,8 @@ i {
     background-size: 1.2vw;
 
     cursor: pointer;
+
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.10);
 }
 
 .custom-select:focus {

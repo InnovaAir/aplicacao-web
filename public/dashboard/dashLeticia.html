@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../styles/dashLeticia.css">
 </head>
 
-<body onload="atualizarGrafico()">
+<body onload="atualizarGrafico(), getCsvAndConvertToJson('leticia-bucket-so ', 'leticia-bucket-so/clima.csv')">
     <div class="container-fluid">
         <div class="row">
             <div class="sidebar d-flex flex-column align-items-center">
@@ -53,9 +53,9 @@
 
                             <div class="select_alinhado">
                                 <div class="div_select custom-select-wrapper">
-                                    <span><b id="titulo_select">Selecione o endereço monitorado</b></span>
+                                    <span><b id="titulo_select">Selecione o aeroporto monitorado</b></span>
                                     <select id="select_endereco" class="custom-select">
-                                        <option value="guarulhos" selected>Guarulhos</option>
+                                        <option value="guarulhos" selected>Internacional de Guarulhos</option>
                                         <option value="congonhas">Congonhas</option>
                                     </select>
                                 </div>
@@ -97,7 +97,7 @@
                                         <div class="box_kpi_nivel" style="background-color: #5271FF;">
                                             <span>Total de alertas previstos</span>
                                             <span id="numero_kpi"><b id="kpi_total"></b></span>
-                                            <span><i><span style="color: #42f042;">▼</span><span id="queda_percentual"></span></i></span>
+                                            <span><i><span style="color: #42f042; text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.45);">▼</span><span id="queda_percentual"></span></i></span>
                                         </div>
                                     </div>
 
@@ -105,13 +105,13 @@
                                         <div class="head_grafico">
                                             <div class="titulo_alinhado">
                                                 <span id="alertas_kpi_titulo"><b>Previsão da quantidade de alertas por
-                                                        componete</b></span>
+                                                        +</b></span>
                                                 <span><i>*Análise trimestral</i></span>
                                             </div>
 
                                             <div class="taxa_kpi">
-                                                <span class="texto_taxa">Taxa de precisão:</span>
-                                                <span style="font-size: 25px;"><b id="taxaPrecisao"></b></span>
+                                                <span class="texto_taxa" style="text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.45);">Taxa de precisão:</span>
+                                                <span style="font-size: 25px; text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.45);"><b id="taxaPrecisao"></b></span>
                                             </div>
                                         </div>
                                         <div class="grafico">
@@ -178,3 +178,11 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 <script src="../js/jsLeticia.js"></script>
+
+<script>
+  window.onload = async () => {
+    const response = await fetch('http://localhost:3333/dashboard/dashLeticia');
+    const data = await response.json();
+    console.log(data);
+  };
+</script>
