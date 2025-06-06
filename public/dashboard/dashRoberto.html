@@ -52,16 +52,17 @@
 
       <div class="select-wrapper">
         <div class="custom-select">
+          <h3>Selecione o aeroporto</h3>
           <select id="select_aeroporto" onchange="aplicarFiltro()">
-            <option value="" disabled selected>Selecione o Aeroporto</option>
+            <option value="" selected>Todos os meus aeroportos</option>
             <option value="gru">GRU</option>
             <option value="cgh">Congonhas</option>
           </select>
         </div>
 
         <div class="custom-select">
+          <h3>Selecione o intervalo</h3>
           <select id="select_intervalo" onchange="aplicarFiltro()">
-            <option value="" disabled>Selecione o intervalo</option>
             <option value="1">Últimos 7 dias</option>
             <option value="2">Últimos 14 dias</option>
             <option value="4" selected>Últimos 30 dias</option>
@@ -69,6 +70,7 @@
         </div>
 
         <div class="custom-select">
+          <h3>Selecione o componente</h3>
           <select id="select_componente" onchange="aplicarFiltro()">
             <option value="" selected>Todos os componentes</option>
             <option value="cpu">CPU</option>

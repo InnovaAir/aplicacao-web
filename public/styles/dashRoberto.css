@@ -12,6 +12,12 @@ h1{
     font-size: 1.6vw !important;
 }
 
+.custom-select h3{
+    color: #8BA0FF;
+    font-size: 1vw !important;
+    gap: 5vh;
+}
+
 .titulo_kpi{
     text-align: center;
 }
@@ -127,6 +133,7 @@ h3{
     width: 60%;
     align-items: start;
     justify-content: start;
+    box-shadow: var(--box-shadow);
 }
 
 .box_kpi {
