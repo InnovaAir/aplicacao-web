@@ -12,6 +12,10 @@ h1{
     font-size: 1.6vw !important;
 }
 
+.kpi_tabela h1{
+    text-shadow: var(--box-shadow)
+}
+
 .custom-select h3{
     color: #8BA0FF;
     font-size: 1vw !important;
@@ -96,6 +100,7 @@ h3{
     background-size: 1.2vw;
 
     cursor: pointer;
+    box-shadow: var(--box-shadow);
 }
   
 .custom-select::after {
