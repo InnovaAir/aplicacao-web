@@ -9,18 +9,19 @@ body {
     margin-left: 5vw;
     display: flex;
     flex-direction: row;
+    height: 90vh;
 }
 
 .box_esquerda{
     /* border: 1px solid blue; */
-    height: 99vh;
+    height: 88vh;
     width: 47vw;
 }
 
 
 .box_direita {
     /* border: 1px solid green; */
-    height: 99vh;
+    height: 88vh;
     width: 46vw;
     margin-left: 6vh;
 }
@@ -30,7 +31,7 @@ body {
     height: auto;
     width: 43vw;
     /* margin-right: 1vw; */
-    margin-top: 15vh;
+    margin-top: 9vh;
     padding: 10px 10px 10px 10px;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
 }
@@ -48,6 +49,7 @@ body {
 .div_titulo1{
     /* border: 1px solid red; */
     color: #0026D6;
+    margin-left: 5vw;
 }
 
 .div_titulo1 h1{
