@@ -6,10 +6,25 @@ body {
 }
 
 .box_geral {
-    margin-left: 5vw;
     display: flex;
+    margin-left: 5vw;
+    align-items: end;
     flex-direction: row;
+    justify-content: end;
     height: 90vh;
+    margin-top: 5vh;
+    /* border: 1px solid red; */
+    
+}
+
+.div_titulo1{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid purple; */
+    color: #0026D6;
+    margin-left: 5vw;
+    justify-content: end;
+    height: 8vh;
 }
 
 .box_esquerda{
@@ -29,7 +44,7 @@ body {
 .box_geral_direita{
     border-radius: 10px;
     height: auto;
-    width: 43vw;
+    width: 44vw;
     /* margin-right: 1vw; */
     margin-top: 9vh;
     padding: 10px 10px 10px 10px;
@@ -46,11 +61,6 @@ body {
     width: auto;
 }
 
-.div_titulo1{
-    /* border: 1px solid red; */
-    color: #0026D6;
-    margin-left: 5vw;
-}
 
 .div_titulo1 h1{
     font-size: 2vw;
@@ -123,10 +133,15 @@ body {
     font-size: 2vw;
 }
 
+.kpi_texto{
+    font-weight: bold;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.45);
+}
+
 .box_esquerdaBaixo{
     /* border: 1px solid red; */
     margin-top: 3vh;
-    height: 66vh;
+    height: 60vh;
 }
 
 .div_titulo2 {
@@ -140,7 +155,7 @@ body {
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
     border-radius: 10px;
     margin-top: 2vh;
-    height: 61vh;
+    height: 60vh;
 }
 
 .div_titulo3 h2{
@@ -217,6 +232,8 @@ body {
     transition: all 0.2s ease;
     position: relative;
     background-color: #5272ff4a;
+    /* border: 1px solid #1976d2; */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .filtro.selecionado {
@@ -277,6 +294,13 @@ body {
     padding: 10px;
     text-align: center;
     cursor: pointer;
+    font-weight: bold;
+    color: white;
+}
+
+.coluna_fixa {
+    font-weight: bold;
+    color: black;
 }
 
 .tabela_conteudo {
@@ -363,19 +387,15 @@ body {
     /* border-bottom: 1px solid #ccc; */
 }
 
-.coluna {
-    flex: 1;
-    text-align: center;
-}
 
 .totem.purple {
-    background-color: #7625bcac;
+    background-color: #8537C8;
     /* border: 2px solid rgba(255, 0, 0, 1); */
     border-radius: 15px;
 }
 
 .totem.red {
-    background-color: #fd3b3bbd;
+    background-color: #DE2828;
     /* border: 2px solid rgba(255, 0, 0, 1); */
     border-radius: 15px;
 }
@@ -387,7 +407,7 @@ body {
 }
 
 .totem.green {
-    background-color: #00A1005B;  /* os ultimos 2 digitos são opacidade*/
+    background-color: #00A100;  /* os ultimos 2 digitos são opacidade*/
     /* border: 2px solid rgba(0, 170, 0, 1); */
     border-radius: 15px;
 }
@@ -410,6 +430,7 @@ body {
     background-repeat: no-repeat;
     background-position: right 1vw center;
     background-size: 1.2vw;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
 
     cursor: pointer;
 }

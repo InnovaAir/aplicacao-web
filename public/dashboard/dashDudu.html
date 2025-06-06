@@ -40,7 +40,7 @@
               <h1>Análise de Comportamento por Aeroporto - Últimas 24h</h1>
             </div>
 
-      <div id="box_geral1" style="width: 95vw;" class="box_geral">
+      <div id="box_geral1" class="box_geral">
         <!-- Inicio Box geral-->
         <div class="box_esquerda">
           <!-- Inicio Box esquerda-->
@@ -95,7 +95,7 @@
                 <h2 class="kpi_titulo">Totens em Estado<br />Crítico</h2>
                 <hr class="kpi_linha" />
                 <h1 class="kpi_valor">
-                  <h1 id="kpi_alertas"></h1>
+                  <h1 class="kpi_texto" id="kpi_alertas"></h1>
                 </h1>
               </div>
 
@@ -103,7 +103,7 @@
                 <h2 class="kpi_titulo">Totens com<br />Baixo Desempenho</h2>
                 <hr class="kpi_linha" />
                 <h1 class="kpi_valor">
-                  <h1 id="kpi_baixo"></h1>
+                  <h1 class="kpi_texto" id="kpi_baixo"></h1>
                 </h1>
               </div>
 
@@ -111,7 +111,7 @@
                 <h2 class="kpi_titulo">Total de Totens</h2>
                 <hr class="kpi_linha" />
                 <h1 class="kpi_valor">
-                  <h1 id="kpi_total"></h1>
+                  <h1 class="kpi_texto" id="kpi_total"></h1>
                 </h1>
               </div>
 
@@ -176,27 +176,27 @@
 
             <div class="div_listaMaq">
               <div class="tabela_cabecalho">
-                <div class="coluna" onclick="ordenarColuna('totem')">
+                <div class="coluna coluna_fixa" onclick="ordenarColuna('totem')">
                   Nome do Tótem <span class="seta">⇅</span>
                 </div>
-                <div class="coluna" onclick="ordenarColuna('terminal')">
+                <div class="coluna coluna_fixa" onclick="ordenarColuna('terminal')">
                   Aeroporto <span class="seta">⇅</span>
                 </div>
-                <div class="coluna" onclick="ordenarColuna('critico')">
+                <div class="coluna coluna_fixa" onclick="ordenarColuna('critico')">
                   Alertas Crítico <span class="seta">⇅</span>
                 </div>
-                <div class="coluna" onclick="ordenarColuna('alto')">
+                <div class="coluna coluna_fixa" onclick="ordenarColuna('alto')">
                   Alertas <br />
                   Alto <span class="seta">⇅</span>
                 </div>
-                <div class="coluna" onclick="ordenarColuna('baixo')">
+                <div class="coluna coluna_fixa" onclick="ordenarColuna('baixo')">
                   Alertas <br />
-                  Baixo <span class="seta">⇅</span>
+                  Baixo <span class="seta coluna_fixa">⇅</span>
                 </div>
-                <div class="coluna" onclick="ordenarColuna('total_alertas')">
+                <div class="coluna coluna_fixa" onclick="ordenarColuna('total_alertas')">
                   Total de Alertas <span class="seta">⇅</span>
                 </div>
-                <div class="coluna" onclick="ordenarColuna('desempenho')">
+                <div class="coluna coluna_fixa" onclick="ordenarColuna('desempenho')">
                   Desempenho (%) <span class="seta">⇅</span>
                 </div>
               </div>
