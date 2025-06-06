@@ -34,99 +34,111 @@
                 </div>
             </div>
 
-            <div class="col-md-11 p-2">
-                <div style="display: none;" class="popUp">
+
+            <div style="display: block;" class="popUp">
 
 
-                    <div class="shadow" onclick="abrirPopUp()"></div>
+                <div id="mainPopup" class="mainPopup">
+                    <img onclick="abrirPopUp()" id="botaoFechar" class="fecharButton" src="../assets/marca-cruzada.png"
+                        alt="" loading="eager">
 
-                    <div id="mainPopup" class="mainPopup">
-                        <img onclick="abrirPopUp()" id="botaoFechar" class="fecharButton"
-                            src="../assets/marca-cruzada.png" alt="" loading="eager">
+                    <!-- SEÇÃO TITULO DO POPUP -->
+                    <div style="min-height: 3em; max-height: 3em;" class="sectionH">
+                        <div class="modeloTitulo">Modelo 10093-S</div>
 
-                        <!-- SEÇÃO TITULO DO POPUP -->
-                        <div style="min-height: 3em; max-height: 3em;" class="sectionH">
-                            <div class="modeloTitulo">Modelo 10093-S</div>
+                    </div>
 
+                    <!-- SEÇÃO DO MEIO DO POPUP -->
+                    <div style="width: 100%;" class="sectionV">
+                        <div style="height: 10%; min-height:30px" class="sectionH">
+                            <div class="modeloSubtitulo">Especificações:</div>
                         </div>
+                        <div class="specsModelo"></div>
+                    </div>
 
-                        <!-- SEÇÃO DO MEIO DO POPUP -->
-                        <div style="width: 100%;" class="sectionV">
-                            <div style="height: 10%; min-height:30px" class="sectionH">
-                                <div class="modeloSubtitulo">Especificações:</div>
-                            </div>
-                            <div class="specsModelo"></div>
-                        </div>
+                    <!-- SEÇÃO DO MEIO DO POPUP -->
+                    <div style="width: 100%;" class="sectionV graficoHist">
+
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+            <!-- <body onload="tamanhoBarra()
+"> -->
+            <div id="tela" class="container">
+                <div class="child">
+
+
+                    <div class="tituloContainer">Alertas por modelo</div>
+                    <div class="resumoContainer"><i>Visualize os modelos e a quantidade de alertas emitidos por
+                            um período de tempo.</i></div>
+                    <div class="subtituloContainer">
+                        <div id="titulo_select"><b>Selecione a filial</b></div>
+                        <select id="select_filial" class="selectBox">
+                            <option value="1" selected>Filial 1</option>
+                            <option value="2">Filial 2</option>
+                        </select>
 
 
 
 
                     </div>
+                    <div id="alertas_kpi_titulo"><b>Quantidade de alertas por modelo</b>
+                        <div class="legendaKPI">
+                            <div class="box">
+                                <div style="background-color: #ff8ca5;" class="ball"></div>
+                                <span>CPU</span>
+                            </div>
+
+                            <div class="box">
+                                <div style="background-color: #69d7ff;" class="ball"></div>
+                                <span>RAM</span>
+                            </div>
+
+                            <div class="box">
+                                <div style="background-color: #e9a276;" class="ball"></div>
+                                <span>Disco</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="main">
+                        <div class="section1">
+
+                            <div class="gridTitulo">
+                                <span>Modelo</span>
+                                <span>Alertas</span>
+                                <span>Qtd.</span>
+                                <span></span>
+                            </div>
+
+                            <div class="containerLista">
 
 
-                </div>
-                <!-- <body onload="tamanhoBarra()
-"> -->
-                <div class="main d-flex justify-content-center align-items-center" style="padding: 10px;">
-                    <div id="tela"
-                        class="container">
-                        <div class="child">
-
-
-                            <div class="tituloContainer">Alertas por modelo</div>
-                            <div class="resumoContainer"><i>Visualize os modelos e a quantidade de alertas emitidos por um período de tempo.</i></div>
-                            <div class="subtituloContainer">
-                                <div id="titulo_select"><b>Selecione a filial</b></div>
-                                <select id="select_filial" class="selectBox">
-                                    <option value="1" selected>Filial 1</option>
-                                    <option value="2">Filial 2</option>
-                                </select>
-
-                                <div class="KPI">
-                                    <p class="">KPI AQUI!!</p> 
+                                <div class="linha">
+                                    <span><b>a</b></span>
+                                    <span class="barraAlertas"></span>
+                                    <span><b>c</b></span>
+                                    <span style="cursor:pointer;" class="botaoPop"><b><u>Expandir</u></b></span>
                                 </div>
+
 
 
                             </div>
-                            <div id="alertas_kpi_titulo"><b>Quantidade de alertas por modelo</b>
-                                <div class="kpiModelos">
-                                    <div class="legendaKPI">Legenda de alertas:</div>
-                                    <div class="legendaKPI">
-                                        <div class="bolinhaKPI"></div>
-                                        CPU
-                                        <div class="bolinhaKPI"></div>
-                                        RAM
-                                        <div class="bolinhaKPI"></div>
-                                        DISCO
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="section1">
-                                <div class="gridTitulo">
-                                    <span>Modelo</span>
-                                    <span>Alertas</span>
-                                    <span>Qtd.</span>
-                                    <span></span>
-                                </div>
-
-                                <div class="containerLista">
-
-
-                                    <div class="linha">
-                                        <span><b>a</b></span>
-                                        <span class="barraAlertas"></span>
-                                        <span><b>c</b></span>
-                                        <span><b><u>Expandir</u></b></span>
-                                    </div>
-
-
-                                </div>
-                            </div>
+                        </div>
+                        <div class="KPI">
+                            <p class="">KPI AQUI!!</p>
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 </body>
@@ -479,7 +491,7 @@
                     // seção "Quantidade"
                     const quantidade = document.createElement("span");
                     quantidade.className = "itemLista";
-                    
+
                     quantidade.textContent = item.quantidade;
                     linha.appendChild(quantidade)
 
@@ -487,6 +499,7 @@
                     const botaoPop = document.createElement("span");
                     botaoPop.className = "item botaoDiv";
                     botaoPop.innerHTML = `<u><b>Expandir</b></u>`;
+                    botaoPop.style.cursor = "pointer"
 
                     let componentesPorMaquina = {};
 
@@ -512,9 +525,7 @@
                     console.log("Componentes do pop up1:")
                     console.log(componentesPorMaquina)
 
-                    // USANDO O ID DO OBJETO PARA O EVENT LISTENER
                     botaoPop.addEventListener("click", () => {
-                        // Agora você pode usar item.popupId para identificar qual objeto corresponde ao botão
                         console.log("Botão clicado - ID do objeto:", item.popupId);
                         console.log("Objeto completo:", item);
 
@@ -524,7 +535,7 @@
                             item.criticoCount,
                             item.altoCount,
                             item.baixoCount,
-                            item.popupId // Usando o ID do objeto
+                            item.popupId
                         );
                     });
 
@@ -547,7 +558,7 @@
         console.log("popupId:", popupId);
 
 
-        const popup = document.querySelector(".popUp").style.backgroundColor;
+        const popup = document.querySelector(".popUp");
         const titulo = popup.querySelector(".modeloTitulo");
         const subtitulo = popup.querySelector(".modeloSubtitulo");
         const specs = popup.querySelector(".specsModelo");
