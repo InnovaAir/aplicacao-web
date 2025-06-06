@@ -346,7 +346,7 @@ function atualizarGraficoDesempenho(maquinas) {
   const cores = desempenhoPorTerminal.map(d => {
     if (d.desempenho <= 10) return '#8537C8';
     if (d.desempenho <= 35) return '#DE2828';
-    if (d.desempenho <= 65) return '#DEC828';
+    if (d.desempenho <= 65) return '#f9e01f';
     return '#00A100';
   });
 
