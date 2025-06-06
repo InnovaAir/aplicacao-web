@@ -36,6 +36,19 @@ function plotarKpi(req, res){
         res.status(500).json({ error: "Erro ao obter dados de alertas" });
     });
 }
+
+function trocarKpi(req, res){
+    fkCliente = req.body.fkClienteServer;
+    idFilial =req.body.fkFilialServer;
+    marcolinoModel.trocarKpi(fkCliente,idFilial)
+    .then((resultado) => {
+        res.json(resultado);
+    })
+    .catch((erro) => {
+        console.log("Erro ao obter dados de alertas:", erro);
+        res.status(500).json({ error: "Erro ao obter dados de alertas" });
+    });
+}
     
 function trocarGraficoMensal(req, res){
     fkCliente = req.body.fkClienteServer;
@@ -54,5 +67,6 @@ module.exports = {
     plotarFilial,
     plotarMensal,
     plotarKpi,
+    trocarKpi,
     trocarGraficoMensal
 }

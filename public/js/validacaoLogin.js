@@ -104,6 +104,7 @@ function entrar(email, senha){
             resposta.json().then(json => {
                 console.log(json);
                 console.log(JSON.stringify(json));
+                sessionStorage.nome = json.nome;
                 sessionStorage.idUsuario = json.idUsuario;
                 sessionStorage.idFilial = json.idFilial;
                 sessionStorage.fkCliente = json.fkCliente;
@@ -112,7 +113,7 @@ function entrar(email, senha){
                     let timerInterval;
                     Swal.fire({
                       icon: "success",
-                      title: "Login efetuado com sucesso!",
+                      title: `Login efetuado com sucesso! Olá ${json.nome}`,
                       html: "Redirecionando... <b></b>",
                       timer: 1000,
                       timerProgressBar: true,
@@ -139,7 +140,7 @@ function entrar(email, senha){
                     let timerInterval;
                     Swal.fire({
                       icon: "success",
-                      title: "Login efetuado com sucesso!",
+                      title: `Login efetuado com sucesso! Olá ${json.nome}`,
                       html: "Redirecionando... <b></b>",
                       timer: 1000,
                       timerProgressBar: true,
@@ -166,7 +167,7 @@ function entrar(email, senha){
                     let timerInterval;
                     Swal.fire({
                       icon: "success",
-                      title: "Login efetuado com sucesso!",
+                      title: `Login efetuado com sucesso! Olá ${json.nome}`,
                       html: "Redirecionando... <b></b>",
                       timer: 1000,
                       timerProgressBar: true,
@@ -193,7 +194,7 @@ function entrar(email, senha){
                     let timerInterval;
                     Swal.fire({
                       icon: "success",
-                      title: "Login efetuado com sucesso!",
+                      title: `Login efetuado com sucesso! Olá ${json.nome}`,
                       html: "Redirecionando... <b></b>",
                       timer: 1000,
                       timerProgressBar: true,

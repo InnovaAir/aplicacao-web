@@ -15,8 +15,8 @@
 </head>
 <body onload="gerarGraficos(); mostrar(); iniciarAtualizacaoAutomatica();" onbeforeunload="pararAtualizacaoAutomatica();">
   <div class="container-fluid">
-  <div class="row">
-  <div class="col-md-1 sidebar d-flex flex-column align-items-center">  
+  <div class="row justify-content-around">
+  <div class="sidebar d-flex flex-column align-items-center" style="width: 5vw;">
     <div id="sidebar">
       <div class="logo d-flex justify-content-between align-items-center w-100 px-2">
         <img src="../assets/InnovaairWhite.png" alt="Logo" class="img-fluid mx-auto d-block" />
@@ -33,16 +33,22 @@
     </div>
   </div>
 
-  <div class="col-md-11 p-2">
-        <h2 class="text-center fw-bold">
-          Total de alertas por componente
-          <br>
-          <h2 class="text-center fw-bold">(últimos 6 meses)</h2>
-        </h2>
+  <div style="width: 90vw;" class="conteudo">
+    <div class="row justify-content-between" style="height: 10vh;" id="titulo">
+      <span class="col-md-10">
+        <h1 class="text-start fw-bold" style="color: #5271FF;" id="titulo_geral">Total de alertas gerais por componente</h1>
+        <h4 class="text-start fw-bold">
+          *(Alertas capturados nos últimos 6 meses)
+        </h4>
+      </span>
+      <button type="button" class="col-md-2 button" onclick="plotarMensal(),plotarkpi()">
+        * Clique aqui para voltar aos gráficos gerais
+      </button>
+    </div>
 
-        <div class="row justify-content-center">
-          <div class="col-12 col-lg-11">
-            <div class="row text-center my-2 no-gap-row" id="div_kpis">
+        <div class="row justify-content-evenly" style="width: 100%;">
+          <div class="col-12 col-lg-12">
+            <div class="row text-center my-2" id="div_kpis">
               <!-- <div class="col-sm-6 col-md-3">
                 <div class="card-alert">
                   <h5>Alertas de CPU</h5>
@@ -71,31 +77,40 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-7">
-            <h2 class="text-center fw-bold" id="div_mensal">Alertas Mensais (Últimos 6 meses)</h2>
-            <h4 class="text-center fw-bold">Clique na legenda para selecionar o tipo de componente</h4>
+        <div class="row justify-content-around" style="height: 75vh;" id="grafico">
+          <div class="col-md-7" style="height: 65vh;" id="canvas">
+            <div><br></div>
+            <h2 class="text-start fw-bold" style="color: #5271FF;" id="div_mensal">Alertas Mensais (Últimos 6 meses)</h2>
+            <div class="row">
+              <h5 class="text-start fw-bold col-md-9">*Clique na legenda do grafico para selecionar um tipo de componente especifico.</h5>
+            </div>
             <div class="d-flex justify-content-between align-items-center mb-2">
-              <span class="text-start" id="div_attMensal">
-              </span>
-              <button type="button" class="btn btn-secondary" onclick="plotarMensal()">
-                Voltar para gráfico geral
-              </button>
             </div>
-            <div class="border rounded p-2" style="height: 59vh;">
-              <canvas id="chartMensal" class="w-100 h-100"></canvas>
+            <div class="canvas">
+              <canvas id="chartMensal"></canvas>
             </div>
+            <span class="text-start" id="div_attMensal">
+            </span>
+            <div><br></div>
+            <div><br></div>
           </div>
-          <div class="col-md-5">
-            <h2 class="text-center fw-bold">Alertas por filiais (últimos 6 meses)</h2>
-            <h5 class="text-center fw-bold">Clique na barra para selecionar os componentes de uma filial</h5>
+          <div style="width: 32vw;height: 65vh;" id="canvas">
+            <div><br></div>
+            <h2 class="text-start fw-bold" style="color: #5271FF;">Alertas por filiais (últimos 6 meses)</h2>
+            <div class="row">
+              <h5 class="text-start fw-bold col-md-9">*Para visualizar a situação dos componentes de uma filial especifica, clique na barra correspondente no grafico abaixo.</h5>
+              <!-- <br> -->
+            </div>
             <div class="d-flex justify-content-between align-items-center mb-2">
-              <span class="text-start" id="div_attFilial">
-              </span>
             </div>
-            <div class="border rounded p-2" style="height: 59vh;">
-              <canvas id="chartFiliais" class="w-100 h-100"></canvas>
+            <div class="canvas">
+              <canvas id="chartFiliais"></canvas>
             </div>
+            <span class="text-start" id="div_attFilial">
+            </span>
+            <div><br></div>
+            <div><br></div>
+          </div>
           </div>
         </div>
       </div>

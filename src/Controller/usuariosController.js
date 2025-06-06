@@ -114,6 +114,7 @@ function entrar(req, res) {
                             // e retornando mensagem de erro caso não esteja.
                             console.log(resultadoAutenticar);
                             res.json({
+                                nome: resultadoAutenticar[0].nome,
                                 idUsuario: resultadoAutenticar[0].idUsuario,
                                 idFilial: resultadoAutenticar[0].idFilial,
                                 fkCliente: resultadoAutenticar[0].fkCliente,

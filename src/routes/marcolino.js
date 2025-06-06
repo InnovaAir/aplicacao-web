@@ -15,6 +15,10 @@ router.post("/plotarKpi", function(req, res) {
     marcolinoController.plotarKpi(req, res)
 });
 
+router.post("/trocarKpi", function(req, res) {
+    marcolinoController.trocarKpi(req, res)
+});
+
 router.post("/trocarGraficoMensal", function(req, res) {
     marcolinoController.trocarGraficoMensal(req, res)
 });

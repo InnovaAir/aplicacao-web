@@ -9,91 +9,91 @@ sessionStorage.setItem("filial", 0);
 function gerarGraficos(){
 Chart.register(ChartDataLabels);
 
-const ctxMensal = document.getElementById('chartMensal');
-chartMensal = new Chart(ctxMensal, {
-    type: 'bar',
-    data: {
-        labels: [
-            // 'Dezembro', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'
-        ],
-        datasets: [
-            {
-                // label: 'CPU',
-                backgroundColor: '#2e8b57',
-                // data: [5, 3, 4, 7, 9, 5],
-                hidden: false },
-            {
-                // label: 'RAM',
-                backgroundColor: '#5f9ea0',
-                // data: [1, 1, 4, 1, 2, 2],
-                hidden: true },
-            {
-                // label: 'Disco',
-                backgroundColor: '#f4c542',
-                // data: [2, 4, 4, 4, 3, 2],
-                hidden: true },
-            {
-                // label: 'REDE',
-                backgroundColor: '#8a2be2',
-                // data: [4, 4, 5, 2, 4, 1],
-                hidden: true }
-        ]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                position: 'top',
-                labels:{
-                    color: '#000000',
-                    font:{
-                        weight: 'bold' //negrito
+    const ctxMensal = document.getElementById('chartMensal');
+    chartMensal = new Chart(ctxMensal, {
+        type: 'bar',
+        data: {
+            labels: [
+                // 'Dezembro', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'
+            ],
+            datasets: [
+                {
+                    // label: 'CPU',
+                    // backgroundColor: '#2e8b57',
+                    // data: [5, 3, 4, 7, 9, 5],
+                    hidden: false },
+                {
+                    // label: 'RAM',
+                    // backgroundColor: '#5f9ea0',
+                    // data: [1, 1, 4, 1, 2, 2],
+                    hidden: true },
+                {
+                    // label: 'Disco',
+                    // backgroundColor: '#f4c542',
+                    // data: [2, 4, 4, 4, 3, 2],
+                    hidden: true },
+                {
+                    // label: 'REDE',
+                    // backgroundColor: '#8a2be2',
+                    // data: [4, 4, 5, 2, 4, 1],
+                    hidden: true }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels:{
+                        color: '#000000',
+                        font:{
+                            weight: 'bold' //negrito
+                        }
                     }
-                }
-            },
-            datalabels: {
-                color: '#000000',
-                font: {
-                    weight: 'bold',
-                    size: 17
                 },
-                anchor: 'end', // Ancorar na extremidade da barra (topo para barras verticais)
-                align: 'top',  // Alinhar a PARTE DE BAIXO do texto com o ponto de ancoragem.
-                                  // Isso coloca o texto DENTRO da barra, logo abaixo da borda superior.
-                offset: 4,      // pequeno deslocamento para baixo.
+                datalabels: {
+                    color: '#000000',
+                    font: {
+                        weight: 'bold',
+                        size: 17
+                    },
+                    anchor: 'end', // Ancorar na extremidade da barra (topo para barras verticais)
+                    align: 'top',  // Alinhar a PARTE DE BAIXO do texto com o ponto de ancoragem.
+                                    // Isso coloca o texto DENTRO da barra, logo abaixo da borda superior.
+                    offset: 4,      // pequeno deslocamento para baixo.
 
-            }
-        },
-    scales: { 
-        x: {
-            title: {
-                display: true,
-                text: 'Meses',
-                color: '#000000', // cor do título
-                font: {
-                    size: 18,       // tamanho da fonte
-                    weight: 'bold', // negrito (opcional)
-                }
-                }
-        },
-        y: {
-            beginAtZero: true,
-            title: {
-                display: true,
-                text: 'Alertas',
-                color: '#000000', // cor do título
-                font: {
-                    size: 18,       // tamanho da fonte
-                    weight: 'bold', // negrito (opcional)
                 }
             },
-            suggestedMax: 120
+        scales: { 
+            x: {
+                title: {
+                    display: true,
+                    text: 'Meses',
+                    color: '#000000', // cor do título
+                    font: {
+                        size: 18,       // tamanho da fonte
+                        weight: 'bold', // negrito (opcional)
+                    }
+                    }
+            },
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Alertas',
+                    color: '#000000', // cor do título
+                    font: {
+                        size: 18,       // tamanho da fonte
+                        weight: 'bold', // negrito (opcional)
+                    }
+                },
+                suggestedMax: 500
+            }
         }
-    }
-    },
-    plugins: [ChartDataLabels]
-});
+        },
+        plugins: [ChartDataLabels]
+    });
 
 const ctxFiliais = document.getElementById('chartFiliais');
 chartFiliais = new Chart(ctxFiliais, {
@@ -104,7 +104,15 @@ chartFiliais = new Chart(ctxFiliais, {
         ],
         datasets: [{
             backgroundColor: [
-                // 'green', '#e6e604', 'red', 'red', '#e6e604', '#e6e604', 'red', '#e6e604'
+  '#17A2B8ab', // Coral claro
+  '#89023Eab', // Lavanda média
+  '#DB5375ab', // Lilás rosado claro
+  '#F2C078ab', // Pêssego claro
+//   '#F8F9FA', // Lilás suave
+
+//   '#FFB3BA', // Coral claro
+//   '#D5AAFF', // Lavanda média
+//   '#FFDAC1', // Pêssego claro
             ],
             data: [
                 // 15, 35, 98, 52, 25, 38, 71, 25
@@ -121,20 +129,23 @@ chartFiliais = new Chart(ctxFiliais, {
         color: '#000000',
         plugins: {
             datalabels: {
-                color: '#ffffff',
+                color: '#000000',
                 font: { weight: 'bold', size: 20 }
             },
+            // legend: {
+            //     position: 'top',
+            //     labels: {
+            //         generateLabels: function(chart) {
+            //             return [
+            //                 { text: 'OK (0 - 20)', fillStyle: 'green', strokeStyle: '#000', lineWidth: 1 },
+            //                 { text: 'Atenção (21 - 50)', fillStyle: '#e6e604', strokeStyle: '#000', lineWidth: 1 },
+            //                 { text: 'Crítico (51 - ~)', fillStyle: 'red', strokeStyle: '#000', lineWidth: 1 }
+            //             ];
+            //         }
+            //     }
+            // }
             legend: {
-                position: 'top',
-                labels: {
-                    generateLabels: function(chart) {
-                        return [
-                            { text: 'OK (0 - 20)', fillStyle: 'green', strokeStyle: '#000', lineWidth: 1 },
-                            { text: 'Atenção (21 - 50)', fillStyle: '#e6e604', strokeStyle: '#000', lineWidth: 1 },
-                            { text: 'Crítico (51 - ~)', fillStyle: 'red', strokeStyle: '#000', lineWidth: 1 }
-                        ];
-                    }
-                }
+                display: false
             }
         },
         scales: { 
@@ -244,8 +255,10 @@ function trocarMensal(evt, elements) {
             chartMensal.update('none');
 
             for(var i = 0; i < chartFiliais.data.labels.length; i++){
-                if (chartFiliais.data.ids[i] == ids) {    
+                if (chartFiliais.data.ids[i] == ids) {
+
                     div_mensal.innerHTML = `Alertas Mensais <b> ${chartFiliais.data.labels[i]} </b> (Últimos 6 meses)`;
+                    titulo_geral.innerHTML = `Total de alertas por componente <b>${chartFiliais.data.labels[i]}</b>`;
                     break;
                 }
             }
@@ -257,12 +270,78 @@ function trocarMensal(evt, elements) {
             }
             chartMensal.update();
 
+            trocarKpi(clientefk,ids);
         }).catch((erro) => {
                 console.error("Erro no retorno do mensal:", erro);
         });
     }else{
        console.log("erro ao trocar grafico mensal") 
     }
+}
+
+function trocarKpi(clientefk,id){
+    var clientefk = sessionStorage.fkCliente;
+    fetch("/marcolino/trocarKpi", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            fkClienteServer: clientefk,
+            fkFilialServer : id,
+        })
+    }).then((resposta) => resposta.json())
+    .then((dados) => {
+        console.log("passei pelo then do fatch de trocar KPI's!");
+        console.log(dados);
+
+        var mensagem = "";
+        var label = 0;
+        var CPU = false;
+        var RAM = false;
+        var Disco = false;
+        var Rede = false;
+
+        for(var i = 0; i < dados.length; i++){
+            var alertas = dados[i];
+            var componente = alertas.componente;
+            var qtdAlertas = alertas.total_alertas;
+            var cor = "";
+            var borda = "";
+
+            if(componente == "Processador"){
+                componente = "CPU"
+                CPU = true;
+            }else if(componente == "Armazenamento"){
+                componente = "Disco"
+                Disco = true;
+            }else if(componente == "Rede"){
+                Rede = true;
+            }else if(componente == "RAM"){
+                RAM = true;
+            }
+
+            if(i === 0){
+                cor = ` style="background-color: #DE2828 !important;border-radius: 10px !important;`
+            }
+            if(i === 1){
+                cor = ` style="background-color: #DEC828 !important;border-radius: 10px !important;`
+            }
+            mensagem +=`
+                        <div class="col-sm-6 col-md-3">
+                            <div class="card-alert" ${cor} style="border-radius: 10px !important;">
+                                <h3 class="titulo-com-borda">Total - Alertas de ${componente}</h3>
+                                <h1>${qtdAlertas}</h1>
+                            </div>
+                        </div>
+            `;
+            label++;
+        }
+        div_kpis.innerHTML = "";
+        div_kpis.innerHTML = mensagem;
+    }).catch((erro) => {
+            console.error("Erro no retorno das trocas de filiais:", erro);
+    });
 }
 
 function mostrar(){
@@ -298,20 +377,25 @@ function plotarkpi(){
             if(componente == "Processador"){
                 componente = "CPU"
             }
+            if(componente == "Armazenamento"){
+                componente = "Disco"
+            }
 
             if(i === 0){
-                cor = ` style="background-color: red !important;"`
+                cor = ` style="background-color: #DE2828 !important;border-radius: 10px !important;"`
+            }
+            if(i === 1){
+                cor = ` style="background-color: #DEC828 !important;border-radius: 10px !important;"`
             }
             mensagem +=`
                         <div class="col-sm-6 col-md-3">
-                            <div class="card-alert"${cor}>
-                                <h5>Alertas de ${componente}</h5>
-                                <h2>${qtdAlertas}</h2>
+                            <div class="card-alert"${cor} style="border-radius: 10px !important;">
+                                <h3>Total - Alertas de ${componente}</h3>
+                                <h1>${qtdAlertas}</h1>
                             </div>
                         </div>
             `;
         }
-
         div_kpis.innerHTML = mensagem;
     }).catch((erro) => {
             console.error("Erro no retorno das filiais:", erro);
@@ -366,6 +450,12 @@ function plotarMensal(){
 
         // for para adicionar os componentes e os valores deles no mes atual
         for (var j = 0; j < chartMensal.data.datasets.length; j++) {
+            if(alerta.Componente == "Processador"){
+                alerta.Componente = "CPU"
+            }
+            if(alerta.Componente == "Armazenamento"){
+                alerta.Componente = "Disco"
+            }
             if (chartMensal.data.datasets[j].label === undefined) {
                 chartMensal.data.datasets[j].label = alerta.Componente;
                 chartMensal.data.datasets[j].data.push(alerta.total_alertas);
@@ -374,6 +464,18 @@ function plotarMensal(){
                 chartMensal.data.datasets[j].data.push(alerta.total_alertas);
                 break;
             }
+        }
+        // definindo cores das barras
+    }
+    for(var i = 0;i < chartMensal.data.datasets.length ;i++){
+        if(chartMensal.data.datasets[i].label == "CPU"){
+            chartMensal.data.datasets[i].backgroundColor = '#69D7FF';
+        }else if(chartMensal.data.datasets[i].label == "Disco"){
+            chartMensal.data.datasets[i].backgroundColor = '#E9A276';
+        }else if(chartMensal.data.datasets[i].label == "RAM"){
+            chartMensal.data.datasets[i].backgroundColor = '#FF8CA5';
+        }else if(chartMensal.data.datasets[i].label == "Rede"){
+            chartMensal.data.datasets[i].backgroundColor = '#D794FE';
         }
     }
 
@@ -387,6 +489,7 @@ function plotarMensal(){
     }
     chartMensal.update();
     div_mensal.innerHTML = `Alertas Mensais (Últimos 6 meses)`;
+    titulo_geral.innerHTML = `Total de alertas gerais por componente`;
     console.log(ano);
     console.log(mes);
     console.log(componente);
@@ -433,19 +536,19 @@ function plotarFilial(){
 
             ids.push(filial.idFilial)
             alertas.push(filial.total_alertas);
-            if(filial.total_alertas >=0 && filial.total_alertas <= 20){
-                cores.push("green");
-            }else if(filial.total_alertas > 20 && filial.total_alertas <= 50){
-                cores.push("#e6e604");
-            }else if(filial.total_alertas > 50){
-                cores.push("red");
-            }
+            // if(filial.total_alertas >=0 && filial.total_alertas <= 1000){
+            //     cores.push("green");
+            // }else if(filial.total_alertas > 1000 && filial.total_alertas <= 2000){
+            //     cores.push("#e6e604");
+            // }else if(filial.total_alertas > 3000){
+            //     cores.push("red");
+            // }
         }
 
         chartFiliais.data.ids = ids; 
         chartFiliais.data.labels = filiais; 
         chartFiliais.data.datasets[0].data = alertas;
-        chartFiliais.data.datasets[0].backgroundColor = cores;
+        // chartFiliais.data.datasets[0].backgroundColor = cores;
         chartFiliais.update();
     }).catch((erro) => {
             console.error("Erro no retorno das filiais:", erro);
@@ -466,10 +569,10 @@ function iniciarAtualizacaoAutomatica() {
 
     atualizar = setInterval(() => {
         console.log("Atualizando os gráficos automaticamente...");
-        if (typeof plotarkpi === 'function') plotarkpi();
-
+        
         if (!garficoFilial) { // Se garficoFilial for false, chama plotarMensal
             if (typeof plotarMensal === 'function') plotarMensal();
+            if (typeof plotarkpi === 'function') plotarkpi();
         } else {
             // Se garficoFilial for true, tenta chamar trocarMensal para a filial da sessão
             const idFilialDaSessao = sessionStorage.filial;
@@ -523,8 +626,8 @@ function iniciarAtualizacaoAutomatica() {
         const minutos = agora.getMinutes().toString().padStart(2, '0');
         const segundos = agora.getSeconds().toString().padStart(2, '0');
 
-        div_attFilial.innerHTML = `<b>Atualizado as: ${horas}:${minutos}:${segundos}</b>`;
-        div_attMensal.innerHTML = `<b>Atualizado as: ${horas}:${minutos}:${segundos}</b>`;
+        div_attFilial.innerHTML = `<b>Atualizado em: ${horas}:${minutos}:${segundos}</b>`;
+        div_attMensal.innerHTML = `<b>Atualizado em: ${horas}:${minutos}:${segundos}</b>`;
     }, 4000);
 }
 

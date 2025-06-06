@@ -1,7 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 body, html {
+    height: 100vh !important;
+    width: 100vw !important;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    font-family: "Inter",Arial, Helvetica, sans-serif !important;
+
+    h1{
+        font-size: 2vw !important;
+    }
+    h2{
+        font-size: 1.6vw !important;
+    }
+    h3{
+        font-size: 1.5vw !important;
+    }
+    h4{
+        font-size: 1.4vw !important;
+    }
+    /* h5{
+        font-size: 1.7vw !important;
+    } */
+    #canvas{
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
+        border-radius: 10px;
+        height: 70vh !important;
+    }
+    .chartFiliais, .chartMensal, canvas{
+        height: 48vh !important;
+        width: 95% !important;
+    }
+    .button {
+        background-color: #5271FF !important;
+        color: white !important;
+        font-weight: bold !important;
+        font-size: 1vw !important;
+        padding: 1vh 1.4vw !important;
+        border: none !important;
+        border-radius: 10px !important;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2) !important;
+        cursor: pointer !important;
+        text-align: center !important;
+        line-height: 1.3 !important;
+        height: 9.5vh !important;
+        width: 24vh !important;
+    }
+
+    .button:hover {
+        transform: scale(1.02);
+        transition: 0.3s ease;
+        background-color: #8537C8 !important;
+    }
+
+    @media (max-width: 1340px) {
+        .button{
+            height: 8vh !important;
+            width: 20vh !important;
+        }
+    }
+    @media (max-width: 993px) {
+        .button{
+            height: 8vh !important;
+            width: 17vh !important;
+        }
+        canvas{
+            height: 43vh !important;
+            width: 95% !important;
+        }
+    }
+    @media (max-width: 800px) {
+        .button{
+            height: 6vh !important;
+            width: 14vh !important;
+        }
+        #titulo{
+            height: 8vh !important;
+        }
+        .conteudo{
+            width: 85vw !important;
+        }
+        canvas{
+            height: 40vh !important;
+            width: 95% !important;
+        }
+    }
+    @media (max-width: 775px) {
+        .conteudo{
+            width: 85vw !important;
+        }
+        canvas{
+            height: 40vh !important;
+            width: 95% !important;
+        }
+    }
+    @media (max-width: 768px) {        
+        #canvas{
+            height: 55vh !important;
+            width: 95% !important;
+        }
+        #titulo{
+            height: 12vh !important;
+        }
+    }
+    @media (max-width: 663px) {
+        .button{
+            height: 6vh !important;
+            width: 14vh !important;
+        }
+    }
+    @media (max-width: 575px) {
+        .button{
+            height: 6vh !important;
+            width: 12vh !important;
+        }
+        .conteudo{
+            width: 83vw !important;
+        }
+    }
 }
 body {
     background-color: #fff;
@@ -11,8 +127,12 @@ body {
     color: white;
     text-align: center;
     padding: 1rem;
-    border: 2px solid #ffffff;
-    background-color: #7A92FF;
+    /* border: 2px solid #ffffff; */
+    background-color: #5271FF;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
+}
+.card-alert h1{
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.45);
 }
 .no-gap-row {
     margin-right: 0;
@@ -22,3 +142,7 @@ body {
     padding-right: 0;
     padding-left: 0;
 }
+
+/* #grafico{
+    background-color: ;
+} */
