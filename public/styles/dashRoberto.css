@@ -137,7 +137,7 @@ h3{
 }
 
 .grafico_alinhado {
-    width: 60%;
+    width: 50%;
     align-items: start;
     justify-content: start;
     box-shadow: var(--box-shadow);
