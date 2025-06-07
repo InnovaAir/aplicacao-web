@@ -34,10 +34,10 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/usuarios", usuarios);
 app.use("/cadastros", cadastros);
-// app.use("/dashboards", dashboards);
-// app.use("/dashDuduRoutes", dashDudu);
-// app.use("/dashLeticia", dashLeticia);
-// app.use("/dados", feitosaR);
+app.use("/dashboards", dashboards);
+app.use("/dashDuduRoutes", dashDudu);
+app.use("/dashLeticia", dashLeticia);
+app.use("/dados", feitosaR);
 app.use("/marcolino", marcolino);
 app.use("/models", modeloRoute);
 

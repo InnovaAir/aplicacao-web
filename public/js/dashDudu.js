@@ -381,19 +381,31 @@ function atualizarGraficoDesempenho(maquinas) {
       categories: labels,
       max: 100,
       labels: {
-        formatter: val => `${val}%`
+        formatter: val => `${val}%`,
+        style: {
+          fontSize: '16px',
+          fontWeight: 'bold'
+        }
       },
       title: {
-        text: 'Desempenho'
+        text: 'Desempenho',
+        style: {
+          fontSize : '20px',
+          fontWeight: 'bold'
+        }
       }
     },
     yaxis: {
       title: {
-        text: 'Aeroportos'
+        text: 'Aeroportos',
+        style: {
+          fontSize : '20px',
+          fontWeight: 'bold'
+        }
       },
       labels: {
     style: {
-      fontSize: '16px', 
+      fontSize: '20px', 
       fontWeight: 'bold'
     }
   }
