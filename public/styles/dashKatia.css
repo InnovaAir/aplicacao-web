@@ -70,14 +70,32 @@ body h5 {
     height: fit-content;
     color: white;
     box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     h5 {
         text-overflow: ellipsis;
+    }
+
+    .line {
+        display: none;
+        width: 100%;
+        height: 15px;
+        background-color: white;
     }
 }
 
 .border-kpi {
     color: #000;
+
+    .line {
+        display: none;
+        width: 100%;
+        height: 15px;
+        background-color: black;
+    }
+
 }
 
 .red {
@@ -451,6 +469,9 @@ body {
             color: black;
             width: fit-content;
             box-shadow: var(--box-shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .box-chart {

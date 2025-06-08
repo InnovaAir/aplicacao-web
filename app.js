@@ -24,6 +24,7 @@ var modeloRoute = require("./src/routes/modelo")
 var dashboards = require("./src/routes/dashboards");
 var dashDudu = require("./src/routes/dashDuduRoutes");
 var dashLeticia = require("./src/routes/routesLeticia");
+var jiraRouter = require("./src/routes/jira");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -40,6 +41,7 @@ app.use("/dashLeticia", dashLeticia);
 app.use("/dados", feitosaR);
 app.use("/marcolino", marcolino);
 app.use("/models", modeloRoute);
+app.use("/jira", jiraRouter);
 
 
 app.listen(PORTA_APP, function () {

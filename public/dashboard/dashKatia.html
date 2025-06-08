@@ -60,31 +60,37 @@
                     <div class="indicators">
                         <div class="border-kpi kpi">
                             <h4>Endereço com mais alertas</h4>
+                            <div class="line"></div>
                             <h5 id="indicator_address">_</h5>
                         </div>
 
                         <div class="border-kpi kpi">
                             <h4>Alertas em aberto</h4>
-                            <h5 id="">_</h5>
+                            <div class="line"></div>
+                            <h5 id="indicator_chamados_abertos">_</h5>
                         </div>
 
                         <div class="kpi red">
                             <h4>Totens em alerta</h4>
+                            <div class="line"></div>
                             <h5 id="indicator_alert">_</h5>
                         </div>
 
                         <div class="kpi green">
                             <h4>Totens em atividade</h4>
+                            <div class="line"></div>
                             <h5 id="indicator_activity">_</h5>
                         </div>
 
                         <div class="kpi grey">
                             <h4>Totens ociosos</h4>
+                            <div class="line"></div>
                             <h5 id="indicator_idle">_</h5>
                         </div>
 
                         <div class="border-kpi kpi">
                             <h4>Totens desligados</h4>
+                            <div class="line"></div>
                             <h5 id="indicator_off">_</h5>
                         </div>
                     </div>
@@ -223,22 +229,22 @@
                             <div class="list2">
                                 <div class="kpi">
                                     <p>ENDEREÇO MAC</p>
-                                    <h2 id="mac_totem">1</h2>
+                                    <h2 id="mac_totem">_</h2>
                                 </div>
                                 <div class="kpi">
-                                    <p>IP</p>
-                                    <h2 id="ip_totem">1</h2>
+                                    <p>Chamados em aberto</p>
+                                    <h2 id="total_chamados_aberto">_</h2>
                                 </div>
                                 <div class="kpi">
                                     <p>TEMPO DE ATIVIDADE</p>
-                                    <h2 id="tempo_atividade_totem">1</h2>
+                                    <h2 id="tempo_atividade_totem">_</h2>
                                 </div>
                             </div>
-                            <div id="listaLog" data-opened="true" onclick="expandList('listaLog')" class="listExpand box-shadow">
+                            <div id="listaLog" data-opened="true" onclick="expandList('listaLog')"
+                                class="listExpand box-shadow">
                                 <div class="header">
                                     <h2>Log de Processos</h2>
-                                    <img  class="seta-expandir"
-                                        src="../assets/arrow-expand.svg" alt="">
+                                    <img class="seta-expandir" src="../assets/arrow-expand.svg" alt="">
                                 </div>
                                 <div class="line"></div>
                                 <div class="headerContent">
@@ -253,22 +259,23 @@
                                 </div>
 
                             </div>
-                            <div id="listaAlerta" onclick="expandList('listaAlerta')" class="listExpand box-shadow">
+                            <div id="listaChamados" data-opened="true" onclick="expandList('listaChamados')"
+                                class="listExpand box-shadow">
                                 <div class="header">
-                                    <h2>Log de Alertas</h2>
-                                    <img class="seta-expandir"
-                                        src="../assets/arrow-expand.svg" alt="">
+                                    <h2>Chamados em aberto</h2>
+                                    <img class="seta-expandir" src="../assets/arrow-expand.svg" alt="">
                                 </div>
                                 <div class="line"></div>
                                 <div class="headerContent">
+                                    <span>ID</span>
+                                    <span>Data de Criação</span>
                                     <span>Nível</span>
                                     <span>Componente</span>
-                                    <span>Dia</span>
-                                    <span>Horário</span>
-                                    <span>Período</span>
                                 </div>
-                                <div class="content" id="linesAlerta">
+                                <div id="chamados_maquina" class="content">
+
                                 </div>
+
                             </div>
                         </div>
                         <div class="child2 box-shadow">
@@ -313,10 +320,14 @@
 
         await getEnderecosUsuario(sessionStorage.idUsuario);
 
+        plotarListaMaquinas(document.getElementById("select_endereco").value)
+
         setInterval(() => {
             plotarListaMaquinas(document.getElementById("select_endereco").value);
         }, 5000);
     }
+
+
 
     executar();
 

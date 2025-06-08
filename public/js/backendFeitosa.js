@@ -32,7 +32,7 @@ function getEnderecosUsuario(idUsuario) {
                     arrayEnderecos.push(endereco);
                     arrayIDs.push(endereco.idEndereco);
 
-                    html_message += `<option value="${endereco.idEndereco}">${endereco.complemento} - ${endereco.estado}</option>`;
+                    html_message += `<option value="${endereco.idEndereco}/${endereco.complemento}">${endereco.complemento} - ${endereco.estado}</option>`;
                 });
                 enderecos_usuario.push(arrayIDs)
                 enderecos_usuario.push(arrayEnderecos)
@@ -47,6 +47,12 @@ function getEnderecosUsuario(idUsuario) {
 async function plotarListaMaquinas(selection) {
     const nowDatetime = await getDatetime()
     const list_totem = document.getElementById("lines")
+
+    var aeroporto = selection.split("/")[1]
+    selection = selection.split("/")[0]
+
+    console.log(aeroporto)
+    console.log(selection)
 
     var arrayExibicaoTotens = [];
 
@@ -99,7 +105,7 @@ async function plotarListaMaquinas(selection) {
     // -10 -> OCIOSO
 
     // Define a pontuação de Priorização
-    arrayExibicaoTotens.forEach(totem => {
+    arrayExibicaoTotens.forEach(async totem => {
 
         var pontuacao = 0;
         var totalAlertas = 0;
@@ -121,7 +127,7 @@ async function plotarListaMaquinas(selection) {
                 var cpu = totem.dados.cpu[totem.dados.cpu.length - 1];
                 var ram = totem.dados.ram[totem.dados.ram.length - 1];
                 var disco = totem.dados.disco[totem.dados.disco.length - 1];
-                var rede = Math.round((totem.dados.rede[totem.dados.rede.length - 1]) / 1024 / 1024, 1);
+                var rede = (totem.dados.rede[totem.dados.rede.length - 1]) / 1024 / 1024;
 
                 var limiteMinCPU = totem.metricas.cpu.minimo
                 var MedianaCPU = Math.round((totem.metricas.cpu.maximo + totem.metricas.cpu.minimo) / 2, 1)
@@ -146,7 +152,7 @@ async function plotarListaMaquinas(selection) {
                 if (cpu > limiteMaxCPU) { cpu_color = "ball-purple"; pontuacao += 99; isOnAlert = true; totalAlertas++; alertasCPU++ }
                 else if (cpu > MedianaCPU && cpu <= limiteMaxCPU) { pontuacao += 50; isOnAlert = true; cpu_color = "ball-red"; totalAlertas++; alertasCPU++ }
                 else if (cpu > limiteMinCPU && cpu <= MedianaCPU) { pontuacao += 20; cpu_color = "ball-yellow" }
-                else if (cpu <= 10) { pontuacao += -10; isIdle = true }
+                else if (cpu <= 10) { cpu_color = "ball-green"; pontuacao += -10; isIdle = true }
                 else { cpu_color = "ball-green"; pontuacao += 1; }
 
                 if (ram > limiteMaxRAM) { pontuacao += 99; isOnAlert = true; ram_color = "ball-purple"; totalAlertas++; alertasRAM++ }
@@ -187,11 +193,47 @@ async function plotarListaMaquinas(selection) {
                 totem.status = { "idle": isIdle, "alert": isOnAlert, colors: { "cpu": cpu_color, "ram": ram_color, "disco": disco_color, "rede": rede_color } }
             }
         }
+    })
+
+    const response1 = await fetch("/jira/buscarChamados", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            jql: "created >= startOfDay() AND resolution IS EMPTY"
+        })
     });
 
+    const json1 = await response1.json();
+    const chamados = await json1.issues;
+
+    var totalChamadosEnderecos = 0;
+
+
+    if (selection == "All") {
+        chamados.forEach(chamado => {
+            var aeroportoChamado = chamado.fields.summary.split("(")[1].split("/")[0]
+
+            enderecos_usuario[1].forEach(enderecoAtual => {
+                if (aeroportoChamado == enderecoAtual.complemento) {
+                    totalChamadosEnderecos++
+                }
+            })
+        });
+    } else {
+        chamados.forEach(chamado => {
+            var aeroportoChamado = chamado.fields.summary.split("(")[1].split("/")[0]
+
+            if (aeroportoChamado == aeroporto) {
+                totalChamadosEnderecos++;
+            }
+        });
+    }
+
+    document.getElementById("indicator_chamados_abertos").innerHTML = totalChamadosEnderecos;
 
     arrayExibicaoTotens.sort((a, b) => b.prioridade - a.prioridade);
-
 
     var listTotensHtml = "";
 
@@ -201,17 +243,20 @@ async function plotarListaMaquinas(selection) {
         var percent_cpu = totem.dados.cpu[totem.dados.cpu.length - 1];
         var percent_ram = totem.dados.ram[totem.dados.ram.length - 1];
         var percent_disco = totem.dados.disco[totem.dados.disco.length - 1];
-        var download_rede = Math.round(totem.dados.rede[totem.dados.rede.length - 1] / 1024 / 1024, 1);
+        var download_rede = Math.round(totem.dados.rede[totem.dados.rede.length - 1] / 1024, 1);
+
+        var rede_name = "kbps";
+
+        if (download_rede > 1000) {
+            download_rede = Math.ceil(download_rede / 1024);
+            rede_name = "Mb";
+        }
 
         // Se não há dados sendo recbeidos de qualquer componente, a maquina está desligada
         if (percent_cpu == undefined) { percent_cpu = "N/A"; totem.turnedOFF = true }
         if (percent_ram == undefined) { percent_cpu = "N/A"; totem.turnedOFF = true }
         if (percent_disco == undefined) { percent_cpu = "N/A"; totem.turnedOFF = true }
         if (download_rede == undefined) { percent_cpu = "N/A"; totem.turnedOFF = true }
-
-        var datetimeData;
-        var datetimeNow;
-        var diferenc;
 
         if (totem.turnedOFF) {
             totensDesligados++
@@ -241,6 +286,8 @@ async function plotarListaMaquinas(selection) {
             var alert = totem.status.alert
             var idle = totem.status.idle
 
+            totem.redename = rede_name;
+
             var color_cpu = totem.status.colors.cpu
             var color_ram = totem.status.colors.ram
             var color_disco = totem.status.colors.disco
@@ -265,7 +312,7 @@ async function plotarListaMaquinas(selection) {
                             </div>
                             <div class="box">
                                 <div class="${color_rede} ball"></div>
-                                <span>${download_rede}Mb</span>
+                                <span>${download_rede}${rede_name}</span>
                             </div>
                             <button style="cursor: pointer;" data-totem='${JSON.stringify(totem)}' onclick="openDashboardDisplay(this.dataset.totem)">Analisar</button>
                         </div>
@@ -287,7 +334,7 @@ async function plotarListaMaquinas(selection) {
     alertasREDE = 0;
 
     getKPIs()
-}
+};
 
 function getEnderecoMaisAlerta() {
     var indexMaior = -1;
@@ -351,6 +398,8 @@ async function getAlertas(idMaquina) {
     }
 }
 
+
+
 async function getDatetime() {
     const dataHoraAtual = new Date();
     const ano = dataHoraAtual.getFullYear();
@@ -371,6 +420,9 @@ function openDashboardDisplay(totemData) {
     arrayRede = []
     totem.dados.rede.forEach(dado => { dado = Math.floor(dado / 1024 / 1024); arrayRede.push(dado) });
     totem.dados.rede = arrayRede
+
+    console.log(arrayRede)
+    console.log(totem.dados.rede)
 
     /* Graficos de Linha */
     var optionsCPU_line = criarOptionLine(totem.dados.cpu, totem.momento);
@@ -395,24 +447,26 @@ function openDashboardDisplay(totemData) {
     var ultimo_dado_disco = totem.dados.disco[totem.dados.disco.length - 1]
     var ultimo_dado_rede = totem.dados.rede[totem.dados.rede.length - 1]
 
+    console.log(totem.dados.rede[totem.dados.rede.length - 1])
+    console.log(ultimo_dado_rede)
     /* Grafico de Status */
     var optionsCPU_status = atualizarOptionStatus(ultimo_dado_cpu, totem.metricas.cpu, "cpu");
     var optionsRAM_status = atualizarOptionStatus(ultimo_dado_ram, totem.metricas.ram, "ram");
     var optionsDISCO_status = atualizarOptionStatus(ultimo_dado_disco, totem.metricas.disco, "disco");
-    var optionsREDE_status = atualizarOptionStatus(ultimo_dado_rede, totem.metricas.rede, "rede");
+    var optionsREDE_status = atualizarOptionStatus(ultimo_dado_rede, totem.metricas.rede, "rede", totem.redename);
 
     /* Abre a tela */
     document.getElementById("analise_frame").style.display = 'flex';
     document.getElementById("main_frame").style.display = 'none';
 
-    plotarLogsAlertas(totem.idMaquina);
+    console.log(totem.hostname)
+    obterChamadosJira(totem.hostname)
 
     const tempo = getTempoAtividade(totem.tempoAtivo);
 
     /* Exibindo as informações nas KPI's */
     document.getElementById("nome_totem").innerHTML = totem.hostname;
     document.getElementById("tempo_atividade_totem").innerHTML = `${tempo}`;
-    document.getElementById("ip_totem").innerHTML = totem.ip;
     document.getElementById("mac_totem").innerHTML = totem.enderecoMac;
 
     var processHTML = ``;
@@ -438,13 +492,21 @@ function openDashboardDisplay(totemData) {
     document.getElementById("processos_maquina").innerHTML = processHTML;
 };
 
-function atualizarOptionStatus(data, metricas, componente) {
+function atualizarOptionStatus(data, metricas, componente, redename) {
+
+
     var componenteNome = componente.toUpperCase();
 
     var simbol = '%'
 
     if (componente == "rede") {
-        simbol = 'Mb'
+        if (redename != undefined) {
+            if (redename == "Mb") {
+                simbol = 'Mb'
+            } else {
+                simbol = "Kbps"
+            }
+        }
     }
 
     var color = "#33A100"
@@ -462,9 +524,6 @@ function atualizarOptionStatus(data, metricas, componente) {
         }
     }
 
-    console.log(componente)
-
-    console.log(data)
 
     ApexCharts.exec(`chart-${componente}-status`, 'updateOptions', {
         series: [data],
@@ -583,33 +642,6 @@ function criarOptionLine(data, momento, maxY = 100) {
     };
 }
 
-function plotarLogsAlertas(idMaquina) {
-    fetch(`/dados/log_alertas/${idMaquina}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-        .then((answer) => {
-            answer.json().then((json) => {
-                var html_log = ``;
-
-                json.forEach(log => {
-                    html_log += `
-                      <div class="dataLine">
-                        <span>${log.gravidade}</span>
-                        <span>${log.componente}</span>
-                        <span>${log.momento.split("T")[0]}</span>
-                        <span>${log.momento.split("T")[1].split(".")[0]}</span>
-                        <span>${log.periodo}</span>
-                    </div>
-                `
-                });
-
-                document.getElementById("linesAlerta").innerHTML = html_log;
-            })
-        })
-}
 
 function getTempoAtividade(tempoAtivo) {
     var segundos = Math.floor(Math.round(tempoAtivo, 0));
@@ -642,7 +674,6 @@ function atualizarGraficoTempoReal() {
         alertasRAM,
         alertasREDE
     ]);
-    console.log("atualizei o grafico de alertas")
 
     var alertasComponentes = [alertasCPU, alertasDISCO, alertasRAM, alertasREDE]
 
@@ -687,6 +718,48 @@ function expandList(div_ID) {
         elemento.querySelector(".content").style.display = 'flex';
         elemento.dataset.opened = 'true'; // Adiciona o atributo
     }
+}
 
+async function obterChamadosJira(hostname) {
 
+    const response = await fetch("/jira/buscarChamados", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            jql: "created >= startOfDay() AND resolution IS EMPTY"
+        })
+    });
+
+    const json = await response.json();
+    const chamados = await json.issues;
+
+    var chamadosHTML = ``;
+    var totalChamados = 0;
+
+    chamados.forEach(chamado => {
+        var dados = chamado.fields.summary.split(" ");
+        var nivel = dados[0];
+        var componente = dados[1];
+        var totem_name = dados[3];
+        var id = chamado.id;
+        var momento = chamado.fields.created.split(".")[0];
+
+        if (totem_name == hostname) {
+            console.log(totem_name)
+            totalChamados++;
+
+            chamadosHTML += `
+                <div class="dataLine">
+                    <span>${id}</span>
+                    <span>${momento}</span>
+                    <span>${nivel}</span>
+                    <span>${componente}</span>
+                </div>`;
+        }
+    });
+
+    document.getElementById("total_chamados_aberto").innerHTML = totalChamados
+    document.getElementById("chamados_maquina").innerHTML = chamadosHTML
 }
