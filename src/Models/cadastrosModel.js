@@ -42,6 +42,14 @@ function listarMetricas(fkComponente) {
     return database.executar(instrucaoSql);
 }
 
+function listarAeroportos(idUsuario){
+        var instrucaoSql = `
+ SELECT aeroporto from usuario join usuarioFilial on fkUsuario = idUsuario join filial on fkFilial = idFilial join endereco on fkEndereco = idEndereco where idUsuario = ${idUsuario} group by aeroporto;
+    `;
+    console.log(`Listando metricas...`)
+    return database.executar(instrucaoSql);
+}
+
 function listarAlertas(fkMetrica) {
     var instrucaoSql = `
         SELECT * FROM captura_alerta WHERE fkMetrica = ${fkMetrica}
@@ -163,4 +171,5 @@ module.exports = {
     atualizarEndereco,
     adicionarEndereco,
     deletarEndereco,
+    listarAeroportos
 };

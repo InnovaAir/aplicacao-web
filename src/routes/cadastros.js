@@ -9,6 +9,10 @@ router.get("/metricas/listar/filiais/:fk", function (req, res) {
     cadastrosController.listarFiliais(req, res)
 });
 
+router.get("/metricas/listar/aeroportos/:fk", function (req, res) {
+    cadastrosController.listarAeroportos(req, res)
+});
+
 router.get("/metricas/listar/totens/:fk", function (req, res) {
     cadastrosController.listarTotens(req, res)
 })

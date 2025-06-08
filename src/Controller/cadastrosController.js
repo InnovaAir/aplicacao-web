@@ -307,6 +307,19 @@ function deletarEndereco(req, res) {
         });
 }
 
+function listarAeroportos(req, res){
+    var idUsuario = req.params.fk
+
+    cadastrosModel.listarAeroportos(idUsuario)
+        .then((resultado) => {
+            res.json(resultado);
+        })
+        .catch((erro) => {
+            console.log("Erro ao obter aeroportos:", erro);
+            res.status(500).json({ error: "Erro ao obter aeroportos no banco de dados!" });
+        });
+}
+
 module.exports = {
     // Get
     listarFiliais,
@@ -317,6 +330,7 @@ module.exports = {
     verMetrica,
     listarEnderecos,
     verEndereco,
+    listarAeroportos,
     // Post
     adicionarMetrica,
     adicionarEndereco,

@@ -164,6 +164,7 @@ h3{
     background-color: #5271FF;
     border-radius: 5px;
     box-shadow: var(--box-shadow);
+    overflow: hidden;
 }
 
 .titulo_grafico3 {

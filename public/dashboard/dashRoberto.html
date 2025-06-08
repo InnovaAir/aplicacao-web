@@ -43,7 +43,7 @@
     <div class="container_componente">
       <div class="titulo">
         <span id="titulo_01">
-          <b>Análise Geral de Modelos</b>
+          <b>Análise Geral de Modelos de Componentes</b>
         </span>
         <span id="titulo_02">
           <i><b>*Selecione os filtros para a visualização(aeroporto, período e componente)</b></i>
@@ -77,6 +77,13 @@
             <option value="ram">RAM</option>
             <option value="disco">DISCO</option>
             <option value="rede">REDE</option>
+          </select>
+        </div>
+
+        <div class="custom-select">
+          <h3>Selecione o modelo</h3>
+          <select id="select_modelo" onchange="aplicarFiltro()">
+            <option value="" selected>Todos os modelos</option>
           </select>
         </div>
       </div>
@@ -128,7 +135,7 @@
                   Lista de Modelos
                 </span>
                 <span id="titulo_02">
-                  <i>*5 modelos que mais apresentaram alertas segundo os filtros</i>
+                  <i>*Modelos que mais apresentaram alertas segundo os filtros máx 5</i>
                 </span>
               </div>
             </div>
@@ -179,6 +186,7 @@ let filiais = []
 let json_filtrado = []
 var periodo = 4
 var menores = []
+var modelos = new Set()
 var options = {
     series: [
       {
@@ -263,7 +271,7 @@ plotarDados(json_dados, qtdMaquinas)
 executar()
 function obterFiliaisGerente(){
 
-  fetch(`/cadastros/metricas/listar/filiais/${sessionStorage.idUsuario}`, {
+  fetch(`/cadastros/metricas/listar/aeroportos/${sessionStorage.idUsuario}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -282,10 +290,10 @@ function obterFiliaisGerente(){
                         var filialAtual = json_filiais[i];
 
                         // Insere cada opção 
-                        select_aeroporto.innerHTML += `<option value="${filialAtual.terminal}">${filialAtual.terminal}</option>`
+                        select_aeroporto.innerHTML += `<option value="${filialAtual.aeroporto}">${filialAtual.aeroporto}</option>`
                     }
                     for(i = 0; i < json_filiais.length; i++){
-                      filiais.push(json_filiais[i].terminal)
+                      filiais.push(json_filiais[i].aeroporto)
                     }
                 })
             })
@@ -306,6 +314,13 @@ async function obterDadosGerente(){
     })
 
     json_dados = await resposta.json()
+
+    for(i = 0; i < json_dados.length; i++){
+      modelos.add(json_dados[i].nomeModelo)
+    }
+    for(const modelo of modelos){
+      select_modelo.innerHTML += `<option value="${modelo}">${modelo}</option>`
+    }
   }
 
 async function obterDadosGerenteMenor(){
@@ -329,11 +344,11 @@ function ordenarDados(json_dados){
   var qtdAtual = 0;
   var modelo = []
   var maquinas = []
-  var qtdMaquinas1 = 0
-  var qtdMaquinas2 = 0
-  var qtdMaquinas3 = 0
-  var qtdMaquinas4 = 0
-  var qtdMaquinas5 = 0
+  var qtdMaquinas1 = new Set()
+  var qtdMaquinas2 = new Set()
+  var qtdMaquinas3 = new Set()
+  var qtdMaquinas4 = new Set()
+  var qtdMaquinas5 = new Set()
   console.log(json_dados)
   for(i = 0; i < json_dados.length; i++){
     if(!modelos.includes(json_dados[i].especificacao)){
@@ -363,14 +378,23 @@ function ordenarDados(json_dados){
                   "especificacao":modelo[0].especificacao, 
                   "componente":modelo[0].componente,
                   "terminal":modelo[0].terminal,
-                  "alertas": [baixo, alto, critico]
+                  "alertas": [baixo, alto, critico],
                 }
                 modelosOrdenados.push(modelo)
               }
+                for(i = 0; i < modelosOrdenados.length; i ++){
+                  var qtdMaquinas = new Set();
+                  for(j = 0; j < json_dados.length; j++){
+                    if(json_dados[j].especificacao == modelosOrdenados[i].especificacao){
+                      qtdMaquinas.add(json_dados[i].idMaquina)
+                    }
+                  }
+                  modelosOrdenados[i].qtdMaquinas = qtdMaquinas.size
+                }
                 for(i = 0; i < modelosOrdenados.length; i++){
                   indexMaior = i
                   for(j = i; j < modelosOrdenados.length; j++){
-                    if(modelosOrdenados[j].qtdAlertas > modelosOrdenados[indexMaior].qtdAlertas){
+                    if(modelosOrdenados[j].qtdAlertas/modelosOrdenados[i].qtdMaquinas > modelosOrdenados[indexMaior].qtdAlertas/modelosOrdenados[indexMaior].qtdMaquinas){
                       indexMaior = j
                     }
                   }
@@ -378,60 +402,106 @@ function ordenarDados(json_dados){
                   modelosOrdenados[i] = modelosOrdenados[indexMaior]
                   modelosOrdenados[indexMaior] = temp
                 }
-                for(i = 0; i < json_dados.length; i++){
-                  if(json_dados[i].especificacao == modelosOrdenados[0].especificacao && !maquinas.includes(json_dados[i].idMaquina)){
-                    maquinas.push(json_dados[i].idMaquina)
-                    qtdMaquinas1++
-                  }
-                  if(json_dados[i].especificacao == modelosOrdenados[1].especificacao && !maquinas.includes(json_dados[i].idMaquina)){
-                    maquinas.push(json_dados[i].idMaquina)
-                    qtdMaquinas2++
-                  }
-                  if(json_dados[i].especificacao == modelosOrdenados[2].especificacao && !maquinas.includes(json_dados[i].idMaquina)){
-                    maquinas.push(json_dados[i].idMaquina)
-                    qtdMaquinas3++
-                  }
-                  if(json_dados[i].especificacao == modelosOrdenados[3].especificacao && !maquinas.includes(json_dados[i].idMaquina)){
-                    maquinas.push(json_dados[i].idMaquina)
-                    qtdMaquinas4++
-                  }
-                    if(json_dados[i].especificacao == modelosOrdenados[4].especificacao && !maquinas.includes(json_dados[i].idMaquina)){
-                    maquinas.push(json_dados[i].idMaquina)
-                    qtdMaquinas5++
-                  }
-                }
-                qtdMaquinas = [qtdMaquinas1, qtdMaquinas2, qtdMaquinas3, qtdMaquinas4, qtdMaquinas5]
 }
 function plotarDados(json_dados, qtdMaquinas){
-                 alertaBaixo = [modelosOrdenados[0].alertas[0], modelosOrdenados[1].alertas[0], modelosOrdenados[2].alertas[0], modelosOrdenados[3].alertas[0], modelosOrdenados[4].alertas[0]]
-                 alertaAlto = [modelosOrdenados[0].alertas[1], modelosOrdenados[1].alertas[1], modelosOrdenados[2].alertas[1], modelosOrdenados[3].alertas[1], modelosOrdenados[4].alertas[1]]
-                 alertaCritico = [modelosOrdenados[0].alertas[2], modelosOrdenados[2].alertas[2], modelosOrdenados[2].alertas[2], modelosOrdenados[3].alertas[2], modelosOrdenados[4].alertas[2]]
-                 nomesModelos = [modelosOrdenados[0].especificacao, modelosOrdenados[1].especificacao, modelosOrdenados[2].especificacao, modelosOrdenados[3].especificacao, modelosOrdenados[4].especificacao]
+  var alertaBaixo = []
+  var alertaAlto = []
+  var alertaCritico = []
+  var nomesModelos = []
+  for(i = 0; i < modelosOrdenados.length && i < 5; i++){
+     alertaBaixo.push(modelosOrdenados[i].alertas[0])
+     alertaAlto.push(modelosOrdenados[i].alertas[1])
+     alertaCritico.push(modelosOrdenados[i].alertas[2])
+     nomesModelos.push(modelosOrdenados[i].especificacao)
+  }
+              
                 max = modelosOrdenados[0].qtdAlertas
-                chart.updateSeries([
-                  {
-                    name: 'Baixo',
-                    data: alertaBaixo
-                  },
-                  {
-                    name: 'Alto',
-                    data: alertaAlto
-                  },
-                  {
-                    name: 'Critico',
-                    data: alertaCritico
-                  }
-                ])
-                chart.updateOptions({
-                  xaxis: {
-                    categories: nomesModelos,
-                    max: max,
-                    forceNiceScale: false
-                  }
-                });
+
+                if (chart) {
+  chart.destroy(); // destrói o gráfico atual
+}
+options = {
+    series: [
+      {
+        name: 'Baixo',
+        data: alertaBaixo
+      },
+      {
+        name: 'Alto',
+        data: alertaAlto
+      },
+      {
+        name: 'Crítico',
+        data: alertaCritico
+      }
+    ],
+    chart: {
+      type: 'bar',
+      height: 500
+    },
+    colors: ['#ff9900', '#ff0000', '#8400ff'],
+    plotOptions: {
+      bar: {
+        horizontal: true,
+        dataLabels: {
+          position: 'top'
+        }
+      }
+    },
+    dataLabels: {
+      enabled: true,
+      offsetX: -6,
+      style: {
+        fontSize: '15px',
+        colors: ['#00000']
+      },
+      formatter: function (val) {
+        return val;
+      }
+    },
+    stroke: {
+      show: true,
+      width: 1,
+      colors: ['#fff']
+    },
+    tooltip: {
+      shared: true,
+      intersect: false
+    },
+    xaxis: {
+      categories: nomesModelos,
+      max: max
+    },
+    yaxis: {
+      labels: {
+        style: {
+          fontSize: '16px' // aumenta a fonte do eixo Y
+        }
+      }      
+    }
+  };
+
+  chart = new ApexCharts(document.querySelector("#chart_barras"), options);
+chart.render();
   const tabela = document.querySelector(".tabela-alertas-div") 
-for(i  = 0; i < modelosOrdenados.length; i++){
-  var perc = Math.round(modelosOrdenados[i].qtdAlertas*100/(qtdMaquinas[i] * 4 * 24 * periodo * 7))
+  tabela.innerHTML = `                            <div class="titulo_grafico3">
+              <div class="titulo_alinhado">
+                <span id="titulo_01">
+                  Lista de Modelos
+                </span>
+                <span id="titulo_02">
+                  <i>*Modelos que mais apresentaram alertas segundo os filtros máx 5</i>
+                </span>
+              </div>
+            </div>
+                <div class="tabela-header">
+                  <div class="col">Componente</div>
+                  <div class="col">Total Alertas</div>
+                  <div class="col">Qtd. máquinas c/ componente</div>
+                  <div class="col">Porcentagem de alertas</div>
+                </div>`
+for(i  = 0; i < modelosOrdenados.length && i < 5; i++){
+  var perc = Math.round(modelosOrdenados[i].qtdAlertas*100/(modelosOrdenados[i].qtdMaquinas * 4 * 24 * periodo * 7))
   var bcor = '#5271FF'
   var cor = 'white'
   console.log(`${i}`+perc)
@@ -456,7 +526,7 @@ for(i  = 0; i < modelosOrdenados.length; i++){
         <small><span id="tabela_modelo_${i+1}">${modelosOrdenados[i].especificacao}</span></small>
     </div>
             <div class="col" id="tabela_total_${i+1}">${modelosOrdenados[i].qtdAlertas}</div>
-            <div class="col" id="tabela_qtd_${i+1}">${qtdMaquinas[i]}</div>
+            <div class="col" id="tabela_qtd_${i+1}">${modelosOrdenados[i].qtdMaquinas}</div>
             <div class="col" id="tabela_perc_${i+1}">${perc + "%"}</div>
     </div>`
 
@@ -465,13 +535,17 @@ for(i  = 0; i < modelosOrdenados.length; i++){
   }
 }
              valor_kpi1.innerHTML = modelosOrdenados[0].especificacao
-                valor_kpi2.innerHTML = qtdMaquinas[0]
-                valor_kpi3.innerHTML = Math.round(modelosOrdenados[0].qtdAlertas*100/(qtdMaquinas[0] * 4 * 24 * periodo * 7)) + "%"
+                valor_kpi2.innerHTML = modelosOrdenados[0].qtdMaquinas
+                valor_kpi3.innerHTML = Math.round(modelosOrdenados[0].qtdAlertas*100/(modelosOrdenados[0].qtdMaquinas * 4 * 24 * periodo * 7)) + "%"
+                console.log(menores)
                 for(i = 0; i < menores.length; i++){
+                  console.log(menores[i].componente)
                   if(modelosOrdenados[0].componente == menores[i].componente){
                     valor_kpi4.innerHTML = menores[i].especificacao
                   }
                 }
+
+
 }
 
 async function aplicarFiltro(){
@@ -479,6 +553,7 @@ async function aplicarFiltro(){
   var aeroporto = aeroportos.value;
   var intervalo = parseInt(select_intervalo.value)
   var componente = select_componente.value
+  var nomeModelo = select_modelo.value;
   dados_filtrados = json_dados;
   const componentes = {
     ram: "RAM",
@@ -512,6 +587,17 @@ var semanaAtual = obterDiaSemana(hoje);
   if(semanas[intervalo]){
     periodo = semanas[intervalo]
     dados_filtrados = dados_filtrados.filter(dado => semanaAtual - dado.semanas <= semanas[intervalo])
+  }
+
+  if(semanas[intervalo]){
+    periodo = semanas[intervalo]
+    dados_filtrados = dados_filtrados.filter(dado => semanaAtual - dado.semanas <= semanas[intervalo])
+  }
+
+  for(const modelo of modelos){
+    if(modelo == nomeModelo){
+    dados_filtrados = dados_filtrados.filter(dado => dado.nomeModelo == modelo)
+    }
   }
   // filtro endereco
   ordenarDados(dados_filtrados)
