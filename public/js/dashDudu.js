@@ -67,7 +67,6 @@ function carregarMaquinas(dados) {
   let qtdMaquinas = dados.length;
   let qtdMaqMenorDsmp = dados_json.filter(dado => dado.desempenho < 35).length;
   let qtdMaqCrit = dados_json.filter(dado => dado.desempenho < 10).length;
-  // let totalAlertas = dados.reduce((acc, curr) => acc + (parseInt(curr.critico) || 0), 0);
 
   const lista = document.getElementById('lista_maquinas');
   lista.innerHTML = '';
@@ -80,14 +79,26 @@ function carregarMaquinas(dados) {
       const valor = parseInt(desempenho);
       if (valor < 10) classe = 'purple';
       else if (valor < 35) classe = 'red';
-      else if (valor < 65) classe = 'yellow'
+      else if (valor < 65) classe = 'yellow';
+    }
+
+    let nomeTerminal;
+    switch (maq.terminal) {
+      case "1":
+        nomeTerminal = "GRU";
+        break;
+      case "2":
+        nomeTerminal = "Galeão";
+        break;
+      default:
+        nomeTerminal = maq.terminal || '-';
     }
 
     const div = document.createElement('div');
     div.className = `totem ${classe}`;
     div.innerHTML = `
       <div class="coluna">${maq.totem || '-'}</div>
-      <div class="coluna">${maq.terminal || '-'}</div>
+      <div class="coluna">${nomeTerminal}</div>
       <div class="coluna">${maq.critico || 0}</div>
       <div class="coluna">${maq.alto || 0}</div>
       <div class="coluna">${maq.baixo || 0}</div>
@@ -101,6 +112,7 @@ function carregarMaquinas(dados) {
   document.getElementById('kpi_baixo').innerText = qtdMaqMenorDsmp;
   document.getElementById('kpi_alertas').innerText = qtdMaqCrit;
 }
+
 
 function atualizarKPIsTotais() {
   let qtdMaquinas = dados_json.length;
@@ -143,6 +155,7 @@ async function listarFiliais() {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
+
     const json_filiais = await res.json();
 
     const slc_filial = document.getElementById("slc_filial");
@@ -150,8 +163,22 @@ async function listarFiliais() {
     slc_filial.innerHTML += `<option selected value="">Todos os meus aeroportos</option>`;
 
     filiais = [];
+
     for (const filialAtual of json_filiais) {
-      slc_filial.innerHTML += `<option value="${filialAtual.terminal}">${filialAtual.terminal}</option>`;
+      let nomeExibido;
+
+      switch (filialAtual.terminal) {
+        case "1":
+          nomeExibido = "GRU";
+          break;
+        case "2":
+          nomeExibido = "Galeão";
+          break;
+        default:
+          nomeExibido = filialAtual.terminal;
+      }
+
+      slc_filial.innerHTML += `<option value="${filialAtual.terminal}">${nomeExibido}</option>`;
       filiais.push(filialAtual.terminal);
     }
   } catch (error) {
