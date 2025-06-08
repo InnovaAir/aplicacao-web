@@ -34,6 +34,10 @@
     --border-div: 1px solid black;
 }
 
+body {
+    overflow: hidden;
+}
+
 body h1 {
     font-size: var(--h1-size) !important;
 }
@@ -73,26 +77,28 @@ body h5 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.45);
 
     h5 {
         text-overflow: ellipsis;
     }
 
     .line {
-        display: none;
+        margin-bottom: 1vh;
         width: 100%;
-        height: 15px;
+        height: 0.15vh;
         background-color: white;
     }
 }
 
 .border-kpi {
     color: #000;
+    text-shadow: none;
 
     .line {
-        display: none;
+        margin-bottom: 1vh;
         width: 100%;
-        height: 15px;
+        height: 0.15vh;
         background-color: black;
     }
 
@@ -252,7 +258,7 @@ body {
             .legend {
                 padding: 1%;
                 border: 0.2vw solid #DDE1E6;
-                width: 44%;
+                width: 30%;
 
                 p {
                     color: #000;
@@ -472,12 +478,14 @@ body {
             display: flex;
             flex-direction: column;
             align-items: center;
+
         }
 
         .box-chart {
             display: flex;
             flex-direction: column;
             width: 100%;
+
 
             h2 {
                 color: var(--color-azul);

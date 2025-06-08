@@ -111,6 +111,9 @@
                                 </div>
 
                                 <div class="legend">
+                                    <div class="box">
+                                        <Span>Indicadores dos Componentes:</Span>
+                                    </div>
                                     <div class="container">
                                         <div class="box">
                                             <div class="ball-green ball"></div>
@@ -177,12 +180,14 @@
                             <h1>Alertas por Categoria</h1>
                             <p>*Exibindos os alertas do momento</p>
                             <div class="indicators">
-                                <div class="kpi">
+                                <div class="kpi border-kpi">
                                     <p>Categoria com mais alerta</p>
+                                    <div class="line"></div>
                                     <h2 id="indicator_category">_</h2>
                                 </div>
-                                <div class="kpi">
+                                <div class="kpi border-kpi">
                                     <p>Total de alertas</p>
+                                    <div class="line"></div>
                                     <h2 id="indicator_totalalerts">_</h2>
                                 </div>
                             </div>
@@ -227,16 +232,21 @@
                             </div>
 
                             <div class="list2">
-                                <div class="kpi">
+                                <div class="kpi border-kpi">
                                     <p>ENDEREÇO MAC</p>
+                                    <div class="line"></div>
                                     <h2 id="mac_totem">_</h2>
                                 </div>
-                                <div class="kpi">
+                                <div class="kpi border-kpi">
                                     <p>Chamados em aberto</p>
+                                    <div class="line"></div>
+
                                     <h2 id="total_chamados_aberto">_</h2>
                                 </div>
-                                <div class="kpi">
+                                <div class="kpi border-kpi">
                                     <p>TEMPO DE ATIVIDADE</p>
+                                    <div class="line"></div>
+
                                     <h2 id="tempo_atividade_totem">_</h2>
                                 </div>
                             </div>
@@ -347,21 +357,54 @@
     chartREDE.render()
 
     var optionChartAlertas = {
-        series: [0, 0, 0, 0],
+        series: [{
+            name: 'Alertas',
+            data: [0, 0, 0, 0]
+        }],
         chart: {
             id: "chartTempoReal",
-            type: 'pie',
-            height: '100%', // O gráfico ocupa toda a altura da div
+            type: 'bar',
+            height: '60%', // O gráfico ocupa toda a altura da div
+            width: '100%'   // O gráfico ocupa toda a largura da div
         },
-        labels: ['CPU', 'DISCO', 'RAM', 'REDE'],
+        xaxis: {
+            categories: ['CPU', 'DISCO', 'RAM', 'REDE']
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded'
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " alertas"
+                }
+            }
+        },
         responsive: [{
             breakpoint: 480,
             options: {
                 chart: {
                     height: 200
                 },
-                legend: {
-                    position: 'bottom'
+                plotOptions: {
+                    bar: {
+                        horizontal: true
+                    }
                 }
             }
         }]

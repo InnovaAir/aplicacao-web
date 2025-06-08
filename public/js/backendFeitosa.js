@@ -668,13 +668,16 @@ function getTempoAtividade(tempoAtivo) {
 }
 
 function atualizarGraficoTempoReal() {
-    ApexCharts.exec('chartTempoReal', 'updateSeries', [
-        alertasCPU,
-        alertasDISCO,
-        alertasRAM,
-        alertasREDE
-    ]);
-
+    ApexCharts.exec('chartTempoReal', 'updateSeries', [{
+        name: 'Alertas',
+        data: [
+            alertasCPU,
+            alertasDISCO,
+            alertasRAM,
+            alertasREDE
+        ]
+    }]);
+    
     var alertasComponentes = [alertasCPU, alertasDISCO, alertasRAM, alertasREDE]
 
     var maiorValor = 0;
