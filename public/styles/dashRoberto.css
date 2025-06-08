@@ -195,9 +195,15 @@ h3{
     border-bottom: 2px solid #000000;
   }
   
-  .tabela-row {
-    display: flex;
-  }
+.tabela-row {
+  display: flex;
+  background-color: #fff; /* Ou mantenha os nth-child se quiser alternância */
+  margin: 8px 12px; /* Espaço entre as linhas (horizontal e vertical) */
+  border-radius: 12px; /* Arredondamento da borda da linha */
+  border: solid 1px black;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
+}
+
   
   .col {
     flex: 1;

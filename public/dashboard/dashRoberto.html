@@ -132,7 +132,6 @@
                 </span>
               </div>
             </div>
-                <!-- Cabeçalho -->
                 <div class="tabela-header">
                   <div class="col">Componente</div>
                   <div class="col">Total Alertas</div>
@@ -140,60 +139,6 @@
                   <div class="col">Porcentagem de alertas</div>
                 </div>
               
-                <!-- Linha 1 -->
-                <div class="tabela-row">
-                  <div class="col">
-                    <span id="tabela_comp_1">Processador</span><br>
-                    <small><span id="tabela_modelo_1">Ryzen 3 3200g</span></small>
-                  </div>
-                  <div class="col" id="tabela_total_1">7</div>
-                  <div class="col" id="tabela_qtd_1">21</div>
-                  <div class="col" id="tabela_perc_1">5%</div>
-                </div>
-              
-                <!-- Linha 2 -->
-                <div class="tabela-row">
-                  <div class="col">
-                    <span id="tabela_comp_2">Processador</span><br>
-                    <small><span id="tabela_modelo_2">Ryzen 3 3200g</span></small>
-                  </div>
-                  <div class="col" id="tabela_total_2">576</div>
-                  <div class="col" id="tabela_qtd_2">12</div>
-                  <div class="col" id="tabela_perc_2">86%</div>
-                </div>
-              
-                <!-- Linha 3 -->
-                <div class="tabela-row">
-                  <div class="col">
-                    <span id="tabela_comp_3">Processador</span><br>
-                    <small><span id="tabela_modelo_3">Ryzen 3 3200g</span></small>
-                  </div>
-                  <div class="col" id="tabela_total_3">1023</div>
-                  <div class="col" id="tabela_qtd_3">43</div>
-                  <div class="col" id="tabela_perc_3">43%</div>
-                </div>
-              
-                <!-- Linha 4 -->
-                <div class="tabela-row">
-                  <div class="col">
-                    <span id="tabela_comp_4">Processador</span><br>
-                    <small><span id="tabela_modelo_4">Ryzen 3 3200g</span></small>
-                  </div>
-                  <div class="col" id="tabela_total_4">1023</div>
-                  <div class="col" id="tabela_qtd_4">43</div>
-                  <div class="col" id="tabela_perc_4">43%</div>
-                </div>
-              
-                <!-- Linha 5 -->
-                <div class="tabela-row">
-                  <div class="col">
-                    <span id="tabela_comp_5">Processador</span><br>
-                    <small><span id="tabela_modelo_5">Ryzen 3 3200g</span></small>
-                  </div>
-                  <div class="col" id="tabela_total_5">1023</div>
-                  <div class="col" id="tabela_qtd_5">43</div>
-                  <div class="col" id="tabela_perc_5">43%</div>
-                </div>
               </div>              
       </div>
       </div>
@@ -484,32 +429,42 @@ function plotarDados(json_dados, qtdMaquinas){
                     forceNiceScale: false
                   }
                 });
-                tabela_comp_1.innerHTML = modelosOrdenados[0].componente
-                tabela_comp_2.innerHTML = modelosOrdenados[1].componente
-                tabela_comp_3.innerHTML = modelosOrdenados[2].componente
-                tabela_comp_4.innerHTML = modelosOrdenados[3].componente
-                tabela_comp_5.innerHTML = modelosOrdenados[4].componente
-                tabela_modelo_1.innerHTML = modelosOrdenados[0].especificacao
-                tabela_modelo_2.innerHTML = modelosOrdenados[1].especificacao
-                tabela_modelo_3.innerHTML = modelosOrdenados[2].especificacao
-                tabela_modelo_4.innerHTML = modelosOrdenados[3].especificacao
-                tabela_modelo_5.innerHTML = modelosOrdenados[4].especificacao
-                tabela_total_1.innerHTML = modelosOrdenados[0].qtdAlertas
-                tabela_total_2.innerHTML = modelosOrdenados[1].qtdAlertas
-                tabela_total_3.innerHTML = modelosOrdenados[2].qtdAlertas
-                tabela_total_4.innerHTML = modelosOrdenados[3].qtdAlertas
-                tabela_total_5.innerHTML = modelosOrdenados[4].qtdAlertas
-                tabela_qtd_1.innerHTML = qtdMaquinas[0];
-                tabela_qtd_2.innerHTML = qtdMaquinas[1];
-                tabela_qtd_3.innerHTML = qtdMaquinas[2];
-                tabela_qtd_4.innerHTML = qtdMaquinas[3];
-                tabela_qtd_5.innerHTML = qtdMaquinas[4];
-                tabela_perc_1.innerHTML = Math.round(modelosOrdenados[0].qtdAlertas*100/(qtdMaquinas[0] * 4 * 24 * periodo * 7)) + "%"
-                tabela_perc_2.innerHTML = Math.round(modelosOrdenados[1].qtdAlertas*100/(qtdMaquinas[1] * 4 * 24 * periodo * 7)) + "%"
-                tabela_perc_3.innerHTML = Math.round(modelosOrdenados[2].qtdAlertas*100/(qtdMaquinas[2] * 4 * 24 * periodo * 7)) + "%"
-                tabela_perc_4.innerHTML = Math.round(modelosOrdenados[3].qtdAlertas*100/(qtdMaquinas[3] * 4 * 24 * periodo * 7)) + "%"
-                tabela_perc_5.innerHTML = Math.round(modelosOrdenados[4].qtdAlertas*100/(qtdMaquinas[4] * 4 * 24 * periodo * 7)) + "%"
-                valor_kpi1.innerHTML = modelosOrdenados[0].especificacao
+  const tabela = document.querySelector(".tabela-alertas-div") 
+for(i  = 0; i < modelosOrdenados.length; i++){
+  var perc = Math.round(modelosOrdenados[i].qtdAlertas*100/(qtdMaquinas[i] * 4 * 24 * periodo * 7))
+  var bcor = '#5271FF'
+  var cor = 'white'
+  console.log(`${i}`+perc)
+  if(perc >= 10 && perc <= 20){
+    bcor = "#DEC828"
+   cor = 'black'
+  }
+  if(perc > 20 && perc <= 30){
+    bcor = "#DE2828"
+   cor = 'white'
+
+  }
+  if(perc > 30){
+    bcor = '#8537C8'
+   cor = 'white'
+
+  }
+  tabela.innerHTML += `
+  <div class="tabela-row" style="background-color: ${bcor}; color:${cor}">
+    <div class="col">
+      <span id="tabela_comp_${i+1}">${modelosOrdenados[i].componente}</span><br>
+        <small><span id="tabela_modelo_${i+1}">${modelosOrdenados[i].especificacao}</span></small>
+    </div>
+            <div class="col" id="tabela_total_${i+1}">${modelosOrdenados[i].qtdAlertas}</div>
+            <div class="col" id="tabela_qtd_${i+1}">${qtdMaquinas[i]}</div>
+            <div class="col" id="tabela_perc_${i+1}">${perc + "%"}</div>
+    </div>`
+
+  if(i == 4){
+    break;
+  }
+}
+             valor_kpi1.innerHTML = modelosOrdenados[0].especificacao
                 valor_kpi2.innerHTML = qtdMaquinas[0]
                 valor_kpi3.innerHTML = Math.round(modelosOrdenados[0].qtdAlertas*100/(qtdMaquinas[0] * 4 * 24 * periodo * 7)) + "%"
                 for(i = 0; i < menores.length; i++){
