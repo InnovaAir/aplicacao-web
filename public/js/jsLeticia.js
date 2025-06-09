@@ -338,7 +338,7 @@ function atualizarBarras(valores) {
             }
         },
         title: {
-            text: 'Média dos Indicadores Climáticos',
+            text: 'Indicadores atualizados todo primeiro dia do mês',
             floating: true,
             offsetY: 300,
             align: 'center',
