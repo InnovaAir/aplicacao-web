@@ -1,52 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InnovaAir</title>
-    <link rel="stylesheet" href="../styles/suporte.css">
-    <link rel="stylesheet" href="../styles/menuLateral.css">
-    <link rel="stylesheet" href="../styles/menu_mobile.css">
-    <link rel="stylesheet" href="../styles/estilo.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InnovaAir</title>
+  <link rel="stylesheet" href="../styles/suporte.css">
+  <link rel="stylesheet" href="../styles/menuLateral.css">
+  <link rel="stylesheet" href="../styles/menu_mobile.css">
+  <link rel="stylesheet" href="../styles/estilo.css">
 
-    <script src="../js/animacaoMenu.js"></script>
-    <link rel="icon" href="../public/assets/favicon.ico" type="favicon">
+  <script src="../js/animacaoMenu.js"></script>
+  <link rel="icon" href="../assets/favicon.ico" type="image/x-icon" />
 </head>
-<body onload="checarSessao()  ">
-    <button class="botao_abrir" onclick="abrirMenu()">☰</button>
 
-    <div class="sidebar" id="sidebar">
-      <div class="d-flex justify-content-center align-items-center px-3 w-100">
-          <div class="logo">
-              <img src="../assets/InnovaairWhite.png" alt="Logo">
-          </div>
+<body onload="checarSessao()  ">
+  <button class="botao_abrir" onclick="abrirMenu()">☰</button>
+
+  <div class="sidebar" id="sidebar">
+    <div class="d-flex justify-content-center align-items-center px-3 w-100">
+      <div class="logo">
+        <img src="../assets/InnovaairWhite.png" alt="Logo">
       </div>
-      <nav class="flex-column">
-          <a style="display: none;" href="dashRoberto.html">Visão geral</a>
-          <a style="display: none;" href="cadastrarFuncionario.html"><strong>Cadastrar Funcionario</strong></a>
-          <a href="visaoGeral.html">Análise em tempo real</a>
-          <a href="suporte.html"><strong>Suporte</strong></a>
-          <div class="logout mt-3">
-              <a onclick="limparSessao()" href="../index.html"><strong>Sair</strong></a>
-          </div>
-      </nav>
+    </div>
+    <nav class="flex-column">
+      <a style="display: none;" href="dashRoberto.html">Visão geral</a>
+      <a style="display: none;" href="cadastrarFuncionario.html"><strong>Cadastrar Funcionario</strong></a>
+      <a href="visaoGeral.html">Análise em tempo real</a>
+      <a href="suporte.html"><strong>Suporte</strong></a>
+      <div class="logout mt-3">
+        <a onclick="limparSessao()" href="../index.html"><strong>Sair</strong></a>
+      </div>
+    </nav>
   </div>
 
   <div class="menu_mobile">
     <button class="botao_menu_mobile" onclick="abrirMenuMobile()">☰</button>
     <div class="logo_container">
-        <img src="../assets/InnovaairWhite.png" alt="" />
+      <img src="../assets/InnovaairWhite.png" alt="" />
     </div>
 
-</div>
-<div class="novo_menu">
-    <a href="visaoGeral.html" >Visão geral</a>
+  </div>
+  <div class="novo_menu">
+    <a href="visaoGeral.html">Visão geral</a>
     <a href="tempoReal.html">Tempo real</a>
     <a href="listaMaquinas.html">Lista de máquinas</a>
     <a href="NovosCadastros.html">Cadastros</a>
     <a href="suporte.html" class="agora">Suporte</a>
     <a href="suporte.html">Fale conosco!</a>
-</div>
+  </div>
 
   <div class="tela" id="tela">
     <div class="logo_container">
@@ -58,45 +60,44 @@
     <h1>ABERTURA DE CHAMADO</h1>
     <div class="centralizar_box">
       <div class="box_forms">
-          <form action="#" method="post" class="estrutura_forms">
-              <div class="boxes_inputs">
-                <label for="titulo">Título:</label>
-                <input type="text" id="titulo" name="titulo" required>
-              </div>
-              
-              <div class="boxes_inputs">
-                <label for="descricao">Descrição:</label>
-                <textarea id="descricao" name="descricao" rows="4" required></textarea>
-              </div>
+        <form action="#" method="post" class="estrutura_forms">
+          <div class="boxes_inputs">
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" required>
+          </div>
 
-              <div class="boxes_inputs">
-                <label for="responsavel">Responsável:</label>
-                <input type="text" id="responsavel" name="responsavel">
-              </div>
+          <div class="boxes_inputs">
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" name="descricao" rows="4" required></textarea>
+          </div>
 
-              <div class="boxes_inputs">
-                <label for="anexo">Anexo:</label>
-                <input type="file" id="anexo" name="anexo">
-              </div>
-      
-              <button>Enviar Chamado</button>
-          </form>
+          <div class="boxes_inputs">
+            <label for="responsavel">Responsável:</label>
+            <input type="text" id="responsavel" name="responsavel">
+          </div>
+
+          <div class="boxes_inputs">
+            <label for="anexo">Anexo:</label>
+            <input type="file" id="anexo" name="anexo">
+          </div>
+
+          <button>Enviar Chamado</button>
+        </form>
       </div>
     </div>
   </div>
 </body>
+
 </html>
 <script>
-     function abrirMenu() {
-        document.getElementById("menu").classList.add("menu-aberto");
-        document.getElementById("tela").classList.add("tela-movida");
-    }
-    function fecharMenu() {
-        document.getElementById("menu").classList.remove("menu-aberto");
-        document.getElementById("tela").classList.remove("tela-movida");
-    }
-    abrirMenu();
+  function abrirMenu() {
+    document.getElementById("menu").classList.add("menu-aberto");
+    document.getElementById("tela").classList.add("tela-movida");
+  }
+  function fecharMenu() {
+    document.getElementById("menu").classList.remove("menu-aberto");
+    document.getElementById("tela").classList.remove("tela-movida");
+  }
+  abrirMenu();
 
 </script>
-
-
