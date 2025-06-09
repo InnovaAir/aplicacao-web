@@ -105,12 +105,12 @@
                                         <div class="head_grafico">
                                             <div class="titulo_alinhado">
                                                 <span id="alertas_kpi_titulo"><b>Previsão da quantidade de alertas por
-                                                        +</b></span>
+                                                        componente</b></span>
                                                 <span><i>*Análise trimestral</i></span>
                                             </div>
 
                                             <div class="taxa_kpi">
-                                                <span class="texto_taxa" style="text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.45);">Taxa de precisão:</span>
+                                                <span class="texto_taxa" style="text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.45); font-size: 20px;">Taxa de precisão:</span>
                                                 <span style="font-size: 25px; text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.45);"><b id="taxaPrecisao"></b></span>
                                             </div>
                                         </div>
@@ -133,14 +133,14 @@
                                             <span id="numero_kpi" class="borda_inferior"><b id="componente"></b></span>
                                             <div class="linha-sólida"></div>
                                             <span id="numero_kpi"><b id="percentual"></b></span>
-                                            <span><i>*Predominância (%) em relação ao total</i></span>
+                                            <span><i style="font-size: 22px;">*Predominância (%) em relação ao total</i></span>
                                         </div>
                                     </div>
 
                                     
                                     <div class="box_kpi_lateral kpi3">
                                         <div class="titulo_barras">
-                                            <span id="alertas_kpi_titulo" style="font-size: 28px; color: #5271FF; line-height: 10px;"><b>Dados de clima e tempo do ultimo trimestre</b></span>
+                                            <span id="alertas_kpi_titulo" style="font-size: 28px; color: #5271FF; line-height: 10px;"><b>Dados de clima e tempo do último trimestre</b></span>
                                         </div>
                                         <div id="graficoBarras"></div>
                                     </div>
@@ -178,11 +178,3 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 <script src="../js/jsLeticia.js"></script>
-
-<script>
-  window.onload = async () => {
-    const response = await fetch('http://localhost:3333/dashboard/dashLeticia');
-    const data = await response.json();
-    console.log(data);
-  };
-</script>

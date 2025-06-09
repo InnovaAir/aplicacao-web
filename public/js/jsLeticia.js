@@ -271,7 +271,7 @@ async function atualizarGrafico() {
 
     atualizarKPI();
     buscarEndereco();
-    atualizarBarras();
+    // atualizarBarras();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -282,18 +282,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
 let chartBarra = null;
 
-function atualizarBarras() {
+function atualizarBarras(valores) {
+    console.log("Valores recebidos no atualizarBarras:", valores);
+
+    if (!valores || !Array.isArray(valores) || valores.length === 0) {
+        console.error("Erro: valores inválidos para o gráfico de barras.");
+        return;
+    }
+
     if (chartBarra) {
         chartBarra.destroy();
         chartBarra = null;
     }
+
     const graficoDiv = document.querySelector("#graficoBarras");
     graficoDiv.innerHTML = '';
 
-    var options = {
+    const options = {
         series: [{
-            name: 'Inflation',
-            data: [2.3, 3.1, 10.1, 4.0, 4.0]
+            name: 'Média Simples',
+            data: valores
         }],
         chart: {
             height: 320,
@@ -309,74 +317,40 @@ function atualizarBarras() {
         },
         dataLabels: {
             enabled: true,
-            formatter: function (val) {
-                return val + "%";
-            },
+            formatter: val => val.toFixed(1),
             offsetY: -20,
             style: {
                 fontSize: '12px',
                 colors: ["#304758"]
             }
         },
-
         xaxis: {
-            categories: ["Temp. Média", "Temp. Min", "Temp. Max", "Chuva (mm)", "Vel. Vento"],
+            categories: ["Temperatura Média", "Chuva (mm)", "Velocidade do Vento"],
             position: 'top',
-            axisBorder: {
-                show: false
-            },
-            axisTicks: {
-                show: false
-            },
-            crosshairs: {
-                fill: {
-                    type: 'gradient',
-                    gradient: {
-                        colorFrom: '#D8E3F0',
-                        colorTo: '#BED1E6',
-                        stops: [0, 100],
-                        opacityFrom: 0.4,
-                        opacityTo: 0.5,
-                    }
-                }
-            },
+            axisBorder: { show: false },
+            axisTicks: { show: false },
             tooltip: {
-                style: {
-                    fontSize: '14px',
-                    color: '#000'
-                },
+                style: { fontSize: '14px', color: '#000' },
                 theme: 'light'
             }
         },
         yaxis: {
-            axisBorder: {
-                show: false
-            },
-            axisTicks: {
-                show: false,
-            },
             labels: {
-                show: false,
-                formatter: function (val) {
-                    return val + "%";
-                }
+                formatter: val => val.toFixed(1)
             }
-
         },
         title: {
-            text: 'Gráfico atualizado todo primeiro dia do mês',
+            text: 'Média dos Indicadores Climáticos',
             floating: true,
             offsetY: 300,
             align: 'center',
-            style: {
-                color: '#444'
-            }
+            style: { color: '#444' }
         }
     };
 
-    var chart = new ApexCharts(document.querySelector("#graficoBarras"), options);
-    chart.render();
-};
+    chartBarra = new ApexCharts(graficoDiv, options);
+    chartBarra.render();
+}
 
 function atualizarKPI() {
     const componenteSelecionado = document.getElementById("select_componente").value;
@@ -510,4 +484,39 @@ function buscarEndereco() {
             }
         })
         .catch(err => console.error("Erro ao buscar endereço:", err));
+}
+
+function getCsvAndConvertToJson() {
+    fetch(`/dashLeticia/getCsvAndConvertToJson`, {
+        cache: 'no-store',
+        method: "GET",
+    })
+        .then(res => res.json())
+        .then(json => {
+            console.log("Dados recebidos do CSV:", json);
+
+            const total = json.length;
+            let somaTempMedia = 0;
+            let somaChuva = 0;
+            let somaVento = 0;
+
+            json.forEach(linha => {
+                somaTempMedia += parseFloat(linha["tavg"] || 0);
+                somaChuva += parseFloat(linha["prcp"] || 0);
+                somaVento += parseFloat(linha["wspd"] || 0);
+            });
+
+            const medias = [
+                (somaTempMedia / total).toFixed(2),
+                (somaChuva / total).toFixed(2),
+                (somaVento / total).toFixed(2),
+            ].map(Number);
+
+            console.log("Médias calculadas para gráfico:", medias);
+
+            atualizarBarras(medias);
+        })
+        .catch(err => {
+            console.error("Erro ao buscar CSV convertido:", err);
+        });
 }

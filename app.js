@@ -12,6 +12,7 @@ var cors = require("cors");
 var path = require("path");
 var PORTA_APP = process.env.APP_PORT;
 var HOST_APP = process.env.APP_HOST;
+require('dotenv').config();
 
 var app = express();
 
@@ -42,7 +43,6 @@ app.use("/dados", feitosaR);
 app.use("/marcolino", marcolino);
 app.use("/models", modeloRoute);
 app.use("/jira", jiraRouter);
-
 
 app.listen(PORTA_APP, function () {
     console.log(`
