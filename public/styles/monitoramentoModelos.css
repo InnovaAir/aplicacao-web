@@ -21,8 +21,11 @@
     --text-kpi-size: 2vw;
 }
 
+
+
 body {
     z-index: 2;
+      font-family: Inter";
 }
 
 * {
@@ -78,13 +81,13 @@ span {
     grid-gap: 2%;
     border-radius: 5px;
     min-height: 40px;
-
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
     align-items: center;
     margin-top: 1%;
     grid-row-gap: 10%;
     grid-template-columns: 3fr 7fr 2fr 3fr;
     background-color: #ffffff;
-    border: solid #5271ff;
+    border: solid #5271ff 2px;
 }
 
 .gridTitulo {
@@ -137,7 +140,7 @@ span {
 }
 
 .resumoContainer {
-    color: #5271FF;
+    color: #111111;
     font-size: max(1.3vw, 20px);
 }
 

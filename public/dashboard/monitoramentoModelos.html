@@ -37,7 +37,7 @@
             </div>
 
 
-            <div style="display: block;" class="popUp">
+            <div style="display: none;" class="popUp">
 
 
                 <div class="shadow" onclick="abrirPopUp()"></div>
@@ -83,8 +83,8 @@
                     <div class="subtituloContainer">
                         <div id="titulo_select"><b>Selecione a filial</b></div>
                         <select id="select_filial" class="selectBox">
-                            <option value="1" selected>Filial 1</option>
-                            <option value="2">Filial 2</option>
+                            <option value="1" selected>GRU</option>
+                            <option value="2">SP</option>
                         </select>
 
 
@@ -115,10 +115,10 @@
                         <div class="section1">
 
                             <div class="gridTitulo">
-                                <span>Modelo</span>
-                                <span>Alertas</span>
-                                <span>Qtd.</span>
-                                <span></span>
+                                <span style="border-right: solid lightgray 1px;">Modelo</span>
+                                <span style="border-right: solid lightgray 1px;">Alertas</span>
+                                <span style="border-right: solid lightgray 1px;">Qtd.</span>
+                                <span style="border-right: solid lightgray 1px;"></span>
                             </div>
 
                             <div class="containerLista">
@@ -136,7 +136,7 @@
                             </div>
                         </div>
                         <div class="KPI">
-                            <h2 class="">Total de alertas:</h2>
+                            <h2>Total de alertas:</h2>
                             <div style="width: 70%;height:2px; background-color:white"></div>
                             <h1 class="interfaceTOTALALERTAS"></h1>
                         </div>
@@ -186,10 +186,9 @@
 
     // evento para mudar de filial
 
-    const linha = document.querySelector(".linha")
     const containerLista = document.querySelector(".containerLista")
     document.getElementById('select_filial').addEventListener('change', function () {
-        linha.innerHTML = '';
+        containerLista.innerHTML = '';
         listarFilial(this.value);
     });
 
@@ -273,8 +272,8 @@
                 let maquinasContadas = new Set();
                 componenteArray = [];
 
-                
-                    let QuantidadeDeAlertasTotal = 0;
+
+                let QuantidadeDeAlertasTotal = 0;
 
                 for (let i = 0; i < contador.length; i++) {
 
@@ -324,15 +323,15 @@
 
                         if (item.gravidade == "baixo") {
                             baixoCount++
-                            
+
                         }
                         if (item.gravidade == "alto") {
                             altoCount++
-                            
+
                         }
                         if (item.gravidade == "critico") {
                             criticoCount++
-                            
+
                         }
                         if (item.componente == "Processador") {
                             cpuCount++;
@@ -474,6 +473,8 @@
                         ram.style.display = "flex";
                         ram.style.flexGrow = "1";
                         ram.style.alignItems = "flex-start";
+                        ram.style.borderInline = "solid black 1px"
+
                         ram.style.fontWeight = "bolder";
                         ram.style.color = "black";
                         ram.style.justifyContent = "center";
@@ -491,6 +492,7 @@
                         cpu.style.display = "flex";
                         cpu.style.flexGrow = "1"
                         cpu.style.alignItems = "flex-start";
+                        cpu.style.borderInline = "solid black 1px"
                         cpu.style.fontWeight = "bolder";
                         cpu.style.color = "black";
                         cpu.style.justifyContent = "center";
@@ -508,6 +510,7 @@
                         disco.style.display = "flex";
                         disco.style.flexGrow = "1";
                         disco.style.alignItems = "flex-start";
+                         disco.style.borderInline = "solid black 1px"
                         disco.style.fontWeight = "bolder";
                         disco.style.color = "black";
                         disco.style.justifyContent = "center";
@@ -639,7 +642,7 @@
         var options = {
             series: [
                 {
-                    name: "High - 2013",
+                    name: "Alertas",
                     data: valores
                 }
             ],
