@@ -89,7 +89,10 @@
         </div>
       </div>
 
-            <div class="box_kpi">
+
+
+      <div class="box_grafico">
+                    <div class="box_kpi">
         <div class="kpi_tabela">
           <h3 class="titulo_kpi">Modelo com mais alertas:</h3>
           <h1 id="valor_kpi1" class="valor_kpi"><b>i3 7200 u</b></h1>
@@ -111,8 +114,7 @@
           
         </div>
       </div>
-
-      <div class="box_grafico">
+      <div class="graficos">
         <div class="grafico_alinhado">
           <div class="titulo_grafico1">
             <span id="titulo_01">
@@ -149,6 +151,7 @@
               
               </div>              
       </div>
+    </div>
       </div>
   </div>
 </body>
@@ -205,7 +208,7 @@ var options = {
     ],
     chart: {
       type: 'bar',
-      height: 500
+      height: 450
     },
     colors: ['#ff9900', '#ff0000', '#8400ff'],
     plotOptions: {
@@ -438,7 +441,7 @@ options = {
     ],
     chart: {
       type: 'bar',
-      height: 500
+      height: 450
     },
     colors: ['#ff9900', '#ff0000', '#8400ff'],
     plotOptions: {
@@ -520,11 +523,13 @@ for(i  = 0; i < modelosOrdenados.length && i < 5; i++){
    cor = 'white'
 
   }
+  var especificacao = modelosOrdenados[i].especificacao
+  especificacao = especificacao.slice(0, 15)
   tabela.innerHTML += `
   <div class="tabela-row" style="background-color: ${bcor}; color:${cor}">
     <div class="col">
       <span id="tabela_comp_${i+1}">${modelosOrdenados[i].componente}</span><br>
-        <small><span id="tabela_modelo_${i+1}">${modelosOrdenados[i].especificacao}</span></small>
+        <small><span id="tabela_modelo_${i+1}">${especificacao}</span></small>
     </div>
             <div class="col" id="tabela_total_${i+1}">${modelosOrdenados[i].qtdAlertas}</div>
             <div class="col" id="tabela_qtd_${i+1}">${modelosOrdenados[i].qtdMaquinas}</div>

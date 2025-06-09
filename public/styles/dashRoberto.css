@@ -17,7 +17,7 @@ h1{
 }
 
 .custom-select h3{
-    color: #8BA0FF;
+    color: #000000;
     font-size: 1vw !important;
     gap: 5vh;
 }
@@ -68,7 +68,7 @@ h3{
 }
 
 #titulo_02 {
-    color: #8BA0FF;
+    color: #000000;
     font-size: 19px;
 
 }
@@ -118,9 +118,10 @@ h3{
 .box_grafico {
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin-top: 2%;
     justify-content: space-evenly;
+    width: 98%;
 }
 
 .box {
@@ -128,6 +129,13 @@ h3{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+}
+
+.graficos{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1%;
 }
 
 .titulo_grafico1{
@@ -147,7 +155,8 @@ h3{
 .box_kpi {
     display: flex;
     flex-direction: row;
-    width: 75vw;
+    width: 92vw;
+    justify-self: center;
     justify-content: space-between;
     border: 0;
     height: 8vw;
@@ -178,10 +187,14 @@ h3{
     margin-right: 80px;
 }
 
+.tabela{
+    width: 45%;
+}
+
   .tabela-alertas-div {
     width: 100%;
     display: flex;
-    height: 100%;
+    height: 95%;
     flex-direction: column;
     box-shadow: var(--box-shadow);
     border-radius: 12px;
@@ -224,3 +237,17 @@ h3{
     background-color: #fdfdfd;
   }
   
+  .tabela-alertas-div::-webkit-scrollbar {
+    width: 15px;
+    margin-left: 20vw;
+}
+
+.tabela-alertas-div::-webkit-scrollbar-track {
+    background: rgba(65, 65, 255, 0.5);
+}
+
+.tabela-alertas-div::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 123, 0.7);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 255, 1);
+}
