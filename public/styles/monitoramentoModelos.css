@@ -181,6 +181,7 @@ span {
 
         display: flex;
         justify-content: center;
+        gap: 1vh;
         align-items: center;
         background-color: #5271FF;
     }

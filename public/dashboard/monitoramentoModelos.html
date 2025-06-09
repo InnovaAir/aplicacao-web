@@ -28,8 +28,10 @@
                     </div>
                     <a href="dashDudu.html"><i class="fas fa-chart-line"></i> <span>Desempenho</span></a>
                     <a href="roberto_Lucas.html"><i class="fas fa-triangle-exclamation"></i> <span>Alertas</span></a>
-                    <a href="monitoramentoModelos.html"><i class="fas fa-desktop"></i> <span>Modelo de <br> Maquinas</span></a>
-                    <a href="dashRoberto.html"><i class="fas fa-microchip"></i> <span>Modelo de <br> Componentes</span></a>
+                    <a href="monitoramentoModelos.html"><i class="fas fa-desktop"></i> <span>Modelo de <br>
+                            Maquinas</span></a>
+                    <a href="dashRoberto.html"><i class="fas fa-microchip"></i> <span>Modelo de <br>
+                            Componentes</span></a>
                     <a onclick="limparSessao()" href="../index.html"><strong>Sair</strong></a>
                 </div>
             </div>
@@ -92,12 +94,12 @@
                     <div id="alertas_kpi_titulo"><b>Quantidade de alertas por modelo</b>
                         <div class="legendaKPI">
                             <div class="box">
-                                <div style="background-color: #ff8ca5;" class="ball"></div>
+                                <div style="background-color: #69d7ff;" class="ball"></div>
                                 <span>CPU</span>
                             </div>
 
                             <div class="box">
-                                <div style="background-color: #69d7ff;" class="ball"></div>
+                                <div style="background-color: #ff8ca5;" class="ball"></div>
                                 <span>RAM</span>
                             </div>
 
@@ -122,19 +124,21 @@
                             <div class="containerLista">
 
 
-                                <div class="linha">
+                                <!-- <div class="linha">
                                     <span><b>a</b></span>
                                     <span class="barraAlertas"></span>
                                     <span><b>c</b></span>
                                     <span style="cursor:pointer;" class="botaoPop"><b><u>Expandir</u></b></span>
-                                </div>
+                                </div> -->
 
 
 
                             </div>
                         </div>
                         <div class="KPI">
-                            <p class="">KPI AQUI!!</p>
+                            <h2 class="">Total de alertas:</h2>
+                            <div style="width: 70%;height:2px; background-color:white"></div>
+                            <h1 class="interfaceTOTALALERTAS"></h1>
                         </div>
                     </div>
                 </div>
@@ -175,76 +179,12 @@
 <script>
 
 
-
-    // fetch especificações dos totens (1 é o numero estático para testes apenas)
-
-    fetch(`/cadastros/metricas/listar/componentes/1`, {
-        method: 'GET',
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-        .then((res) => res.json())
-        .then(specs => {
-            let componenteArray = [];
-            let contador = 0;
-            for (let s of specs) {
-                contador++;
-                componenteArray.push({ id: contador, tipo: s.componente, componente: s.especificacao, fk: s.fkMaquina })
-            }
-            console.log("Componentes:")
-            console.log(componenteArray)
-            specs.componenteArray = componenteArray;
-
-        })
-
-
-    // fetch alertas dos totens
-    fetch(`/cadastros/metricas/listar/alertas/1`, {
-        method: 'GET',
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-        .then((res) => res.json())
-        .then(alertas => {
-            let alertasArray = [];
-            let alertaAnterior = null;
-            let quantidade = 0;
-
-            for (let i = 0; i < alertas.length; i++) {
-                const item = alertas[i];
-                let nivelAtual = item.idCapturaAlerta;
-
-                if (nivelAtual !== alertaAnterior) {
-                    if (alertaAnterior !== null) {
-                        alertasArray.push({
-                            idCapturaAlerta: alertaAnterior,
-                            quantidade: quantidade
-                        });
-                    }
-                    quantidade = 1;
-                    alertaAnterior = nivelAtual;
-                } else {
-                    quantidade++;
-                }
-            }
-
-            if (alertaAnterior !== null) {
-                alertasArray.push({
-                    idCapturaAlerta: alertaAnterior,
-                    quantidade: quantidade
-                });
-            }
-
-            console.log("Alertas:");
-            return alertasArray;
-        })
-        .then(alerta => console.log(alerta));
-
+    // variaveis globais
     let componenteArray = [];
     let ultimoComponente = null;
     let ultimoID = null;
+
+    // evento para mudar de filial
 
     const linha = document.querySelector(".linha")
     const containerLista = document.querySelector(".containerLista")
@@ -252,6 +192,54 @@
         linha.innerHTML = '';
         listarFilial(this.value);
     });
+
+
+    let objetoHistorico = {};
+    let totalDia = [];
+    let componenteDia = [];
+    let dias = [];
+    async function historicoMaquina(idMaquina) {
+        try {
+            const res = await fetch(`/models/infoModelos/historico/${idMaquina}`, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            const filtro = await res.json();
+
+            objetoHistorico = {};
+            totalDia = [];
+            componenteDia = [];
+            dias = [];
+
+            console.log("(1) - FETCH HISTORICO:")
+            console.log(filtro)
+
+            Object.values(filtro).forEach(item => {
+                if (item.Componente == "Processador" || item.Componente == "RAM" || item.Componente == "Armazenamento") {
+                    dias.push(item.Dia)
+                    componenteDia.push(item.Componente)
+                    totalDia.push(item.total_alertas)
+                }
+            })
+
+            objetoHistorico = { "Dia": dias, "ComponenteDia": componenteDia, "TotalAlertasDia": totalDia }
+
+            console.log("objetoHistorico:")
+            console.log(objetoHistorico)
+
+            return objetoHistorico; // Agora retorna corretamente
+
+        } catch (error) {
+            console.error("Erro ao buscar histórico:", error);
+            return null;
+        }
+    }
+
+
+
     listarFilial(1)
     function listarFilial(filialAtual) {
         fetch(`/models/infoModelos/${filialAtual}`, {
@@ -273,6 +261,10 @@
                 let altoCount = 0;
                 let criticoCount = 0;
 
+
+                let componentesPorMaquina = {};
+
+
                 let resultados = [];
                 let modeloAnterior = null;
                 let quantidade = 0;
@@ -281,7 +273,12 @@
                 let maquinasContadas = new Set();
                 componenteArray = [];
 
+                
+                    let QuantidadeDeAlertasTotal = 0;
+
                 for (let i = 0; i < contador.length; i++) {
+
+
                     const item = contador[i];
                     let modeloAtual = item.nomeModelo;
                     let idAtual = item.idMaquina;
@@ -295,9 +292,11 @@
                             ultimoItem.ramCount = ramCount;
                             ultimoItem.discoCount = discoCount;
                             ultimoItem.quantidade = quantidade;
-                            ultimoItem.quantidade = quantidade;
+                            ultimoItem.componentesPorMaquina = componentesPorMaquina;
 
-                            maquinasContadas.clear;
+
+                            componentesPorMaquina = {}
+                            maquinasContadas.clear();
                             resultados.push(ultimoItem);
                         }
 
@@ -310,6 +309,7 @@
                         baixoCount = 0;
                         altoCount = 0;
                         criticoCount = 0;
+                        maquinasContadas = new Set();
                         modeloAnterior = modeloAtual;
                         ultimoItem = item;
                     }
@@ -318,14 +318,35 @@
                         maquinasContadas.add(idAtual);
                         quantidade++;
                     }
-                    if (item.gravidade == "critico") criticoCount++;
-                    if (item.gravidade == "alta") altoCount++;
-                    if (item.gravidade == "baixa") baixoCount++;
 
-                    if (item.componente == "Processador") cpuCount++;
-                    if (item.componente == "RAM") ramCount++;
-                    if (item.componente == "Armazenamento") discoCount++;
+                    if ((item.gravidade == "critico" || item.gravidade == "alto" || item.gravidade == "baixo")) {
 
+
+                        if (item.gravidade == "baixo") {
+                            baixoCount++
+                            
+                        }
+                        if (item.gravidade == "alto") {
+                            altoCount++
+                            
+                        }
+                        if (item.gravidade == "critico") {
+                            criticoCount++
+                            
+                        }
+                        if (item.componente == "Processador") {
+                            cpuCount++;
+                            QuantidadeDeAlertasTotal++
+                        }
+                        if (item.componente == "RAM") {
+                            ramCount++;
+                            QuantidadeDeAlertasTotal++
+                        }
+                        if (item.componente == "Armazenamento") {
+                            discoCount++;
+                            QuantidadeDeAlertasTotal++
+                        }
+                    }
 
 
 
@@ -334,10 +355,15 @@
                         tipo: item.componente,
                         componente: item.especificacao,
                         idMaquina: item.idMaquina,
-                        fkFilial: item.fkFilial
+                        fkFilial: item.fkFilial,
+                        nomeModelo: item.nomeModelo
                     });
                 }
 
+                console.log("Quantidade de alertasTotal:")
+                console.log(QuantidadeDeAlertasTotal)
+
+                document.querySelector(".interfaceTOTALALERTAS").textContent = QuantidadeDeAlertasTotal;
                 // Finaliza último modelo
                 if (ultimoItem !== null) {
                     ultimoItem.altoCount = altoCount;
@@ -347,6 +373,7 @@
                     ultimoItem.ramCount = ramCount;
                     ultimoItem.discoCount = discoCount;
                     ultimoItem.quantidade = quantidade;
+                    ultimoItem.componentesPorMaquina = componentesPorMaquina;
                     resultados.push(ultimoItem);
                 }
 
@@ -378,6 +405,7 @@
 
                 // for para pegar a maquina com mais alertas (para ser referência para o tamanho das outras barras)
                 for (let i = 0; i < resultados.length; i++) {
+
                     const item = resultados[i];
                     var tamanhototal = item.quantidade;
                     if (tamanhototal > maiorAlerta) {
@@ -389,6 +417,7 @@
                 resultados.sort((a, b) => b.quantidade - a.quantidade);
 
                 for (let i = 0; i < resultados.length; i++) {
+                    debugger
                     const item = resultados[i];
                     contadorPopUp++
 
@@ -503,7 +532,7 @@
                     botaoPop.innerHTML = `<u><b>Expandir</b></u>`;
                     botaoPop.style.cursor = "pointer"
 
-                    let componentesPorMaquina = {};
+                    componentesPorMaquina = {};
 
                     for (let j = 0; j < componenteArray.length; j++) {
                         let componenteAtual = componenteArray[j];
@@ -524,22 +553,41 @@
                         }
                     }
 
+                    item.componentesPorMaquina = componentesPorMaquina;
+
                     console.log("Componentes do pop up1:")
                     console.log(componentesPorMaquina)
 
-                    botaoPop.addEventListener("click", () => {
+
+                    botaoPop.addEventListener("click", async () => {
                         console.log("Botão clicado - ID do objeto:", item.popupId);
                         console.log("Objeto completo:", item);
 
+                        const historico = await historicoMaquina(item.idMaquina);
+
                         abrirPopUpComModelo(
                             item.nomeModelo,
-                            componentesPorMaquina,
+                            item.componentesPorMaquina,
                             item.criticoCount,
                             item.altoCount,
                             item.baixoCount,
-                            item.popupId
+                            item.popupId,
+                            historico
                         );
-                    });
+                    },
+
+                        //    botaoPop.addEventListener("click", () => {
+                        //        console.log("Botão clicado - ID do objeto:", item.popupId);
+                        //        console.log("Objeto completo:", item);
+                        //
+                        //        console.log("HistoricoMaquina:")
+                        //        console.log(historicoMaquina(item.popupId));
+                        //    }
+
+
+
+
+                    );
 
                     linha.appendChild(botaoPop)
                 }
@@ -551,13 +599,18 @@
     }
 
 
-    function abrirPopUpComModelo(nomeModelo, componentesPorMaquina, criticoCount, altoCount, baixoCount, popupId) {
+    function abrirPopUpComModelo(nomeModelo, componentesPorMaquina, criticoCount, altoCount, baixoCount, popupId, historicoMaquina) {
         console.log("nomeModelo:", nomeModelo);
         console.log("componentesPorMaquina:", componentesPorMaquina);
         console.log("criticoCount:", criticoCount);
         console.log("altoCount:", altoCount);
         console.log("baixoCount:", baixoCount);
         console.log("popupId:", popupId);
+
+        console.log("Historico maquina:")
+        console.log(historicoMaquina)
+        console.log("Historico maquina.TotalAlertasDia:")
+        console.log(historicoMaquina.TotalAlertasDia)
 
 
         const popup = document.querySelector(".popUp");
@@ -566,49 +619,28 @@
         const specs = popup.querySelector(".specsModelo");
         specs.innerHTML = "";
 
-        //   // gráfico de torta da quantidade de alertas
-        //   var options = {
-        //       series: [criticoCount, altoCount, baixoCount],
-        //       chart: {
-        //           height: "50%",
-        //           type: 'pie',
-        //       },
-        //       labels: ['Alertas Críticos', 'Alertas Altos', 'Alertas Baixos'],
-        //       legend: {
-        //           fontSize: '19px',
-        //
-        //       },
-        //       responsive: [{
-        //           breakpoint: 480,
-        //           options: {
-        //               chart: {
-        //                   width: 40,
-        //                   height: 40
-        //               },
-        //               legend: {
-        //                   position: 'bottom'
-        //               }
-        //           }
-        //       }]
-        //   };
-        //   chartPopUp = new ApexCharts(document.querySelector(".graficoTorta"), options);
-        //   chartPopUp.render();
-        //
-        //   console.log("Estrutura completa de componentesPorMaquina:");
-        //   console.log(componentesPorMaquina);
-        //
 
         // histórico de alertas (gráfico linhas)
+
+        // Processar dados em uma linha
+        const alertasPorDia = historicoMaquina.Dia.reduce((acc, dia, index) => {
+            acc[dia] = (acc[dia] || 0) + historicoMaquina.TotalAlertasDia[index];
+            return acc;
+        }, {});
+
+        const dias = Object.keys(alertasPorDia).map(Number).sort((a, b) => a - b);
+        const valores = dias.map(dia => alertasPorDia[dia]);
+        console.log("dias")
+        console.log(dias)
+
+        console.log("valores")
+        console.log(valores)
 
         var options = {
             series: [
                 {
                     name: "High - 2013",
-                    data: [28, 29, 33, 36, 32, 32, 33]
-                },
-                {
-                    name: "Low - 2013",
-                    data: [12, 11, 14, 18, 17, 13, 13]
+                    data: valores
                 }
             ],
             chart: {
@@ -638,7 +670,7 @@
                 curve: 'smooth'
             },
             title: {
-                text: 'Average High & Low Temperature',
+                text: `Alertas da maquina ${nomeModelo} nos últimos 30 dias.`,
                 align: 'left'
             },
             grid: {
@@ -652,17 +684,17 @@
                 size: 1
             },
             xaxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                categories: dias,
                 title: {
-                    text: 'Month'
+                    text: 'Dia'
                 }
             },
             yaxis: {
                 title: {
-                    text: 'Temperature'
+                    text: 'Alertas'
                 },
-                min: 5,
-                max: 40
+                min: 1,
+                max: 100
             },
             legend: {
                 position: 'top',
