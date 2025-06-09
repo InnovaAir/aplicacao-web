@@ -5,12 +5,12 @@ const calcularDesempenho = (linha) => {
   const alto = Number(linha.alto) || 0;
   // const baixo = Number(linha.baixo) || 0;
 
-  const perdas = (critico * 2) + (alto * 1);
+  const perdas = ((critico * 2) + (alto * 1)) / 28;
   
   const desempenho = Math.max(0, 100 - perdas);
   
   return desempenho;
-};
+};  
 
 const obterDesempenho = async (req, res) => {
   try {

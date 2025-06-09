@@ -36,7 +36,7 @@ body {
 
 .box_direita {
     /* border: 1px solid green; */
-    height: 88vh;
+    height: 87vh;
     width: 46vw;
     margin-left: 6vh;
 }
@@ -83,8 +83,9 @@ body {
     height: 4vh;
     text-align: start;
     font-size: 1vw;
-    color: #5271FF;
+    color: #000000;
     font-weight: bolder;
+    margin-bottom: 13px;
 }
 
 .div_kpis {

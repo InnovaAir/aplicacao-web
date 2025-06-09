@@ -82,6 +82,10 @@ function carregarMaquinas(dados) {
       else if (valor < 65) classe = 'yellow';
     }
 
+    // if (classe === 'yellow'){
+    //   coluna.style.color = 'black';
+    // }
+
     let nomeTerminal;
     switch (maq.terminal) {
       case "1":
@@ -103,7 +107,7 @@ function carregarMaquinas(dados) {
       <div class="coluna">${maq.alto || 0}</div>
       <div class="coluna">${maq.baixo || 0}</div>
       <div class="coluna">${maq.total_alertas || 0}</div>
-      <div class="coluna">${maq.desempenho !== undefined ? maq.desempenho + '%' : 'N/A'}</div>
+      <div class="coluna">${maq.desempenho.toFixed(2) !== undefined ? maq.desempenho.toFixed(2) + '%' : 'N/A'}</div>
     `;
     lista.appendChild(div);
   });
@@ -159,7 +163,7 @@ async function listarFiliais() {
     const json_filiais = await res.json();
 
     const slc_filial = document.getElementById("slc_filial");
-    slc_filial.innerHTML = `<option disabled value="null">Selecione um aeroporto</option>`;
+    // slc_filial.innerHTML = `<option disabled value="null">Selecione um aeroporto</option>`;
     slc_filial.innerHTML += `<option selected value="">Todos os meus aeroportos</option>`;
 
     filiais = [];
@@ -330,7 +334,7 @@ function atualizarGraficoDesempenho(maquinas) {
     const desempenho = parseFloat(maq.desempenho ?? 0);
     const critico = parseInt(maq.critico) || 0;
     const alto = parseInt(maq.alto) || 0;
-    const peso = (critico * 2) + (alto * 1);
+    const peso = ((critico * 2) + (alto * 1)) / 28;
 
     if (!terminais[terminal]) {
       terminais[terminal] = {

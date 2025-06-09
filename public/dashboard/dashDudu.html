@@ -28,7 +28,7 @@
             </button>
           </div>
 
-          <a href="dashDudu.html"><i class="fas fa-chart-line"></i> <span>Desempenho</span></a>
+          <a href="dashDudu.html"><i class="fas fa-chart-line"></i> <span>Comportamento</span></a>
           <a href="roberto_Lucas.html"><i class="fas fa-triangle-exclamation"></i> <span>Alertas</span></a>
           <a href="monitoramentoModelos.html"><i class="fas fa-desktop"></i> <span>Modelo de <br> Maquinas</span></a>
           <a href="dashRoberto.html"><i class="fas fa-microchip"></i> <span>Modelo de <br> Componentes</span></a>
@@ -38,7 +38,7 @@
 
 
             <div class="div_titulo1">
-              <h1>Análise de Comportamento por Aeroporto - Últimas 24h</h1>
+              <h1>Análise de Comportamento por Aeroporto - Último Mês</h1>
             </div>
 
       <div id="box_geral1" class="box_geral">
@@ -65,10 +65,10 @@
 
               <div class="custom-select-wrapper">
                 <div class="div_slcFil">
-                  <span>Selecione o endereço monitorado</span>
+                  <span>Selecione um aeroporto</span>
                   <select id="slc_filial" onchange="aplicarFiltro()" class="custom-select">
                     <!-- <option value="">Filial</option> -->
-                    <option selected>Todos os Aeroportos</option>
+                    <!-- <option selected>Todos os Aeroportos</option> -->
                     <!-- <option>GRU Airport</option> -->
                     <!-- <option>Galeão Airport</option> -->
                   </select>
@@ -101,7 +101,7 @@
               </div>
 
               <div class="kpi_caixa">
-                <h2 class="kpi_titulo">Totens com<br />Baixo Desempenho</h2>
+                <h2 class="kpi_titulo">Totens com<br />Desempenho abaixo de 35%</h2>
                 <hr class="kpi_linha" />
                 <h1 class="kpi_valor">
                   <h1 class="kpi_texto" id="kpi_baixo"></h1>
@@ -148,7 +148,7 @@
             <div class="div_legenda">
               <div class="box_check filtro" data-filtro="verde">
                 <span class="check_box_suficiente"></span>
-                <h5 class="checkbox-text">Desempenho Suficiente </h5>
+                <h5 class="checkbox-text">Desempenho Bom </h5>
                 <!-- <br />
               &gt; 75% -->
               </div>
@@ -162,7 +162,7 @@
 
               <div class="box_check filtro" data-filtro="vermelho">
                 <span class="check_box_insuficiente"></span>
-                <h5 class="checkbox-text">Desempenho Insuficiente </h5>
+                <h5 class="checkbox-text">Desempenho Ruim </h5>
                 <!-- <br />
             &gt; 25% -->
               </div>
