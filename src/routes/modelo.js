@@ -7,4 +7,8 @@ router.get("/infoModelos/:fk", function(req, res){
     modelosController.listarMetricasEComponente(req, res)
 })
 
+router.get("/infoModelos/historico/:fk", function(req, res){
+    modelosController.filtroHistoricoModelo(req, res)
+})
+
 module.exports = router;
