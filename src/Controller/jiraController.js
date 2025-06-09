@@ -1,8 +1,8 @@
 async function buscarChamados(req, res) {
     var jql = req.body.jql;
 
-    const jiraBaseUrl = 'https://inovaair.atlassian.net';
-    const apiToken = '';
+    const jiraBaseUrl = process.env.URL_JIRA;
+    const apiToken = process.env.TOKEN_JIRA;
     const email = 'diogo.tateno@sptech.school';
 
     const headers = {
