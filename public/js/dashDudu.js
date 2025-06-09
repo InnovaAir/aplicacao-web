@@ -320,13 +320,16 @@ function atualizarSetas() {
 //Dashboard
 function atualizarGraficoDesempenho(maquinas) {
   const terminais = {};
+  const nomesTerminais = {
+    "1": "GRU",
+    "2": "SDU"
+  };
 
   maquinas.forEach(maq => {
     const terminal = maq.terminal;
     const desempenho = parseFloat(maq.desempenho ?? 0);
     const critico = parseInt(maq.critico) || 0;
     const alto = parseInt(maq.alto) || 0;
-    // const baixo = parseInt(maq.baixo) || 0;
     const peso = (critico * 2) + (alto * 1);
 
     if (!terminais[terminal]) {
@@ -361,7 +364,7 @@ function atualizarGraficoDesempenho(maquinas) {
     }
 
     desempenhoPorTerminal.push({
-      terminal,
+      terminal: nomesTerminais[terminal] || terminal,
       desempenho: parseFloat(desempenhoFinal.toFixed(1))
     });
   }
@@ -377,6 +380,8 @@ function atualizarGraficoDesempenho(maquinas) {
     return '#00A100';
   });
 
+  console.log("Labels do grafico: ", labels)
+
   const options = {
     chart: {
       type: 'bar',
@@ -388,7 +393,8 @@ function atualizarGraficoDesempenho(maquinas) {
     plotOptions: {
       bar: {
         horizontal: true,
-        barHeight: '30%'
+        barHeight: '30%',
+        distributed: true
       }
     },
     dataLabels: {
@@ -417,7 +423,7 @@ function atualizarGraficoDesempenho(maquinas) {
       title: {
         text: 'Desempenho',
         style: {
-          fontSize : '20px',
+          fontSize: '20px',
           fontWeight: 'bold'
         }
       }
@@ -426,16 +432,16 @@ function atualizarGraficoDesempenho(maquinas) {
       title: {
         text: 'Aeroportos',
         style: {
-          fontSize : '20px',
+          fontSize: '20px',
           fontWeight: 'bold'
         }
       },
       labels: {
-    style: {
-      fontSize: '20px', 
-      fontWeight: 'bold'
-    }
-  }
+        style: {
+          fontSize: '20px',
+          fontWeight: 'bold'
+        }
+      }
     },
     series: [{
       name: 'Desempenho',
@@ -451,6 +457,7 @@ function atualizarGraficoDesempenho(maquinas) {
     apexChart.render();
   }
 }
+
 
 window.onload = async function () {
   await getIdUsuario();
