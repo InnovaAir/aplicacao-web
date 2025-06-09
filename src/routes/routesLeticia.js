@@ -42,8 +42,8 @@ async function streamToString(stream) {
 router.get('/getCsvAndConvertToJson', async (req, res) => {
     try {
         console.log("AWS_ACCESS_KEY_ID:", process.env.AWS_ACCESS_KEY_ID);
-        console.log("AWS_SECRET_ACCESS_KEY:", process.env.AWS_SECRET_ACCESS_KEY ? "DEFINED" : "UNDEFINED"); // Não imprima a chave secreta
-        console.log("AWS_SESSION_TOKEN:", process.env.AWS_SESSION_TOKEN ? "DEFINED" : "UNDEFINED"); // Não imprima o token
+        console.log("AWS_SECRET_ACCESS_KEY:", process.env.AWS_SECRET_ACCESS_KEY ? "DEFINED" : "UNDEFINED");
+        console.log("AWS_SESSION_TOKEN:", process.env.AWS_SESSION_TOKEN ? "DEFINED" : "UNDEFINED");
         const command = new GetObjectCommand({
             Bucket: 'leticia-bucket-so',
             Key: 'clima.csv'

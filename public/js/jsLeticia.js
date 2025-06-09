@@ -271,7 +271,6 @@ async function atualizarGrafico() {
 
     atualizarKPI();
     buscarEndereco();
-    // atualizarBarras();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
