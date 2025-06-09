@@ -387,7 +387,7 @@
                 //-----------------------------------
                 console.log("resultados")
                 console.log(resultados)
-
+debugger
 
 
                 // ADICIONANDO IDs CRESCENTES AOS OBJETOS DE RESULTADOS
@@ -408,16 +408,18 @@
                 for (let i = 0; i < resultados.length; i++) {
 
                     const item = resultados[i];
-                    var tamanhototal = item.quantidade;
+                    var tamanhototal = item.cpuCount + item.ramCount + item.discoCount;
                     if (tamanhototal > maiorAlerta) {
                         maiorAlerta = tamanhototal;
                     }
                 }
 
+        
                 // ORDENANDO DO MAIOR PARA O MENOR
-                resultados.sort((a, b) => b.quantidade - a.quantidade);
+                resultados.sort((a, b) => (b.cpuCount + b.ramCount + b.discoCount) -(a.cpuCount + a.ramCount + a.discoCount));
 
                 for (let i = 0; i < resultados.length; i++) {
+                
                     debugger
                     const item = resultados[i];
                     contadorPopUp++
@@ -450,7 +452,7 @@
 
 
                     const barraAlertas = document.createElement("span");
-                    barraAlertas.style.width = ((item.quantidade / maiorAlerta) * 100) + "%";
+                    barraAlertas.style.width = ((totalAlertas / maiorAlerta) * 100) + "%";
                     barraAlertas.className = "barraAlertas";
 
 
