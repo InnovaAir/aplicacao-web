@@ -71,11 +71,12 @@ body h5 {
 .kpi {
     padding: 1.25%;
     border-radius: 10px;
-    height: fit-content;
+    height: 100%;
     color: white;
     box-shadow: var(--box-shadow);
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.45);
 
@@ -92,6 +93,7 @@ body h5 {
 }
 
 .border-kpi {
+    max-width: 20vw;
     color: #000;
     text-shadow: none;
 
@@ -478,7 +480,12 @@ body {
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
 
+        }
+
+        #mac_totem {
+            font-size: 1vw;
         }
 
         .box-chart {
