@@ -135,9 +135,8 @@ INSERT INTO usuario VALUES
 INSERT INTO usuarioFilial (fkUsuario, fkFilial) VALUES
 (1,1),
 (2,2),
-(2,3),
-(2,4),
-(2,5);
+(3,3),
+(4,4);
 
 # ____________________________________________________________________________________________________________________________________
 INSERT INTO filial (terminal, setor, fkCliente, fkEndereco) VALUES
