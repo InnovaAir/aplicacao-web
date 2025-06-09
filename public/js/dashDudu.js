@@ -88,7 +88,7 @@ function carregarMaquinas(dados) {
         nomeTerminal = "GRU";
         break;
       case "2":
-        nomeTerminal = "Galeão";
+        nomeTerminal = "SDU";
         break;
       default:
         nomeTerminal = maq.terminal || '-';
@@ -172,7 +172,7 @@ async function listarFiliais() {
           nomeExibido = "GRU";
           break;
         case "2":
-          nomeExibido = "Galeão";
+          nomeExibido = "SDU";
           break;
         default:
           nomeExibido = filialAtual.terminal;
