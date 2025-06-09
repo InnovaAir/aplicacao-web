@@ -2,7 +2,7 @@ var database = require("../database/config.js");
 
 function getAlertas() {
     var instrucaoSql = `
-        SELECT * FROM view_alertas_ultimos_3_meses_ram_cpu;
+        SELECT * FROM view_grafico_linha;
     `;
 
     return database.executar(instrucaoSql);
@@ -10,7 +10,7 @@ function getAlertas() {
 
 function getAlertasNivel() {
     var instrucaoSql = `
-        SELECT * FROM view_gravidade;
+        SELECT * FROM view_kpi_alerta;
     `;
 
     return database.executar(instrucaoSql);

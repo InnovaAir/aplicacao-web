@@ -268,7 +268,6 @@ async function atualizarGrafico() {
         document.getElementById("kpi_total").innerText = dadosGrafico_ram[3] + dadosGrafico_cpu[3];
     }
 
-
     atualizarKPI();
     buscarEndereco();
 }
