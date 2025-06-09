@@ -15,7 +15,17 @@ i {
 }
 
 #titulo_select {
-    font-size: 20px;
+    font-size: 1.4vw;
+    color: #000;
+}
+
+.sub {
+    font-size: 1.6vw; 
+    color: #000;
+}
+
+.kpi_titulo {
+    font-size: 1.6vw;
 }
 
 .tela_geral {
@@ -45,7 +55,7 @@ i {
 }
 
 .titulo01 {
-    font-size: 38px;
+    font-size: 2vw;
 }
 
 .titulo_alinhado {
@@ -107,7 +117,7 @@ i {
 }
 
 #numero_kpi {
-    font-size: 40px;
+    font-size: 2vw;
     text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.45);
 }
 
@@ -154,7 +164,7 @@ i {
 
 /* GRÁFICO */
 .grafico {
-    height: 90%;
+    height: 70%;
     width: 100%;
 }
 
