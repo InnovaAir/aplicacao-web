@@ -75,12 +75,12 @@
             </div>
             <!-- <body onload="tamanhoBarra()
 "> -->
-            <div id="tela" class="container">
                 <div class="child">
 
 
-                    <div class="tituloContainer">Alertas por modelo</div>
-                    <div class="resumoContainer"><i>Visualize os modelos e a quantidade de alertas emitidos nos ultimos 30 dias.</i></div>
+                    <div class="tituloContainer">Quantidade de alertas por modelo</div>
+                    <div class="resumoContainer"><i>Visualize os modelos e a quantidade de alertas emitidos nos ultimos
+                            30 dias.</i></div>
                     <div class="subtituloContainer">
                         <div id="titulo_select"><b>Selecione a filial</b></div>
                         <select id="select_filial" class="selectBox">
@@ -92,7 +92,7 @@
 
 
                     </div>
-                    <div id="alertas_kpi_titulo"><b>Quantidade de alertas por modelo</b>
+                    <div id="alertas_kpi_titulo">
                         <div class="legendaKPI">
                             <div class="box">
                                 <div style="background-color: #69d7ff;" class="ball"></div>
@@ -109,6 +109,11 @@
                                 <span>Disco</span>
                             </div>
 
+                        </div>
+                        <div class="KPI">
+                            <h4>Total de alertas:</h4>
+                            <div style="width: 70%;height:2px; background-color:white"></div>
+                            <h1 class="interfaceTOTALALERTAS"></h1>
                         </div>
                     </div>
 
@@ -136,11 +141,7 @@
 
                             </div>
                         </div>
-                        <div class="KPI">
-                            <h2>Total de alertas:</h2>
-                            <div style="width: 70%;height:2px; background-color:white"></div>
-                            <h1 class="interfaceTOTALALERTAS"></h1>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -386,7 +387,7 @@
                 //-----------------------------------
                 console.log("resultados")
                 console.log(resultados)
-debugger
+                debugger
 
 
                 // ADICIONANDO IDs CRESCENTES AOS OBJETOS DE RESULTADOS
@@ -413,12 +414,12 @@ debugger
                     }
                 }
 
-        
+
                 // ORDENANDO DO MAIOR PARA O MENOR
-                resultados.sort((a, b) => (b.cpuCount + b.ramCount + b.discoCount) -(a.cpuCount + a.ramCount + a.discoCount));
+                resultados.sort((a, b) => (b.cpuCount + b.ramCount + b.discoCount) - (a.cpuCount + a.ramCount + a.discoCount));
 
                 for (let i = 0; i < resultados.length; i++) {
-                
+
                     debugger
                     const item = resultados[i];
                     contadorPopUp++

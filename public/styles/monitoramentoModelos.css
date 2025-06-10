@@ -25,7 +25,8 @@
 
 body {
     z-index: 2;
-      font-family: Inter";
+    font-family: Inter";
+
 }
 
 * {
@@ -37,6 +38,7 @@ body {
 
 .container {
     width: 100vw;
+
     height: fit-content;
 }
 
@@ -67,6 +69,7 @@ span {
     overflow-wrap: anywhere;
 }
 
+
 .itemLista {
     height: 100%;
     display: flex;
@@ -87,7 +90,6 @@ span {
     grid-row-gap: 10%;
     grid-template-columns: 3fr 7fr 2fr 3fr;
     background-color: #ffffff;
-    border: solid #5271ff 2px;
 }
 
 .gridTitulo {
@@ -118,12 +120,14 @@ span {
 
 .legendaKPI {
     display: flex;
-    /* para 3 colunas */
     gap: 5%;
     padding: 1%;
     align-items: center;
     border: 0.2vw solid #DDE1E6;
-    width: 40%;
+    width: 45%;
+    min-height: 3em;
+    max-height: 8em;
+    align-self: center;
     word-wrap: none;
     text-wrap-mode: wrap;
 }
@@ -141,11 +145,12 @@ span {
 
 .resumoContainer {
     color: #111111;
+    width: 80vw;
     font-size: max(1.3vw, 20px);
 }
 
 .ball {
-    width: 1vw;
+    width: 1.5vw;
     aspect-ratio: 1/1;
     border-radius: 100%;
     border: 1px solid black;
@@ -164,39 +169,31 @@ span {
 }
 
 
-.main {
+.KPI {
+    position: relative;
+    margin: 2px;
+    flex-direction: column;
+    font-family: Inter;
+    min-height: 3em;
+    max-height: 8em;
+    width: 40%;
     display: flex;
-    width: 90vw;
-    height: fit-content;
-    justify-content: space-around;
-
-    .KPI {
-        position: relative;
-        margin: 2px;
-        flex-direction: column;
-        font-family: Inter;
-        min-height: 10vh;
-        max-height: 20vh;
-        width: 20%;
-        color: white;
-        border-radius: 5px;
-        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
-
-        display: flex;
-        justify-content: center;
-        gap: 1vh;
-        align-items: center;
-        background-color: #5271FF;
-    }
+    align-items: center;
+    justify-content: space-evenly;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
+    background-color: #5271FF;
 }
 
 .child {
-    width: fit-content;
+
+
+    margin-left: 60px;
     height: fit-content;
     flex-direction: column;
     display: flex;
     gap: 2rem;
-    margin-left: 7vw;
 
 
 }
@@ -217,6 +214,12 @@ span {
     height: 120vh;
     background-color: black;
     opacity: 40%;
+}
+
+.main {
+    display: flex;
+    align-self: flex-start;
+
 }
 
 .mainPopup {
@@ -275,7 +278,7 @@ span {
     height: 99%;
 }
 
-.graficoHist{
+.graficoHist {
     background-color: antiquewhite;
     display: flex;
     align-items: center;
@@ -354,8 +357,11 @@ span {
 #alertas_kpi_titulo {
     font-size: max(2vw, 30px);
     display: flex;
+    min-height: 130px;
+    width: 80%;
+    padding-right: 10%;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     color: #0026D6;
 
 
@@ -423,7 +429,8 @@ span {
     align-items: center;
     top: 40%;
     justify-content: space-evenly;
-    display: flex;    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
     width: 20vw;
 }
@@ -436,7 +443,7 @@ span {
 
     padding: 0.7vw;
     padding-right: 10em;
-    max-width: 10vw;
+    max-width: fit-content;
     min-width: none;
     border: none;
     border-bottom: 0.4vh solid #B0BEC5;
@@ -454,20 +461,25 @@ span {
 
 
 
-    .scrollLog::-webkit-scrollbar-thumb {
-        background-color: #8BA0FF;
-    }
-
-    .scrollLog::-webkit-scrollbar-button {
-        display: none;
-        height: 0;
-        width: 0;
-    }
+    
 
 
 }
 
 @media (max-width: 768px) {
+
+    #alertas_kpi_titulo {
+        font-size: max(2vw, 30px);
+        display: flex;
+        min-height: 120px;
+        max-height: 120px;
+        flex-direction: row;
+        justify-content: space-evenly;
+        color: #0026D6;
+
+
+    }
+
     .barraAlertas {
         max-height: 4vh;
     }
@@ -527,13 +539,13 @@ span {
         display: flex;
         flex-direction: column;
         gap: 1rem;
-        margin-left: 12vw;
-        padding: 0.5rem;
+        margin-left: 10vw;
+        width: 30%;
         overflow-y: hidden;
     }
 
     .ball {
-        width: 3vw;
+        width: 2.5vw;
     }
 
 }
