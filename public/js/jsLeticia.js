@@ -448,6 +448,10 @@ function calcularR2(x, y) {
 
     var denominador = Math.sqrt(somaQuadradoX * somaQuadradoY);
 
+    if (denominador === 0) {
+        return 0
+    }
+
     var r = numerador / denominador;
 
     return r * r;

@@ -25,7 +25,11 @@ i {
 }
 
 .kpi_titulo {
+    padding-top: 5%;
     font-size: 1.6vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .tela_geral {
@@ -96,11 +100,11 @@ i {
 }
 
 .box_kpi {
-    height: 20%;
+    height: 22%;
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .box_kpi_nivel {
@@ -108,7 +112,6 @@ i {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     text-align: center;
     font-size: 24px;
     border-radius: 5px;
