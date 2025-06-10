@@ -368,7 +368,7 @@ function trocarKpi(clientefk,id){
             mensagem +=`
                         <div class="col-sm-6 col-md-3">
                             <div class="card-alert"${bgColor} style="border-radius: 10px !important;">
-                                <h3>Total - Alertas de ${componente}</h3>
+                                <h3 class="borda">Total - Alertas de ${componente}</h3>
                                 <h1>${qtdAlertas}</h1>
                             </div>
                         </div>
@@ -438,7 +438,7 @@ function plotarkpi(){
             mensagem +=`
                         <div class="col-sm-6 col-md-3">
                             <div class="card-alert"${bgColor} style="border-radius: 10px !important;">
-                                <h3>Total - Alertas de ${componente}</h3>
+                                <h3 class="borda">Total - Alertas de ${componente}</h3>
                                 <h1>${qtdAlertas}</h1>
                             </div>
                         </div>

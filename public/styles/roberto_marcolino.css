@@ -22,6 +22,9 @@ body, html {
     /* h5{
         font-size: 1.7vw !important;
     } */
+    .borda{
+        border-bottom: 2px solid rgb(255, 255, 255) !important;
+    }
     #canvas{
         box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.35);
         border-radius: 10px;
