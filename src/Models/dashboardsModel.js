@@ -13,7 +13,7 @@ function dashGerenteDadosQtd(modelo1, modelo2, modelo3, modelo4, modelo5, idUsua
 }
 
 function obterDadosGerenteMenor(idUsuario){
-    var instrucaoSql = `select * from dashRobertoModelosMenor where idUsuario = ${idUsuario}`
+    var instrucaoSql = `select * from dashRobertoModelosMenor`
         console.log("Executando instrução:", instrucaoSql)
     return database.executar(instrucaoSql);
 }
