@@ -62,23 +62,29 @@ body, html {
             width: 20vh !important;
         }
     }
-    @media (max-width: 993px) {
+    @media (max-width: 1114px) {
         .button{
             height: 8vh !important;
             width: 17vh !important;
+        }
+    }
+    @media (max-width: 993px) {
+        .button{
+            height: 8vh !important;
+            width: 15vh !important;
         }
         canvas{
             height: 43vh !important;
             width: 95% !important;
         }
     }
-    @media (max-width: 800px) {
+    @media (max-width: 836px) {
         .button{
             height: 6vh !important;
             width: 14vh !important;
         }
         #titulo{
-            height: 8vh !important;
+            height: 13vh !important;
         }
         .conteudo{
             width: 85vw !important;

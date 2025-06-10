@@ -276,21 +276,16 @@ function trocarMensal(evt, elements) {
                     chartMensal.data.datasets[i].label = "sem dados";
                 }
 
-                var bgColor = "";
                 if(i === 0 && chartMensal.data.datasets[i].label != "sem dados"){
-                    bgColor = ` style="background-color: #DE2828 !important;border-radius: 10px !important;"`;
                     chartMensal.data.datasets[i].backgroundColor = '#DE2828';
                 }
                 if(i === 1 && chartMensal.data.datasets[i].label != "sem dados"){
-                    bgColor = ` style="background-color: #de6528 !important;border-radius: 10px !important;"`
                     chartMensal.data.datasets[i].backgroundColor = '#de6528';
                 }
                 if(i === 2 && chartMensal.data.datasets[i].label != "sem dados"){
-                    bgColor = ` style="background-color: #DEC828 !important;border-radius: 10px !important;"`
                     chartMensal.data.datasets[i].backgroundColor = '#DEC828';
                 }
                 if(i === 3 && chartMensal.data.datasets[i].label != "sem dados"){
-                    bgColor = ` style="background-color: #5271FF !important;border-radius: 10px !important;"`
                     chartMensal.data.datasets[i].backgroundColor = '#5271FF';
                 }
 
@@ -333,8 +328,6 @@ function trocarKpi(clientefk,id){
             var alertas = dados[i];
             var componente = alertas.componente;
             var qtdAlertas = alertas.total_alertas;
-            var cor = "";
-            var borda = "";
 
             if(componente == "Processador"){
                 componente = "CPU"
@@ -367,7 +360,7 @@ function trocarKpi(clientefk,id){
             }
             mensagem +=`
                         <div class="col-sm-6 col-md-3">
-                            <div class="card-alert"${bgColor} style="border-radius: 10px !important;">
+                            <div class="card-alert p-5"${bgColor} style="border-radius: 10px !important;">
                                 <h3 class="borda">Total - Alertas de ${componente}</h3>
                                 <h1>${qtdAlertas}</h1>
                             </div>
@@ -437,7 +430,7 @@ function plotarkpi(){
             }
             mensagem +=`
                         <div class="col-sm-6 col-md-3">
-                            <div class="card-alert"${bgColor} style="border-radius: 10px !important;">
+                            <div class="card-alert p-5"${bgColor} style="border-radius: 10px !important;">
                                 <h3 class="borda">Total - Alertas de ${componente}</h3>
                                 <h1>${qtdAlertas}</h1>
                             </div>
@@ -565,7 +558,6 @@ function plotarFilial(){
 
         var filiais = [];
         var alertas = [];
-        var cores = [];
         var ids = [];
         
         for(var i = 0; i < dados.length; i++){
