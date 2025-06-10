@@ -350,7 +350,7 @@ span {
     margin-top: 20px;
     font-weight: 700;
     font-size: max(2vw, 30px);
-    color: #0026D6;
+    color: #5271FF;
 
 }
 
@@ -362,7 +362,7 @@ span {
     padding-right: 10%;
     flex-direction: row;
     justify-content: space-evenly;
-    color: #0026D6;
+    color: #5271FF;
 
 
 }
@@ -475,7 +475,7 @@ span {
         max-height: 120px;
         flex-direction: row;
         justify-content: space-evenly;
-        color: #0026D6;
+        color: #5271FF;
 
 
     }
@@ -528,7 +528,7 @@ span {
 
     b {
 
-        font-size: 5vw;
+        font-size: 3vw;
     }
 
     span {
@@ -548,6 +548,8 @@ span {
         width: 2.5vw;
     }
 
+
+
 }
 
 
@@ -555,7 +557,7 @@ span {
     font-size: 20px;
     display: flex;
     flex-direction: column;
-    color: #0026D6;
+    color: #5271FF;
 
 }
 
