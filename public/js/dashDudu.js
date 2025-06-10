@@ -82,10 +82,6 @@ function carregarMaquinas(dados) {
       else if (valor < 65) classe = 'yellow';
     }
 
-    // if (classe === 'yellow'){
-    //   coluna.style.color = 'black';
-    // }
-
     let nomeTerminal;
     switch (maq.terminal) {
       case "1":
@@ -109,6 +105,14 @@ function carregarMaquinas(dados) {
       <div class="coluna">${maq.total_alertas || 0}</div>
       <div class="coluna">${maq.desempenho.toFixed(2) !== undefined ? maq.desempenho.toFixed(2) + '%' : 'N/A'}</div>
     `;
+
+    if (classe === 'yellow') {
+      const colunasDestaLinha = div.getElementsByClassName('coluna');
+      for (let i = 0; i < colunasDestaLinha.length; i++) {
+        colunasDestaLinha[i].style.color = 'black';
+      }
+    }
+
     lista.appendChild(div);
   });
 
@@ -406,7 +410,8 @@ function atualizarGraficoDesempenho(maquinas) {
       formatter: val => `${val}%`,
       style: {
         fontWeight: 'bold',
-        fontSize: '22px'
+        fontSize: '22px',
+        colors: ['#000000']
       }
     },
     tooltip: {
