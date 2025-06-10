@@ -19,13 +19,13 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarios = require("./src/routes/usuarios");
 var cadastros = require("./src/routes/cadastros");
-// var feitosaR = require("./src/routes/feitosa");
+var feitosaR = require("./src/routes/feitosa");
 var marcolino = require("./src/routes/marcolino");
-// var modeloRoute = require("./src/routes/modelo")
-// var dashboards = require("./src/routes/dashboards");
-// var dashDudu = require("./src/routes/dashDuduRoutes");
-// var dashLeticia = require("./src/routes/routesLeticia");
-// var jiraRouter = require("./src/routes/jira");
+var modeloRoute = require("./src/routes/modelo")
+var dashboards = require("./src/routes/dashboards");
+var dashDudu = require("./src/routes/dashDuduRoutes");
+var dashLeticia = require("./src/routes/routesLeticia");
+var jiraRouter = require("./src/routes/jira");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -36,13 +36,13 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/usuarios", usuarios);
 app.use("/cadastros", cadastros);
-// app.use("/dashboards", dashboards);
-// app.use("/dashDuduRoutes", dashDudu);
-// app.use("/dashLeticia", dashLeticia);
-// app.use("/dados", feitosaR);
+app.use("/dashboards", dashboards);
+app.use("/dashDuduRoutes", dashDudu);
+app.use("/dashLeticia", dashLeticia);
+app.use("/dados", feitosaR);
 app.use("/marcolino", marcolino);
-// app.use("/models", modeloRoute);
-// app.use("/jira", jiraRouter);
+app.use("/models", modeloRoute);
+app.use("/jira", jiraRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
