@@ -46,7 +46,7 @@ router.get('/getCsvAndConvertToJson', async (req, res) => {
         console.log("AWS_SESSION_TOKEN:", process.env.AWS_SESSION_TOKEN ? "DEFINED" : "UNDEFINED");
         const command = new GetObjectCommand({
             Bucket: 'innovaair-raw',
-            Key: 'clima/clima_2025-06-09.csv'
+            Key: 'clima/clima_2025-06-10.csv'
         });
 
         const data = await s3.send(command);

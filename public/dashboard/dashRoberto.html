@@ -44,7 +44,7 @@
     <div class="container_componente">
       <div class="titulo">
         <span id="titulo_01">
-          <b>Análise Geral de Modelos de Componentes</b>
+          <b><h1>Análise Geral de Modelos de Componentes</h1></b>
         </span>
         <span id="titulo_02">
           <i><b>*Selecione os filtros para a visualização(aeroporto, período e componente)</b></i>
@@ -418,8 +418,16 @@ function plotarDados(json_dados, qtdMaquinas){
      alertaCritico.push(modelosOrdenados[i].alertas[2])
      nomesModelos.push(modelosOrdenados[i].especificacao)
   }
+  var maior = -1000
+  var indexMaior = 0
+  for(i = 0; i < 3; i++){
+    if(modelosOrdenados[0].alertas[i] > maior){
+      maior = modelosOrdenados[0].alertas[i]
+      indexMaior = i
+    }
+  }
               
-                max = modelosOrdenados[0].qtdAlertas
+                max = modelosOrdenados[0].alertas[indexMaior]
 
                 if (chart) {
   chart.destroy(); // destrói o gráfico atual
@@ -474,7 +482,8 @@ options = {
     },
     xaxis: {
       categories: nomesModelos,
-      max: max
+      max: max,
+      min: 0
     },
     yaxis: {
       labels: {
