@@ -7,6 +7,10 @@ let atualizar = null;
 sessionStorage.setItem("filial", 0);
 
 function gerarGraficos(){
+    document.getElementById('mensal_Loading').style.display = "none";
+    document.getElementById('filial_Loading').style.display = "none";
+    document.getElementById('chartMensal').style.display = "flex";
+    document.getElementById('chartFiliais').style.display = "flex";
 Chart.register(ChartDataLabels);
 
     const ctxMensal = document.getElementById('chartMensal');
