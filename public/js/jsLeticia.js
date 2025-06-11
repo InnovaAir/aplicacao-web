@@ -372,12 +372,12 @@ function atualizarKPI() {
                 const qtd = info.quantidade_alertas;
 
                 if (componente === "ram") {
-                    if (gravidade === "baixa") baixo_ram += qtd;
-                    else if (gravidade === "alta") alto_ram += qtd;
+                    if (gravidade === "baixo") baixo_ram += qtd;
+                    else if (gravidade === "alto") alto_ram += qtd;
                     else if (gravidade === "critico") critico_ram += qtd;
                 } else if (componente === "processador") {
-                    if (gravidade === "baixa") baixo_cpu += qtd;
-                    else if (gravidade === "alta") alto_cpu += qtd;
+                    if (gravidade === "baixo") baixo_cpu += qtd;
+                    else if (gravidade === "alto") alto_cpu += qtd;
                     else if (gravidade === "critico") critico_cpu += qtd;
                 }
             });
