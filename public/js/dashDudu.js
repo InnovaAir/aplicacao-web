@@ -326,7 +326,7 @@ function atualizarSetas() {
 }
 
 //Dashboard
-function atualizarGraficoDesempenho(maquinas) {
+  function atualizarGraficoDesempenho(maquinas) {
   const terminais = {};
   const nomesTerminais = {
     "1": "GRU",
@@ -336,46 +336,25 @@ function atualizarGraficoDesempenho(maquinas) {
   maquinas.forEach(maq => {
     const terminal = maq.terminal;
     const desempenho = parseFloat(maq.desempenho ?? 0);
-    const critico = parseInt(maq.critico) || 0;
-    const alto = parseInt(maq.alto) || 0;
-    const peso = ((critico * 2) + (alto * 1)) / 28;
 
     if (!terminais[terminal]) {
       terminais[terminal] = {
-        somaPonderada: 0,
-        somaPesos: 0,
-        somatorioDesempenho: 0,
-        total: 0
+        somaDesempenho: 0,
+        totalMaquinas: 0
       };
     }
 
-    if (peso > 0) {
-      terminais[terminal].somaPonderada += desempenho * peso;
-      terminais[terminal].somaPesos += peso;
-    } else {
-      terminais[terminal].somatorioDesempenho += desempenho;
-      terminais[terminal].total += 1;
-    }
+    terminais[terminal].somaDesempenho += desempenho;
+    terminais[terminal].totalMaquinas += 1;
   });
 
-  const desempenhoPorTerminal = [];
-
-  for (const terminal in terminais) {
-    const { somaPonderada, somaPesos, somatorioDesempenho, total } = terminais[terminal];
-
-    let desempenhoFinal = 0;
-
-    if (somaPesos > 0) {
-      desempenhoFinal = somaPonderada / somaPesos;
-    } else if (total > 0) {
-      desempenhoFinal = somatorioDesempenho / total;
-    }
-
-    desempenhoPorTerminal.push({
+  const desempenhoPorTerminal = Object.entries(terminais).map(([terminal, dados]) => {
+    const media = dados.somaDesempenho / dados.totalMaquinas;
+    return {
       terminal: nomesTerminais[terminal] || terminal,
-      desempenho: parseFloat(desempenhoFinal.toFixed(1))
-    });
-  }
+      desempenho: parseFloat(media.toFixed(1))
+    };
+  });
 
   desempenhoPorTerminal.sort((a, b) => a.desempenho - b.desempenho);
 
@@ -388,7 +367,7 @@ function atualizarGraficoDesempenho(maquinas) {
     return '#00A100';
   });
 
-  console.log("Labels do grafico: ", labels)
+  console.log("Labels do gráfico: ", labels);
 
   const options = {
     chart: {
@@ -466,6 +445,7 @@ function atualizarGraficoDesempenho(maquinas) {
     apexChart.render();
   }
 }
+
 
 
 window.onload = async function () {
